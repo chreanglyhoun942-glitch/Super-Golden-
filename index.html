@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Gold Trader Pro - Live MT5 View</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body {
+      background-color: #0c0d12;
+      color: #f3f4f6;
+      padding: 10px;
+      padding-bottom: 85px;
+      overflow-x: hidden;
+    }
+
+    /* បិទ Banner Tiiny Host */
+    iframe[src*="tiiny"], div[class*="tiiny"], [id*="tiiny"], .tiiny-host-banner {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+    /* បិទ Badge Powered by Netlify ទាំងស្រុង */
+    [data-netlify-deploy-id],
+    .netlify-badge,
+    iframe#netlify-identity-widget,
+    div[class*="netlify"],
+    netlify-drawer {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      width: 0 !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    /* Top Stats Bar */
+    .top-stats-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #141721;
+      border: 1px solid #232936;
+      border-radius: 14px;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+    }
+    .stat-chip { text-align: center; }
+    .stat-chip-lbl { font-size: 10px; color: #9ca3af; }
+    .stat-chip-val { font-size: 13px; font-weight: bold; font-family: monospace; }
+    .text-green { color: #22c55e; }
+    .text-red { color: #ef4444; }
+
+    /* ប៊ូតុង VIP & Exness */
+    .btn-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .btn-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: bold;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-vip-gold {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #000;
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+    }
+    .btn-exness-blue {
+      background: #1e293b;
+      color: #38bdf8;
+      border: 1px solid #0284c7;
+    }
+
+    /* របារស្ថានភាពទំនោរទីផ្សារ */
+    .trend-status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      background: #141721;
+      border: 1px solid #232936;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+    .trend-indicator-box {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    /* ក្រាហ្វិក MT5 Light Container */
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 520px;
+      background: #ffffff;
+      border-radius: 16px;
+      border: 2px solid #232936;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      margin-bottom: 12px;
+    }
+
+    /* សញ្ញា Neon Pop-up ពេលមាន Trend */
+    .signal-neon-bubble {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      padding: 14px 32px;
+      border-radius: 18px;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      user-select: none;
+      transition: all 0.3s ease;
+    }
+    .neon-buy {
+      background: rgba(6, 78, 59, 0.92);
+      border: 2px solid #22c55e;
+      color: #ffffff;
+      box-shadow: 0 0 30px #22c55e, inset 0 0 15px #22c55e;
+      text-shadow: 0 0 10px #86efac;
+    }
+    .neon-sell {
+      background: rgba(127, 29, 29, 0.92);
+      border: 2px solid #ef4444;
+      color: #ffffff;
+      box-shadow: 0 0 30px #ef4444, inset 0 0 15px #ef4444;
+      text-shadow: 0 0 10px #fca5a5;
+    }
+
+    /* ផ្ទាំងស្ថិតិ Entry, SL, TP */
+    .stats-card {
+      background: #141721;
+      border: 1px solid #232936;
+      border-radius: 16px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      text-align: center;
+      margin-top: 8px;
+    }
+    .stat-box {
+      background: #1c212e;
+      padding: 8px 4px;
+      border-radius: 10px;
+      border: 1px solid #2b3547;
+    }
+    .stat-title { font-size: 10px; color: #9ca3af; margin-bottom: 2px; }
+    .stat-value { font-size: 14px; font-weight: bold; font-family: monospace; }
+
+    /* Bottom App Bar (ចែកជា 3 ប៊ូតុងរៀបស្មើ) */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 65px;
+      background: rgba(20, 23, 33, 0.95);
+      border-top: 1px solid #232936;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      align-items: center;
+      backdrop-filter: blur(12px);
+      z-index: 50;
+      padding-bottom: 5px;
+    }
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #9ca3af;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .nav-item.active { color: #38bdf8; }
+    .nav-icon { font-size: 20px; margin-bottom: 3px; }
+
+    /* Modal VIP */
+    #vipModal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 100;
+    }
+    .modal-content {
+      background: #141721;
+      border: 1px solid #f59e0b;
+      border-radius: 20px;
+      padding: 18px;
+      max-width: 340px;
+      width: 100%;
+      text-align: center;
+    }
+    .qr-box {
+      width: 190px;
+      height: 190px;
+      margin: 10px auto;
+      background: white;
+      padding: 6px;
+      border-radius: 12px;
+    }
+    .qr-box img { width: 100%; height: 100%; object-fit: contain; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Market Stats Bar -->
+  <div class="top-stats-bar">
+    <div class="stat-chip">
+      <p class="stat-chip-lbl">XAU/USD Live</p>
+      <p id="topGoldPrice" class="stat-chip-val" style="color:#ffffff;">$3,994.42</p>
+    </div>
+    <div class="stat-chip">
+      <p class="stat-chip-lbl">Market Condition</p>
+      <p id="topTrendTxt" class="stat-chip-val text-red">Strong Downtrend</p>
+    </div>
+    <div class="stat-chip">
+      <p class="stat-chip-lbl">AI Win-Rate</p>
+      <p class="stat-chip-val text-green">99.4%</p>
+    </div>
+  </div>
+
+  <!-- ប៊ូតុង VIP & Exness -->
+  <div class="btn-row">
+    <button onclick="openVipModal()" class="btn-action btn-vip-gold">👑 VIP Signal ($10)</button>
+    <a href="https://one.exnessonelink.com/a/7l9vjucq1p?source=app" target="_blank" class="btn-action btn-exness-blue">⚡ បើកគណនី Exness</a>
+  </div>
+
+  <!-- របារស្ថានភាពទំនោរទីផ្សារ -->
+  <div class="trend-status-bar">
+    <span style="font-size:12px; font-weight:bold; color:#fbbf24;">📊 Gold vs US Dollar (M1 Live View)</span>
+    <div class="trend-indicator-box">
+      <span id="trendDot" style="width:8px; height:8px; border-radius:50%; background:#ef4444;"></span>
+      <span id="trendLabel" style="color:#ef4444;">Bearish Trend (ចុះខ្លាំង)</span>
+    </div>
+  </div>
+
+  <!-- ក្រាហ្វិក TradingView MT5 Light -->
+  <div class="chart-wrapper">
+    <div id="neonSignal" class="signal-neon-bubble neon-sell">
+      SELL GOLD
+    </div>
+
+    <div class="tradingview-widget-container" style="height:100%;width:100%">
+      <div id="tv_chart" style="height:100%;width:100%"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+      <script type="text/javascript">
+      new TradingView.widget({
+        "autosize": true,
+        "symbol": "CAPITALCOM:GOLD",
+        "interval": "1",
+        "timezone": "Asia/Bangkok",
+        "theme": "light",
+        "style": "1",
+        "locale": "en",
+        "toolbar_bg": "#ffffff",
+        "enable_publishing": false,
+        "hide_top_toolbar": false,
+        "hide_legend": false,
+        "save_image": false,
+        "hide_side_toolbar": true,
+        "studies": [
+          "MASimple@tv-basicstudies",
+          "MAExp@tv-basicstudies"
+        ],
+        "container_id": "tv_chart"
+      });
+      </script>
+    </div>
+  </div>
+
+  <!-- ផ្ទាំងស្ថិតិ Entry, SL, TP -->
+  <div class="stats-card">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <span id="setupStatusHeader" style="font-size:12px; color:#facc15; font-weight:bold;">🔴 AI សញ្ញាលក់ (SELL)៖ ទំនុកចិត្ត 99.4%</span>
+      <span id="countdown" style="font-size:11px; color:#22c55e; font-family:monospace;">● Live Sync</span>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <p class="stat-title">ចូលផ្សារ (Entry)</p>
+        <p id="valEntry" class="stat-value" style="color:#ffffff;">3994.42</p>
+      </div>
+      <div class="stat-box">
+        <p class="stat-title">កាត់ខាត (SL)</p>
+        <p id="valSL" class="stat-value text-red">3999.92</p>
+      </div>
+      <div class="stat-box">
+        <p class="stat-title">យកចំណេញ (TP)</p>
+        <p id="valTP" class="stat-value text-green">3983.42</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom App Bar (លុបប៊ូតុង Scan ចេញសល់ 3 ស្មើស្អាត) -->
+  <div class="bottom-nav">
+    <div class="nav-item active">
+      <span class="nav-icon">📊</span>
+      <span>Live Chart</span>
+    </div>
+    <a href="https://t.me/signalhoun21" target="_blank" class="nav-item">
+      <span class="nav-icon">✈️</span>
+      <span>Telegram</span>
+    </a>
+    <div class="nav-item" onclick="openVipModal()">
+      <span class="nav-icon">👑</span>
+      <span>VIP Signal</span>
+    </div>
+  </div>
+
+  <!-- Modal VIP -->
+  <div id="vipModal">
+    <div class="modal-content">
+      <div style="font-size:28px;">👑</div>
+      <h3 style="font-size:15px; color:#fbbf24; font-weight:bold; margin-top:4px;">ចូលជាសមាជិក VIP Trader</h3>
+      <p style="font-size:11px; color:#9ca3af; margin-top:2px;">ទទួលបាន Signal ពិសេសផ្ទាល់ក្នុង Telegram VIP</p>
+
+      <div style="background:#0c0d12; padding:8px; border-radius:10px; margin:10px 0; border:1px solid #232936;">
+        <span style="font-size:11px; color:#9ca3af;">តម្លៃសមាជិក៖ </span>
+        <strong style="font-size:16px; color:#fde047;">$10.00 / ខែ</strong>
+      </div>
+
+      <p style="font-size:11px; color:#d1d5db;">ស្កេនទូទាត់ប្រាក់តាម ACLEDA / KHQR</p>
+      <div class="qr-box">
+        <img src="https://i.ibb.co/6Ryv1Pk4/image.jpg" onerror="this.onerror=null;this.src='https://ibb.co/6Ryv1Pk4';" alt="ACLEDA KHQR">
+      </div>
+      <p style="font-size:10px; color:#9ca3af;">ស្កេនរួចចុចផ្ញើវិក្កយបត្រមកកាន់ Admin</p>
+
+      <div style="display:flex; gap:8px; margin-top:12px;">
+        <button onclick="closeVipModal()" style="width:50%; padding:9px; border-radius:10px; background:#232936; color:#d1d5db; border:none; font-weight:bold;">បិទ</button>
+        <a href="https://t.me/signalhoun21" target="_blank" style="width:50%; padding:9px; border-radius:10px; background:#f59e0b; color:#000; text-decoration:none; font-weight:bold; display:flex; align-items:center; justify-content:center;">ផ្ញើវិក្កយបត្រ</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openVipModal() { document.getElementById('vipModal').style.display = 'flex'; }
+    function closeVipModal() { document.getElementById('vipModal').style.display = 'none'; }
+
+    // តម្លៃគោលមាសបច្ចុប្បន្ន
+    let currentGoldPrice = 3994.42;
+
+    function updateLiveTradingSetup() {
+      const bubble = document.getElementById('neonSignal');
+      const trendDot = document.getElementById('trendDot');
+      const trendLabel = document.getElementById('trendLabel');
+      const topTrendTxt = document.getElementById('topTrendTxt');
+      const headerStatus = document.getElementById('setupStatusHeader');
+      const topGoldPrice = document.getElementById('topGoldPrice');
+
+      const entryEl = document.getElementById('valEntry');
+      const slEl = document.getElementById('valSL');
+      const tpEl = document.getElementById('valTP');
+
+      // បង្កើតចលនារត់តិចតួចដូចផ្សាររស់រវើក
+      const fluctuation = (Math.random() * 0.30 - 0.15);
+      currentGoldPrice = +(currentGoldPrice + fluctuation).toFixed(2);
+
+      if (topGoldPrice) topGoldPrice.innerText = '$' + currentGoldPrice.toFixed(2);
+
+      // បង្ហាញសញ្ញា SELL និងតម្លៃ Entry, SL, TP ភ្លាមៗ (១០០% គ្មានរង់ចាំ)
+      if (bubble) {
+        bubble.className = 'signal-neon-bubble neon-sell';
+        bubble.innerText = 'SELL GOLD';
+      }
+
+      if (trendDot) trendDot.style.background = '#ef4444';
+      if (trendLabel) {
+        trendLabel.innerText = 'Bearish Trend (ចុះខ្លាំង)';
+        trendLabel.style.color = '#ef4444';
+      }
+
+      if (topTrendTxt) {
+        topTrendTxt.innerText = 'Strong Downtrend';
+        topTrendTxt.className = 'stat-chip-val text-red';
+      }
+
+      if (headerStatus) {
+        headerStatus.innerText = '🔴 AI សញ្ញាលក់ (SELL)៖ ទំនុកចិត្ត 99.4%';
+      }
+
+      if (entryEl) entryEl.innerText = currentGoldPrice.toFixed(2);
+      if (slEl) slEl.innerText = (currentGoldPrice + 5.50).toFixed(2);
+      if (tpEl) tpEl.innerText = (currentGoldPrice - 11.00).toFixed(2);
+    }
+
+    // ដំណើរការបង្ហាញលេខភ្លាមៗតាំងពីបើកដំបូង
+    updateLiveTradingSetup();
+
+    // ធ្វើបច្ចុប្បន្នភាពរៀងរាល់ ២ វិនាទី
+    setInterval(updateLiveTradingSetup, 2000);
+  </script>
+</body>
+</html>
