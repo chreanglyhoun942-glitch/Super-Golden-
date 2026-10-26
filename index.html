@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Gold Trader Pro - Live MT5 View</title>
+  <title>Gold Trader Pro - Long Position Setup</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body {
@@ -12,18 +12,6 @@
       padding: 10px;
       padding-bottom: 85px;
       overflow-x: hidden;
-    }
-
-    /* បិទផ្ទាំង Banner ផ្សេងៗ និង Netlify Drawer */
-    iframe[src*="tiiny"], div[class*="tiiny"], [id*="tiiny"], .tiiny-host-banner,
-    [data-netlify-deploy-id], .netlify-badge, iframe#netlify-identity-widget,
-    div[class*="netlify"], netlify-drawer {
-      display: none !important;
-      visibility: hidden !important;
-      height: 0 !important;
-      width: 0 !important;
-      opacity: 0 !important;
-      pointer-events: none !important;
     }
 
     /* Top Stats Bar */
@@ -97,7 +85,7 @@
     .chart-wrapper {
       position: relative;
       width: 100%;
-      height: 520px;
+      height: 480px;
       background: #ffffff;
       border-radius: 16px;
       border: 2px solid #232936;
@@ -106,39 +94,41 @@
       margin-bottom: 12px;
     }
 
-    /* សញ្ញា Neon Pop-up */
+    /* សញ្ញា Neon តូចនៅខាងក្រោមទៀន Candle */
     .signal-neon-bubble {
       position: absolute;
-      top: 45%;
+      bottom: 22px; /* ដាក់នៅបាតក្រោមជិតបន្ទាត់ម៉ោង មិនបាំងទៀនទេ */
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translateX(-50%);
       z-index: 10;
-      padding: 14px 32px;
-      border-radius: 18px;
-      font-size: 22px;
-      font-weight: 900;
-      letter-spacing: 1.5px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
       text-align: center;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(6px);
       user-select: none;
-      transition: all 0.4s ease;
+      white-space: nowrap;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     }
     .neon-buy {
-      background: rgba(6, 78, 59, 0.92);
-      border: 2px solid #22c55e;
+      background: rgba(6, 78, 59, 0.94);
+      border: 1.5px solid #22c55e;
       color: #ffffff;
-      box-shadow: 0 0 30px #22c55e, inset 0 0 15px #22c55e;
-      text-shadow: 0 0 10px #86efac;
+      box-shadow: 0 0 15px rgba(34, 197, 94, 0.6);
+      text-shadow: 0 0 6px #86efac;
     }
     .neon-sell {
-      background: rgba(127, 29, 29, 0.92);
-      border: 2px solid #ef4444;
+      background: rgba(127, 29, 29, 0.94);
+      border: 1.5px solid #ef4444;
       color: #ffffff;
-      box-shadow: 0 0 30px #ef4444, inset 0 0 15px #ef4444;
-      text-shadow: 0 0 10px #fca5a5;
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+      text-shadow: 0 0 6px #fca5a5;
     }
 
-    /* ផ្ទាំងស្ថិតិ Entry, SL, TP */
+    /* ផ្ទាំងស្ថិតិ Long Position (Entry, SL, TP) */
     .stats-card {
       background: #141721;
       border: 1px solid #232936;
@@ -146,23 +136,30 @@
       padding: 12px;
       margin-bottom: 12px;
     }
-    .stats-grid {
+    .stats-grid-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+    .stats-grid-tp {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 6px;
       text-align: center;
-      margin-top: 8px;
     }
     .stat-box {
       background: #1c212e;
       padding: 8px 4px;
       border-radius: 10px;
       border: 1px solid #2b3547;
+      text-align: center;
     }
     .stat-title { font-size: 10px; color: #9ca3af; margin-bottom: 2px; }
-    .stat-value { font-size: 14px; font-weight: bold; font-family: monospace; }
+    .stat-value { font-size: 13px; font-weight: bold; font-family: monospace; }
 
-    /* Bottom App Bar (រៀបស្មើ 3 ប៊ូតុង) */
+    /* Bottom App Bar */
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -228,15 +225,15 @@
   <div class="top-stats-bar">
     <div class="stat-chip">
       <p class="stat-chip-lbl">XAU/USD Live</p>
-      <p id="topGoldPrice" class="stat-chip-val" style="color:#ffffff;">$3,991.68</p>
+      <p id="topGoldPrice" class="stat-chip-val" style="color:#ffffff;">$3,994.88</p>
     </div>
     <div class="stat-chip">
-      <p class="stat-chip-lbl">Market Condition</p>
-      <p id="topTrendTxt" class="stat-chip-val text-green">Strong Uptrend</p>
+      <p class="stat-chip-lbl">Position Mode</p>
+      <p id="topPosTxt" class="stat-chip-val text-green">LONG (BUY វែង)</p>
     </div>
     <div class="stat-chip">
-      <p class="stat-chip-lbl">AI Win-Rate</p>
-      <p class="stat-chip-val text-green">99.4%</p>
+      <p class="stat-chip-lbl">Risk : Reward</p>
+      <p class="stat-chip-val" style="color:#38bdf8;">1 : 3.0</p>
     </div>
   </div>
 
@@ -248,17 +245,18 @@
 
   <!-- របារស្ថានភាពទំនោរទីផ្សារ -->
   <div class="trend-status-bar">
-    <span style="font-size:12px; font-weight:bold; color:#fbbf24;">📊 Gold vs US Dollar (M1 Live View)</span>
+    <span style="font-size:12px; font-weight:bold; color:#fbbf24;">📈 Position Tracker (H1/M15 View)</span>
     <div class="trend-indicator-box">
       <span id="trendDot" style="width:8px; height:8px; border-radius:50%; background:#22c55e;"></span>
-      <span id="trendLabel" style="color:#22c55e;">Bullish Trend (កំពុងឡើងខ្លាំង)</span>
+      <span id="trendLabel" style="color:#22c55e;">Bullish Wave (រលកឡើង)</span>
     </div>
   </div>
 
-  <!-- ក្រាហ្វិក TradingView MT5 Light -->
+  <!-- ក្រាហ្វិក TradingView -->
   <div class="chart-wrapper">
+    <!-- សញ្ញា Pop-up បង្រួមតូចនៅខាងក្រោមទៀន Candle -->
     <div id="neonSignal" class="signal-neon-bubble neon-buy">
-      BUY GOLD
+      ▲ LONG POSITION (BUY)
     </div>
 
     <div class="tradingview-widget-container" style="height:100%;width:100%">
@@ -268,7 +266,7 @@
       new TradingView.widget({
         "autosize": true,
         "symbol": "CAPITALCOM:GOLD",
-        "interval": "1",
+        "interval": "15",
         "timezone": "Asia/Bangkok",
         "theme": "light",
         "style": "1",
@@ -289,24 +287,36 @@
     </div>
   </div>
 
-  <!-- ផ្ទាំងស្ថិតិ Entry, SL, TP -->
+  <!-- ផ្ទាំងស្ថិតិ Long/Short Position (Entry, SL, TP1, TP2, TP3) -->
   <div class="stats-card">
     <div style="display:flex; justify-content:space-between; align-items:center;">
-      <span id="setupStatusHeader" style="font-size:12px; color:#facc15; font-weight:bold;">🟢 AI សញ្ញាទិញ (BUY)៖ ទំនុកចិត្ត 99.4%</span>
-      <span id="countdown" style="font-size:11px; color:#22c55e; font-family:monospace;">● Live Sync</span>
+      <span id="setupStatusHeader" style="font-size:12px; color:#facc15; font-weight:bold;">🟢 Swing Setup (ទិញទុកយកចំណេញធំ)</span>
+      <span style="font-size:11px; color:#22c55e; font-family:monospace;">● Active Wave</span>
     </div>
-    <div class="stats-grid">
+
+    <div class="stats-grid-top">
       <div class="stat-box">
-        <p class="stat-title">ចូលផ្សារ (Entry)</p>
-        <p id="valEntry" class="stat-value" style="color:#ffffff;">3991.68</p>
+        <p class="stat-title">តំបន់ចូលផ្សារ (Entry Zone)</p>
+        <p id="valEntry" class="stat-value" style="color:#ffffff;">3993.50 - 3995.50</p>
       </div>
       <div class="stat-box">
-        <p class="stat-title">កាត់ខាត (SL)</p>
-        <p id="valSL" class="stat-value text-red">3985.18</p>
+        <p class="stat-title">កាត់ខាតការពារទុន (Stop Loss)</p>
+        <p id="valSL" class="stat-value text-red">3981.00</p>
+      </div>
+    </div>
+
+    <div class="stats-grid-tp">
+      <div class="stat-box">
+        <p class="stat-title">TP 1 (+140p)</p>
+        <p id="valTP1" class="stat-value text-green">4008.00</p>
       </div>
       <div class="stat-box">
-        <p class="stat-title">យកចំណេញ (TP)</p>
-        <p id="valTP" class="stat-value text-green">4003.68</p>
+        <p class="stat-title">TP 2 (+260p)</p>
+        <p id="valTP2" class="stat-value text-green">4020.00</p>
+      </div>
+      <div class="stat-box">
+        <p class="stat-title">TP 3 (+420p)</p>
+        <p id="valTP3" class="stat-value text-green">4036.00</p>
       </div>
     </div>
   </div>
@@ -356,87 +366,89 @@
     function openVipModal() { document.getElementById('vipModal').style.display = 'flex'; }
     function closeVipModal() { document.getElementById('vipModal').style.display = 'none'; }
 
-    // តម្លៃចាប់ផ្តើមជាក់ស្តែង
-    let currentGoldPrice = 3991.68;
-    let cycleCount = 0;
-    let currentMode = "BUY"; // ចាប់ផ្តើមដោយ BUY ព្រោះទៀនកំពុងហក់ឡើងខ្លាំង
+    let baseGoldPrice = 3994.88;
+    let positionMode = "BUY"; // ប្តូររវាង BUY (Long) និង SELL (Short)
+    let waveCounter = 0;
 
-    function autoDetectTrendAndSetSignal() {
+    function syncPositionSetup() {
       const bubble = document.getElementById('neonSignal');
       const trendDot = document.getElementById('trendDot');
       const trendLabel = document.getElementById('trendLabel');
-      const topTrendTxt = document.getElementById('topTrendTxt');
+      const topPosTxt = document.getElementById('topPosTxt');
       const headerStatus = document.getElementById('setupStatusHeader');
       const topGoldPrice = document.getElementById('topGoldPrice');
 
-      const entryEl = document.getElementById('valEntry');
-      const slEl = document.getElementById('valSL');
-      const tpEl = document.getElementById('valTP');
+      const valEntry = document.getElementById('valEntry');
+      const valSL = document.getElementById('valSL');
+      const valTP1 = document.getElementById('valTP1');
+      const valTP2 = document.getElementById('valTP2');
+      const valTP3 = document.getElementById('valTP3');
 
-      cycleCount++;
-      // ផ្លាស់ប្តូរតាមលំហូរទីផ្សារ (ឆ្លាស់គ្នាជាវដ្តបែប Real-market cycle)
-      if (cycleCount % 15 === 0) {
-        currentMode = (currentMode === "BUY") ? "SELL" : "BUY";
+      // បម្លាស់ប្តូរតម្លៃផ្សារតិចតួច
+      const delta = (Math.random() * 0.30 - 0.15);
+      baseGoldPrice = +(baseGoldPrice + delta).toFixed(2);
+      if (topGoldPrice) topGoldPrice.innerText = '$' + baseGoldPrice.toFixed(2);
+
+      waveCounter++;
+      // ផ្លាស់ប្តូររលកធំរៀងរាល់វដ្ត (ឬតាមទីផ្សារជាក់ស្តែង)
+      if (waveCounter % 20 === 0) {
+        positionMode = (positionMode === "BUY") ? "SELL" : "BUY";
       }
 
-      // រំកិលតម្លៃឡើងចុះបន្តិចបន្តួចដូចផ្សារផ្ទាល់
-      const step = (Math.random() * 0.40 - 0.20);
-      currentGoldPrice = +(currentGoldPrice + step).toFixed(2);
-
-      if (topGoldPrice) topGoldPrice.innerText = '$' + currentGoldPrice.toFixed(2);
-
-      if (currentMode === "BUY") {
-        // --- សញ្ញាទិញឡើង BUY GOLD ---
+      if (positionMode === "BUY") {
+        // --- LONG POSITION (BUY) ---
         if (bubble) {
           bubble.className = 'signal-neon-bubble neon-buy';
-          bubble.innerText = 'BUY GOLD';
+          bubble.innerText = '▲ LONG POSITION (BUY)';
         }
         if (trendDot) trendDot.style.background = '#22c55e';
         if (trendLabel) {
-          trendLabel.innerText = 'Bullish Trend (កំពុងឡើងខ្លាំង)';
+          trendLabel.innerText = 'Bullish Wave (រលកឡើង)';
           trendLabel.style.color = '#22c55e';
         }
-        if (topTrendTxt) {
-          topTrendTxt.innerText = 'Strong Uptrend';
-          topTrendTxt.className = 'stat-chip-val text-green';
+        if (topPosTxt) {
+          topPosTxt.innerText = 'LONG (BUY វែង)';
+          topPosTxt.className = 'stat-chip-val text-green';
         }
-        if (headerStatus) {
-          headerStatus.innerText = '🟢 AI សញ្ញាទិញ (BUY)៖ ទំនុកចិត្ត 99.4%';
-        }
+        if (headerStatus) headerStatus.innerText = '🟢 Swing Long Setup (ទិញទុកយកចំណេញធំ)';
 
-        if (entryEl) entryEl.innerText = currentGoldPrice.toFixed(2);
-        if (slEl) slEl.innerText = (currentGoldPrice - 6.50).toFixed(2);
-        if (tpEl) tpEl.innerText = (currentGoldPrice + 12.00).toFixed(2);
+        const e1 = (baseGoldPrice - 1.20).toFixed(2);
+        const e2 = (baseGoldPrice + 1.20).toFixed(2);
+        if (valEntry) valEntry.innerText = `${e1} - ${e2}`;
+        if (valSL) valSL.innerText = (baseGoldPrice - 13.50).toFixed(2);
+        if (valTP1) valTP1.innerText = (baseGoldPrice + 14.00).toFixed(2);
+        if (valTP2) valTP2.innerText = (baseGoldPrice + 26.00).toFixed(2);
+        if (valTP3) valTP3.innerText = (baseGoldPrice + 42.00).toFixed(2);
+
       } else {
-        // --- សញ្ញាលក់ចុះ SELL GOLD ---
+        // --- SHORT POSITION (SELL) ---
         if (bubble) {
           bubble.className = 'signal-neon-bubble neon-sell';
-          bubble.innerText = 'SELL GOLD';
+          bubble.innerText = '▼ SHORT POSITION (SELL)';
         }
         if (trendDot) trendDot.style.background = '#ef4444';
         if (trendLabel) {
-          trendLabel.innerText = 'Bearish Trend (កំពុងចុះ)';
+          trendLabel.innerText = 'Bearish Wave (រលកចុះ)';
           trendLabel.style.color = '#ef4444';
         }
-        if (topTrendTxt) {
-          topTrendTxt.innerText = 'Strong Downtrend';
-          topTrendTxt.className = 'stat-chip-val text-red';
+        if (topPosTxt) {
+          topPosTxt.innerText = 'SHORT (SELL វែង)';
+          topPosTxt.className = 'stat-chip-val text-red';
         }
-        if (headerStatus) {
-          headerStatus.innerText = '🔴 AI សញ្ញាលក់ (SELL)៖ ទំនុកចិត្ត 99.4%';
-        }
+        if (headerStatus) headerStatus.innerText = '🔴 Swing Short Setup (លក់ទុកយកចំណេញធំ)';
 
-        if (entryEl) entryEl.innerText = currentGoldPrice.toFixed(2);
-        if (slEl) slEl.innerText = (currentGoldPrice + 6.50).toFixed(2);
-        if (tpEl) tpEl.innerText = (currentGoldPrice - 12.00).toFixed(2);
+        const e1 = (baseGoldPrice + 1.20).toFixed(2);
+        const e2 = (baseGoldPrice - 1.20).toFixed(2);
+        if (valEntry) valEntry.innerText = `${e1} - ${e2}`;
+        if (valSL) valSL.innerText = (baseGoldPrice + 13.50).toFixed(2);
+        if (valTP1) valTP1.innerText = (baseGoldPrice - 14.00).toFixed(2);
+        if (valTP2) valTP2.innerText = (baseGoldPrice - 26.00).toFixed(2);
+        if (valTP3) valTP3.innerText = (baseGoldPrice - 42.00).toFixed(2);
       }
     }
 
-    // ដំណើរការភ្លាមពេលបើក
-    autoDetectTrendAndSetSignal();
-
-    // ដំណើរការ Update តម្លៃរៀងរាល់ ២ វិនាទី
-    setInterval(autoDetectTrendAndSetSignal, 2000);
+    syncPositionSetup();
+    setInterval(syncPositionSetup, 2500);
   </script>
 </body>
 </html>
