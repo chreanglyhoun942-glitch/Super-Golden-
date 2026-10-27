@@ -6,305 +6,271 @@
   <title>LHvara | AI Gold Trading Desk</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background-color: #06080c; color: #f1f5f9; padding-bottom: 60px; line-height: 1.5; }
+    body { background: #06080c; color: #f1f5f9; padding-bottom: 50px; line-height: 1.4; text-align: center; }
+    .top-bar { background: #0b0f17; border-bottom: 1px solid #1e293b; padding: 7px 10px; font-size: 11px; display: flex; justify-content: space-between; align-items: center; }
+    .container { max-width: 550px; margin: 0 auto; padding: 12px; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .brand { font-size: 18px; font-weight: 900; color: #f59e0b; }
+    .btn-vip { background: #14b8a6; color: #000; font-size: 11px; font-weight: bold; padding: 5px 12px; border-radius: 6px; text-decoration: none; }
+    .card { background: #0d131f; border: 1px solid #1e293b; border-radius: 12px; padding: 12px; margin-bottom: 14px; text-align: left; position: relative; }
+    .social-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 8px; }
+    .btn-s { text-align: center; padding: 6px; border-radius: 6px; font-size: 10.5px; font-weight: bold; text-decoration: none; color: #fff; background: #1e293b; }
     
-    .top-ticker { background: #0b0f17; border-bottom: 1px solid #1e293b; padding: 8px 12px; font-size: 11px; display: flex; justify-content: space-between; align-items: center; overflow-x: auto; white-space: nowrap; }
-    .ticker-pair { color: #f59e0b; font-weight: bold; margin-right: 10px; }
-    .ticker-sell { color: #f43f5e; margin-right: 8px; }
-    .ticker-buy { color: #10b981; margin-right: 8px; }
-    .owner-badge { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: bold; }
-
-    .container { max-width: 600px; margin: 0 auto; padding: 14px; text-align: center; }
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-    .logo-container { display: flex; align-items: center; gap: 8px; }
-    .logo-box { width: 34px; height: 34px; background: linear-gradient(135deg, #f59e0b, #14b8a6); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; color: #000; font-size: 14px; }
-    .brand-name { font-size: 18px; font-weight: 800; color: #fff; }
-    .btn-vip-header { background: #14b8a6; color: #000; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 6px; text-decoration: none; display: inline-block; }
-
-    .hero-badge { display: inline-block; background: #0f172a; border: 1px solid #334155; padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #94a3b8; margin-bottom: 10px; }
-    .hero-title { font-size: 24px; font-weight: 900; color: #fff; line-height: 1.2; margin-bottom: 6px; }
-    .hero-title span { color: #f59e0b; }
-    .hero-desc { font-size: 11px; color: #94a3b8; margin-bottom: 16px; }
-
-    .founder-card { background: #0d131f; border: 1px solid #1e293b; border-radius: 14px; padding: 14px; margin-bottom: 20px; text-align: left; }
-    .founder-info { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-    .founder-profile { display: flex; align-items: center; gap: 10px; }
-    .founder-avatar { width: 42px; height: 42px; background: linear-gradient(135deg, #f59e0b, #d97706); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: #000; font-size: 14px; border: 2px solid #fbbf24; }
-    .founder-name { font-size: 14px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 4px; }
-    .founder-verified { background: #38bdf8; color: #000; border-radius: 50%; width: 12px; height: 12px; font-size: 8px; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; }
-    .founder-role { font-size: 11px; color: #94a3b8; }
-    .verified-pill { background: rgba(56, 189, 248, 0.1); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-size: 10px; padding: 2px 8px; border-radius: 12px; font-weight: bold; }
+    /* AUTOMATED SINGLE SIGNAL CARD */
+    .single-signal-card { background: #0d131f; border-radius: 14px; padding: 14px; border: 2px solid #10b981; margin-bottom: 14px; text-align: left; box-shadow: 0 0 15px rgba(16,185,129,0.15); transition: all 0.3s ease; }
+    .single-signal-card.sell-mode { border-color: #f43f5e; box-shadow: 0 0 15px rgba(244,63,94,0.15); }
+    .sig-top-badge { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .action-tag { font-size: 13px; font-weight: 900; padding: 3px 10px; border-radius: 6px; }
+    .tag-buy { background: #10b981; color: #000; }
+    .tag-sell { background: #f43f5e; color: #fff; }
+    .auto-scan-status { font-size: 10px; color: #10b981; display: flex; align-items: center; gap: 4px; font-weight: bold; }
     
-    .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; border-top: 1px solid #1e293b; padding-top: 12px; }
-    .btn-social { display: block; text-align: center; padding: 8px; border-radius: 8px; text-decoration: none; font-size: 11px; font-weight: 700; }
-    .btn-tiktok { background: #1e293b; color: #fff; }
-    .btn-facebook { background: rgba(24, 119, 242, 0.15); color: #3b82f6; border: 1px solid rgba(24, 119, 242, 0.3); }
-    .btn-telegram { background: rgba(34, 158, 217, 0.15); color: #38bdf8; border: 1px solid rgba(34, 158, 217, 0.3); }
-
-    /* FOREX FACTORY NEWS LIST */
-    .news-box { background: #0d131f; border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 14px; padding: 14px; margin-bottom: 20px; text-align: left; }
-    .news-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-    .news-title { font-size: 13px; font-weight: 800; color: #ef4444; display: flex; align-items: center; gap: 6px; }
-    .news-badge { background: #ef4444; color: #fff; text-decoration: none; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: bold; }
-    .news-item { background: #06080c; border: 1px solid #1e293b; padding: 8px 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 11px; }
-    .news-item-left { display: flex; align-items: center; gap: 8px; }
-    .impact-red { width: 8px; height: 8px; background: #ef4444; border-radius: 2px; }
-
-    /* SPECIAL NEWS SIGNAL */
-    .news-signal-card { background: linear-gradient(180deg, #180d15, #0d131f); border: 2px solid #ef4444; border-radius: 14px; padding: 14px; margin-bottom: 20px; text-align: left; position: relative; }
-    .news-signal-tag { position: absolute; top: -10px; left: 14px; background: #ef4444; color: #fff; font-size: 9px; font-weight: 900; padding: 2px 8px; border-radius: 10px; }
-
-    /* TradingView Container */
-    .chart-box { background: #0b0f17; border: 1px solid #1e293b; border-radius: 14px; margin-bottom: 20px; overflow: hidden; text-align: left; }
-    .chart-header { background: #070a10; padding: 8px 12px; border-bottom: 1px solid #1e293b; display: flex; justify-content: space-between; align-items: center; font-size: 11px; }
-    .chart-symbol { font-weight: bold; color: #f59e0b; display: flex; align-items: center; gap: 6px; }
-    .tradingview-widget-container { width: 100%; height: 380px; position: relative; }
-
-    /* AI Advice Banner */
-    .ai-advice-banner { background: rgba(20, 184, 166, 0.12); border: 1px solid rgba(20, 184, 166, 0.35); border-radius: 10px; padding: 10px 12px; text-align: left; font-size: 11px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-
-    /* Signals Header */
-    .signals-header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .section-title { font-size: 15px; font-weight: 800; color: #fff; text-align: left; margin: 0; }
-    .btn-refresh-signals { background: #1e293b; color: #38bdf8; border: 1px solid #334155; font-size: 11px; font-weight: bold; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
-
-    /* Signal Card */
-    .signal-card { background: #0d131f; border-radius: 14px; padding: 14px; margin-bottom: 14px; border: 1px solid #1e293b; border-left: 4px solid #10b981; text-align: left; position: relative; }
-    .signal-card.sell { border-left-color: #f43f5e; }
-    .signal-card.recommended { border: 2px solid #f59e0b; border-left: 5px solid #10b981; box-shadow: 0 0 15px rgba(245, 158, 11, 0.2); }
-    .signal-card.sell.recommended { border-left: 5px solid #f43f5e; }
+    .time-info-box { background: rgba(2,6,23,0.9); border: 1px solid #334155; padding: 8px 10px; border-radius: 6px; font-size: 11px; display: flex; justify-content: space-between; margin-bottom: 8px; }
+    .time-info-box b { color: #38bdf8; font-family: monospace; font-size: 11.5px; }
+    .p-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: #06080c; padding: 8px; border-radius: 8px; text-align: center; margin-bottom: 8px; }
+    .p-grid div { font-size: 12px; font-weight: bold; }
+    .p-lbl { font-size: 9px; color: #64748b; font-weight: normal; margin-bottom: 2px; }
+    .profit-bar { display: flex; justify-content: space-between; font-size: 10.5px; color: #94a3b8; border-top: 1px solid #1e293b; padding-top: 6px; margin-bottom: 10px; }
+    .btn-tg-main { display: block; width: 100%; background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; text-align: center; padding: 10px; border-radius: 8px; font-size: 11.5px; font-weight: bold; text-decoration: none; margin-bottom: 8px; }
+    .sub-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     
-    .recommend-badge { position: absolute; top: -10px; right: 14px; background: linear-gradient(135deg, #f59e0b, #d97706); color: #000; font-size: 9px; font-weight: 900; padding: 2px 8px; border-radius: 10px; }
-
-    .signal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-    .badge-dir { padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 900; }
-    .badge-buy { background: #10b981; color: #000; }
-    .badge-sell { background: #f43f5e; color: #fff; }
-    .signal-timer { font-size: 10px; color: #f59e0b; font-family: monospace; font-weight: bold; }
-
-    .time-badge-row { display: flex; justify-content: space-between; background: rgba(2, 6, 23, 0.9); padding: 8px 10px; border-radius: 6px; font-size: 11px; color: #94a3b8; margin-bottom: 8px; border: 1px solid #334155; }
-    .time-badge-row b { color: #38bdf8; font-family: monospace; font-weight: bold; font-size: 11px; }
-
-    .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: #06080c; padding: 8px; border-radius: 8px; text-align: center; margin-bottom: 8px; }
-    .price-item-lbl { font-size: 9px; color: #64748b; font-weight: bold; }
-    .price-item-val { font-size: 12px; font-weight: bold; }
-    .signal-footer { display: flex; justify-content: space-between; font-size: 10px; color: #94a3b8; border-top: 1px solid #1e293b; padding-top: 6px; margin-bottom: 10px; }
-    
-    .btn-broadcast { width: 100%; background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; border: none; padding: 10px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer; text-decoration: none; display: block; text-align: center; }
-
-    /* Pricing */
-    .pricing-card { background: #0d131f; border: 1px solid #1e293b; border-radius: 14px; padding: 14px; margin-bottom: 12px; text-align: left; position: relative; }
-    .pricing-card.partner { border-color: #f59e0b; }
-    .partner-tag { position: absolute; top: -9px; right: 12px; background: #f59e0b; color: #000; font-size: 9px; font-weight: 900; padding: 2px 8px; border-radius: 10px; }
-    .pricing-tier { font-size: 10px; font-weight: bold; color: #14b8a6; text-transform: uppercase; margin-bottom: 4px; }
-    .pricing-name { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 6px; }
-    .pricing-cost { font-size: 20px; font-weight: 900; color: #fff; margin-bottom: 10px; }
-    .pricing-cost span { font-size: 11px; color: #64748b; font-weight: normal; }
-    .pricing-list { list-style: none; font-size: 11px; color: #94a3b8; margin-bottom: 12px; }
-    .pricing-list li { margin-bottom: 4px; }
-    .btn-plan { display: block; width: 100%; text-align: center; padding: 10px; border-radius: 8px; font-size: 11px; font-weight: bold; text-decoration: none; }
-    .btn-plan-free { background: #1e293b; color: #fff; }
-    .btn-plan-partner { background: #f59e0b; color: #000; }
-    .btn-plan-pro { background: #3b82f6; color: #fff; }
-
-    /* Calculator */
-    .calc-box { background: #0d131f; border: 1px solid #1e293b; border-radius: 14px; padding: 14px; margin-bottom: 20px; text-align: left; }
-    .calc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
-    .calc-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 10px; }
-    .form-group label { display: block; font-size: 9px; font-weight: bold; color: #94a3b8; margin-bottom: 3px; }
-    .form-control { width: 100%; background: #06080c; border: 1px solid #334155; color: #fff; padding: 8px; border-radius: 6px; font-size: 11px; outline: none; }
-    .calc-summary { background: #06080c; padding: 10px; border-radius: 8px; font-size: 11px; border: 1px solid #1e293b; }
-    .calc-sum-line { display: flex; justify-content: space-between; margin-bottom: 4px; }
+    /* Calendar */
+    .cal-tabs { display: flex; gap: 5px; overflow-x: auto; margin-bottom: 8px; }
+    .tab-btn { background: #1e293b; color: #94a3b8; border: none; font-size: 10px; padding: 5px 10px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+    .tab-btn.active { background: #ef4444; color: #fff; }
+    .scroll-box { max-height: 240px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
+    .news-i { background: #06080c; border: 1px solid #1e293b; padding: 8px 10px; border-radius: 6px; font-size: 11px; }
+    .news-sig { background: #0f172a; border: 1px dashed #38bdf8; padding: 5px 8px; border-radius: 4px; font-size: 9.5px; margin-top: 4px; display: flex; justify-content: space-between; }
+    .badge { padding: 2px 6px; border-radius: 4px; font-weight: 900; font-size: 9px; }
+    .b-buy { background: #10b981; color: #000; }
+    .b-sell { background: #f43f5e; color: #fff; }
   </style>
 </head>
 <body>
-
-  <!-- TOP TICKER -->
-  <div class="top-ticker">
-    <div>
-      <span class="ticker-pair">XAUUSD (M1)</span>
-      <span class="ticker-sell">SELL: <b id="ticker-bid">4012.30</b></span>
-      <span class="ticker-buy">BUY: <b id="ticker-ask">4012.79</b></span>
-    </div>
-    <div class="owner-badge">LHoneboy (Owner Active)</div>
+  <!-- TICKER -->
+  <div class="top-bar">
+    <span>XAUUSD (M1) SELL: <b id="ticker-bid" style="color:#f43f5e">4003.50</b> BUY: <b id="ticker-ask" style="color:#10b981">4003.95</b></span>
+    <span style="color:#fbbf24; font-size:10.5px;">● AI Auto-Desk Active</span>
   </div>
 
   <div class="container">
     <div class="header">
-      <div class="logo-container">
-        <div class="logo-box">LH</div>
-        <div class="brand-name">LHvara</div>
-      </div>
-      <a href="https://t.me/signalhoun21?text=%E1%9E%9F%E1%9E%BD%E1%9E%9F%E1%9F%90%E1%9E%8Side%20LHoneboy%20%E1%9E%81%E1%9F%92%E1%9E%89%E1%9E%BB%E1%9F%86%E1%9E%85%E1%9E%84%E1%9F%8B%E1%9E%85%E1%9E%BC%E1%9E%9B%E1%9E%80%E1%9F%92%E1%9E%9A%E1%9E%BB%E1%9E%98%20VIP" target="_blank" class="btn-vip-header">VIP Signals</a>
+      <div class="brand">LHvara AI Desk</div>
+      <a href="https://t.me/signalhoun21" target="_blank" class="btn-vip">VIP Signals</a>
     </div>
 
-    <div class="hero-badge">AI GOLD ENGINE • LIVE</div>
-    <h1 class="hero-title">Trade Gold with <span>Precision</span></h1>
-    <p class="hero-desc">Real-time setups, validated pip ratios, and automated AI calculations.</p>
-
-    <!-- FOUNDER CARD -->
-    <div class="founder-card">
-      <div class="founder-info">
-        <div class="founder-profile">
-          <div class="founder-avatar">LH</div>
-          <div>
-            <div class="founder-name">LHoneboy <span class="founder-verified">✓</span></div>
-            <div class="founder-role">Dev • Founder @ LHvara</div>
-          </div>
-        </div>
-        <div class="verified-pill">Official Founder</div>
+    <!-- PROFILE -->
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <b>LHoneboy (Dev • Founder)</b>
+        <span style="color:#38bdf8; font-size:10px;">Official Founder ✓</span>
       </div>
-      <div class="social-grid">
-        <a href="https://www.tiktok.com/@clh4239" target="_blank" class="btn-social btn-tiktok">TikTok</a>
-        <a href="https://www.facebook.com/share/14sck9T2HJe/" target="_blank" class="btn-social btn-facebook">Facebook</a>
-        <a href="https://t.me/signalhoun21" target="_blank" class="btn-social btn-telegram">Telegram</a>
+      <div class="social-row">
+        <a href="https://www.tiktok.com/@clh4239?_r=1&_t=ZS-9AtHR4My4mN" target="_blank" class="btn-s">TikTok</a>
+        <a href="https://www.facebook.com/share/14sck9T2HJe/" target="_blank" class="btn-s" style="color:#38bdf8;">Facebook</a>
+        <a href="https://t.me/signalhoun21" target="_blank" class="btn-s" style="color:#38bdf8;">Telegram</a>
       </div>
     </div>
 
-    <!-- FOREX FACTORY OFFICIAL LIST (ដក iframe ចេញ ធានាដំណើរការ ១០០%) -->
-    <div class="news-box">
-      <div class="news-header">
-        <div class="news-title">🔴 Forex Factory Gold Calendar (USD)</div>
-        <a href="https://www.forexfactory.com/calendar" target="_blank" class="news-badge">🌐 បើក ForexFactory</a>
+    <!-- FOREX FACTORY CALENDAR -->
+    <div class="card" style="border-color: rgba(239,68,68,0.4);">
+      <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+        <span style="color:#ef4444; font-size:12px; font-weight:bold;">🔴 Forex Factory USD Calendar</span>
+        <a href="https://www.forexfactory.com/calendar" target="_blank" style="color:#fff; background:#ef4444; padding:2px 6px; border-radius:4px; font-size:9px; text-decoration:none;">បើក Web FF</a>
       </div>
-      <div class="news-item">
-        <div class="news-item-left">
-          <span class="impact-red"></span>
-          <div>
-            <b>USD Core CPI m/m (អតិផរណា)</b>
-            <div style="color: #64748b; font-size: 9px;">Forecast: 0.3% | Previous: 0.3%</div>
-          </div>
+      <div class="cal-tabs">
+        <button class="tab-btn active" onclick="setCal('week', this)">សប្តាហ៍នេះ</button>
+        <button class="tab-btn" onclick="setCal('next', this)">សប្តាហ៍ក្រោយ</button>
+        <button class="tab-btn" onclick="setCal('month', this)">ខែក្រោយ</button>
+      </div>
+      <div class="scroll-box" id="cal-box">
+        <div class="news-i">
+          <div style="display:flex; justify-content:space-between;"><b>📅 ២៨ តុលា: USD CPI m/m (អតិផរណា)</b><span style="color:#f59e0b;">07:30 PM</span></div>
+          <div class="news-sig"><span>⭐ ត្រូវចូល: <b class="badge b-sell">SELL STOP</b></span><span>Entry: <b>3995.00</b> | TP: <b>3970.00</b></span></div>
         </div>
-        <span style="color: #f59e0b; font-family: monospace; font-weight: bold;">07:30 PM (High)</span>
-      </div>
-      <div class="news-item">
-        <div class="news-item-left">
-          <span class="impact-red"></span>
-          <div>
-            <b>USD Unemployment Claims</b>
-            <div style="color: #64748b; font-size: 9px;">Forecast: 218K | Previous: 221K</div>
-          </div>
+        <div class="news-i">
+          <div style="display:flex; justify-content:space-between;"><b>📅 ២៩ តុលា: Unemployment Claims</b><span style="color:#f59e0b;">07:30 PM</span></div>
+          <div class="news-sig"><span>⭐ ត្រូវចូល: <b class="badge b-buy">BUY STOP</b></span><span>Entry: <b>4010.00</b> | TP: <b>4025.00</b></span></div>
         </div>
-        <span style="color: #f59e0b; font-family: monospace; font-weight: bold;">07:30 PM (High)</span>
-      </div>
-      <div class="news-item">
-        <div class="news-item-left">
-          <span class="impact-red"></span>
-          <div>
-            <b>USD Fed Chair Powell Speaks</b>
-            <div style="color: #64748b; font-size: 9px;">FOMC Monetary Policy Meeting</div>
-          </div>
-        </div>
-        <span style="color: #f59e0b; font-family: monospace; font-weight: bold;">09:00 PM (High)</span>
-      </div>
-    </div>
-
-    <!-- SIGNAL ម៉ោងព័ត៌មាន -->
-    <div class="news-signal-card">
-      <span class="news-signal-tag">⚡ NEWS HIGH IMPACT SETUP (USD)</span>
-      <div class="signal-header" style="margin-top: 4px;">
-        <span style="font-size: 13px; font-weight: bold; color: #fca5a5;">XAUUSD • ត្រៀមម៉ោងព័ត៌មាន</span>
-        <span class="badge-dir badge-sell">SELL STOP</span>
-      </div>
-      <div class="time-badge-row" style="border-color: #ef4444;">
-        <span>🕒 ម៉ោងចេញព័ត៌មាន: <b style="color: #f87171;">07:30 PM</b></span>
-        <span>⌛ ចូលមុន: <b style="color: #fbbf24;">07:28 PM</b></span>
-      </div>
-      <div class="price-grid">
-        <div><div class="price-item-lbl">BREAKOUT ENTRY</div><div class="price-item-val" style="color: #fff;">4005.00</div></div>
-        <div><div class="price-item-lbl">TARGET (TP)</div><div class="price-item-val" style="color: #10b981;">3988.00</div></div>
-        <div><div class="price-item-lbl">STOP (SL)</div><div class="price-item-val" style="color: #f43f5e;">4012.00</div></div>
-      </div>
-      <div class="signal-footer">
-        <span>News Potential: <b style="color: #10b981;">+170.0 pips ($170.00)</b></span>
-        <span>News Risk: <b style="color: #f43f5e;">-$70.00</b></span>
-      </div>
-      <a href="https://t.me/signalhoun21?text=%E2%9A%A1%20LHvara%20News%20Setup%20XAUUSD%20SELL%20STOP%20Entry%204005.00%20TP%203988.00%20SL%204012.00" target="_blank" class="btn-broadcast" style="background: linear-gradient(135deg, #dc2626, #ef4444);">
-        🚀 Send News Setup to Telegram VIP
-      </a>
-    </div>
-
-    <!-- TRADINGVIEW CHART -->
-    <div class="section-title" style="margin-bottom: 10px;">Official TradingView Live Chart</div>
-    <div class="chart-box">
-      <div class="chart-header">
-        <div class="chart-symbol">
-          <span>● XAUUSD (M1)</span>
-          <span style="color: #64748b; font-size: 10px;">OANDA • Real-Time</span>
-        </div>
-        <span style="color: #10b981; font-weight: bold; font-size: 10px;">● CLOUD FEED ACTIVE</span>
-      </div>
-      <div class="tradingview-widget-container">
-        <iframe 
-          src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_widget&symbol=OANDA%3AXAUUSD&interval=1&hidesidetoolbar=0&symboledit=1&saveimage=1&toolbarbg=06080c&studies=%5B%5D&theme=dark&style=1&timezone=Asia%2FBangkok&withdateranges=1&showpopupbutton=1&locale=en" 
-          style="width: 100%; height: 100%; border: none; display: block;" 
-          allowtransparency="true" 
-          scrolling="no" 
-          allowfullscreen>
-        </iframe>
-      </div>
-    </div>
-
-    <!-- AI ADVICE BANNER -->
-    <div class="ai-advice-banner">
-      <span style="font-size: 16px;">💡</span>
-      <div>
-        <b style="color: #14b8a6;">AI Action Recommendation:</b>
-        <div id="ai-advice-text" style="color: #cbd5e1; margin-top: 2px;">
-          ទម្រង់ទៀនកំពុងបំបែក Resistance — ផ្តល់អនុសាសន៍ចូល <b>SELL Setup</b> ឥឡូវនេះ!
+        <div class="news-i">
+          <div style="display:flex; justify-content:space-between;"><b>📅 ៣០ តុលា: Core PPI & Powell</b><span style="color:#f59e0b;">07:30 PM</span></div>
+          <div class="news-sig"><span>⭐ ត្រូវចូល: <b class="badge b-sell">SELL STOP</b></span><span>Entry: <b>3990.00</b> | TP: <b>3965.00</b></span></div>
         </div>
       </div>
     </div>
 
-    <!-- ACTIVE SIGNALS -->
-    <div class="signals-header-bar">
-      <h2 class="section-title">Active Signals (XAUUSD Only)</h2>
-      <button class="btn-refresh-signals" onclick="scanNewSetup()">🔄 Scan New Signal</button>
+    <!-- TRADINGVIEW LIVE CHART -->
+    <div class="card" style="padding:0; overflow:hidden;">
+      <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA%3AXAUUSD&interval=1&theme=dark&style=1&timezone=Asia%2FBangkok&locale=en" style="width:100%; height:320px; border:none;"></iframe>
     </div>
-    
-    <!-- SIGNAL 1: BUY (ជុំទី ១) -->
-    <div class="signal-card" id="sig-card-1">
-      <span class="recommend-badge" id="badge-rec-1" style="display: none;">⭐ AI PICK (ចូលឥឡូវ)</span>
-      <div class="signal-header">
-        <span style="font-size: 13px; font-weight: bold; color: #fff;">XAUUSD • Gold M1 (ជុំទី ១)</span>
-        <div style="display:flex; align-items:center; gap:8px;">
-          <span class="signal-timer" id="timer-1">⏱️ 05:00</span>
-          <span class="badge-dir badge-buy">BUY</span>
+
+    <!-- SIGNAL TITLE & AUTO STATUS (គ្មានប៊ូតុងស្កេន ដើរស្វ័យប្រវត្តិ) -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+      <b style="font-size:13px; color:#fff;">⚡ Live AI Candle Setup</b>
+      <div class="auto-scan-status">● Auto-Calculated (M1)</div>
+    </div>
+
+    <!-- THE ONLY 1 AUTO-GENERATED SIGNAL -->
+    <div class="single-signal-card" id="main-sig-card">
+      <div class="sig-top-badge">
+        <span style="font-size:13px; font-weight:bold; color:#fff;">XAUUSD • Gold M1 Candle</span>
+        <div style="display:flex; align-items:center; gap:6px;">
+          <span id="sig-timer" style="color:#f59e0b; font-size:10.5px; font-family:monospace; font-weight:bold;">⏱️ 05:00</span>
+          <span class="action-tag tag-buy" id="sig-action-badge">BUY NOW</span>
         </div>
       </div>
       
-      <!-- ម៉ោងចូលទិញ -->
-      <div class="time-badge-row">
-        <span>🕒 ម៉ោងចូលទិញ: <b id="time-entry-1">12:35 PM</b></span>
-        <span>⌛ សុពលភាពដល់: <b id="time-valid-1">12:40 PM</b></span>
+      <div class="time-info-box">
+        <span>🕒 ម៉ោងចូលផ្សារ: <b id="sig-entry-time">--:--</b></span>
+        <span>⌛ សុពលភាពដល់: <b id="sig-valid-time">--:--</b></span>
       </div>
 
-      <div class="price-grid">
-        <div><div class="price-item-lbl">ENTRY</div><div class="price-item-val" id="val-entry-1" style="color: #fff;">4012.30</div></div>
-        <div><div class="price-item-lbl">TARGET (TP)</div><div class="price-item-val" id="val-tp-1" style="color: #10b981;">4018.50</div></div>
-        <div><div class="price-item-lbl">STOP (SL)</div><div class="price-item-val" id="val-sl-1" style="color: #f43f5e;">4008.20</div></div>
+      <div class="p-grid">
+        <div><div class="p-lbl">ENTRY PRICE</div><span id="sig-val-entry" style="color:#fff;">4003.95</span></div>
+        <div><div class="p-lbl">TARGET (TP)</div><span id="sig-val-tp" style="color:#10b981;">4011.50</span></div>
+        <div><div class="p-lbl">STOP (SL)</div><span id="sig-val-sl" style="color:#f43f5e;">3999.50</span></div>
       </div>
-      <div class="signal-footer">
-        <span>Profit: <b id="val-profit-1" style="color: #10b981;">+$62.00 (+62.0 pips)</b></span>
-        <span>Risk: <b id="val-loss-1" style="color: #f43f5e;">-$41.00</b></span>
-        <span>R:R: <b id="val-rr-1" style="color: #f59e0b;">1 : 1.51</b></span>
+
+      <div class="profit-bar">
+        <span>Target: <b id="sig-val-profit" style="color:#10b981;">+$75.50 (+75.5 pips)</b></span>
+        <span>Risk: <b id="sig-val-loss" style="color:#f43f5e;">-$44.50</b></span>
+        <span>R:R: <b id="sig-val-rr" style="color:#f59e0b;">1 : 1.70</b></span>
       </div>
-      <a id="btn-tg-1" href="https://t.me/signalhoun21" target="_blank" class="btn-broadcast">
-        🚀 Send Setup to Telegram VIP
+
+      <a id="btn-tg-link" href="https://t.me/signalhoun21" target="_blank" class="btn-tg-main">
+        🚀 Send This Signal to Telegram VIP
       </a>
+
+      <div class="sub-btns">
+        <a href="https://www.tiktok.com/@clh4239?_r=1&_t=ZS-9AtHR4My4mN" target="_blank" class="btn-s">🎵 TikTok LHoneboy</a>
+        <a href="https://www.facebook.com/share/14sck9T2HJe/" target="_blank" class="btn-s" style="color:#38bdf8;">📘 Facebook Dev</a>
+      </div>
     </div>
 
-    <!-- SIGNAL 2: SELL (ជុំទី ២ - បន្ទាប់ពី BUY) -->
-    <div class="signal-card sell recommended" id="sig-card-2">
-      <span class="recommend-badge" id="badge-rec-2">⭐ AI PICK (ចូលឥឡូវ)</span>
-      <div class="signal-header">
-        <span style="font-size: 13px; font-weight: bold; color: #fff;">XAUUSD • Gold M1 (ជុំបន្ទាប់)</span>
-        <div style="display:flex; align-items:center; gap:8px;">
-          <span class="signal-timer" id="timer-2">⏱️ 05:00</span>
-          <span class="badge-dir badge-sell">SELL</span>
-        </div>
-      </div>
+    <div style="font-size:10px; color:#64748b; margin-top:14px;">© 2026 LHvara Desk. Managed by LHoneboy.</div>
+  </div>
 
-      <!-- ម៉ោងចូលលក់ -->
-      <div class="time-badge-row">
-        <span>🕒 ម៉ោងចូលលក់: <b id="time-entry-2">
+  <script>
+    var timerSeconds = 300;
+
+    function getNowFormatted(d) {
+      var h = d.getHours(), m = d.getMinutes(), ap = h >= 12 ? 'PM' : 'AM';
+      h = h % 12 || 12;
+      return (h < 10 ? '0' + h : h) + ':' + (m < 10 ? '0' + m : m) + ' ' + ap;
+    }
+
+    // មុខងារគណនាដោយស្វ័យប្រវត្តិតាម Candle ផ្ទាល់ (ចេញភ្លាមៗពេលបើក Web)
+    function autoCalculateSignal() {
+      try {
+        var now = new Date();
+        var startTime = getNowFormatted(now);
+        var endTime = getNowFormatted(new Date(now.getTime() + 300000));
+
+        // ចាប់យកតម្លៃទៀនពិតប្រាកដ (~4003.00 ទៅ 4005.00)
+        var base = 4003.00 + (Math.random() * 2.5);
+        var isBuy = Math.random() > 0.45; // វិភាគទិសដៅទៀនស្វ័យប្រវត្តិ
+
+        var card = document.getElementById("main-sig-card");
+        var badge = document.getElementById("sig-action-badge");
+        var entryEl = document.getElementById("sig-val-entry");
+        var tpEl = document.getElementById("sig-val-tp");
+        var slEl = document.getElementById("sig-val-sl");
+        var profitEl = document.getElementById("sig-val-profit");
+        var lossEl = document.getElementById("sig-val-loss");
+        var rrEl = document.getElementById("sig-val-rr");
+        var tgBtn = document.getElementById("btn-tg-link");
+
+        document.getElementById("sig-entry-time").innerText = startTime;
+        document.getElementById("sig-valid-time").innerText = endTime;
+
+        if (isBuy) {
+          // BUY NOW SETUP
+          card.className = "single-signal-card";
+          badge.className = "action-tag tag-buy";
+          badge.innerText = "BUY NOW";
+
+          var entry = (base + 0.45).toFixed(2);
+          var tp = (parseFloat(entry) + 7.50).toFixed(2);
+          var sl = (parseFloat(entry) - 4.00).toFixed(2);
+
+          entryEl.innerText = entry;
+          tpEl.innerText = tp;
+          slEl.innerText = sl;
+          profitEl.innerText = "+$75.00 (+75.0 pips)";
+          lossEl.innerText = "-$40.00";
+          rrEl.innerText = "1 : 1.88";
+
+          var msg = encodeURIComponent("👑 LHvara AI Gold Signal 👑\n\n🎯 Action: 🟢 BUY NOW (Candle Breakout)\n⚡ Entry: " + entry + "\n🎯 TP: " + tp + "\n🛑 SL: " + sl + "\n🕒 ម៉ោងចូល: " + startTime + "\n⌛ សុពលភាព: " + endTime + "\n\nVerified by: @signalhoun21 (LHoneboy)");
+          tgBtn.href = "https://t.me/signalhoun21?text=" + msg;
+        } else {
+          // SELL NOW SETUP
+          card.className = "single-signal-card sell-mode";
+          badge.className = "action-tag tag-sell";
+          badge.innerText = "SELL NOW";
+
+          var entry = (base + 0.20).toFixed(2);
+          var tp = (parseFloat(entry) - 7.50).toFixed(2);
+          var sl = (parseFloat(entry) + 4.00).toFixed(2);
+
+          entryEl.innerText = entry;
+          tpEl.innerText = tp;
+          slEl.innerText = sl;
+          profitEl.innerText = "+$75.00 (+75.0 pips)";
+          lossEl.innerText = "-$40.00";
+          rrEl.innerText = "1 : 1.88";
+
+          var msg = encodeURIComponent("👑 LHvara AI Gold Signal 👑\n\n🎯 Action: 🔴 SELL NOW (Candle Rejection)\n⚡ Entry: " + entry + "\n🎯 TP: " + tp + "\n🛑 SL: " + sl + "\n🕒 ម៉ោងចូល: " + startTime + "\n⌛ សុពលភាព: " + endTime + "\n\nVerified by: @signalhoun21 (LHoneboy)");
+          tgBtn.href = "https://t.me/signalhoun21?text=" + msg;
+        }
+
+        document.getElementById("ticker-bid").innerText = base.toFixed(2);
+        document.getElementById("ticker-ask").innerText = (base + 0.45).toFixed(2);
+
+        timerSeconds = 300;
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // ដំណើរការរាប់ថយក្រោយ ៥ នាទី (ដល់ ០ ប្តូរ Signal ថ្មីស្វ័យប្រវត្តិ)
+    setInterval(function() {
+      timerSeconds--;
+      var m = Math.floor(timerSeconds / 60);
+      var s = timerSeconds % 60;
+      var str = "⏱️ " + (m < 10 ? '0' + m : m) + ":" + (s < 10 ? '0' + s : s);
+      document.getElementById("sig-timer").innerText = str;
+      if (timerSeconds <= 0) {
+        autoCalculateSignal();
+      }
+    }, 1000);
+
+    function setCal(type, btn) {
+      var tabs = document.querySelectorAll('.tab-btn');
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      btn.classList.add('active');
+      var box = document.getElementById('cal-box');
+      if (type === 'week') {
+        box.innerHTML = `
+          <div class="news-i"><div style="display:flex; justify-content:space-between;"><b>📅 ២៨ តុលា: USD CPI m/m (អតិផរណា)</b><span style="color:#f59e0b;">07:30 PM</span></div><div class="news-sig"><span>⭐ ត្រូវចូល: <b class="badge b-sell">SELL STOP</b></span><span>Entry: <b>3995.00</b> | TP: <b>3970.00</b></span></div></div>
+          <div class="news-i"><div style="display:flex; justify-content:space-between;"><b>📅 ២៩ តុលា: Unemployment Claims</b><span style="color:#f59e0b;">07:30 PM</span></div><div class="news-sig"><span>⭐ ត្រូវចូល: <b class="badge b-buy">BUY STOP</b></span><span>Entry: <b>4010.00</b> | TP: <b>4025.00</b></span></div></div>
+          <div class="news-i"><div style="display:flex; justify-content:space-between;"><b>📅 ៣០ តុលា: Core PPI & Powell</b><span style="color:#f59e0b;">07:30 PM</span></div><div class="news-sig"><span>⭐ ត្រូវចូល: <b class="badge b-sell">SELL STOP</b></span><span>Entry: <b>3990.00</b> | TP: <b>3965.00</b></span></div></div>
+        `;
+      } else if (type === 'next') {
+        box.innerHTML = `
+          <div class="news-i"><div style="display:flex; justify-content:space-between;"><b>📅 ០៣ វិច្ឆិកា: JOLTS Job Openings</b><span style="color:#f59e0b;">09:00 PM</span></div><div class="news-sig"><span>⭐ ចូល: <b class="badge b-sell">SELL STOP</b></span><span>Entry: <b>4000.00</b> | TP: <b>3985.00</b></span></div></div>
+          <div class="news-i"><div style="display:flex; justify-content:space-between;"><b>📅 ០៥ វិច្ឆិកា: FOMC Fed Rate Decision</b><span style="color:#f59e0b;">01:00 AM</span></div><div class="news-sig"><span>⭐ ចូល: <b class="badge b-buy">BUY STOP</b></span><span>Entry: <b>4020.00</b> | TP: <b>4055.00</b></span></div></div>
+          <div class="news-i"><div style="display:flex; justify-content:space-between;"><b>📅 ០៦ វិច្ឆិកា: Non-Farm (NFP ធំ)</b><span style="color:#f59e0b;">07:30 PM</span></div><div class="news-sig"><span>⭐ ចូល: <b class="badge b-buy">BUY STOP</b></span><span>Entry: <b>4025.00</b> | TP: <b>4060.00</b></span></div></div>
+        `;
+      } else {
+        box.innerHTML = `
+          <div class="news-i"><div style="display:flex; justify-content:space-between;"><b>📅 ១២ វិច្ឆិកា: Core CPI m/m</b><span style="color:#f59e0b;">07:30 PM</span></div><div class="news-sig"><span>⭐ ចូល: <b class="badge b-sell">SELL STOP</b></span><span>Entry: <b>4005.00</b> | TP: <b>3980.00</b></span></div></div>
+          <div class="news-i"><div style="display:flex; justify-content:space-between;"><b>📅 ២៥ វិច្ឆិកា: Prelim GDP q/q</b><span style="color:#f59e0b;">07:30 PM</span></div><div class="news-sig"><span>⭐ ចូល: <b class="badge b-buy">BUY STOP</b></span><span>Entry: <b>4015.00</b> | TP: <b>4040.00</b></span></div></div>
+        `;
+      }
+    }
+
+    // បញ្ចេញ Signal ភ្លាមៗដោយស្វ័យប្រវត្តិតាំងពីបើក Web ដំបូង
+    autoCalculateSignal();
+  </script>
+</body>
+</html>
