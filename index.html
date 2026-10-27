@@ -2,396 +2,331 @@
 <html lang="km">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Gold Trader Pro - High Profit Long/Short Signal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>LHvara | AI Gold Trading Desk</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body {
-      background-color: #0c0d12;
-      color: #f3f4f6;
-      padding: 10px;
-      padding-bottom: 85px;
-      overflow-x: hidden;
-    }
+    body { background-color: #06080c; color: #f1f5f9; padding-bottom: 60px; line-height: 1.5; }
+    
+    /* Top Ticker */
+    .top-ticker { background: #0b0f17; border-bottom: 1px solid #1e293b; padding: 8px 12px; font-size: 11px; display: flex; justify-content: space-between; align-items: center; overflow-x: auto; white-space: nowrap; }
+    .ticker-pair { color: #f59e0b; font-weight: bold; margin-right: 10px; }
+    .ticker-sell { color: #f43f5e; margin-right: 8px; }
+    .ticker-buy { color: #10b981; margin-right: 8px; }
+    .owner-badge { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: bold; }
 
-    /* Top Stats Bar */
-    .top-stats-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #141721;
-      border: 1px solid #232936;
-      border-radius: 14px;
-      padding: 8px 12px;
-      margin-bottom: 10px;
-    }
-    .stat-chip { text-align: center; }
-    .stat-chip-lbl { font-size: 10px; color: #9ca3af; }
-    .stat-chip-val { font-size: 13px; font-weight: bold; font-family: monospace; }
-    .text-green { color: #22c55e; }
-    .text-red { color: #ef4444; }
+    /* Header & Container */
+    .container { max-width: 600px; margin: 0 auto; padding: 14px; text-align: center; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .logo-container { display: flex; align-items: center; gap: 8px; }
+    .logo-box { width: 34px; height: 34px; background: linear-gradient(135deg, #f59e0b, #14b8a6); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; color: #000; font-size: 14px; }
+    .brand-name { font-size: 18px; font-weight: 800; color: #fff; }
+    .btn-vip-header { background: #14b8a6; color: #000; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 6px; text-decoration: none; }
 
-    /* ប៊ូតុងបង្កើតគណនី Exness ធំទាក់ទាញ */
-    .btn-exness-container {
-      margin-bottom: 10px;
-    }
-    .btn-exness-main {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      padding: 12px;
-      border-radius: 14px;
-      font-size: 14px;
-      font-weight: 800;
-      text-decoration: none;
-      background: linear-gradient(135deg, #facc15, #eab308);
-      color: #000000;
-      border: 1px solid #fef08a;
-      box-shadow: 0 0 18px rgba(250, 204, 21, 0.35);
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-    .btn-exness-main:active {
-      transform: scale(0.98);
-    }
+    /* Hero */
+    .hero-badge { display: inline-block; background: #0f172a; border: 1px solid #334155; padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #94a3b8; margin-bottom: 10px; }
+    .hero-title { font-size: 24px; font-weight: 900; color: #fff; line-height: 1.2; margin-bottom: 6px; }
+    .hero-title span { color: #f59e0b; }
+    .hero-desc { font-size: 11px; color: #94a3b8; margin-bottom: 16px; }
 
-    /* របារស្ថានភាពទំនោរទីផ្សារ */
-    .trend-status-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 12px;
-      background: #141721;
-      border: 1px solid #232936;
-      border-radius: 12px;
-      margin-bottom: 8px;
-    }
-    .trend-indicator-box {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      font-weight: bold;
-    }
+    /* Founder Card (លុប Follower ចេញ) */
+    .founder-card { background: #0d131f; border: 1px solid #1e293b; border-radius: 14px; padding: 14px; margin-bottom: 20px; text-align: left; }
+    .founder-info { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .founder-profile { display: flex; align-items: center; gap: 10px; }
+    .founder-avatar { width: 42px; height: 42px; background: linear-gradient(135deg, #f59e0b, #d97706); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: #000; font-size: 14px; border: 2px solid #fbbf24; }
+    .founder-name { font-size: 14px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 4px; }
+    .founder-verified { background: #38bdf8; color: #000; border-radius: 50%; width: 12px; height: 12px; font-size: 8px; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; }
+    .founder-role { font-size: 11px; color: #94a3b8; }
+    .verified-pill { background: rgba(56, 189, 248, 0.1); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-size: 10px; padding: 2px 8px; border-radius: 12px; font-weight: bold; }
+    
+    /* Social Buttons */
+    .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; border-top: 1px solid #1e293b; padding-top: 12px; }
+    .btn-social { display: block; text-align: center; padding: 8px; border-radius: 8px; text-decoration: none; font-size: 11px; font-weight: 700; }
+    .btn-tiktok { background: #1e293b; color: #fff; }
+    .btn-facebook { background: rgba(24, 119, 242, 0.15); color: #3b82f6; border: 1px solid rgba(24, 119, 242, 0.3); }
+    .btn-telegram { background: rgba(34, 158, 217, 0.15); color: #38bdf8; border: 1px solid rgba(34, 158, 217, 0.3); }
 
-    /* ក្រាហ្វិក TradingView Container */
-    .chart-wrapper {
-      position: relative;
-      width: 100%;
-      height: 480px;
-      background: #ffffff;
-      border-radius: 16px;
-      border: 2px solid #232936;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-      margin-bottom: 12px;
-    }
+    /* OFFICIAL TRADINGVIEW WIDGET CONTAINER */
+    .chart-box { background: #0b0f17; border: 1px solid #1e293b; border-radius: 14px; margin-bottom: 20px; overflow: hidden; text-align: left; }
+    .chart-header { background: #070a10; padding: 8px 12px; border-bottom: 1px solid #1e293b; display: flex; justify-content: space-between; align-items: center; font-size: 11px; }
+    .chart-symbol { font-weight: bold; color: #f59e0b; display: flex; align-items: center; gap: 6px; }
+    .tradingview-widget-container { width: 100%; height: 380px; position: relative; }
 
-    /* សញ្ញា Neon តូចនៅខាងក្រោមទៀន Candle (ច្បាស់ មិនបាំងទៀន) */
-    .signal-neon-bubble {
-      position: absolute;
-      bottom: 22px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-      padding: 7px 18px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: 0.5px;
-      text-align: center;
-      backdrop-filter: blur(8px);
-      user-select: none;
-      white-space: nowrap;
-      transition: all 0.3s ease;
-    }
-    .neon-buy {
-      background: rgba(6, 78, 59, 0.94);
-      border: 1.5px solid #22c55e;
-      color: #ffffff;
-      box-shadow: 0 0 18px rgba(34, 197, 94, 0.75);
-      text-shadow: 0 0 8px #86efac;
-    }
-    .neon-sell {
-      background: rgba(127, 29, 29, 0.94);
-      border: 1.5px solid #ef4444;
-      color: #ffffff;
-      box-shadow: 0 0 18px rgba(239, 68, 68, 0.75);
-      text-shadow: 0 0 8px #fca5a5;
-    }
+    /* Signal Cards */
+    .section-title { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 10px; text-align: left; }
+    .signal-card { background: #0d131f; border-radius: 14px; padding: 14px; margin-bottom: 12px; border: 1px solid #1e293b; border-left: 4px solid #10b981; text-align: left; }
+    .signal-card.sell { border-left-color: #f43f5e; }
+    .signal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .badge-dir { padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 900; }
+    .badge-buy { background: #10b981; color: #000; }
+    .badge-sell { background: #f43f5e; color: #fff; }
+    .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: #06080c; padding: 8px; border-radius: 8px; text-align: center; margin-bottom: 8px; }
+    .price-item-lbl { font-size: 9px; color: #64748b; font-weight: bold; }
+    .price-item-val { font-size: 12px; font-weight: bold; }
+    .signal-footer { display: flex; justify-content: space-between; font-size: 10px; color: #94a3b8; border-top: 1px solid #1e293b; padding-top: 6px; }
 
-    /* ផ្ទាំងស្ថិតិ Long/Short Position ផលចំណេញខ្ពស់ (Entry, SL, TP) */
-    .stats-card {
-      background: #141721;
-      border: 1px solid #232936;
-      border-radius: 16px;
-      padding: 12px;
-      margin-bottom: 12px;
-    }
-    .stats-grid-top {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-top: 8px;
-      margin-bottom: 8px;
-    }
-    .stats-grid-tp {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      text-align: center;
-    }
-    .stat-box {
-      background: #1c212e;
-      padding: 8px 4px;
-      border-radius: 10px;
-      border: 1px solid #2b3547;
-      text-align: center;
-    }
-    .stat-title { font-size: 10px; color: #9ca3af; margin-bottom: 2px; }
-    .stat-value { font-size: 13px; font-weight: bold; font-family: monospace; }
+    /* Pricing Section */
+    .pricing-card { background: #0d131f; border: 1px solid #1e293b; border-radius: 14px; padding: 14px; margin-bottom: 12px; text-align: left; position: relative; }
+    .pricing-card.partner { border-color: #f59e0b; }
+    .partner-tag { position: absolute; top: -9px; right: 12px; background: #f59e0b; color: #000; font-size: 9px; font-weight: 900; padding: 2px 8px; border-radius: 10px; }
+    .pricing-tier { font-size: 10px; font-weight: bold; color: #14b8a6; text-transform: uppercase; margin-bottom: 4px; }
+    .pricing-name { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .pricing-cost { font-size: 20px; font-weight: 900; color: #fff; margin-bottom: 10px; }
+    .pricing-cost span { font-size: 11px; color: #64748b; font-weight: normal; }
+    .pricing-list { list-style: none; font-size: 11px; color: #94a3b8; margin-bottom: 12px; }
+    .pricing-list li { margin-bottom: 4px; }
+    .btn-plan { display: block; width: 100%; text-align: center; padding: 10px; border-radius: 8px; font-size: 11px; font-weight: bold; text-decoration: none; border: none; cursor: pointer; }
+    .btn-plan-free { background: #1e293b; color: #fff; }
+    .btn-plan-partner { background: #f59e0b; color: #000; }
+    .btn-plan-pro { background: #3b82f6; color: #fff; }
 
-    /* Bottom App Bar */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 65px;
-      background: rgba(20, 23, 33, 0.95);
-      border-top: 1px solid #232936;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      align-items: center;
-      backdrop-filter: blur(12px);
-      z-index: 50;
-      padding-bottom: 5px;
-    }
-    .nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      color: #9ca3af;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .nav-item.active { color: #38bdf8; }
-    .nav-item.highlight-exness { color: #facc15; font-weight: bold; }
-    .nav-icon { font-size: 20px; margin-bottom: 3px; }
+    /* Calculator */
+    .calc-box { background: #0d131f; border: 1px solid #1e293b; border-radius: 14px; padding: 14px; margin-bottom: 20px; text-align: left; }
+    .calc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+    .calc-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 10px; }
+    .form-group label { display: block; font-size: 9px; font-weight: bold; color: #94a3b8; margin-bottom: 3px; }
+    .form-control { width: 100%; background: #06080c; border: 1px solid #334155; color: #fff; padding: 8px; border-radius: 6px; font-size: 11px; outline: none; }
+    .calc-summary { background: #06080c; padding: 10px; border-radius: 8px; font-size: 11px; border: 1px solid #1e293b; }
+    .calc-sum-line { display: flex; justify-content: space-between; margin-bottom: 4px; }
+
+    #copy-toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #14b8a6; color: #000; font-size: 11px; font-weight: bold; padding: 8px 16px; border-radius: 20px; display: none; z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
   </style>
 </head>
 <body>
 
-  <!-- Top Market Stats Bar -->
-  <div class="top-stats-bar">
-    <div class="stat-chip">
-      <p class="stat-chip-lbl">XAU/USD Live</p>
-      <p id="topGoldPrice" class="stat-chip-val" style="color:#ffffff;">$3,995.10</p>
+  <!-- TOP TICKER -->
+  <div class="top-ticker">
+    <div>
+      <span class="ticker-pair">XAUUSD (M1)</span>
+      <span class="ticker-sell">SELL: <b>4007.37</b></span>
+      <span class="ticker-buy">BUY: <b>4007.86</b></span>
     </div>
-    <div class="stat-chip">
-      <p class="stat-chip-lbl">Position Mode</p>
-      <p id="topPosTxt" class="stat-chip-val text-green">LONG (BUY វែង)</p>
-    </div>
-    <div class="stat-chip">
-      <p class="stat-chip-lbl">Risk : Reward</p>
-      <p class="stat-chip-val" style="color:#38bdf8;">1 : 3.6 (ចំណេញខ្ពស់)</p>
-    </div>
+    <div class="owner-badge">LHoneboy (Owner Active)</div>
   </div>
 
-  <!-- ប៊ូតុងបង្កើតគណនី Exness ធំ -->
-  <div class="btn-exness-container">
-    <a href="https://one.exnessonelink.com/a/7l9vjucq1p?source=app" target="_blank" class="btn-exness-main">
-      ⚡ បង្កើតគណនីត្រេដជាមួយ Exness (ចុះឈ្មោះភ្លាម)
-    </a>
-  </div>
-
-  <!-- របារស្ថានភាពទំនោរទីផ្សារ -->
-  <div class="trend-status-bar">
-    <span style="font-size:12px; font-weight:bold; color:#fbbf24;">📊 Fast Momentum Wave (M15 View)</span>
-    <div class="trend-indicator-box">
-      <span id="trendDot" style="width:8px; height:8px; border-radius:50%; background:#22c55e;"></span>
-      <span id="trendLabel" style="color:#22c55e;">Bullish Strong Run (កម្លាំងឡើងខ្លាំង)</span>
-    </div>
-  </div>
-
-  <!-- ក្រាហ្វិក TradingView -->
-  <div class="chart-wrapper">
-    <!-- សញ្ញា Neon តូចច្បាស់នៅខាងក្រោមទៀន Candle -->
-    <div id="neonSignal" class="signal-neon-bubble neon-buy">
-      ▲ STRONG LONG (BUY)
-    </div>
-
-    <div class="tradingview-widget-container" style="height:100%;width:100%">
-      <div id="tv_chart" style="height:100%;width:100%"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-      <script type="text/javascript">
-      new TradingView.widget({
-        "autosize": true,
-        "symbol": "CAPITALCOM:GOLD",
-        "interval": "15",
-        "timezone": "Asia/Bangkok",
-        "theme": "light",
-        "style": "1",
-        "locale": "en",
-        "toolbar_bg": "#ffffff",
-        "enable_publishing": false,
-        "hide_top_toolbar": false,
-        "hide_legend": false,
-        "save_image": false,
-        "hide_side_toolbar": true,
-        "studies": [
-          "MASimple@tv-basicstudies",
-          "MAExp@tv-basicstudies"
-        ],
-        "container_id": "tv_chart"
-      });
-      </script>
-    </div>
-  </div>
-
-  <!-- ផ្ទាំងស្ថិតិ Long/Short Position (Target ធំ ចំណេញច្រើន) -->
-  <div class="stats-card">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <span id="setupStatusHeader" style="font-size:12px; color:#facc15; font-weight:bold;">🟢 AI Long Setup (ចន្លោះទិញចំណេញច្រើន)</span>
-      <span style="font-size:11px; color:#22c55e; font-family:monospace;">● High Reward</span>
-    </div>
-
-    <div class="stats-grid-top">
-      <div class="stat-box">
-        <p class="stat-title">តំបន់ចូលផ្សារ (Entry Zone)</p>
-        <p id="valEntry" class="stat-value" style="color:#ffffff;">3994.00 - 3996.00</p>
+  <div class="container">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="logo-container">
+        <div class="logo-box">LH</div>
+        <div class="brand-name">LHvara</div>
       </div>
-      <div class="stat-box">
-        <p class="stat-title">កាត់ខាតការពារទុន (Stop Loss)</p>
-        <p id="valSL" class="stat-value text-red">3982.50</p>
+      <a href="https://t.me/signalhoun21" onclick="handleSocial(event, 'https://t.me/signalhoun21', 'Telegram')" class="btn-vip-header">VIP Signals</a>
+    </div>
+
+    <div class="hero-badge">AI GOLD ENGINE • LIVE</div>
+    <h1 class="hero-title">Trade Gold with <span>Precision</span></h1>
+    <p class="hero-desc">Real-time setups, validated pip ratios, and automated AI calculations.</p>
+
+    <!-- FOUNDER CARD (លុប Follower ចេញ ដោយជំនួសស្លាក Official វិញ) -->
+    <div class="founder-card">
+      <div class="founder-info">
+        <div class="founder-profile">
+          <div class="founder-avatar">LH</div>
+          <div>
+            <div class="founder-name">LHoneboy <span class="founder-verified">✓</span></div>
+            <div class="founder-role">Dev • Founder @ LHvara</div>
+          </div>
+        </div>
+        <div class="verified-pill">Official Founder</div>
+      </div>
+      <div class="social-grid">
+        <a href="https://www.tiktok.com/@clh4239?_r=1&_t=ZS-9AtHR4My4mN" onclick="handleSocial(event, 'https://www.tiktok.com/@clh4239?_r=1&_t=ZS-9AtHR4My4mN', 'TikTok')" class="btn-social btn-tiktok">TikTok</a>
+        <a href="https://www.facebook.com/share/14sck9T2HJe/" onclick="handleSocial(event, 'https://www.facebook.com/share/14sck9T2HJe/', 'Facebook')" class="btn-social btn-facebook">Facebook</a>
+        <a href="https://t.me/signalhoun21" onclick="handleSocial(event, 'https://t.me/signalhoun21', 'Telegram')" class="btn-social btn-telegram">Telegram</a>
       </div>
     </div>
 
-    <div class="stats-grid-tp">
-      <div class="stat-box">
-        <p class="stat-title">TP 1 (+150p)</p>
-        <p id="valTP1" class="stat-value text-green">4010.00</p>
+    <!-- OFFICIAL TRADINGVIEW REAL-TIME EMBED -->
+    <div class="section-title">Official TradingView Live Chart</div>
+    <div class="chart-box">
+      <div class="chart-header">
+        <div class="chart-symbol">
+          <span>● XAUUSD (M1)</span>
+          <span style="color: #64748b; font-size: 10px;">OANDA • Real-Time</span>
+        </div>
+        <span style="color: #10b981; font-weight: bold; font-size: 10px;">● CLOUD FEED ACTIVE</span>
       </div>
-      <div class="stat-box">
-        <p class="stat-title">TP 2 (+280p)</p>
-        <p id="valTP2" class="stat-value text-green">4023.00</p>
+
+      <!-- TradingView Iframe Widget -->
+      <div class="tradingview-widget-container">
+        <iframe 
+          src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_widget&symbol=OANDA%3AXAUUSD&interval=1&hidesidetoolbar=0&symboledit=1&saveimage=1&toolbarbg=06080c&studies=%5B%5D&theme=dark&style=1&timezone=Asia%2FBangkok&withdateranges=1&showpopupbutton=1&locale=en" 
+          style="width: 100%; height: 100%; border: none; display: block;" 
+          allowtransparency="true" 
+          scrolling="no" 
+          allowfullscreen>
+        </iframe>
       </div>
-      <div class="stat-box">
-        <p class="stat-title">TP 3 (+450p វែង)</p>
-        <p id="valTP3" class="stat-value text-green">4040.00</p>
+    </div>
+
+    <!-- 2 SIGNALS ONLY -->
+    <div class="section-title">Active Signals (XAUUSD Only)</div>
+    
+    <!-- SIGNAL 1 -->
+    <div class="signal-card">
+      <div class="signal-header">
+        <span style="font-size: 13px; font-weight: bold; color: #fff;">XAUUSD • Gold M1</span>
+        <span class="badge-dir badge-buy">BUY</span>
       </div>
+      <div class="price-grid">
+        <div><div class="price-item-lbl">ENTRY</div><div class="price-item-val" style="color: #fff;">4007.86</div></div>
+        <div><div class="price-item-lbl">TARGET (TP)</div><div class="price-item-val" style="color: #10b981;">4017.17</div></div>
+        <div><div class="price-item-lbl">STOP (SL)</div><div class="price-item-val" style="color: #f43f5e;">4003.50</div></div>
+      </div>
+      <div class="signal-footer">
+        <span>Profit: <b style="color: #10b981;">+$93.10 (+93.1 pips)</b></span>
+        <span>Risk: <b style="color: #f43f5e;">-$43.60</b></span>
+        <span>R:R: <b style="color: #f59e0b;">1 : 2.14</b></span>
+      </div>
+    </div>
+
+    <!-- SIGNAL 2 -->
+    <div class="signal-card sell">
+      <div class="signal-header">
+        <span style="font-size: 13px; font-weight: bold; color: #fff;">XAUUSD • Gold M1</span>
+        <span class="badge-dir badge-sell">SELL</span>
+      </div>
+      <div class="price-grid">
+        <div><div class="price-item-lbl">ENTRY</div><div class="price-item-val" style="color: #fff;">4012.01</div></div>
+        <div><div class="price-item-lbl">TARGET (TP)</div><div class="price-item-val" style="color: #10b981;">4006.50</div></div>
+        <div><div class="price-item-lbl">STOP (SL)</div><div class="price-item-val" style="color: #f43f5e;">4014.50</div></div>
+      </div>
+      <div class="signal-footer">
+        <span>Profit: <b style="color: #10b981;">+$55.10 (+55.1 pips)</b></span>
+        <span>Risk: <b style="color: #f43f5e;">-$24.90</b></span>
+        <span>R:R: <b style="color: #f59e0b;">1 : 2.21</b></span>
+      </div>
+    </div>
+
+    <!-- PRICING -->
+    <div class="section-title" style="margin-top: 20px;">Access Plans & Pricing</div>
+    
+    <div class="pricing-card">
+      <div class="pricing-tier">Public Trial</div>
+      <div class="pricing-name">3-Day Free Trial</div>
+      <div class="pricing-cost">$0 <span>/ 3 days</span></div>
+      <ul class="pricing-list">
+        <li>✓ Access all active Gold setups</li>
+        <li>✓ Real-time pip calculator</li>
+        <li>✓ No credit card required</li>
+      </ul>
+      <button class="btn-plan btn-plan-free" onclick="alert('អ្នកកំពុងប្រើប្រាស់ 3-Day Free Trial!')">Start Free 3 Days</button>
+    </div>
+
+    <div class="pricing-card partner">
+      <div class="partner-tag">PARTNER OFFER</div>
+      <div class="pricing-tier" style="color: #f59e0b;">Broker Trial</div>
+      <div class="pricing-name">7-Day Pro Free</div>
+      <div class="pricing-cost">$0 <span>/ with Broker</span></div>
+      <ul class="pricing-list">
+        <li>✓ Open account with partner broker</li>
+        <li>✓ 7 days full Pro AI desk access</li>
+        <li>✓ Instant auto-unlock</li>
+      </ul>
+      <a href="https://t.me/signalhoun21" onclick="handleSocial(event, 'https://t.me/signalhoun21', 'Telegram')" class="btn-plan btn-plan-partner">Claim 7-Day Partner</a>
+    </div>
+
+    <div class="pricing-card">
+      <div class="pricing-tier" style="color: #3b82f6;">Full Pro</div>
+      <div class="pricing-name">LHvara Pro Desk</div>
+      <div class="pricing-cost">$49 <span>/ month</span></div>
+      <ul class="pricing-list">
+        <li>✓ Unlimited instant Gold signals</li>
+        <li>✓ Direct Telegram VIP alerts</li>
+        <li>✓ Complete risk engine access</li>
+      </ul>
+      <a href="https://t.me/signalhoun21" onclick="handleSocial(event, 'https://t.me/signalhoun21', 'Telegram')" class="btn-plan btn-plan-pro">Upgrade to Pro</a>
+    </div>
+
+    <!-- CALCULATOR -->
+    <div class="section-title" style="margin-top: 20px;">Risk & Pip Calculator</div>
+    <div class="calc-box">
+      <div class="calc-row">
+        <div class="form-group">
+          <label>DIRECTION</label>
+          <select id="calc-dir" onchange="runCalc()" class="form-control">
+            <option value="BUY">BUY (Long)</option>
+            <option value="SELL">SELL (Short)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>LOT SIZE</label>
+          <input type="number" id="calc-lot" step="0.01" value="0.10" oninput="runCalc()" class="form-control">
+        </div>
+      </div>
+      <div class="calc-row-3">
+        <div class="form-group">
+          <label>ENTRY</label>
+          <input type="number" id="calc-entry" step="0.01" value="4007.86" oninput="runCalc()" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>TARGET (TP)</label>
+          <input type="number" id="calc-tp" step="0.01" value="4017.17" oninput="runCalc()" class="form-control" style="color: #10b981;">
+        </div>
+        <div class="form-group">
+          <label>STOP (SL)</label>
+          <input type="number" id="calc-sl" step="0.01" value="4003.50" oninput="runCalc()" class="form-control" style="color: #f43f5e;">
+        </div>
+      </div>
+      <div class="calc-summary">
+        <div class="calc-sum-line">
+          <span style="color: #94a3b8;">Potential Profit:</span>
+          <span id="res-profit" style="color: #10b981; font-weight: bold;">+$93.10 (+93.1 pips)</span>
+        </div>
+        <div class="calc-sum-line">
+          <span style="color: #94a3b8;">Risk Capital:</span>
+          <span id="res-loss" style="color: #f43f5e; font-weight: bold;">-$43.60 (-43.6 pips)</span>
+        </div>
+        <div class="calc-sum-line" style="border-top: 1px solid #1e293b; padding-top: 4px; margin-top: 4px;">
+          <span style="color: #94a3b8;">Risk / Reward:</span>
+          <span id="res-rr" style="color: #f59e0b; font-weight: bold;">1 : 2.14</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size: 11px; color: #64748b; margin-top: 10px;">
+      © 2026 LHvara. Managed by LHoneboy.
     </div>
   </div>
 
-  <!-- Bottom App Bar -->
-  <div class="bottom-nav">
-    <div class="nav-item active">
-      <span class="nav-icon">📊</span>
-      <span>Live Chart</span>
-    </div>
-    <a href="https://one.exnessonelink.com/a/7l9vjucq1p?source=app" target="_blank" class="nav-item highlight-exness">
-      <span class="nav-icon">⚡</span>
-      <span>បើកគណនី Exness</span>
-    </a>
-    <a href="https://t.me/signalhoun21" target="_blank" class="nav-item">
-      <span class="nav-icon">✈️</span>
-      <span>Telegram</span>
-    </a>
-  </div>
+  <div id="copy-toast">បានចម្លង Link រួចរាល់!</div>
 
   <script>
-    // តម្លៃគោលមាសបច្ចុប្បន្ន
-    let baseGoldPrice = 3995.10;
-    let momentumVelocity = 0.18; // ល្បឿនរំកិលរហ័ស
-    let currentSignal = "BUY";   // ចាប់ផ្តើមដោយ Long BUY តាមកម្លាំងងើបឡើង
-    let countTicks = 0;
-
-    function fastMarketEngine() {
-      const bubble = document.getElementById('neonSignal');
-      const trendDot = document.getElementById('trendDot');
-      const trendLabel = document.getElementById('trendLabel');
-      const topPosTxt = document.getElementById('topPosTxt');
-      const headerStatus = document.getElementById('setupStatusHeader');
-      const topGoldPrice = document.getElementById('topGoldPrice');
-
-      const valEntry = document.getElementById('valEntry');
-      const valSL = document.getElementById('valSL');
-      const valTP1 = document.getElementById('valTP1');
-      const valTP2 = document.getElementById('valTP2');
-      const valTP3 = document.getElementById('valTP3');
-
-      // គណនាលំហូរតម្លៃលឿនរហ័សតាមវិនាទី
-      countTicks++;
-      const fluctuation = (Math.random() * 0.45 - 0.20);
-      baseGoldPrice = +(baseGoldPrice + fluctuation).toFixed(2);
-
-      if (topGoldPrice) topGoldPrice.innerText = '$' + baseGoldPrice.toFixed(2);
-
-      // រៀងរាល់ 15 វិនាទី ប្រព័ន្ធពិនិត្យកម្លាំង Trend វែងម្តង
-      if (countTicks % 15 === 0) {
-        // បើកម្លាំងឡើង > 0 ➔ BUY បើ < 0 ➔ SELL
-        currentSignal = (fluctuation >= 0) ? "BUY" : "SELL";
-      }
-
-      if (currentSignal === "BUY") {
-        // --- LONG POSITION (BUY) ចំណេញច្រើន ---
-        if (bubble) {
-          bubble.className = 'signal-neon-bubble neon-buy';
-          bubble.innerText = '▲ STRONG LONG (BUY)';
-        }
-        if (trendDot) trendDot.style.background = '#22c55e';
-        if (trendLabel) {
-          trendLabel.innerText = 'Bullish Strong Run (កម្លាំងឡើងខ្លាំង)';
-          trendLabel.style.color = '#22c55e';
-        }
-        if (topPosTxt) {
-          topPosTxt.innerText = 'LONG (BUY វែង)';
-          topPosTxt.className = 'stat-chip-val text-green';
-        }
-        if (headerStatus) headerStatus.innerText = '🟢 AI Long Setup (ចន្លោះទិញចំណេញច្រើន)';
-
-        const e1 = (baseGoldPrice - 1.20).toFixed(2);
-        const e2 = (baseGoldPrice + 1.20).toFixed(2);
-        if (valEntry) valEntry.innerText = `${e1} - ${e2}`;
-        if (valSL) valSL.innerText = (baseGoldPrice - 12.50).toFixed(2);
-        if (valTP1) valTP1.innerText = (baseGoldPrice + 15.00).toFixed(2);
-        if (valTP2) valTP2.innerText = (baseGoldPrice + 28.00).toFixed(2);
-        if (valTP3) valTP3.innerText = (baseGoldPrice + 45.00).toFixed(2);
-
-      } else {
-        // --- SHORT POSITION (SELL) ចំណេញច្រើន ---
-        if (bubble) {
-          bubble.className = 'signal-neon-bubble neon-sell';
-          bubble.innerText = '▼ STRONG SHORT (SELL)';
-        }
-        if (trendDot) trendDot.style.background = '#ef4444';
-        if (trendLabel) {
-          trendLabel.innerText = 'Bearish Breakdown (កម្លាំងចុះខ្លាំង)';
-          trendLabel.style.color = '#ef4444';
-        }
-        if (topPosTxt) {
-          topPosTxt.innerText = 'SHORT (SELL វែង)';
-          topPosTxt.className = 'stat-chip-val text-red';
-        }
-        if (headerStatus) headerStatus.innerText = '🔴 AI Short Setup (ចន្លោះលក់ចំណេញច្រើន)';
-
-        const e1 = (baseGoldPrice + 1.20).toFixed(2);
-        const e2 = (baseGoldPrice - 1.20).toFixed(2);
-        if (valEntry) valEntry.innerText = `${e1} - ${e2}`;
-        if (valSL) valSL.innerText = (baseGoldPrice + 12.50).toFixed(2);
-        if (valTP1) valTP1.innerText = (baseGoldPrice - 15.00).toFixed(2);
-        if (valTP2) valTP2.innerText = (baseGoldPrice - 28.00).toFixed(2);
-        if (valTP3) valTP3.innerText = (baseGoldPrice - 45.00).toFixed(2);
+    function handleSocial(e, url, name) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(url);
+        var toast = document.getElementById('copy-toast');
+        toast.innerText = "បានចម្លង Link " + name + " រួចរាល់!";
+        toast.style.display = "block";
+        setTimeout(function(){ toast.style.display = "none"; }, 2500);
       }
     }
 
-    // ដំណើរការភ្លាមពេលបើក និងគណនារហ័សរៀងរាល់ ១ វិនាទី (Fast Calculation)
-    fastMarketEngine();
-    setInterval(fastMarketEngine, 1000);
+    function runCalc() {
+      var dir = document.getElementById('calc-dir').value;
+      var lot = parseFloat(document.getElementById('calc-lot').value) || 0.1;
+      var entry = parseFloat(document.getElementById('calc-entry').value) || 0;
+      var tp = parseFloat(document.getElementById('calc-tp').value) || 0;
+      var sl = parseFloat(document.getElementById('calc-sl').value) || 0;
+
+      var gainDiff = dir === 'BUY' ? (tp - entry) : (entry - tp);
+      var lossDiff = dir === 'BUY' ? (entry - sl) : (sl - entry);
+
+      var gainPips = gainDiff * 10;
+      var lossPips = lossDiff * 10;
+
+      var dollarGain = gainPips * (lot * 10);
+      var dollarLoss = lossPips * (lot * 10);
+
+      var rr = lossDiff > 0 ? (gainDiff / lossDiff).toFixed(2) : '0.00';
+
+      document.getElementById('res-profit').innerText = '+$' + dollarGain.toFixed(2) + ' (+' + gainPips.toFixed(1) + ' pips)';
+      document.getElementById('res-loss').innerText = '-$' + dollarLoss.toFixed(2) + ' (-' + lossPips.toFixed(1) + ' pips)';
+      document.getElementById('res-rr').innerText = '1 : ' + rr;
+    }
+
+    runCalc();
   </script>
 </body>
 </html>
