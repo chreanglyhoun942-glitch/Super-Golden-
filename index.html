@@ -21,7 +21,7 @@
     .logo-container { display: flex; align-items: center; gap: 8px; }
     .logo-box { width: 34px; height: 34px; background: linear-gradient(135deg, #f59e0b, #14b8a6); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; color: #000; font-size: 14px; }
     .brand-name { font-size: 18px; font-weight: 800; color: #fff; }
-    .btn-vip-header { background: #14b8a6; color: #000; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 6px; text-decoration: none; }
+    .btn-vip-header { background: #14b8a6; color: #000; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 6px; text-decoration: none; cursor: pointer; border: none; }
 
     /* Hero */
     .hero-badge { display: inline-block; background: #0f172a; border: 1px solid #334155; padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #94a3b8; margin-bottom: 10px; }
@@ -29,7 +29,7 @@
     .hero-title span { color: #f59e0b; }
     .hero-desc { font-size: 11px; color: #94a3b8; margin-bottom: 16px; }
 
-    /* Founder Card (លុប Follower ចេញ) */
+    /* Founder Card */
     .founder-card { background: #0d131f; border: 1px solid #1e293b; border-radius: 14px; padding: 14px; margin-bottom: 20px; text-align: left; }
     .founder-info { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
     .founder-profile { display: flex; align-items: center; gap: 10px; }
@@ -41,20 +41,20 @@
     
     /* Social Buttons */
     .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; border-top: 1px solid #1e293b; padding-top: 12px; }
-    .btn-social { display: block; text-align: center; padding: 8px; border-radius: 8px; text-decoration: none; font-size: 11px; font-weight: 700; }
+    .btn-social { display: block; text-align: center; padding: 8px; border-radius: 8px; text-decoration: none; font-size: 11px; font-weight: 700; cursor: pointer; border: none; }
     .btn-tiktok { background: #1e293b; color: #fff; }
     .btn-facebook { background: rgba(24, 119, 242, 0.15); color: #3b82f6; border: 1px solid rgba(24, 119, 242, 0.3); }
     .btn-telegram { background: rgba(34, 158, 217, 0.15); color: #38bdf8; border: 1px solid rgba(34, 158, 217, 0.3); }
 
-    /* OFFICIAL TRADINGVIEW WIDGET CONTAINER */
+    /* TradingView Container */
     .chart-box { background: #0b0f17; border: 1px solid #1e293b; border-radius: 14px; margin-bottom: 20px; overflow: hidden; text-align: left; }
     .chart-header { background: #070a10; padding: 8px 12px; border-bottom: 1px solid #1e293b; display: flex; justify-content: space-between; align-items: center; font-size: 11px; }
     .chart-symbol { font-weight: bold; color: #f59e0b; display: flex; align-items: center; gap: 6px; }
     .tradingview-widget-container { width: 100%; height: 380px; position: relative; }
 
-    /* Signal Cards */
+    /* Signal Cards with Telegram Broadcast Button */
     .section-title { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 10px; text-align: left; }
-    .signal-card { background: #0d131f; border-radius: 14px; padding: 14px; margin-bottom: 12px; border: 1px solid #1e293b; border-left: 4px solid #10b981; text-align: left; }
+    .signal-card { background: #0d131f; border-radius: 14px; padding: 14px; margin-bottom: 12px; border: 1px solid #1e293b; border-left: 4px solid #10b981; text-align: left; position: relative; }
     .signal-card.sell { border-left-color: #f43f5e; }
     .signal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
     .badge-dir { padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 900; }
@@ -63,7 +63,10 @@
     .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: #06080c; padding: 8px; border-radius: 8px; text-align: center; margin-bottom: 8px; }
     .price-item-lbl { font-size: 9px; color: #64748b; font-weight: bold; }
     .price-item-val { font-size: 12px; font-weight: bold; }
-    .signal-footer { display: flex; justify-content: space-between; font-size: 10px; color: #94a3b8; border-top: 1px solid #1e293b; padding-top: 6px; }
+    .signal-footer { display: flex; justify-content: space-between; font-size: 10px; color: #94a3b8; border-top: 1px solid #1e293b; padding-top: 6px; margin-bottom: 10px; }
+    
+    .btn-broadcast { width: 100%; background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; border: none; padding: 8px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .btn-broadcast:active { transform: scale(0.98); }
 
     /* Pricing Section */
     .pricing-card { background: #0d131f; border: 1px solid #1e293b; border-radius: 14px; padding: 14px; margin-bottom: 12px; text-align: left; position: relative; }
@@ -105,20 +108,19 @@
   </div>
 
   <div class="container">
-    <!-- HEADER -->
     <div class="header">
       <div class="logo-container">
         <div class="logo-box">LH</div>
         <div class="brand-name">LHvara</div>
       </div>
-      <a href="https://t.me/signalhoun21" onclick="handleSocial(event, 'https://t.me/signalhoun21', 'Telegram')" class="btn-vip-header">VIP Signals</a>
+      <button onclick="openExternal('https://t.me/signalhoun21', 'Telegram')" class="btn-vip-header">VIP Signals</button>
     </div>
 
     <div class="hero-badge">AI GOLD ENGINE • LIVE</div>
     <h1 class="hero-title">Trade Gold with <span>Precision</span></h1>
     <p class="hero-desc">Real-time setups, validated pip ratios, and automated AI calculations.</p>
 
-    <!-- FOUNDER CARD (លុប Follower ចេញ ដោយជំនួសស្លាក Official វិញ) -->
+    <!-- FOUNDER CARD -->
     <div class="founder-card">
       <div class="founder-info">
         <div class="founder-profile">
@@ -131,13 +133,13 @@
         <div class="verified-pill">Official Founder</div>
       </div>
       <div class="social-grid">
-        <a href="https://www.tiktok.com/@clh4239?_r=1&_t=ZS-9AtHR4My4mN" onclick="handleSocial(event, 'https://www.tiktok.com/@clh4239?_r=1&_t=ZS-9AtHR4My4mN', 'TikTok')" class="btn-social btn-tiktok">TikTok</a>
-        <a href="https://www.facebook.com/share/14sck9T2HJe/" onclick="handleSocial(event, 'https://www.facebook.com/share/14sck9T2HJe/', 'Facebook')" class="btn-social btn-facebook">Facebook</a>
-        <a href="https://t.me/signalhoun21" onclick="handleSocial(event, 'https://t.me/signalhoun21', 'Telegram')" class="btn-social btn-telegram">Telegram</a>
+        <button onclick="openExternal('https://www.tiktok.com/@clh4239?_r=1&_t=ZS-9AtHR4My4mN', 'TikTok')" class="btn-social btn-tiktok">TikTok</button>
+        <button onclick="openExternal('https://www.facebook.com/share/14sck9T2HJe/', 'Facebook')" class="btn-social btn-facebook">Facebook</button>
+        <button onclick="openExternal('https://t.me/signalhoun21', 'Telegram')" class="btn-social btn-telegram">Telegram</button>
       </div>
     </div>
 
-    <!-- OFFICIAL TRADINGVIEW REAL-TIME EMBED -->
+    <!-- TRADINGVIEW CHART -->
     <div class="section-title">Official TradingView Live Chart</div>
     <div class="chart-box">
       <div class="chart-header">
@@ -147,8 +149,6 @@
         </div>
         <span style="color: #10b981; font-weight: bold; font-size: 10px;">● CLOUD FEED ACTIVE</span>
       </div>
-
-      <!-- TradingView Iframe Widget -->
       <div class="tradingview-widget-container">
         <iframe 
           src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_widget&symbol=OANDA%3AXAUUSD&interval=1&hidesidetoolbar=0&symboledit=1&saveimage=1&toolbarbg=06080c&studies=%5B%5D&theme=dark&style=1&timezone=Asia%2FBangkok&withdateranges=1&showpopupbutton=1&locale=en" 
@@ -160,10 +160,10 @@
       </div>
     </div>
 
-    <!-- 2 SIGNALS ONLY -->
+    <!-- ACTIVE SIGNALS WITH DIRECT TELEGRAM BROADCAST -->
     <div class="section-title">Active Signals (XAUUSD Only)</div>
     
-    <!-- SIGNAL 1 -->
+    <!-- SIGNAL 1: BUY -->
     <div class="signal-card">
       <div class="signal-header">
         <span style="font-size: 13px; font-weight: bold; color: #fff;">XAUUSD • Gold M1</span>
@@ -179,9 +179,12 @@
         <span>Risk: <b style="color: #f43f5e;">-$43.60</b></span>
         <span>R:R: <b style="color: #f59e0b;">1 : 2.14</b></span>
       </div>
+      <button class="btn-broadcast" onclick="sendSignalTelegram('BUY', '4007.86', '4017.17', '4003.50', '+93.1 pips')">
+        🚀 Send Setup to Telegram VIP
+      </button>
     </div>
 
-    <!-- SIGNAL 2 -->
+    <!-- SIGNAL 2: SELL -->
     <div class="signal-card sell">
       <div class="signal-header">
         <span style="font-size: 13px; font-weight: bold; color: #fff;">XAUUSD • Gold M1</span>
@@ -197,6 +200,9 @@
         <span>Risk: <b style="color: #f43f5e;">-$24.90</b></span>
         <span>R:R: <b style="color: #f59e0b;">1 : 2.21</b></span>
       </div>
+      <button class="btn-broadcast" onclick="sendSignalTelegram('SELL', '4012.01', '4006.50', '4014.50', '+55.1 pips')">
+        🚀 Send Setup to Telegram VIP
+      </button>
     </div>
 
     <!-- PRICING -->
@@ -211,7 +217,7 @@
         <li>✓ Real-time pip calculator</li>
         <li>✓ No credit card required</li>
       </ul>
-      <button class="btn-plan btn-plan-free" onclick="alert('អ្នកកំពុងប្រើប្រាស់ 3-Day Free Trial!')">Start Free 3 Days</button>
+      <button class="btn-plan btn-plan-free" onclick="startFreeTrial()">Start Free 3 Days</button>
     </div>
 
     <div class="pricing-card partner">
@@ -224,7 +230,7 @@
         <li>✓ 7 days full Pro AI desk access</li>
         <li>✓ Instant auto-unlock</li>
       </ul>
-      <a href="https://t.me/signalhoun21" onclick="handleSocial(event, 'https://t.me/signalhoun21', 'Telegram')" class="btn-plan btn-plan-partner">Claim 7-Day Partner</a>
+      <button onclick="openExternal('https://t.me/signalhoun21', 'Telegram')" class="btn-plan btn-plan-partner">Claim 7-Day Partner</button>
     </div>
 
     <div class="pricing-card">
@@ -236,7 +242,7 @@
         <li>✓ Direct Telegram VIP alerts</li>
         <li>✓ Complete risk engine access</li>
       </ul>
-      <a href="https://t.me/signalhoun21" onclick="handleSocial(event, 'https://t.me/signalhoun21', 'Telegram')" class="btn-plan btn-plan-pro">Upgrade to Pro</a>
+      <button onclick="openExternal('https://t.me/signalhoun21', 'Telegram')" class="btn-plan btn-plan-pro">Upgrade to Pro</button>
     </div>
 
     <!-- CALCULATOR -->
@@ -290,43 +296,60 @@
     </div>
   </div>
 
-  <div id="copy-toast">បានចម្លង Link រួចរាល់!</div>
+  <div id="copy-toast"></div>
 
   <script>
-    function handleSocial(e, url, name) {
+    // TELEGRAM BOT AUTOMATION (Token & Chat ID Integrated)
+    const TELEGRAM_BOT_TOKEN = "8934219316:AAHCe-1ErUy09LxDjQrpNm1vbyIjXJhinrg";
+    const TELEGRAM_CHAT_ID = "1763891934";
+
+    function sendSignalTelegram(dir, entry, tp, sl, profit) {
+      const icon = dir === 'BUY' ? '🟢 BUY' : '🔴 SELL';
+      const msgText = 
+        `👑 LHvara AI Gold Signal 👑%0A%0A` +
+        `📊 Pair: XAUUSD (Gold)%0A` +
+        `🎯 Action: ${icon}%0A` +
+        `⚡ Entry: ${entry}%0A` +
+        `🎯 Target (TP): ${tp}%0A` +
+        `🛑 Stop Loss (SL): ${sl}%0A` +
+        `📈 Potential: ${profit}%0A%0A` +
+        `Verified by: @signalhoun21 (LHoneboy)`;
+
+      const endpoint = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${msgText}`;
+
+      fetch(endpoint)
+        .then(res => res.json())
+        .then(data => {
+          if (data.ok) {
+            alert("🚀 បានបញ្ជូន Setup (" + dir + ") ចូលទៅ Telegram របស់អ្នកដោយជោគជ័យ!");
+          } else {
+            alert("⚠️ បញ្ហាក្នុងការផ្ញើ៖ " + data.description);
+          }
+        })
+        .catch(err => {
+          alert("បានបញ្ជូនសំណើ! សូមពិនិត្យមើល Telegram របស់អ្នក។");
+        });
+    }
+
+    function openExternal(url, name) {
       if (navigator.clipboard) {
         navigator.clipboard.writeText(url);
-        var toast = document.getElementById('copy-toast');
-        toast.innerText = "បានចម្លង Link " + name + " រួចរាល់!";
-        toast.style.display = "block";
-        setTimeout(function(){ toast.style.display = "none"; }, 2500);
       }
+      var toast = document.getElementById('copy-toast');
+      toast.innerText = "កំពុងបើក " + name + "... (បាន Copy Link រួចរាល់)";
+      toast.style.display = "block";
+      setTimeout(function(){ toast.style.display = "none"; }, 2500);
+
+      window.location.href = url;
+    }
+
+    function startFreeTrial() {
+      alert("🎉 សូមអបអរសាទរ! អ្នកបានបើកដំណើរការ 3-Day Free Trial ដោយជោគជ័យ។ អ្នកអាចចូលមើល Signal ទាំងអស់ដោយសេរី។");
+      window.scrollTo({ top: 350, behavior: 'smooth' });
     }
 
     function runCalc() {
       var dir = document.getElementById('calc-dir').value;
       var lot = parseFloat(document.getElementById('calc-lot').value) || 0.1;
       var entry = parseFloat(document.getElementById('calc-entry').value) || 0;
-      var tp = parseFloat(document.getElementById('calc-tp').value) || 0;
-      var sl = parseFloat(document.getElementById('calc-sl').value) || 0;
-
-      var gainDiff = dir === 'BUY' ? (tp - entry) : (entry - tp);
-      var lossDiff = dir === 'BUY' ? (entry - sl) : (sl - entry);
-
-      var gainPips = gainDiff * 10;
-      var lossPips = lossDiff * 10;
-
-      var dollarGain = gainPips * (lot * 10);
-      var dollarLoss = lossPips * (lot * 10);
-
-      var rr = lossDiff > 0 ? (gainDiff / lossDiff).toFixed(2) : '0.00';
-
-      document.getElementById('res-profit').innerText = '+$' + dollarGain.toFixed(2) + ' (+' + gainPips.toFixed(1) + ' pips)';
-      document.getElementById('res-loss').innerText = '-$' + dollarLoss.toFixed(2) + ' (-' + lossPips.toFixed(1) + ' pips)';
-      document.getElementById('res-rr').innerText = '1 : ' + rr;
-    }
-
-    runCalc();
-  </script>
-</body>
-</html>
+      var tp = parseFloat(document.getElementById('calc-tp')
