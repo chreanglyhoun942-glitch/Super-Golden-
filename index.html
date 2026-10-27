@@ -8,14 +8,12 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background-color: #06080c; color: #f1f5f9; padding-bottom: 60px; line-height: 1.5; }
     
-    /* Top Ticker */
     .top-ticker { background: #0b0f17; border-bottom: 1px solid #1e293b; padding: 8px 12px; font-size: 11px; display: flex; justify-content: space-between; align-items: center; overflow-x: auto; white-space: nowrap; }
     .ticker-pair { color: #f59e0b; font-weight: bold; margin-right: 10px; }
     .ticker-sell { color: #f43f5e; margin-right: 8px; }
     .ticker-buy { color: #10b981; margin-right: 8px; }
     .owner-badge { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: bold; }
 
-    /* Header & Container */
     .container { max-width: 600px; margin: 0 auto; padding: 14px; text-align: center; }
     .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
     .logo-container { display: flex; align-items: center; gap: 8px; }
@@ -23,13 +21,11 @@
     .brand-name { font-size: 18px; font-weight: 800; color: #fff; }
     .btn-vip-header { background: #14b8a6; color: #000; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 6px; text-decoration: none; cursor: pointer; border: none; }
 
-    /* Hero */
     .hero-badge { display: inline-block; background: #0f172a; border: 1px solid #334155; padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #94a3b8; margin-bottom: 10px; }
     .hero-title { font-size: 24px; font-weight: 900; color: #fff; line-height: 1.2; margin-bottom: 6px; }
     .hero-title span { color: #f59e0b; }
     .hero-desc { font-size: 11px; color: #94a3b8; margin-bottom: 16px; }
 
-    /* Founder Card */
     .founder-card { background: #0d131f; border: 1px solid #1e293b; border-radius: 14px; padding: 14px; margin-bottom: 20px; text-align: left; }
     .founder-info { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
     .founder-profile { display: flex; align-items: center; gap: 10px; }
@@ -39,14 +35,12 @@
     .founder-role { font-size: 11px; color: #94a3b8; }
     .verified-pill { background: rgba(56, 189, 248, 0.1); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-size: 10px; padding: 2px 8px; border-radius: 12px; font-weight: bold; }
     
-    /* Social Buttons */
     .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; border-top: 1px solid #1e293b; padding-top: 12px; }
     .btn-social { display: block; text-align: center; padding: 8px; border-radius: 8px; text-decoration: none; font-size: 11px; font-weight: 700; cursor: pointer; border: none; }
     .btn-tiktok { background: #1e293b; color: #fff; }
     .btn-facebook { background: rgba(24, 119, 242, 0.15); color: #3b82f6; border: 1px solid rgba(24, 119, 242, 0.3); }
     .btn-telegram { background: rgba(34, 158, 217, 0.15); color: #38bdf8; border: 1px solid rgba(34, 158, 217, 0.3); }
 
-    /* TradingView Container */
     .chart-box { background: #0b0f17; border: 1px solid #1e293b; border-radius: 14px; margin-bottom: 20px; overflow: hidden; text-align: left; }
     .chart-header { background: #070a10; padding: 8px 12px; border-bottom: 1px solid #1e293b; display: flex; justify-content: space-between; align-items: center; font-size: 11px; }
     .chart-symbol { font-weight: bold; color: #f59e0b; display: flex; align-items: center; gap: 6px; }
@@ -55,15 +49,20 @@
     /* Signal Cards */
     .signals-header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
     .section-title { font-size: 15px; font-weight: 800; color: #fff; text-align: left; margin: 0; }
-    .btn-refresh-signals { background: #1e293b; color: #38bdf8; border: 1px solid #334155; font-size: 10px; font-weight: bold; padding: 4px 10px; border-radius: 6px; cursor: pointer; }
+    .btn-refresh-signals { background: #1e293b; color: #38bdf8; border: 1px solid #334155; font-size: 10px; font-weight: bold; padding: 5px 12px; border-radius: 6px; cursor: pointer; }
+    .btn-refresh-signals:active { transform: scale(0.95); }
 
     .signal-card { background: #0d131f; border-radius: 14px; padding: 14px; margin-bottom: 14px; border: 1px solid #1e293b; border-left: 4px solid #10b981; text-align: left; position: relative; }
     .signal-card.sell { border-left-color: #f43f5e; }
-    .signal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .signal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
     .badge-dir { padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 900; }
     .badge-buy { background: #10b981; color: #000; }
     .badge-sell { background: #f43f5e; color: #fff; }
     .signal-timer { font-size: 10px; color: #f59e0b; font-family: monospace; font-weight: bold; }
+
+    /* Time Row */
+    .time-badge-row { display: flex; justify-content: space-between; background: rgba(2, 6, 23, 0.6); padding: 5px 10px; border-radius: 6px; font-size: 10px; color: #94a3b8; margin-bottom: 8px; border: 1px solid #1e293b; }
+    .time-badge-row b { color: #38bdf8; font-family: monospace; }
 
     .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: #06080c; padding: 8px; border-radius: 8px; text-align: center; margin-bottom: 8px; }
     .price-item-lbl { font-size: 9px; color: #64748b; font-weight: bold; }
@@ -73,7 +72,7 @@
     .btn-broadcast { width: 100%; background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; border: none; padding: 9px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
     .btn-broadcast:active { transform: scale(0.98); }
 
-    /* Pricing Section */
+    /* Pricing */
     .pricing-card { background: #0d131f; border: 1px solid #1e293b; border-radius: 14px; padding: 14px; margin-bottom: 12px; text-align: left; position: relative; }
     .pricing-card.partner { border-color: #f59e0b; }
     .partner-tag { position: absolute; top: -9px; right: 12px; background: #f59e0b; color: #000; font-size: 9px; font-weight: 900; padding: 2px 8px; border-radius: 10px; }
@@ -106,8 +105,8 @@
   <div class="top-ticker">
     <div>
       <span class="ticker-pair">XAUUSD (M1)</span>
-      <span class="ticker-sell">SELL: <b id="ticker-bid">4007.37</b></span>
-      <span class="ticker-buy">BUY: <b id="ticker-ask">4007.86</b></span>
+      <span class="ticker-sell">SELL: <b id="ticker-bid">4011.20</b></span>
+      <span class="ticker-buy">BUY: <b id="ticker-ask">4011.69</b></span>
     </div>
     <div class="owner-badge">LHoneboy (Owner Active)</div>
   </div>
@@ -118,7 +117,7 @@
         <div class="logo-box">LH</div>
         <div class="brand-name">LHvara</div>
       </div>
-      <button onclick="contactPlan('VIP Support')" class="btn-vip-header">VIP Signals</button>
+      <button onclick="contactPlan('VIP Signals')" class="btn-vip-header">VIP Signals</button>
     </div>
 
     <div class="hero-badge">AI GOLD ENGINE • LIVE</div>
@@ -165,7 +164,7 @@
       </div>
     </div>
 
-    <!-- DYNAMIC SIGNALS -->
+    <!-- DYNAMIC SIGNALS WITH EXECUTION TIME -->
     <div class="signals-header-bar">
       <h2 class="section-title">Active Signals (XAUUSD Only)</h2>
       <button class="btn-refresh-signals" onclick="generateNewSignals(true)">🔄 Scan New Signal</button>
@@ -180,15 +179,22 @@
           <span class="badge-dir badge-buy" id="dir-badge-1">BUY</span>
         </div>
       </div>
+      
+      <!-- ម៉ោងចូលទិញ និងម៉ោងផុតកំណត់ -->
+      <div class="time-badge-row">
+        <span>🕒 ម៉ោងចូល: <b id="time-entry-1">--:--</b></span>
+        <span>⌛ សុពលភាពដល់: <b id="time-valid-1">--:--</b></span>
+      </div>
+
       <div class="price-grid">
-        <div><div class="price-item-lbl">ENTRY</div><div class="price-item-val" id="val-entry-1" style="color: #fff;">4007.86</div></div>
-        <div><div class="price-item-lbl">TARGET (TP)</div><div class="price-item-val" id="val-tp-1" style="color: #10b981;">4017.17</div></div>
-        <div><div class="price-item-lbl">STOP (SL)</div><div class="price-item-val" id="val-sl-1" style="color: #f43f5e;">4003.50</div></div>
+        <div><div class="price-item-lbl">ENTRY</div><div class="price-item-val" id="val-entry-1" style="color: #fff;">4011.69</div></div>
+        <div><div class="price-item-lbl">TARGET (TP)</div><div class="price-item-val" id="val-tp-1" style="color: #10b981;">4018.50</div></div>
+        <div><div class="price-item-lbl">STOP (SL)</div><div class="price-item-val" id="val-sl-1" style="color: #f43f5e;">4008.20</div></div>
       </div>
       <div class="signal-footer">
-        <span>Profit: <b id="val-profit-1" style="color: #10b981;">+$93.10 (+93.1 pips)</b></span>
-        <span>Risk: <b id="val-loss-1" style="color: #f43f5e;">-$43.60</b></span>
-        <span>R:R: <b id="val-rr-1" style="color: #f59e0b;">1 : 2.14</b></span>
+        <span>Profit: <b id="val-profit-1" style="color: #10b981;">+$68.10 (+68.1 pips)</b></span>
+        <span>Risk: <b id="val-loss-1" style="color: #f43f5e;">-$34.90</b></span>
+        <span>R:R: <b id="val-rr-1" style="color: #f59e0b;">1 : 1.95</b></span>
       </div>
       <button class="btn-broadcast" onclick="sendActiveSignalTelegram(1)">
         🚀 Send Setup to Telegram VIP
@@ -204,22 +210,29 @@
           <span class="badge-dir badge-sell" id="dir-badge-2">SELL</span>
         </div>
       </div>
+
+      <!-- ម៉ោងចូលលក់ និងម៉ោងផុតកំណត់ -->
+      <div class="time-badge-row">
+        <span>🕒 ម៉ោងចូល: <b id="time-entry-2">--:--</b></span>
+        <span>⌛ សុពលភាពដល់: <b id="time-valid-2">--:--</b></span>
+      </div>
+
       <div class="price-grid">
-        <div><div class="price-item-lbl">ENTRY</div><div class="price-item-val" id="val-entry-2" style="color: #fff;">4012.01</div></div>
-        <div><div class="price-item-lbl">TARGET (TP)</div><div class="price-item-val" id="val-tp-2" style="color: #10b981;">4006.50</div></div>
-        <div><div class="price-item-lbl">STOP (SL)</div><div class="price-item-val" id="val-sl-2" style="color: #f43f5e;">4014.50</div></div>
+        <div><div class="price-item-lbl">ENTRY</div><div class="price-item-val" id="val-entry-2" style="color: #fff;">4014.20</div></div>
+        <div><div class="price-item-lbl">TARGET (TP)</div><div class="price-item-val" id="val-tp-2" style="color: #10b981;">4008.00</div></div>
+        <div><div class="price-item-lbl">STOP (SL)</div><div class="price-item-val" id="val-sl-2" style="color: #f43f5e;">4016.80</div></div>
       </div>
       <div class="signal-footer">
-        <span>Profit: <b id="val-profit-2" style="color: #10b981;">+$55.10 (+55.1 pips)</b></span>
-        <span>Risk: <b id="val-loss-2" style="color: #f43f5e;">-$24.90</b></span>
-        <span>R:R: <b id="val-rr-2" style="color: #f59e0b;">1 : 2.21</b></span>
+        <span>Profit: <b id="val-profit-2" style="color: #10b981;">+$62.00 (+62.0 pips)</b></span>
+        <span>Risk: <b id="val-loss-2" style="color: #f43f5e;">-$26.00</b></span>
+        <span>R:R: <b id="val-rr-2" style="color: #f59e0b;">1 : 2.38</b></span>
       </div>
       <button class="btn-broadcast" onclick="sendActiveSignalTelegram(2)">
         🚀 Send Setup to Telegram VIP
       </button>
     </div>
 
-    <!-- LICENCE / PRICING (ភ្ជាប់លោតទៅ Telegram ផ្ទាល់) -->
+    <!-- PRICING -->
     <div class="section-title" style="margin-top: 20px; margin-bottom: 10px;">Access Plans & Pricing</div>
     
     <div class="pricing-card">
@@ -278,29 +291,29 @@
       <div class="calc-row-3">
         <div class="form-group">
           <label>ENTRY</label>
-          <input type="number" id="calc-entry" step="0.01" value="4007.86" oninput="runCalc()" class="form-control">
+          <input type="number" id="calc-entry" step="0.01" value="4011.69" oninput="runCalc()" class="form-control">
         </div>
         <div class="form-group">
           <label>TARGET (TP)</label>
-          <input type="number" id="calc-tp" step="0.01" value="4017.17" oninput="runCalc()" class="form-control" style="color: #10b981;">
+          <input type="number" id="calc-tp" step="0.01" value="4018.50" oninput="runCalc()" class="form-control" style="color: #10b981;">
         </div>
         <div class="form-group">
           <label>STOP (SL)</label>
-          <input type="number" id="calc-sl" step="0.01" value="4003.50" oninput="runCalc()" class="form-control" style="color: #f43f5e;">
+          <input type="number" id="calc-sl" step="0.01" value="4008.20" oninput="runCalc()" class="form-control" style="color: #f43f5e;">
         </div>
       </div>
       <div class="calc-summary">
         <div class="calc-sum-line">
           <span style="color: #94a3b8;">Potential Profit:</span>
-          <span id="res-profit" style="color: #10b981; font-weight: bold;">+$93.10 (+93.1 pips)</span>
+          <span id="res-profit" style="color: #10b981; font-weight: bold;">+$68.10 (+68.1 pips)</span>
         </div>
         <div class="calc-sum-line">
           <span style="color: #94a3b8;">Risk Capital:</span>
-          <span id="res-loss" style="color: #f43f5e; font-weight: bold;">-$43.60 (-43.6 pips)</span>
+          <span id="res-loss" style="color: #f43f5e; font-weight: bold;">-$34.90 (-34.9 pips)</span>
         </div>
         <div class="calc-sum-line" style="border-top: 1px solid #1e293b; padding-top: 4px; margin-top: 4px;">
           <span style="color: #94a3b8;">Risk / Reward:</span>
-          <span id="res-rr" style="color: #f59e0b; font-weight: bold;">1 : 2.14</span>
+          <span id="res-rr" style="color: #f59e0b; font-weight: bold;">1 : 1.95</span>
         </div>
       </div>
     </div>
@@ -316,23 +329,14 @@
     const TELEGRAM_BOT_TOKEN = "8934219316:AAHCe-1ErUy09LxDjQrpNm1vbyIjXJhinrg";
     const TELEGRAM_CHAT_ID = "1763891934";
 
-    let currentSignals = {
-      1: { dir: "BUY", entry: 4007.86, tp: 4017.17, sl: 4003.50, profit: "+93.1 pips", risk: "-$43.60", rr: "1 : 2.14" },
-      2: { dir: "SELL", entry: 4012.01, tp: 4006.50, sl: 4014.50, profit: "+55.1 pips", risk: "-$24.90", rr: "1 : 2.21" }
-    };
-
-    let signalDuration = 300;
+    let currentSignals = {};
+    let signalDuration = 300; // 5 នាទី
     let timerSeconds = signalDuration;
 
-    function generateNewSignals(manual = false) {
-      let basePrice = 4005.00 + (Math.random() * 10);
-      let spread = 0.49;
-
-      let buyEntry = parseFloat((basePrice + (Math.random() * 2)).toFixed(2));
-      let buyTP = parseFloat((buyEntry + 6.0 + (Math.random() * 5)).toFixed(2));
-      let buySL = parseFloat((buyEntry - 3.0 - (Math.random() * 2)).toFixed(2));
-      let buyGain = ((buyTP - buyEntry) * 10).toFixed(1);
-      let buyLoss = ((buyEntry - buySL) * 10).toFixed(1);
-      let buyRR = ((buyTP - buyEntry) / (buyEntry - buySL)).toFixed(2);
-
-      currentSignals[1]
+    function formatTime(date) {
+      let h = date.getHours();
+      let m = date.getMinutes();
+      let ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12;
+      h = h ? h : 12;
+ 
