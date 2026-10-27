@@ -52,20 +52,25 @@
     .chart-symbol { font-weight: bold; color: #f59e0b; display: flex; align-items: center; gap: 6px; }
     .tradingview-widget-container { width: 100%; height: 380px; position: relative; }
 
-    /* Signal Cards with Telegram Broadcast Button */
-    .section-title { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 10px; text-align: left; }
-    .signal-card { background: #0d131f; border-radius: 14px; padding: 14px; margin-bottom: 12px; border: 1px solid #1e293b; border-left: 4px solid #10b981; text-align: left; position: relative; }
+    /* Signal Cards */
+    .signals-header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .section-title { font-size: 15px; font-weight: 800; color: #fff; text-align: left; margin: 0; }
+    .btn-refresh-signals { background: #1e293b; color: #38bdf8; border: 1px solid #334155; font-size: 10px; font-weight: bold; padding: 4px 10px; border-radius: 6px; cursor: pointer; }
+
+    .signal-card { background: #0d131f; border-radius: 14px; padding: 14px; margin-bottom: 14px; border: 1px solid #1e293b; border-left: 4px solid #10b981; text-align: left; position: relative; }
     .signal-card.sell { border-left-color: #f43f5e; }
     .signal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
     .badge-dir { padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 900; }
     .badge-buy { background: #10b981; color: #000; }
     .badge-sell { background: #f43f5e; color: #fff; }
+    .signal-timer { font-size: 10px; color: #f59e0b; font-family: monospace; font-weight: bold; }
+
     .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: #06080c; padding: 8px; border-radius: 8px; text-align: center; margin-bottom: 8px; }
     .price-item-lbl { font-size: 9px; color: #64748b; font-weight: bold; }
     .price-item-val { font-size: 12px; font-weight: bold; }
     .signal-footer { display: flex; justify-content: space-between; font-size: 10px; color: #94a3b8; border-top: 1px solid #1e293b; padding-top: 6px; margin-bottom: 10px; }
     
-    .btn-broadcast { width: 100%; background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; border: none; padding: 8px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .btn-broadcast { width: 100%; background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; border: none; padding: 9px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
     .btn-broadcast:active { transform: scale(0.98); }
 
     /* Pricing Section */
@@ -101,8 +106,8 @@
   <div class="top-ticker">
     <div>
       <span class="ticker-pair">XAUUSD (M1)</span>
-      <span class="ticker-sell">SELL: <b>4007.37</b></span>
-      <span class="ticker-buy">BUY: <b>4007.86</b></span>
+      <span class="ticker-sell">SELL: <b id="ticker-bid">4007.37</b></span>
+      <span class="ticker-buy">BUY: <b id="ticker-ask">4007.86</b></span>
     </div>
     <div class="owner-badge">LHoneboy (Owner Active)</div>
   </div>
@@ -113,7 +118,7 @@
         <div class="logo-box">LH</div>
         <div class="brand-name">LHvara</div>
       </div>
-      <button onclick="openExternal('https://t.me/signalhoun21', 'Telegram')" class="btn-vip-header">VIP Signals</button>
+      <button onclick="contactPlan('VIP Support')" class="btn-vip-header">VIP Signals</button>
     </div>
 
     <div class="hero-badge">AI GOLD ENGINE • LIVE</div>
@@ -140,7 +145,7 @@
     </div>
 
     <!-- TRADINGVIEW CHART -->
-    <div class="section-title">Official TradingView Live Chart</div>
+    <div class="section-title" style="margin-bottom: 10px;">Official TradingView Live Chart</div>
     <div class="chart-box">
       <div class="chart-header">
         <div class="chart-symbol">
@@ -160,53 +165,62 @@
       </div>
     </div>
 
-    <!-- ACTIVE SIGNALS WITH DIRECT TELEGRAM BROADCAST -->
-    <div class="section-title">Active Signals (XAUUSD Only)</div>
+    <!-- DYNAMIC SIGNALS -->
+    <div class="signals-header-bar">
+      <h2 class="section-title">Active Signals (XAUUSD Only)</h2>
+      <button class="btn-refresh-signals" onclick="generateNewSignals(true)">🔄 Scan New Signal</button>
+    </div>
     
     <!-- SIGNAL 1: BUY -->
-    <div class="signal-card">
+    <div class="signal-card" id="sig-card-1">
       <div class="signal-header">
         <span style="font-size: 13px; font-weight: bold; color: #fff;">XAUUSD • Gold M1</span>
-        <span class="badge-dir badge-buy">BUY</span>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="signal-timer" id="timer-1">⏱️ 05:00</span>
+          <span class="badge-dir badge-buy" id="dir-badge-1">BUY</span>
+        </div>
       </div>
       <div class="price-grid">
-        <div><div class="price-item-lbl">ENTRY</div><div class="price-item-val" style="color: #fff;">4007.86</div></div>
-        <div><div class="price-item-lbl">TARGET (TP)</div><div class="price-item-val" style="color: #10b981;">4017.17</div></div>
-        <div><div class="price-item-lbl">STOP (SL)</div><div class="price-item-val" style="color: #f43f5e;">4003.50</div></div>
+        <div><div class="price-item-lbl">ENTRY</div><div class="price-item-val" id="val-entry-1" style="color: #fff;">4007.86</div></div>
+        <div><div class="price-item-lbl">TARGET (TP)</div><div class="price-item-val" id="val-tp-1" style="color: #10b981;">4017.17</div></div>
+        <div><div class="price-item-lbl">STOP (SL)</div><div class="price-item-val" id="val-sl-1" style="color: #f43f5e;">4003.50</div></div>
       </div>
       <div class="signal-footer">
-        <span>Profit: <b style="color: #10b981;">+$93.10 (+93.1 pips)</b></span>
-        <span>Risk: <b style="color: #f43f5e;">-$43.60</b></span>
-        <span>R:R: <b style="color: #f59e0b;">1 : 2.14</b></span>
+        <span>Profit: <b id="val-profit-1" style="color: #10b981;">+$93.10 (+93.1 pips)</b></span>
+        <span>Risk: <b id="val-loss-1" style="color: #f43f5e;">-$43.60</b></span>
+        <span>R:R: <b id="val-rr-1" style="color: #f59e0b;">1 : 2.14</b></span>
       </div>
-      <button class="btn-broadcast" onclick="sendSignalTelegram('BUY', '4007.86', '4017.17', '4003.50', '+93.1 pips')">
+      <button class="btn-broadcast" onclick="sendActiveSignalTelegram(1)">
         🚀 Send Setup to Telegram VIP
       </button>
     </div>
 
     <!-- SIGNAL 2: SELL -->
-    <div class="signal-card sell">
+    <div class="signal-card sell" id="sig-card-2">
       <div class="signal-header">
         <span style="font-size: 13px; font-weight: bold; color: #fff;">XAUUSD • Gold M1</span>
-        <span class="badge-dir badge-sell">SELL</span>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="signal-timer" id="timer-2">⏱️ 05:00</span>
+          <span class="badge-dir badge-sell" id="dir-badge-2">SELL</span>
+        </div>
       </div>
       <div class="price-grid">
-        <div><div class="price-item-lbl">ENTRY</div><div class="price-item-val" style="color: #fff;">4012.01</div></div>
-        <div><div class="price-item-lbl">TARGET (TP)</div><div class="price-item-val" style="color: #10b981;">4006.50</div></div>
-        <div><div class="price-item-lbl">STOP (SL)</div><div class="price-item-val" style="color: #f43f5e;">4014.50</div></div>
+        <div><div class="price-item-lbl">ENTRY</div><div class="price-item-val" id="val-entry-2" style="color: #fff;">4012.01</div></div>
+        <div><div class="price-item-lbl">TARGET (TP)</div><div class="price-item-val" id="val-tp-2" style="color: #10b981;">4006.50</div></div>
+        <div><div class="price-item-lbl">STOP (SL)</div><div class="price-item-val" id="val-sl-2" style="color: #f43f5e;">4014.50</div></div>
       </div>
       <div class="signal-footer">
-        <span>Profit: <b style="color: #10b981;">+$55.10 (+55.1 pips)</b></span>
-        <span>Risk: <b style="color: #f43f5e;">-$24.90</b></span>
-        <span>R:R: <b style="color: #f59e0b;">1 : 2.21</b></span>
+        <span>Profit: <b id="val-profit-2" style="color: #10b981;">+$55.10 (+55.1 pips)</b></span>
+        <span>Risk: <b id="val-loss-2" style="color: #f43f5e;">-$24.90</b></span>
+        <span>R:R: <b id="val-rr-2" style="color: #f59e0b;">1 : 2.21</b></span>
       </div>
-      <button class="btn-broadcast" onclick="sendSignalTelegram('SELL', '4012.01', '4006.50', '4014.50', '+55.1 pips')">
+      <button class="btn-broadcast" onclick="sendActiveSignalTelegram(2)">
         🚀 Send Setup to Telegram VIP
       </button>
     </div>
 
-    <!-- PRICING -->
-    <div class="section-title" style="margin-top: 20px;">Access Plans & Pricing</div>
+    <!-- LICENCE / PRICING (ភ្ជាប់លោតទៅ Telegram ផ្ទាល់) -->
+    <div class="section-title" style="margin-top: 20px; margin-bottom: 10px;">Access Plans & Pricing</div>
     
     <div class="pricing-card">
       <div class="pricing-tier">Public Trial</div>
@@ -217,7 +231,7 @@
         <li>✓ Real-time pip calculator</li>
         <li>✓ No credit card required</li>
       </ul>
-      <button class="btn-plan btn-plan-free" onclick="startFreeTrial()">Start Free 3 Days</button>
+      <button class="btn-plan btn-plan-free" onclick="contactPlan('3-Day Free Trial ($0)')">Start Free 3 Days</button>
     </div>
 
     <div class="pricing-card partner">
@@ -230,7 +244,7 @@
         <li>✓ 7 days full Pro AI desk access</li>
         <li>✓ Instant auto-unlock</li>
       </ul>
-      <button onclick="openExternal('https://t.me/signalhoun21', 'Telegram')" class="btn-plan btn-plan-partner">Claim 7-Day Partner</button>
+      <button onclick="contactPlan('7-Day Partner Trial ($0)')" class="btn-plan btn-plan-partner">Claim 7-Day Partner</button>
     </div>
 
     <div class="pricing-card">
@@ -242,11 +256,11 @@
         <li>✓ Direct Telegram VIP alerts</li>
         <li>✓ Complete risk engine access</li>
       </ul>
-      <button onclick="openExternal('https://t.me/signalhoun21', 'Telegram')" class="btn-plan btn-plan-pro">Upgrade to Pro</button>
+      <button onclick="contactPlan('LHvara Pro Desk ($49/month)')" class="btn-plan btn-plan-pro">Upgrade to Pro</button>
     </div>
 
     <!-- CALCULATOR -->
-    <div class="section-title" style="margin-top: 20px;">Risk & Pip Calculator</div>
+    <div class="section-title" style="margin-top: 20px; margin-bottom: 10px;">Risk & Pip Calculator</div>
     <div class="calc-box">
       <div class="calc-row">
         <div class="form-group">
@@ -299,57 +313,26 @@
   <div id="copy-toast"></div>
 
   <script>
-    // TELEGRAM BOT AUTOMATION (Token & Chat ID Integrated)
     const TELEGRAM_BOT_TOKEN = "8934219316:AAHCe-1ErUy09LxDjQrpNm1vbyIjXJhinrg";
     const TELEGRAM_CHAT_ID = "1763891934";
 
-    function sendSignalTelegram(dir, entry, tp, sl, profit) {
-      const icon = dir === 'BUY' ? '🟢 BUY' : '🔴 SELL';
-      const msgText = 
-        `👑 LHvara AI Gold Signal 👑%0A%0A` +
-        `📊 Pair: XAUUSD (Gold)%0A` +
-        `🎯 Action: ${icon}%0A` +
-        `⚡ Entry: ${entry}%0A` +
-        `🎯 Target (TP): ${tp}%0A` +
-        `🛑 Stop Loss (SL): ${sl}%0A` +
-        `📈 Potential: ${profit}%0A%0A` +
-        `Verified by: @signalhoun21 (LHoneboy)`;
+    let currentSignals = {
+      1: { dir: "BUY", entry: 4007.86, tp: 4017.17, sl: 4003.50, profit: "+93.1 pips", risk: "-$43.60", rr: "1 : 2.14" },
+      2: { dir: "SELL", entry: 4012.01, tp: 4006.50, sl: 4014.50, profit: "+55.1 pips", risk: "-$24.90", rr: "1 : 2.21" }
+    };
 
-      const endpoint = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${msgText}`;
+    let signalDuration = 300;
+    let timerSeconds = signalDuration;
 
-      fetch(endpoint)
-        .then(res => res.json())
-        .then(data => {
-          if (data.ok) {
-            alert("🚀 បានបញ្ជូន Setup (" + dir + ") ចូលទៅ Telegram របស់អ្នកដោយជោគជ័យ!");
-          } else {
-            alert("⚠️ បញ្ហាក្នុងការផ្ញើ៖ " + data.description);
-          }
-        })
-        .catch(err => {
-          alert("បានបញ្ជូនសំណើ! សូមពិនិត្យមើល Telegram របស់អ្នក។");
-        });
-    }
+    function generateNewSignals(manual = false) {
+      let basePrice = 4005.00 + (Math.random() * 10);
+      let spread = 0.49;
 
-    function openExternal(url, name) {
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(url);
-      }
-      var toast = document.getElementById('copy-toast');
-      toast.innerText = "កំពុងបើក " + name + "... (បាន Copy Link រួចរាល់)";
-      toast.style.display = "block";
-      setTimeout(function(){ toast.style.display = "none"; }, 2500);
+      let buyEntry = parseFloat((basePrice + (Math.random() * 2)).toFixed(2));
+      let buyTP = parseFloat((buyEntry + 6.0 + (Math.random() * 5)).toFixed(2));
+      let buySL = parseFloat((buyEntry - 3.0 - (Math.random() * 2)).toFixed(2));
+      let buyGain = ((buyTP - buyEntry) * 10).toFixed(1);
+      let buyLoss = ((buyEntry - buySL) * 10).toFixed(1);
+      let buyRR = ((buyTP - buyEntry) / (buyEntry - buySL)).toFixed(2);
 
-      window.location.href = url;
-    }
-
-    function startFreeTrial() {
-      alert("🎉 សូមអបអរសាទរ! អ្នកបានបើកដំណើរការ 3-Day Free Trial ដោយជោគជ័យ។ អ្នកអាចចូលមើល Signal ទាំងអស់ដោយសេរី។");
-      window.scrollTo({ top: 350, behavior: 'smooth' });
-    }
-
-    function runCalc() {
-      var dir = document.getElementById('calc-dir').value;
-      var lot = parseFloat(document.getElementById('calc-lot').value) || 0.1;
-      var entry = parseFloat(document.getElementById('calc-entry').value) || 0;
-      var tp = parseFloat(document.getElementById('calc-tp')
+      currentSignals[1]
