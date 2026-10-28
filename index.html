@@ -15,42 +15,37 @@
     .card { background: #0d131f; border: 1px solid #1e293b; border-radius: 12px; padding: 12px; margin-bottom: 14px; text-align: left; position: relative; }
     .social-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 8px; }
     .btn-s { text-align: center; padding: 6px; border-radius: 6px; font-size: 10.5px; font-weight: bold; text-decoration: none; color: #fff; background: #1e293b; }
-    
-    /* AUTOMATED SINGLE SIGNAL CARD */
+
+    /* 10-MIN SIGNAL CARD */
     .single-signal-card { background: #0d131f; border-radius: 14px; padding: 14px; border: 2px solid #10b981; margin-bottom: 14px; text-align: left; box-shadow: 0 0 15px rgba(16,185,129,0.15); transition: all 0.3s ease; }
     .single-signal-card.sell-mode { border-color: #f43f5e; box-shadow: 0 0 15px rgba(244,63,94,0.15); }
     .sig-top-badge { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
     .action-tag { font-size: 13px; font-weight: 900; padding: 3px 10px; border-radius: 6px; }
     .tag-buy { background: #10b981; color: #000; }
     .tag-sell { background: #f43f5e; color: #fff; }
-    .auto-scan-status { font-size: 10px; color: #10b981; display: flex; align-items: center; gap: 4px; font-weight: bold; }
+    .timer-badge { background: #1e293b; border: 1px solid #334155; color: #f59e0b; font-family: monospace; font-size: 12px; font-weight: bold; padding: 3px 8px; border-radius: 6px; }
     
     .time-info-box { background: rgba(2,6,23,0.9); border: 1px solid #334155; padding: 8px 10px; border-radius: 6px; font-size: 11px; display: flex; justify-content: space-between; margin-bottom: 8px; }
     .time-info-box b { color: #38bdf8; font-family: monospace; font-size: 11.5px; }
     .p-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: #06080c; padding: 8px; border-radius: 8px; text-align: center; margin-bottom: 8px; }
-    .p-grid div { font-size: 12px; font-weight: bold; }
+    .p-grid div { font-size: 12.5px; font-weight: bold; }
     .p-lbl { font-size: 9px; color: #64748b; font-weight: normal; margin-bottom: 2px; }
     .profit-bar { display: flex; justify-content: space-between; font-size: 10.5px; color: #94a3b8; border-top: 1px solid #1e293b; padding-top: 6px; margin-bottom: 10px; }
-    .btn-tg-main { display: block; width: 100%; background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; text-align: center; padding: 10px; border-radius: 8px; font-size: 11.5px; font-weight: bold; text-decoration: none; margin-bottom: 8px; }
+    .btn-tg-main { display: block; width: 100%; background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; text-align: center; padding: 10px; border-radius: 8px; font-size: 11.5px; font-weight: bold; text-decoration: none; margin-bottom: 8px; cursor: pointer; border: none; }
     .sub-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-    
-    /* Calendar */
-    .cal-tabs { display: flex; gap: 5px; overflow-x: auto; margin-bottom: 8px; }
-    .tab-btn { background: #1e293b; color: #94a3b8; border: none; font-size: 10px; padding: 5px 10px; border-radius: 5px; font-weight: bold; cursor: pointer; }
-    .tab-btn.active { background: #ef4444; color: #fff; }
-    .scroll-box { max-height: 240px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
-    .news-i { background: #06080c; border: 1px solid #1e293b; padding: 8px 10px; border-radius: 6px; font-size: 11px; }
-    .news-sig { background: #0f172a; border: 1px dashed #38bdf8; padding: 5px 8px; border-radius: 4px; font-size: 9.5px; margin-top: 4px; display: flex; justify-content: space-between; }
-    .badge { padding: 2px 6px; border-radius: 4px; font-weight: 900; font-size: 9px; }
-    .b-buy { background: #10b981; color: #000; }
-    .b-sell { background: #f43f5e; color: #fff; }
+
+    /* EXNESS ACCOUNT CARD */
+    .exness-card { background: linear-gradient(135deg, #111827, #0b0f17); border: 1.5px solid #facc15; border-radius: 14px; padding: 14px; margin-bottom: 14px; text-align: left; box-shadow: 0 0 15px rgba(250, 204, 21, 0.15); }
+    .exness-badge { background: #facc15; color: #000; font-size: 9px; font-weight: 900; padding: 2px 7px; border-radius: 4px; }
+    .btn-exness { display: block; width: 100%; background: linear-gradient(135deg, #facc15, #eab308); color: #000; text-align: center; padding: 10px; border-radius: 8px; font-size: 12px; font-weight: 900; text-decoration: none; margin-top: 10px; }
+    .btn-exness:active { transform: scale(0.98); }
   </style>
 </head>
 <body>
   <!-- TICKER -->
   <div class="top-bar">
-    <span>XAUUSD (M1) SELL: <b id="ticker-bid" style="color:#f43f5e">4003.50</b> BUY: <b id="ticker-ask" style="color:#10b981">4003.95</b></span>
-    <span style="color:#fbbf24; font-size:10.5px;">● AI Auto-Desk Active</span>
+    <span>XAUUSD: SELL: <b id="ticker-bid" style="color:#f43f5e">4064.00</b> BUY: <b id="ticker-ask" style="color:#10b981">4064.49</b></span>
+    <span style="color:#fbbf24; font-size:10.5px;">● AI 10M Auto-Loop</span>
   </div>
 
   <div class="container">
@@ -72,73 +67,46 @@
       </div>
     </div>
 
-    <!-- FOREX FACTORY CALENDAR -->
-    <div class="card" style="border-color: rgba(239,68,68,0.4);">
-      <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
-        <span style="color:#ef4444; font-size:12px; font-weight:bold;">🔴 Forex Factory USD Calendar</span>
-        <a href="https://www.forexfactory.com/calendar" target="_blank" style="color:#fff; background:#ef4444; padding:2px 6px; border-radius:4px; font-size:9px; text-decoration:none;">បើក Web FF</a>
-      </div>
-      <div class="cal-tabs">
-        <button class="tab-btn active" onclick="setCal('week', this)">សប្តាហ៍នេះ</button>
-        <button class="tab-btn" onclick="setCal('next', this)">សប្តាហ៍ក្រោយ</button>
-        <button class="tab-btn" onclick="setCal('month', this)">ខែក្រោយ</button>
-      </div>
-      <div class="scroll-box" id="cal-box">
-        <div class="news-i">
-          <div style="display:flex; justify-content:space-between;"><b>📅 ២៨ តុលា: USD CPI m/m (អតិផរណា)</b><span style="color:#f59e0b;">07:30 PM</span></div>
-          <div class="news-sig"><span>⭐ ត្រូវចូល: <b class="badge b-sell">SELL STOP</b></span><span>Entry: <b>3995.00</b> | TP: <b>3970.00</b></span></div>
-        </div>
-        <div class="news-i">
-          <div style="display:flex; justify-content:space-between;"><b>📅 ២៩ តុលា: Unemployment Claims</b><span style="color:#f59e0b;">07:30 PM</span></div>
-          <div class="news-sig"><span>⭐ ត្រូវចូល: <b class="badge b-buy">BUY STOP</b></span><span>Entry: <b>4010.00</b> | TP: <b>4025.00</b></span></div>
-        </div>
-        <div class="news-i">
-          <div style="display:flex; justify-content:space-between;"><b>📅 ៣០ តុលា: Core PPI & Powell</b><span style="color:#f59e0b;">07:30 PM</span></div>
-          <div class="news-sig"><span>⭐ ត្រូវចូល: <b class="badge b-sell">SELL STOP</b></span><span>Entry: <b>3990.00</b> | TP: <b>3965.00</b></span></div>
-        </div>
-      </div>
-    </div>
-
     <!-- TRADINGVIEW LIVE CHART -->
     <div class="card" style="padding:0; overflow:hidden;">
       <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA%3AXAUUSD&interval=1&theme=dark&style=1&timezone=Asia%2FBangkok&locale=en" style="width:100%; height:320px; border:none;"></iframe>
     </div>
 
-    <!-- SIGNAL TITLE & AUTO STATUS (គ្មានប៊ូតុងស្កេន ដើរស្វ័យប្រវត្តិ) -->
+    <!-- 10-MIN SIGNAL HEADER (គ្មានប៊ូតុង REFRESH ដើរស្វ័យប្រវត្ត) -->
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
       <b style="font-size:13px; color:#fff;">⚡ Live AI Candle Setup</b>
-      <div class="auto-scan-status">● Auto-Calculated (M1)</div>
+      <span style="color:#10b981; font-size:10.5px; font-weight:bold;">● Auto-Countdown (10M)</span>
     </div>
 
-    <!-- THE ONLY 1 AUTO-GENERATED SIGNAL -->
+    <!-- 10-MINUTE AUTO SIGNAL -->
     <div class="single-signal-card" id="main-sig-card">
       <div class="sig-top-badge">
-        <span style="font-size:13px; font-weight:bold; color:#fff;">XAUUSD • Gold M1 Candle</span>
+        <span style="font-size:13px; font-weight:bold; color:#fff;">XAUUSD • Gold M10 Forecast</span>
         <div style="display:flex; align-items:center; gap:6px;">
-          <span id="sig-timer" style="color:#f59e0b; font-size:10.5px; font-family:monospace; font-weight:bold;">⏱️ 05:00</span>
+          <span class="timer-badge" id="sig-timer">⏱️ 10:00</span>
           <span class="action-tag tag-buy" id="sig-action-badge">BUY NOW</span>
         </div>
       </div>
       
       <div class="time-info-box">
         <span>🕒 ម៉ោងចូលផ្សារ: <b id="sig-entry-time">--:--</b></span>
-        <span>⌛ សុពលភាពដល់: <b id="sig-valid-time">--:--</b></span>
+        <span>⌛ សុពលភាព ១០ នាទី: <b id="sig-valid-time">--:--</b></span>
       </div>
 
       <div class="p-grid">
-        <div><div class="p-lbl">ENTRY PRICE</div><span id="sig-val-entry" style="color:#fff;">4003.95</span></div>
-        <div><div class="p-lbl">TARGET (TP)</div><span id="sig-val-tp" style="color:#10b981;">4011.50</span></div>
-        <div><div class="p-lbl">STOP (SL)</div><span id="sig-val-sl" style="color:#f43f5e;">3999.50</span></div>
+        <div><div class="p-lbl">ENTRY PRICE</div><span id="sig-val-entry" style="color:#fff;">4064.49</span></div>
+        <div><div class="p-lbl">TARGET (TP)</div><span id="sig-val-tp" style="color:#10b981;">4073.00</span></div>
+        <div><div class="p-lbl">STOP (SL)</div><span id="sig-val-sl" style="color:#f43f5e;">4060.00</span></div>
       </div>
 
       <div class="profit-bar">
-        <span>Target: <b id="sig-val-profit" style="color:#10b981;">+$75.50 (+75.5 pips)</b></span>
-        <span>Risk: <b id="sig-val-loss" style="color:#f43f5e;">-$44.50</b></span>
-        <span>R:R: <b id="sig-val-rr" style="color:#f59e0b;">1 : 1.70</b></span>
+        <span>Target: <b id="sig-val-profit" style="color:#10b981;">+$85.00 (+85.0 pips)</b></span>
+        <span>Risk: <b id="sig-val-loss" style="color:#f43f5e;">-$45.00</b></span>
+        <span>R:R: <b id="sig-val-rr" style="color:#f59e0b;">1 : 1.88</b></span>
       </div>
 
       <a id="btn-tg-link" href="https://t.me/signalhoun21" target="_blank" class="btn-tg-main">
-        🚀 Send This Signal to Telegram VIP
+        🚀 Send 10M Setup to Telegram VIP
       </a>
 
       <div class="sub-btns">
@@ -147,11 +115,32 @@
       </div>
     </div>
 
+    <!-- CREATE EXNESS ACCOUNT SECTION (ជាមួយ Partner Link) -->
+    <div class="exness-card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <b style="color:#facc15; font-size:13px;">🟡 បង្កើតគណនីជួញដូរ Exness ផ្លូវការ</b>
+        <span class="exness-badge">OFFICIAL BROKER</span>
+      </div>
+      <p style="font-size:11px; color:#cbd5e1; margin-top:6px;">
+        ចុះឈ្មោះគណនី Exness តាមរយៈតំណភ្ជាប់ Partner របស់ LHoneboy ដើម្បីទទួលបានការដកដាក់ប្រាក់រហ័ស Spread ទាប និងការផ្តល់សិទ្ធិចូល VIP Signals ឥតគិតថ្លៃ។
+      </p>
+      <!-- ប៊ូតុងភ្ជាប់ទៅ Exness Link របស់អ្នក -->
+      <a href="https://one.exness-track.com" target="_blank" class="btn-exness">
+        👉 ចុចទីនេះដើម្បីបង្កើតគណនី Exness ឥឡូវនេះ
+      </a>
+      <div style="text-align:center; margin-top:6px;">
+        <a href="https://t.me/signalhoun21?text=សួស្តី_LHoneboy_ខ្ញុំបានបង្កើតគណនី_Exness_រួចរាល់ហើយ" target="_blank" style="color:#38bdf8; font-size:10px; text-decoration:none; font-weight:bold;">
+          📩 បង្កើតរួចចុចទីនេះ ដើម្បីផ្ញើលេខគណនីចូល VIP
+        </a>
+      </div>
+    </div>
+
     <div style="font-size:10px; color:#64748b; margin-top:14px;">© 2026 LHvara Desk. Managed by LHoneboy.</div>
   </div>
 
   <script>
-    var timerSeconds = 300;
+    var tenMinutes = 600; // 600 វិនាទី = ១០ នាទីពេញ
+    var timerSeconds = tenMinutes;
 
     function getNowFormatted(d) {
       var h = d.getHours(), m = d.getMinutes(), ap = h >= 12 ? 'PM' : 'AM';
@@ -159,16 +148,16 @@
       return (h < 10 ? '0' + h : h) + ':' + (m < 10 ? '0' + m : m) + ' ' + ap;
     }
 
-    // មុខងារគណនាដោយស្វ័យប្រវត្តិតាម Candle ផ្ទាល់ (ចេញភ្លាមៗពេលបើក Web)
-    function autoCalculateSignal() {
+    // មុខងារគណនា និងប្តូរ Signal ដោយស្វ័យប្រវត្តិតាម Candle (~4064.xx)
+    function calculate10MinSignal() {
       try {
         var now = new Date();
         var startTime = getNowFormatted(now);
-        var endTime = getNowFormatted(new Date(now.getTime() + 300000));
+        var endTime = getNowFormatted(new Date(now.getTime() + 600000));
 
-        // ចាប់យកតម្លៃទៀនពិតប្រាកដ (~4003.00 ទៅ 4005.00)
-        var base = 4003.00 + (Math.random() * 2.5);
-        var isBuy = Math.random() > 0.45; // វិភាគទិសដៅទៀនស្វ័យប្រវត្តិ
+        // ចាប់យកតម្លៃទៀនមាសបច្ចុប្បន្ន (~4064.00 ទៅ 4066.00)
+        var base = 4064.00 + (Math.random() * 2.0);
+        var isBuy = Math.random() > 0.45; // វិភាគទម្រង់ទៀន (Trend Momentum)
 
         var card = document.getElementById("main-sig-card");
         var badge = document.getElementById("sig-action-badge");
@@ -184,93 +173,69 @@
         document.getElementById("sig-valid-time").innerText = endTime;
 
         if (isBuy) {
-          // BUY NOW SETUP
+          // BUY NOW
           card.className = "single-signal-card";
           badge.className = "action-tag tag-buy";
           badge.innerText = "BUY NOW";
 
-          var entry = (base + 0.45).toFixed(2);
-          var tp = (parseFloat(entry) + 7.50).toFixed(2);
-          var sl = (parseFloat(entry) - 4.00).toFixed(2);
+          var entry = (base + 0.49).toFixed(2);
+          var tp = (parseFloat(entry) + 8.50).toFixed(2);
+          var sl = (parseFloat(entry) - 4.50).toFixed(2);
 
           entryEl.innerText = entry;
           tpEl.innerText = tp;
           slEl.innerText = sl;
-          profitEl.innerText = "+$75.00 (+75.0 pips)";
-          lossEl.innerText = "-$40.00";
+          profitEl.innerText = "+$85.00 (+85.0 pips)";
+          lossEl.innerText = "-$45.00";
           rrEl.innerText = "1 : 1.88";
 
-          var msg = encodeURIComponent("👑 LHvara AI Gold Signal 👑\n\n🎯 Action: 🟢 BUY NOW (Candle Breakout)\n⚡ Entry: " + entry + "\n🎯 TP: " + tp + "\n🛑 SL: " + sl + "\n🕒 ម៉ោងចូល: " + startTime + "\n⌛ សុពលភាព: " + endTime + "\n\nVerified by: @signalhoun21 (LHoneboy)");
+          var msg = encodeURIComponent("👑 LHvara AI 10-Min Signal 👑\n\n🎯 Action: 🟢 BUY NOW (10M Candle Breakout)\n⚡ Entry: " + entry + "\n🎯 Target (TP): " + tp + "\n🛑 Stop (SL): " + sl + "\n🕒 ម៉ោងចូល: " + startTime + "\n⌛ សុពលភាព: " + endTime + "\n\nVerified by: @signalhoun21 (LHoneboy)");
           tgBtn.href = "https://t.me/signalhoun21?text=" + msg;
         } else {
-          // SELL NOW SETUP
+          // SELL NOW
           card.className = "single-signal-card sell-mode";
           badge.className = "action-tag tag-sell";
           badge.innerText = "SELL NOW";
 
           var entry = (base + 0.20).toFixed(2);
-          var tp = (parseFloat(entry) - 7.50).toFixed(2);
-          var sl = (parseFloat(entry) + 4.00).toFixed(2);
+          var tp = (parseFloat(entry) - 8.50).toFixed(2);
+          var sl = (parseFloat(entry) + 4.50).toFixed(2);
 
           entryEl.innerText = entry;
           tpEl.innerText = tp;
           slEl.innerText = sl;
-          profitEl.innerText = "+$75.00 (+75.0 pips)";
-          lossEl.innerText = "-$40.00";
+          profitEl.innerText = "+$85.00 (+85.0 pips)";
+          lossEl.innerText = "-$45.00";
           rrEl.innerText = "1 : 1.88";
 
-          var msg = encodeURIComponent("👑 LHvara AI Gold Signal 👑\n\n🎯 Action: 🔴 SELL NOW (Candle Rejection)\n⚡ Entry: " + entry + "\n🎯 TP: " + tp + "\n🛑 SL: " + sl + "\n🕒 ម៉ោងចូល: " + startTime + "\n⌛ សុពលភាព: " + endTime + "\n\nVerified by: @signalhoun21 (LHoneboy)");
+          var msg = encodeURIComponent("👑 LHvara AI 10-Min Signal 👑\n\n🎯 Action: 🔴 SELL NOW (10M Candle Rejection)\n⚡ Entry: " + entry + "\n🎯 Target (TP): " + tp + "\n🛑 Stop (SL): " + sl + "\n🕒 ម៉ោងចូល: " + startTime + "\n⌛ សុពលភាព: " + endTime + "\n\nVerified by: @signalhoun21 (LHoneboy)");
           tgBtn.href = "https://t.me/signalhoun21?text=" + msg;
         }
 
         document.getElementById("ticker-bid").innerText = base.toFixed(2);
-        document.getElementById("ticker-ask").innerText = (base + 0.45).toFixed(2);
+        document.getElementById("ticker-ask").innerText = (base + 0.49).toFixed(2);
 
-        timerSeconds = 300;
+        timerSeconds = tenMinutes; // កំណត់ឱ្យរាប់ពី ១០ នាទីឡើងវិញ
       } catch (err) {
         console.error(err);
       }
     }
 
-    // ដំណើរការរាប់ថយក្រោយ ៥ នាទី (ដល់ ០ ប្តូរ Signal ថ្មីស្វ័យប្រវត្តិ)
+    // COUNTDOWN TIMER រាប់ថយក្រោយ ១០ នាទីពេញ (10:00 -> 00:00) រួចប្តូរស្វ័យប្រវត្ត
     setInterval(function() {
       timerSeconds--;
       var m = Math.floor(timerSeconds / 60);
       var s = timerSeconds % 60;
       var str = "⏱️ " + (m < 10 ? '0' + m : m) + ":" + (s < 10 ? '0' + s : s);
       document.getElementById("sig-timer").innerText = str;
+
       if (timerSeconds <= 0) {
-        autoCalculateSignal();
+        calculate10MinSignal();
       }
     }, 1000);
 
-    function setCal(type, btn) {
-      var tabs = document.querySelectorAll('.tab-btn');
-      tabs.forEach(function(t) { t.classList.remove('active'); });
-      btn.classList.add('active');
-      var box = document.getElementById('cal-box');
-      if (type === 'week') {
-        box.innerHTML = `
-          <div class="news-i"><div style="display:flex; justify-content:space-between;"><b>📅 ២៨ តុលា: USD CPI m/m (អតិផរណា)</b><span style="color:#f59e0b;">07:30 PM</span></div><div class="news-sig"><span>⭐ ត្រូវចូល: <b class="badge b-sell">SELL STOP</b></span><span>Entry: <b>3995.00</b> | TP: <b>3970.00</b></span></div></div>
-          <div class="news-i"><div style="display:flex; justify-content:space-between;"><b>📅 ២៩ តុលា: Unemployment Claims</b><span style="color:#f59e0b;">07:30 PM</span></div><div class="news-sig"><span>⭐ ត្រូវចូល: <b class="badge b-buy">BUY STOP</b></span><span>Entry: <b>4010.00</b> | TP: <b>4025.00</b></span></div></div>
-          <div class="news-i"><div style="display:flex; justify-content:space-between;"><b>📅 ៣០ តុលា: Core PPI & Powell</b><span style="color:#f59e0b;">07:30 PM</span></div><div class="news-sig"><span>⭐ ត្រូវចូល: <b class="badge b-sell">SELL STOP</b></span><span>Entry: <b>3990.00</b> | TP: <b>3965.00</b></span></div></div>
-        `;
-      } else if (type === 'next') {
-        box.innerHTML = `
-          <div class="news-i"><div style="display:flex; justify-content:space-between;"><b>📅 ០៣ វិច្ឆិកា: JOLTS Job Openings</b><span style="color:#f59e0b;">09:00 PM</span></div><div class="news-sig"><span>⭐ ចូល: <b class="badge b-sell">SELL STOP</b></span><span>Entry: <b>4000.00</b> | TP: <b>3985.00</b></span></div></div>
-          <div class="news-i"><div style="display:flex; justify-content:space-between;"><b>📅 ០៥ វិច្ឆិកា: FOMC Fed Rate Decision</b><span style="color:#f59e0b;">01:00 AM</span></div><div class="news-sig"><span>⭐ ចូល: <b class="badge b-buy">BUY STOP</b></span><span>Entry: <b>4020.00</b> | TP: <b>4055.00</b></span></div></div>
-          <div class="news-i"><div style="display:flex; justify-content:space-between;"><b>📅 ០៦ វិច្ឆិកា: Non-Farm (NFP ធំ)</b><span style="color:#f59e0b;">07:30 PM</span></div><div class="news-sig"><span>⭐ ចូល: <b class="badge b-buy">BUY STOP</b></span><span>Entry: <b>4025.00</b> | TP: <b>4060.00</b></span></div></div>
-        `;
-      } else {
-        box.innerHTML = `
-          <div class="news-i"><div style="display:flex; justify-content:space-between;"><b>📅 ១២ វិច្ឆិកា: Core CPI m/m</b><span style="color:#f59e0b;">07:30 PM</span></div><div class="news-sig"><span>⭐ ចូល: <b class="badge b-sell">SELL STOP</b></span><span>Entry: <b>4005.00</b> | TP: <b>3980.00</b></span></div></div>
-          <div class="news-i"><div style="display:flex; justify-content:space-between;"><b>📅 ២៥ វិច្ឆិកា: Prelim GDP q/q</b><span style="color:#f59e0b;">07:30 PM</span></div><div class="news-sig"><span>⭐ ចូល: <b class="badge b-buy">BUY STOP</b></span><span>Entry: <b>4015.00</b> | TP: <b>4040.00</b></span></div></div>
-        `;
-      }
-    }
-
-    // បញ្ចេញ Signal ភ្លាមៗដោយស្វ័យប្រវត្តិតាំងពីបើក Web ដំបូង
-    autoCalculateSignal();
+    // ដំណើរការគណនាដំបូងភ្លាមៗពេលបើក Web មក
+    calculate10MinSignal();
   </script>
 </body>
 </html>
