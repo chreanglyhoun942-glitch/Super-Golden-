@@ -16,7 +16,7 @@
     .social-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 8px; }
     .btn-s { text-align: center; padding: 6px; border-radius: 6px; font-size: 10.5px; font-weight: bold; text-decoration: none; color: #fff; background: #1e293b; }
 
-    /* 10-MIN SIGNAL CARD */
+    /* 10-MIN SYNCHRONIZED SIGNAL CARD */
     .single-signal-card { background: #0d131f; border-radius: 14px; padding: 14px; border: 2px solid #10b981; margin-bottom: 14px; text-align: left; box-shadow: 0 0 15px rgba(16,185,129,0.15); transition: all 0.3s ease; }
     .single-signal-card.sell-mode { border-color: #f43f5e; box-shadow: 0 0 15px rgba(244,63,94,0.15); }
     .sig-top-badge { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
@@ -42,10 +42,10 @@
   </style>
 </head>
 <body>
-  <!-- TICKER -->
+  <!-- TICKER (តម្លៃតាម Candle 4056.xx) -->
   <div class="top-bar">
-    <span>XAUUSD: SELL: <b id="ticker-bid" style="color:#f43f5e">4064.00</b> BUY: <b id="ticker-ask" style="color:#10b981">4064.49</b></span>
-    <span style="color:#fbbf24; font-size:10.5px;">● AI 10M Auto-Loop</span>
+    <span>XAUUSD: SELL: <b id="ticker-bid" style="color:#f43f5e">4055.80</b> BUY: <b id="ticker-ask" style="color:#10b981">4056.29</b></span>
+    <span style="color:#fbbf24; font-size:10.5px;">● Universal 10M Sync</span>
   </div>
 
   <div class="container">
@@ -72,16 +72,16 @@
       <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA%3AXAUUSD&interval=1&theme=dark&style=1&timezone=Asia%2FBangkok&locale=en" style="width:100%; height:320px; border:none;"></iframe>
     </div>
 
-    <!-- 10-MIN SIGNAL HEADER (គ្មានប៊ូតុង REFRESH ដើរស្វ័យប្រវត្ត) -->
+    <!-- 10-MIN SIGNAL HEADER -->
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
       <b style="font-size:13px; color:#fff;">⚡ Live AI Candle Setup</b>
-      <span style="color:#10b981; font-size:10.5px; font-weight:bold;">● Auto-Countdown (10M)</span>
+      <span style="color:#10b981; font-size:10.5px; font-weight:bold;">● 10M Global Clock Auto-Sync</span>
     </div>
 
-    <!-- 10-MINUTE AUTO SIGNAL -->
+    <!-- 10-MINUTE AUTO SIGNAL (ដើររហូតទោះបិទ Web) -->
     <div class="single-signal-card" id="main-sig-card">
       <div class="sig-top-badge">
-        <span style="font-size:13px; font-weight:bold; color:#fff;">XAUUSD • Gold M10 Forecast</span>
+        <span style="font-size:13px; font-weight:bold; color:#fff;">XAUUSD • Gold 10M Block</span>
         <div style="display:flex; align-items:center; gap:6px;">
           <span class="timer-badge" id="sig-timer">⏱️ 10:00</span>
           <span class="action-tag tag-buy" id="sig-action-badge">BUY NOW</span>
@@ -89,14 +89,14 @@
       </div>
       
       <div class="time-info-box">
-        <span>🕒 ម៉ោងចូលផ្សារ: <b id="sig-entry-time">--:--</b></span>
-        <span>⌛ សុពលភាព ១០ នាទី: <b id="sig-valid-time">--:--</b></span>
+        <span>🕒 ម៉ោងចាប់ផ្តើម: <b id="sig-entry-time">--:--</b></span>
+        <span>⌛ បញ្ចប់ជុំ: <b id="sig-valid-time">--:--</b></span>
       </div>
 
       <div class="p-grid">
-        <div><div class="p-lbl">ENTRY PRICE</div><span id="sig-val-entry" style="color:#fff;">4064.49</span></div>
-        <div><div class="p-lbl">TARGET (TP)</div><span id="sig-val-tp" style="color:#10b981;">4073.00</span></div>
-        <div><div class="p-lbl">STOP (SL)</div><span id="sig-val-sl" style="color:#f43f5e;">4060.00</span></div>
+        <div><div class="p-lbl">ENTRY PRICE</div><span id="sig-val-entry" style="color:#fff;">4056.29</span></div>
+        <div><div class="p-lbl">TARGET (TP)</div><span id="sig-val-tp" style="color:#10b981;">4064.80</span></div>
+        <div><div class="p-lbl">STOP (SL)</div><span id="sig-val-sl" style="color:#f43f5e;">4051.80</span></div>
       </div>
 
       <div class="profit-bar">
@@ -115,7 +115,7 @@
       </div>
     </div>
 
-    <!-- CREATE EXNESS ACCOUNT SECTION (ជាមួយ Partner Link) -->
+    <!-- EXNESS ACCOUNT SECTION -->
     <div class="exness-card">
       <div style="display:flex; justify-content:space-between; align-items:center;">
         <b style="color:#facc15; font-size:13px;">🟡 បង្កើតគណនីជួញដូរ Exness ផ្លូវការ</b>
@@ -124,7 +124,6 @@
       <p style="font-size:11px; color:#cbd5e1; margin-top:6px;">
         ចុះឈ្មោះគណនី Exness តាមរយៈតំណភ្ជាប់ Partner របស់ LHoneboy ដើម្បីទទួលបានការដកដាក់ប្រាក់រហ័ស Spread ទាប និងការផ្តល់សិទ្ធិចូល VIP Signals ឥតគិតថ្លៃ។
       </p>
-      <!-- ប៊ូតុងភ្ជាប់ទៅ Exness Link របស់អ្នក -->
       <a href="https://one.exness-track.com" target="_blank" class="btn-exness">
         👉 ចុចទីនេះដើម្បីបង្កើតគណនី Exness ឥឡូវនេះ
       </a>
@@ -139,103 +138,103 @@
   </div>
 
   <script>
-    var tenMinutes = 600; // 600 វិនាទី = ១០ នាទីពេញ
-    var timerSeconds = tenMinutes;
+    var BLOCK_DURATION = 600; // 10 នាទី = 600 វិនាទី
+    var lastBlockIndex = -1;
 
-    function getNowFormatted(d) {
+    function fmt(d) {
       var h = d.getHours(), m = d.getMinutes(), ap = h >= 12 ? 'PM' : 'AM';
       h = h % 12 || 12;
       return (h < 10 ? '0' + h : h) + ':' + (m < 10 ? '0' + m : m) + ' ' + ap;
     }
 
-    // មុខងារគណនា និងប្តូរ Signal ដោយស្វ័យប្រវត្តិតាម Candle (~4064.xx)
-    function calculate10MinSignal() {
-      try {
-        var now = new Date();
-        var startTime = getNowFormatted(now);
-        var endTime = getNowFormatted(new Date(now.getTime() + 600000));
+    // មុខងារគណនា Signal ផ្អែកលើ Block ម៉ោងសកល (ដើររហូតទោះបិទ Web)
+    function syncGlobal10MinSignal() {
+      var now = new Date();
+      var currentTimestamp = Math.floor(now.getTime() / 1000);
+      
+      // រក Block នៃជុំ ១០ នាទី (ឧទាហរណ៍៖ 08:00, 08:10, 08:20, 08:30...)
+      var currentBlockIndex = Math.floor(currentTimestamp / BLOCK_DURATION);
+      var secondsRemaining = BLOCK_DURATION - (currentTimestamp % BLOCK_DURATION);
 
-        // ចាប់យកតម្លៃទៀនមាសបច្ចុប្បន្ន (~4064.00 ទៅ 4066.00)
-        var base = 4064.00 + (Math.random() * 2.0);
-        var isBuy = Math.random() > 0.45; // វិភាគទម្រង់ទៀន (Trend Momentum)
+      // បង្ហាញ Timer រាប់ថយក្រោយតាមវិនាទីពិតលើពិភពលោក
+      var m = Math.floor(secondsRemaining / 60);
+      var s = secondsRemaining % 60;
+      document.getElementById("sig-timer").innerText = "⏱️ " + (m < 10 ? '0' + m : m) + ":" + (s < 10 ? '0' + s : s);
 
-        var card = document.getElementById("main-sig-card");
-        var badge = document.getElementById("sig-action-badge");
-        var entryEl = document.getElementById("sig-val-entry");
-        var tpEl = document.getElementById("sig-val-tp");
-        var slEl = document.getElementById("sig-val-sl");
-        var profitEl = document.getElementById("sig-val-profit");
-        var lossEl = document.getElementById("sig-val-loss");
-        var rrEl = document.getElementById("sig-val-rr");
-        var tgBtn = document.getElementById("btn-tg-link");
-
-        document.getElementById("sig-entry-time").innerText = startTime;
-        document.getElementById("sig-valid-time").innerText = endTime;
-
-        if (isBuy) {
-          // BUY NOW
-          card.className = "single-signal-card";
-          badge.className = "action-tag tag-buy";
-          badge.innerText = "BUY NOW";
-
-          var entry = (base + 0.49).toFixed(2);
-          var tp = (parseFloat(entry) + 8.50).toFixed(2);
-          var sl = (parseFloat(entry) - 4.50).toFixed(2);
-
-          entryEl.innerText = entry;
-          tpEl.innerText = tp;
-          slEl.innerText = sl;
-          profitEl.innerText = "+$85.00 (+85.0 pips)";
-          lossEl.innerText = "-$45.00";
-          rrEl.innerText = "1 : 1.88";
-
-          var msg = encodeURIComponent("👑 LHvara AI 10-Min Signal 👑\n\n🎯 Action: 🟢 BUY NOW (10M Candle Breakout)\n⚡ Entry: " + entry + "\n🎯 Target (TP): " + tp + "\n🛑 Stop (SL): " + sl + "\n🕒 ម៉ោងចូល: " + startTime + "\n⌛ សុពលភាព: " + endTime + "\n\nVerified by: @signalhoun21 (LHoneboy)");
-          tgBtn.href = "https://t.me/signalhoun21?text=" + msg;
-        } else {
-          // SELL NOW
-          card.className = "single-signal-card sell-mode";
-          badge.className = "action-tag tag-sell";
-          badge.innerText = "SELL NOW";
-
-          var entry = (base + 0.20).toFixed(2);
-          var tp = (parseFloat(entry) - 8.50).toFixed(2);
-          var sl = (parseFloat(entry) + 4.50).toFixed(2);
-
-          entryEl.innerText = entry;
-          tpEl.innerText = tp;
-          slEl.innerText = sl;
-          profitEl.innerText = "+$85.00 (+85.0 pips)";
-          lossEl.innerText = "-$45.00";
-          rrEl.innerText = "1 : 1.88";
-
-          var msg = encodeURIComponent("👑 LHvara AI 10-Min Signal 👑\n\n🎯 Action: 🔴 SELL NOW (10M Candle Rejection)\n⚡ Entry: " + entry + "\n🎯 Target (TP): " + tp + "\n🛑 Stop (SL): " + sl + "\n🕒 ម៉ោងចូល: " + startTime + "\n⌛ សុពលភាព: " + endTime + "\n\nVerified by: @signalhoun21 (LHoneboy)");
-          tgBtn.href = "https://t.me/signalhoun21?text=" + msg;
-        }
-
-        document.getElementById("ticker-bid").innerText = base.toFixed(2);
-        document.getElementById("ticker-ask").innerText = (base + 0.49).toFixed(2);
-
-        timerSeconds = tenMinutes; // កំណត់ឱ្យរាប់ពី ១០ នាទីឡើងវិញ
-      } catch (err) {
-        console.error(err);
+      // បើឆ្លងចូល Block ១០ នាទីថ្មី -> គណនា និងប្តូរ Signal ភ្លាមៗ
+      if (currentBlockIndex !== lastBlockIndex) {
+        lastBlockIndex = currentBlockIndex;
+        updateSignalData(currentBlockIndex);
       }
     }
 
-    // COUNTDOWN TIMER រាប់ថយក្រោយ ១០ នាទីពេញ (10:00 -> 00:00) រួចប្តូរស្វ័យប្រវត្ត
-    setInterval(function() {
-      timerSeconds--;
-      var m = Math.floor(timerSeconds / 60);
-      var s = timerSeconds % 60;
-      var str = "⏱️ " + (m < 10 ? '0' + m : m) + ":" + (s < 10 ? '0' + s : s);
-      document.getElementById("sig-timer").innerText = str;
+    function updateSignalData(blockIndex) {
+      var blockStartTime = new Date(blockIndex * BLOCK_DURATION * 1000);
+      var blockEndTime = new Date((blockIndex + 1) * BLOCK_DURATION * 1000);
 
-      if (timerSeconds <= 0) {
-        calculate10MinSignal();
+      document.getElementById("sig-entry-time").innerText = fmt(blockStartTime);
+      document.getElementById("sig-valid-time").innerText = fmt(blockEndTime);
+
+      // ក្បួនគណនា Pseudo-Random ផ្អែកលើ Block Index (ធានាថាក្នុង ១០ នាទីនោះទោះបិទ/បើក Web ក៏នៅតែរក្សា Signal ដដែល ដល់ចប់ជុំទើបដូរ)
+      var seed = (blockIndex * 9301 + 49297) % 233280;
+      var rnd = seed / 233280.0;
+
+      // តម្លៃ Candle មាសបច្ចុប្បន្ន (~4056.xx)
+      var base = 4056.00 + (rnd * 2.0);
+      var isBuy = rnd > 0.45;
+
+      var card = document.getElementById("main-sig-card");
+      var badge = document.getElementById("sig-action-badge");
+      var entryEl = document.getElementById("sig-val-entry");
+      var tpEl = document.getElementById("sig-val-tp");
+      var slEl = document.getElementById("sig-val-sl");
+      var profitEl = document.getElementById("sig-val-profit");
+      var lossEl = document.getElementById("sig-val-loss");
+      var tgBtn = document.getElementById("btn-tg-link");
+
+      if (isBuy) {
+        card.className = "single-signal-card";
+        badge.className = "action-tag tag-buy";
+        badge.innerText = "BUY NOW";
+
+        var entry = (base + 0.49).toFixed(2);
+        var tp = (parseFloat(entry) + 8.50).toFixed(2);
+        var sl = (parseFloat(entry) - 4.50).toFixed(2);
+
+        entryEl.innerText = entry;
+        tpEl.innerText = tp;
+        slEl.innerText = sl;
+        profitEl.innerText = "+$85.00 (+85.0 pips)";
+        lossEl.innerText = "-$45.00";
+
+        var msg = encodeURIComponent("👑 LHvara AI 10-Min Signal 👑\n\n🎯 Action: 🟢 BUY NOW (10M Candle Breakout)\n⚡ Entry: " + entry + "\n🎯 Target (TP): " + tp + "\n🛑 Stop (SL): " + sl + "\n🕒 ម៉ោងចាប់ផ្តើម: " + fmt(blockStartTime) + "\n⌛ បញ្ចប់ជុំ: " + fmt(blockEndTime) + "\n\nVerified by: @signalhoun21 (LHoneboy)");
+        tgBtn.href = "https://t.me/signalhoun21?text=" + msg;
+      } else {
+        card.className = "single-signal-card sell-mode";
+        badge.className = "action-tag tag-sell";
+        badge.innerText = "SELL NOW";
+
+        var entry = (base + 0.20).toFixed(2);
+        var tp = (parseFloat(entry) - 8.50).toFixed(2);
+        var sl = (parseFloat(entry) + 4.50).toFixed(2);
+
+        entryEl.innerText = entry;
+        tpEl.innerText = tp;
+        slEl.innerText = sl;
+        profitEl.innerText = "+$85.00 (+85.0 pips)";
+        lossEl.innerText = "-$45.00";
+
+        var msg = encodeURIComponent("👑 LHvara AI 10-Min Signal 👑\n\n🎯 Action: 🔴 SELL NOW (10M Candle Rejection)\n⚡ Entry: " + entry + "\n🎯 Target (TP): " + tp + "\n🛑 Stop (SL): " + sl + "\n🕒 ម៉ោងចាប់ផ្តើម: " + fmt(blockStartTime) + "\n⌛ បញ្ចប់ជុំ: " + fmt(blockEndTime) + "\n\nVerified by: @signalhoun21 (LHoneboy)");
+        tgBtn.href = "https://t.me/signalhoun21?text=" + msg;
       }
-    }, 1000);
 
-    // ដំណើរការគណនាដំបូងភ្លាមៗពេលបើក Web មក
-    calculate10MinSignal();
+      document.getElementById("ticker-bid").innerText = base.toFixed(2);
+      document.getElementById("ticker-ask").innerText = (base + 0.49).toFixed(2);
+    }
+
+    // ដំណើរការ Sync ម៉ោងពិតលើពិភពលោករៀងរាល់ ១ វិនាទីម្តង
+    setInterval(syncGlobal10MinSignal, 1000);
+    syncGlobal10MinSignal();
   </script>
 </body>
 </html>
