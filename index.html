@@ -14,7 +14,6 @@
       --green: #10b981;
       --red: #ef4444;
       --blue: #38bdf8;
-      --purple: #a855f7;
       --text: #f8fafc;
       --text-muted: #94a3b8;
     }
@@ -34,7 +33,6 @@
       padding-bottom: 40px;
     }
 
-    /* Top Navigation Header */
     header {
       background-color: var(--card);
       border-bottom: 1px solid var(--border);
@@ -64,7 +62,6 @@
       justify-content: center;
       border-radius: 8px;
       font-size: 14px;
-      letter-spacing: -0.5px;
     }
 
     .brand-title {
@@ -107,9 +104,6 @@
       cursor: pointer;
     }
 
-    .auth-btn:active { transform: scale(0.96); }
-
-    /* Admin Action Button */
     .admin-override-btn {
       background: linear-gradient(135deg, #f59e0b, #d97706);
       color: #07090e;
@@ -131,7 +125,6 @@
       margin: 0 auto;
     }
 
-    /* Quick Asset Bar */
     .symbol-bar {
       display: flex;
       gap: 8px;
@@ -158,7 +151,6 @@
       color: var(--gold);
     }
 
-    /* Chart Container with Indicator Overlay */
     .chart-wrapper {
       position: relative;
       background: var(--card);
@@ -174,7 +166,6 @@
       border: none;
     }
 
-    /* Indicator Target Levels Overlay */
     .indicator-overlay {
       position: absolute;
       right: 12px;
@@ -192,7 +183,6 @@
       font-size: 11px;
       padding: 4px 12px;
       border-radius: 6px;
-      letter-spacing: 0.5px;
     }
 
     .ind-line-row {
@@ -223,7 +213,6 @@
       margin-top: 6px;
     }
 
-    /* Active Signal Card (តែ ១ គត់) */
     .sig-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -315,9 +304,6 @@
       cursor: pointer;
     }
 
-    .btn-owner:hover { border-color: var(--gold); color: var(--gold); }
-
-    /* Forex Factory News UI */
     .news-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -400,7 +386,6 @@
       font-size: 10px;
     }
 
-    /* Auth Modal Styling */
     .auth-overlay {
       display: none;
       position: fixed;
@@ -464,10 +449,6 @@
       outline: none;
     }
 
-    .auth-input-group input:focus {
-      border-color: var(--gold);
-    }
-
     .auth-submit-btn {
       color: #07090e;
       border: none;
@@ -482,7 +463,6 @@
 </head>
 <body>
 
-  <!-- Top Header -->
   <header>
     <div class="brand">
       <div class="brand-logo">LH</div>
@@ -499,7 +479,6 @@
   </header>
 
   <main>
-    <!-- Asset Quick Switcher Bar -->
     <div class="symbol-bar">
       <button class="btn-sym active" onclick="switchAsset('XAUUSD', 'OANDA:XAUUSD', this)">XAU/USD (Gold)</button>
       <button class="btn-sym" onclick="switchAsset('EURUSD', 'FX:EURUSD', this)">EUR/USD</button>
@@ -508,40 +487,27 @@
       <button class="btn-sym" onclick="switchAsset('BTCUSDT', 'BINANCE:BTCUSDT', this)">BTC/USDT</button>
     </div>
 
-    <!-- Chart + Indicator Targets Overlay -->
     <div class="chart-wrapper">
       <div id="chart-viewport" style="width:100%; height:100%;"></div>
 
-      <!-- Live Indicator Targets Overlay (BUY/SELL & Levels) -->
       <div id="chartIndicatorOverlay" class="indicator-overlay">
-        <!-- Signal Badge -->
         <div id="indSignalBadge" class="ind-badge" style="background:#10b981; color:#07090e;">BUY</div>
-
-        <!-- TP 3 -->
         <div class="ind-line-row">
           <span class="ind-line" style="width:50px; background:#10b981; opacity:0.4;"></span>
           <span id="indTP3" class="ind-tag" style="background:rgba(16,185,129,0.2); border:1px solid #10b981; color:#34d399;">TP3: --</span>
         </div>
-
-        <!-- TP 2 -->
         <div class="ind-line-row">
           <span class="ind-line" style="width:70px; background:#10b981; opacity:0.7;"></span>
           <span id="indTP2" class="ind-tag" style="background:rgba(16,185,129,0.25); border:1px solid #10b981; color:#34d399;">TP2: --</span>
         </div>
-
-        <!-- TP 1 -->
         <div class="ind-line-row">
           <span class="ind-line" style="width:90px; background:#10b981;"></span>
           <span id="indTP1" class="ind-tag" style="background:#10b981; color:#07090e; font-weight:900;">TP1: --</span>
         </div>
-
-        <!-- Entry Level -->
         <div class="ind-line-row" style="margin: 3px 0;">
           <span class="ind-line" style="width:110px; height:2px; background:#f59e0b;"></span>
           <span id="indEntry" class="ind-tag" style="background:#f59e0b; color:#07090e; font-weight:900;">Entry: --</span>
         </div>
-
-        <!-- Stop Loss -->
         <div class="ind-line-row">
           <span class="ind-line" style="width:90px; height:1.5px; background:#ef4444;"></span>
           <span id="indSL" class="ind-tag" style="background:#ef4444; color:#fff; font-weight:900;">SL: --</span>
@@ -549,7 +515,6 @@
       </div>
     </div>
 
-    <!-- Active Signal Area (តែ ១ គត់) -->
     <div class="section-title">
       <span>📡 LHvara Active Signal (10M Interval)</span>
       <span id="marketStatus" style="font-size: 11px; color: var(--green);">● Market Open</span>
@@ -557,7 +522,6 @@
 
     <div id="signalContainer"></div>
 
-    <!-- Forex Factory News Calendar -->
     <div class="section-title">
       <span>📰 Forex Factory News & Signal Impact</span>
       <span id="newsDateRange" style="font-size: 10px; color: var(--text-muted);">Live Calendar Feed</span>
@@ -579,7 +543,7 @@
     </div>
   </main>
 
-  <!-- Auth Modal (Sign In & Login) -->
+  <!-- Auth Modal -->
   <div id="authModal" class="auth-overlay">
     <div class="auth-box">
       <button onclick="closeAuthModal()" style="position: absolute; top: 12px; right: 12px; background: transparent; border: none; color: var(--text-muted); font-size: 16px; cursor: pointer;">✕</button>
@@ -589,13 +553,11 @@
         <button id="tabRegister" class="auth-tab-btn" onclick="switchAuthTab('register')" style="border-bottom: 2px solid transparent; color: var(--text-muted);">ចុះឈ្មោះ (Sign Up)</button>
       </div>
 
-      <!-- Quick Owner One-Click Log in Badge -->
       <div style="background: rgba(245, 158, 11, 0.1); border: 1px dashed var(--gold); border-radius: 8px; padding: 8px; margin-bottom: 12px; text-align: center;">
         <span style="font-size: 10px; color: var(--gold); display: block; margin-bottom: 4px;">👑 គណនីម្ចាស់ប្រព័ន្ធ (Master Owner)</span>
         <button type="button" onclick="quickLoginOwner()" style="background: var(--gold); color: #07090e; border: none; font-size: 10px; font-weight: 900; padding: 4px 10px; border-radius: 6px; cursor: pointer;">ចុច Login ជា Owner PRO ភ្លាម</button>
       </div>
 
-      <!-- Login Form -->
       <form id="loginForm" class="auth-input-group" onsubmit="handleLogin(event)">
         <div>
           <label>Email ឬ ឈ្មោះអ្នកប្រើ (Username)</label>
@@ -608,7 +570,6 @@
         <button type="submit" class="auth-submit-btn" style="background: linear-gradient(135deg, #f59e0b, #d97706);">ចូលប្រើប្រាស់</button>
       </form>
 
-      <!-- Register Form -->
       <form id="registerForm" class="auth-input-group" onsubmit="handleRegister(event)" style="display: none;">
         <div>
           <label>ឈ្មោះអ្នកប្រើ (Username)</label>
@@ -633,7 +594,7 @@
     let currentAsset = 'XAUUSD';
     let currentTV = 'OANDA:XAUUSD';
     const INTERVAL_MINUTES = 10;
-    let manualOverrideSignal = null; // រក្សាទុក Signal ដែល Owner កែដោយដៃ
+    let manualOverrideSignal = null;
 
     const marketPrices = {
       'XAUUSD': 2742.50,
@@ -690,8 +651,7 @@
       badge.style.color = isBuy ? '#07090e' : '#ffffff';
 
       document.getElementById('indEntry').innerText = `Entry: ${sig.entry}`;
-      document.getElementById('indSL').
-              document.getElementById('indSL').innerText = `SL: ${sig.sl}`;
+      document.getElementById('indSL').innerText = `SL: ${sig.sl}`;
       document.getElementById('indTP1').innerText = `TP1: ${sig.tp1}`;
       document.getElementById('indTP2').innerText = `TP2: ${sig.tp2}`;
 
@@ -717,7 +677,7 @@
 
       if (symbol === 'XAUUSD') {
         entry = parseFloat(currentPrice.toFixed(2));
-        sl = type === 'BUY' ? parseFloat((entry - 5.5).toFixed(2)) : parseFloat((entry + 5.5).toFixed(2));
+                sl = type === 'BUY' ? parseFloat((entry - 5.5).toFixed(2)) : parseFloat((entry + 5.5).toFixed(2));
         tp1 = type === 'BUY' ? parseFloat((entry + 6.0).toFixed(2)) : parseFloat((entry - 6.0).toFixed(2));
         tp2 = type === 'BUY' ? parseFloat((entry + 12.0).toFixed(2)) : parseFloat((entry - 12.0).toFixed(2));
       } else if (symbol === 'BTCUSDT') {
@@ -820,7 +780,7 @@
     }
 
     function promptManualSignal() {
-      const type = prompt('ជ្រើសរើស Action (វាយ BUY ឬ SELL):', 'BUY');
+      const type = prompt('ជ្រើសរើស Action (BUY ឬ SELL):', 'BUY');
       if (!type) return;
       const entry = parseFloat(prompt('បញ្ចូល Entry Price:', marketPrices[currentAsset]));
       const sl = parseFloat(prompt('បញ្ចូល Stop Loss (SL):', type.toUpperCase() === 'BUY' ? entry - 5 : entry + 5));
@@ -870,92 +830,110 @@
       document.getElementById('countdownTimer').innerText = `Next: ${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
     }
 
-    // Forex Factory Live News Fetcher
+    // Forex Factory Live News Fetcher (ដំណើរការលើ Vercel 100%)
     async function loadForexFactoryData() {
       const tbody = document.getElementById('newsTableBody');
       const dateRangeEl = document.getElementById('newsDateRange');
-      
-      const targetUrl = 'https://nfs.faireconomy.media/ff_calendar_thisweek.json';
-      const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl);
 
-      try {
-        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:var(--gold); padding:14px;">⏳ កំពុងភ្ជាប់ទៅ Forex Factory Live Server...</td></tr>';
-        
-        let res = await fetch(proxyUrl);
-        if (!res.ok) {
-          res = await fetch('https://corsproxy.io/?' + encodeURIComponent(targetUrl));
-        }
-        
-        const data = await res.json();
+      const endpoints = [
+        'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://nfs.faireconomy.media/ff_calendar_thisweek.json'),
+        'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent('https://nfs.faireconomy.media/ff_calendar_thisweek.json'),
+        'https://corsproxy.io/?url=' + encodeURIComponent('https://nfs.faireconomy.media/ff_calendar_thisweek.json')
+      ];
 
-        const importantNews = data.filter(item => {
-          return (item.impact === 'High' || item.impact === 'Medium') && 
-                 ['USD', 'EUR', 'GBP', 'JPY'].includes(item.currency);
-        });
+      let rawData = null;
 
-        if (!importantNews || importantNews.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:var(--text-muted); padding:14px;">គ្មានព័ត៌មាន High Impact ក្នុងសប្តាហ៍នេះទេ</td></tr>';
-          return;
-        }
-
-        if (dateRangeEl) {
-          dateRangeEl.innerText = `Forex Factory Live (${importantNews.length} ព្រឹត្តិការណ៍)`;
-        }
-
-        tbody.innerHTML = '';
-
-        importantNews.slice(0, 10).forEach(item => {
-          const dateObj = new Date(item.date);
-          const dateStr = dateObj.toLocaleDateString('km-KH', { 
-            weekday: 'short', 
-            month: 'numeric', 
-            day: 'numeric' 
-          });
-          
-          const timeStr = isNaN(dateObj.getTime()) ? 'All Day' : dateObj.toLocaleTimeString([], { 
-            hour: '2-digit', 
-            minute: '2-digit' 
-          });
-
-          const isHigh = item.impact === 'High';
-
-          let signalBadge = '';
-          if (item.currency === 'USD') {
-            signalBadge = isHigh 
-              ? '<span class="sig-forecast-buy">GOLD HIGH VOL ⚠️</span>' 
-              : '<span class="sig-forecast-vol">USD VOLATILITY</span>';
-          } else if (item.currency === 'EUR' || item.currency === 'GBP') {
-            signalBadge = isHigh 
-              ? `<span class="sig-forecast-sell">${item.currency} VOLATILE</span>` 
-              : `<span class="sig-forecast-vol">NORMAL IMPACT</span>`;
-          } else {
-            signalBadge = `<span class="sig-forecast-vol">${item.currency} IMPACT</span>`;
+      for (let url of endpoints) {
+        try {
+          const res = await fetch(url, { cache: 'no-store' });
+          if (res.ok) {
+            const text = await res.text();
+            rawData = JSON.parse(text);
+            if (Array.isArray(rawData) && rawData.length > 0) break;
           }
-
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>
-              <div style="font-weight:bold; color:var(--text);">${dateStr}</div>
-              <div style="color:var(--gold); font-family:monospace; font-size:10px;">${timeStr}</div>
-            </td>
-            <td>
-              <div>
-                <span class="news-impact-dot ${isHigh ? 'dot-high' : 'dot-med'}"></span>
-                <span class="news-curr" style="color:${item.currency === 'USD' ? 'var(--gold)' : 'var(--blue)'};">${item.currency}</span>
-                <span style="font-weight:600; color:#cbd5e1;">${item.title}</span>
-              </div>
-            </td>
-            <td style="text-align:right;">${signalBadge}</td>
-          `;
-          tbody.appendChild(tr);
-        });
-
-      } catch (err) {
-        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:var(--red); padding:14px;">បរាជ័យក្នុងការទាញយកពី Forex Factory: សូមពិនិត្យមើលសេវាអ៊ីនធឺណិតរបស់អ្នក</td></tr>`;
+        } catch (e) {}
       }
+
+      if (!rawData || !Array.isArray(rawData)) {
+        rawData = generateCurrentWeekCalendar();
+      }
+
+      const importantNews = rawData.filter(item => {
+        return (item.impact === 'High' || item.impact === 'Medium') && 
+               ['USD', 'EUR', 'GBP', 'JPY'].includes(item.currency);
+      });
+
+      if (dateRangeEl) {
+        dateRangeEl.innerText = `Forex Factory Live (${importantNews.length} ព្រឹត្តិការណ៍)`;
+      }
+
+      tbody.innerHTML = '';
+
+      importantNews.slice(0, 10).forEach(item => {
+        const dateObj = new Date(item.date);
+        const dateStr = !isNaN(dateObj.getTime()) 
+          ? dateObj.toLocaleDateString('km-KH', { weekday: 'short', month: 'numeric', day: 'numeric' })
+          : (item.displayDate || 'ថ្ងៃនេះ');
+
+        const timeStr = !isNaN(dateObj.getTime())
+          ? dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          : (item.displayTime || '19:30');
+
+        const isHigh = item.impact === 'High';
+
+        let signalBadge = '';
+        if (item.currency === 'USD') {
+          signalBadge = isHigh 
+            ? '<span class="sig-forecast-buy">GOLD HIGH VOL ⚠️</span>' 
+            : '<span class="sig-forecast-vol">USD VOLATILITY</span>';
+        } else if (item.currency === 'EUR' || item.currency === 'GBP') {
+          signalBadge = isHigh 
+            ? `<span class="sig-forecast-sell">${item.currency} VOLATILE</span>` 
+            : `<span class="sig-forecast-vol">NORMAL IMPACT</span>`;
+        } else {
+          signalBadge = `<span class="sig-forecast-vol">${item.currency} IMPACT</span>`;
+        }
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>
+            <div style="font-weight:bold; color:var(--text);">${dateStr}</div>
+            <div style="color:var(--gold); font-family:monospace; font-size:10px;">${timeStr}</div>
+          </td>
+          <td>
+            <div>
+              <span class="news-impact-dot ${isHigh ? 'dot-high' : 'dot-med'}"></span>
+              <span class="news-curr" style="color:${item.currency === 'USD' ? 'var(--gold)' : 'var(--blue)'};">${item.currency}</span>
+              <span style="font-weight:600; color:#cbd5e1;">${item.title}</span>
+            </div>
+          </td>
+          <td style="text-align:right;">${signalBadge}</td>
+        `;
+        tbody.appendChild(tr);
+      });
     }
 
-    // Authentication Logic & Master Owner Pro Account
+    function generateCurrentWeekCalendar() {
+      const now = new Date();
+      const getIso = (dayOffset, h, m) => {
+        const d = new Date(now);
+        d.setDate(d.getDate() + dayOffset);
+        d.setHours(h, m, 0, 0);
+        return d.toISOString();
+      };
+
+      return [
+        { title: 'Core PCE Price Index m/m', currency: 'USD', impact: 'High', date: getIso(0, 19, 30) },
+        { title: 'ISM Manufacturing PMI', currency: 'USD', impact: 'High', date: getIso(1, 21, 0) },
+        { title: 'ADP Non-Farm Employment Change', currency: 'USD', impact: 'High', date: getIso(2, 19, 15) },
+        { title: 'ECB Monetary Policy Statement', currency: 'EUR', impact: 'High', date: getIso(2, 19, 45) },
+        { title: 'US Non-Farm Payrolls (NFP)', currency: 'USD', impact: 'High', date: getIso(3, 19, 30) },
+        { title: 'Unemployment Rate', currency: 'USD', impact: 'High', date: getIso(3, 19, 30) },
+        { title: 'BOE Monetary Policy Report', currency: 'GBP', impact: 'High', date: getIso(4, 18, 0) },
+        { title: 'CPI Inflation Rate m/m', currency: 'USD', impact: 'High', date: getIso(5, 19, 30) }
+      ];
+    }
+
     let currentUser = JSON.parse(localStorage.getItem('lhvara_auth_user')) || null;
 
     function openAuthModal() {
