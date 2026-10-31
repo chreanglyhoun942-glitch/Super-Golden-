@@ -3,238 +3,1120 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>LHvara | AI Gold Trading Desk</title>
+  <title>LHvara - Trading Signals & Prime Indicator</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: #06080c; color: #f1f5f9; padding-bottom: 50px; line-height: 1.4; text-align: center; }
-    .top-bar { background: #0b0f17; border-bottom: 1px solid #1e293b; padding: 7px 10px; font-size: 11px; display: flex; justify-content: space-between; align-items: center; }
-    .container { max-width: 550px; margin: 0 auto; padding: 12px; }
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .brand { font-size: 18px; font-weight: 900; color: #f59e0b; }
-    .btn-vip { background: #14b8a6; color: #000; font-size: 11px; font-weight: bold; padding: 5px 12px; border-radius: 6px; text-decoration: none; }
-    .card { background: #0d131f; border: 1px solid #1e293b; border-radius: 12px; padding: 12px; margin-bottom: 14px; text-align: left; position: relative; }
-    .social-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 8px; }
-    .btn-s { text-align: center; padding: 6px; border-radius: 6px; font-size: 10.5px; font-weight: bold; text-decoration: none; color: #fff; background: #1e293b; }
+    :root {
+      --bg: #07090e;
+      --card: #0f141f;
+      --card-inner: #161d2d;
+      --border: #1e2638;
+      --gold: #f59e0b;
+      --green: #10b981;
+      --red: #ef4444;
+      --blue: #38bdf8;
+      --purple: #a855f7;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
 
-    /* 10-MIN SYNCHRONIZED SIGNAL CARD */
-    .single-signal-card { background: #0d131f; border-radius: 14px; padding: 14px; border: 2px solid #10b981; margin-bottom: 14px; text-align: left; box-shadow: 0 0 15px rgba(16,185,129,0.15); transition: all 0.3s ease; }
-    .single-signal-card.sell-mode { border-color: #f43f5e; box-shadow: 0 0 15px rgba(244,63,94,0.15); }
-    .sig-top-badge { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-    .action-tag { font-size: 13px; font-weight: 900; padding: 3px 10px; border-radius: 6px; }
-    .tag-buy { background: #10b981; color: #000; }
-    .tag-sell { background: #f43f5e; color: #fff; }
-    .timer-badge { background: #1e293b; border: 1px solid #334155; color: #f59e0b; font-family: monospace; font-size: 12px; font-weight: bold; padding: 3px 8px; border-radius: 6px; }
-    
-    .time-info-box { background: rgba(2,6,23,0.9); border: 1px solid #334155; padding: 8px 10px; border-radius: 6px; font-size: 11px; display: flex; justify-content: space-between; margin-bottom: 8px; }
-    .time-info-box b { color: #38bdf8; font-family: monospace; font-size: 11.5px; }
-    .p-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: #06080c; padding: 8px; border-radius: 8px; text-align: center; margin-bottom: 8px; }
-    .p-grid div { font-size: 12.5px; font-weight: bold; }
-    .p-lbl { font-size: 9px; color: #64748b; font-weight: normal; margin-bottom: 2px; }
-    .profit-bar { display: flex; justify-content: space-between; font-size: 10.5px; color: #94a3b8; border-top: 1px solid #1e293b; padding-top: 6px; margin-bottom: 10px; }
-    .btn-tg-main { display: block; width: 100%; background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; text-align: center; padding: 10px; border-radius: 8px; font-size: 11.5px; font-weight: bold; text-decoration: none; margin-bottom: 8px; cursor: pointer; border: none; }
-    .sub-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-    /* EXNESS ACCOUNT CARD */
-    .exness-card { background: linear-gradient(135deg, #111827, #0b0f17); border: 1.5px solid #facc15; border-radius: 14px; padding: 14px; margin-bottom: 14px; text-align: left; box-shadow: 0 0 15px rgba(250, 204, 21, 0.15); }
-    .exness-badge { background: #facc15; color: #000; font-size: 9px; font-weight: 900; padding: 2px 7px; border-radius: 4px; }
-    .btn-exness { display: block; width: 100%; background: linear-gradient(135deg, #facc15, #eab308); color: #000; text-align: center; padding: 10px; border-radius: 8px; font-size: 12px; font-weight: 900; text-decoration: none; margin-top: 10px; }
-    .btn-exness:active { transform: scale(0.98); }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    /* Top Navigation Header */
+    header {
+      background-color: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+      background: linear-gradient(135deg, #f59e0b, #fbbf24);
+      color: #07090e;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 14px;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+    }
+
+    .brand-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .timer-badge {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 5px 8px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: bold;
+      font-family: monospace;
+    }
+
+    .auth-btn {
+      background: var(--card-inner);
+      border: 1px solid var(--border);
+      color: var(--gold);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .auth-btn:active { transform: scale(0.96); }
+
+    /* Admin Action Button */
+    .admin-override-btn {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #07090e;
+      border: none;
+      padding: 5px 9px;
+      border-radius: 7px;
+      font-size: 10px;
+      font-weight: 900;
+      cursor: pointer;
+      display: none;
+    }
+
+    main {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Quick Asset Bar */
+    .symbol-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+    }
+
+    .symbol-bar::-webkit-scrollbar { display: none; }
+
+    .btn-sym {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-sym.active {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Chart Container with Indicator Overlay */
+    .chart-wrapper {
+      position: relative;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      height: 520px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Indicator Target Levels Overlay */
+    .indicator-overlay {
+      position: absolute;
+      right: 12px;
+      top: 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    .ind-badge {
+      align-self: flex-end;
+      font-weight: 900;
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .ind-line-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 6px;
+    }
+
+    .ind-line { height: 1px; }
+
+    .ind-tag {
+      font-size: 10px;
+      font-weight: bold;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: bold;
+      color: var(--gold);
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    /* Active Signal Card (តែ ១ គត់) */
+    .sig-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    .sig-card.buy { border-left: 4px solid var(--green); }
+    .sig-card.sell { border-left: 4px solid var(--red); }
+    .sig-card.closed { border-left: 4px solid #64748b; opacity: 0.85; }
+
+    .sig-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sig-badge {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .badge-buy { background: rgba(16, 185, 129, 0.15); color: var(--green); }
+    .badge-sell { background: rgba(239, 68, 68, 0.15); color: var(--red); }
+    .badge-closed { background: rgba(100, 116, 139, 0.2); color: #94a3b8; }
+
+    .sig-symbol { font-weight: 800; font-size: 15px; margin-left: 6px; }
+    .sig-tf { font-size: 10px; background: var(--bg); border: 1px solid var(--border); color: var(--text-muted); padding: 2px 6px; border-radius: 4px; margin-left: 4px; }
+    .sig-time { font-size: 11px; color: var(--text-muted); }
+
+    .sig-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--card-inner);
+      padding: 10px;
+      border-radius: 8px;
+      gap: 4px;
+      text-align: center;
+    }
+
+    .sig-item label { font-size: 9px; color: var(--text-muted); display: block; margin-bottom: 2px; }
+    .sig-item span { font-size: 12px; font-weight: 700; }
+
+    .sig-note {
+      font-size: 11px;
+      color: #cbd5e1;
+      background: rgba(245, 158, 11, 0.05);
+      border-left: 2px solid var(--gold);
+      padding: 6px 10px;
+      border-radius: 4px;
+    }
+
+    .sig-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      padding-top: 8px;
+    }
+
+    .status-tag {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--gold);
+    }
+
+    .owner-controls {
+      display: none;
+      gap: 6px;
+    }
+
+    .btn-owner {
+      background: var(--card-inner);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 3px 6px;
+      border-radius: 6px;
+      font-size: 9px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-owner:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* Forex Factory News UI */
+    .news-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .news-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+
+    .news-table th {
+      background: var(--card-inner);
+      padding: 8px;
+      text-align: left;
+      color: var(--text-muted);
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .news-table td {
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .news-table tr:last-child td { border-bottom: none; }
+
+    .news-curr {
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: #0b0f19;
+      font-size: 10px;
+      display: inline-block;
+    }
+
+    .news-impact-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 4px;
+    }
+
+    .dot-high { background-color: var(--red); box-shadow: 0 0 6px var(--red); }
+    .dot-med { background-color: var(--gold); box-shadow: 0 0 6px var(--gold); }
+
+    .sig-forecast-buy {
+      color: var(--green);
+      font-weight: bold;
+      background: rgba(16, 185, 129, 0.1);
+      padding: 3px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      font-size: 10px;
+    }
+
+    .sig-forecast-sell {
+      color: var(--red);
+      font-weight: bold;
+      background: rgba(239, 68, 68, 0.1);
+      padding: 3px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      font-size: 10px;
+    }
+
+    .sig-forecast-vol {
+      color: var(--gold);
+      font-weight: bold;
+      background: rgba(245, 158, 11, 0.1);
+      padding: 3px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      font-size: 10px;
+    }
+
+    /* Auth Modal Styling */
+    .auth-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .auth-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 380px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      position: relative;
+    }
+
+    .auth-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
+    .auth-tab-btn {
+      flex: 1;
+      padding: 8px;
+      background: transparent;
+      border: none;
+      font-weight: bold;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .auth-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .auth-input-group label {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .auth-input-group input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      outline: none;
+    }
+
+    .auth-input-group input:focus {
+      border-color: var(--gold);
+    }
+
+    .auth-submit-btn {
+      color: #07090e;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 12px;
+      cursor: pointer;
+      margin-top: 6px;
+    }
   </style>
 </head>
 <body>
-  <!-- TICKER (តម្លៃតាម Candle 4056.xx) -->
-  <div class="top-bar">
-    <span>XAUUSD: SELL: <b id="ticker-bid" style="color:#f43f5e">4055.80</b> BUY: <b id="ticker-ask" style="color:#10b981">4056.29</b></span>
-    <span style="color:#fbbf24; font-size:10.5px;">● Universal 10M Sync</span>
-  </div>
 
-  <div class="container">
-    <div class="header">
-      <div class="brand">LHvara AI Desk</div>
-      <a href="https://t.me/signalhoun21" target="_blank" class="btn-vip">VIP Signals</a>
-    </div>
-
-    <!-- PROFILE -->
-    <div class="card">
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <b>LHoneboy (Dev • Founder)</b>
-        <span style="color:#38bdf8; font-size:10px;">Official Founder ✓</span>
-      </div>
-      <div class="social-row">
-        <a href="https://www.tiktok.com/@clh4239?_r=1&_t=ZS-9AtHR4My4mN" target="_blank" class="btn-s">TikTok</a>
-        <a href="https://www.facebook.com/share/14sck9T2HJe/" target="_blank" class="btn-s" style="color:#38bdf8;">Facebook</a>
-        <a href="https://t.me/signalhoun21" target="_blank" class="btn-s" style="color:#38bdf8;">Telegram</a>
+  <!-- Top Header -->
+  <header>
+    <div class="brand">
+      <div class="brand-logo">LH</div>
+      <div>
+        <div class="brand-title">LHvara</div>
+        <div class="brand-sub">Auto Signals & Indicator Hub</div>
       </div>
     </div>
+    <div class="header-actions">
+      <button id="adminOverrideBtn" class="admin-override-btn" onclick="promptManualSignal()">⚡ Manual Override</button>
+      <div class="timer-badge" id="countdownTimer">Next: 10:00</div>
+      <button id="authBtn" class="auth-btn" onclick="openAuthModal()">🔑 Login</button>
+    </div>
+  </header>
 
-    <!-- TRADINGVIEW LIVE CHART -->
-    <div class="card" style="padding:0; overflow:hidden;">
-      <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA%3AXAUUSD&interval=1&theme=dark&style=1&timezone=Asia%2FBangkok&locale=en" style="width:100%; height:320px; border:none;"></iframe>
+  <main>
+    <!-- Asset Quick Switcher Bar -->
+    <div class="symbol-bar">
+      <button class="btn-sym active" onclick="switchAsset('XAUUSD', 'OANDA:XAUUSD', this)">XAU/USD (Gold)</button>
+      <button class="btn-sym" onclick="switchAsset('EURUSD', 'FX:EURUSD', this)">EUR/USD</button>
+      <button class="btn-sym" onclick="switchAsset('GBPUSD', 'FX:GBPUSD', this)">GBP/USD</button>
+      <button class="btn-sym" onclick="switchAsset('USDJPY', 'FX:USDJPY', this)">USD/JPY</button>
+      <button class="btn-sym" onclick="switchAsset('BTCUSDT', 'BINANCE:BTCUSDT', this)">BTC/USDT</button>
     </div>
 
-    <!-- 10-MIN SIGNAL HEADER -->
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-      <b style="font-size:13px; color:#fff;">⚡ Live AI Candle Setup</b>
-      <span style="color:#10b981; font-size:10.5px; font-weight:bold;">● 10M Global Clock Auto-Sync</span>
-    </div>
+    <!-- Chart + Indicator Targets Overlay -->
+    <div class="chart-wrapper">
+      <div id="chart-viewport" style="width:100%; height:100%;"></div>
 
-    <!-- 10-MINUTE AUTO SIGNAL (ដើររហូតទោះបិទ Web) -->
-    <div class="single-signal-card" id="main-sig-card">
-      <div class="sig-top-badge">
-        <span style="font-size:13px; font-weight:bold; color:#fff;">XAUUSD • Gold 10M Block</span>
-        <div style="display:flex; align-items:center; gap:6px;">
-          <span class="timer-badge" id="sig-timer">⏱️ 10:00</span>
-          <span class="action-tag tag-buy" id="sig-action-badge">BUY NOW</span>
+      <!-- Live Indicator Targets Overlay (BUY/SELL & Levels) -->
+      <div id="chartIndicatorOverlay" class="indicator-overlay">
+        <!-- Signal Badge -->
+        <div id="indSignalBadge" class="ind-badge" style="background:#10b981; color:#07090e;">BUY</div>
+
+        <!-- TP 3 -->
+        <div class="ind-line-row">
+          <span class="ind-line" style="width:50px; background:#10b981; opacity:0.4;"></span>
+          <span id="indTP3" class="ind-tag" style="background:rgba(16,185,129,0.2); border:1px solid #10b981; color:#34d399;">TP3: --</span>
+        </div>
+
+        <!-- TP 2 -->
+        <div class="ind-line-row">
+          <span class="ind-line" style="width:70px; background:#10b981; opacity:0.7;"></span>
+          <span id="indTP2" class="ind-tag" style="background:rgba(16,185,129,0.25); border:1px solid #10b981; color:#34d399;">TP2: --</span>
+        </div>
+
+        <!-- TP 1 -->
+        <div class="ind-line-row">
+          <span class="ind-line" style="width:90px; background:#10b981;"></span>
+          <span id="indTP1" class="ind-tag" style="background:#10b981; color:#07090e; font-weight:900;">TP1: --</span>
+        </div>
+
+        <!-- Entry Level -->
+        <div class="ind-line-row" style="margin: 3px 0;">
+          <span class="ind-line" style="width:110px; height:2px; background:#f59e0b;"></span>
+          <span id="indEntry" class="ind-tag" style="background:#f59e0b; color:#07090e; font-weight:900;">Entry: --</span>
+        </div>
+
+        <!-- Stop Loss -->
+        <div class="ind-line-row">
+          <span class="ind-line" style="width:90px; height:1.5px; background:#ef4444;"></span>
+          <span id="indSL" class="ind-tag" style="background:#ef4444; color:#fff; font-weight:900;">SL: --</span>
         </div>
       </div>
-      
-      <div class="time-info-box">
-        <span>🕒 ម៉ោងចាប់ផ្តើម: <b id="sig-entry-time">--:--</b></span>
-        <span>⌛ បញ្ចប់ជុំ: <b id="sig-valid-time">--:--</b></span>
-      </div>
-
-      <div class="p-grid">
-        <div><div class="p-lbl">ENTRY PRICE</div><span id="sig-val-entry" style="color:#fff;">4056.29</span></div>
-        <div><div class="p-lbl">TARGET (TP)</div><span id="sig-val-tp" style="color:#10b981;">4064.80</span></div>
-        <div><div class="p-lbl">STOP (SL)</div><span id="sig-val-sl" style="color:#f43f5e;">4051.80</span></div>
-      </div>
-
-      <div class="profit-bar">
-        <span>Target: <b id="sig-val-profit" style="color:#10b981;">+$85.00 (+85.0 pips)</b></span>
-        <span>Risk: <b id="sig-val-loss" style="color:#f43f5e;">-$45.00</b></span>
-        <span>R:R: <b id="sig-val-rr" style="color:#f59e0b;">1 : 1.88</b></span>
-      </div>
-
-      <a id="btn-tg-link" href="https://t.me/signalhoun21" target="_blank" class="btn-tg-main">
-        🚀 Send 10M Setup to Telegram VIP
-      </a>
-
-      <div class="sub-btns">
-        <a href="https://www.tiktok.com/@clh4239?_r=1&_t=ZS-9AtHR4My4mN" target="_blank" class="btn-s">🎵 TikTok LHoneboy</a>
-        <a href="https://www.facebook.com/share/14sck9T2HJe/" target="_blank" class="btn-s" style="color:#38bdf8;">📘 Facebook Dev</a>
-      </div>
     </div>
 
-    <!-- EXNESS ACCOUNT SECTION -->
-    <div class="exness-card">
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <b style="color:#facc15; font-size:13px;">🟡 បង្កើតគណនីជួញដូរ Exness ផ្លូវការ</b>
-        <span class="exness-badge">OFFICIAL BROKER</span>
-      </div>
-      <p style="font-size:11px; color:#cbd5e1; margin-top:6px;">
-        ចុះឈ្មោះគណនី Exness តាមរយៈតំណភ្ជាប់ Partner របស់ LHoneboy ដើម្បីទទួលបានការដកដាក់ប្រាក់រហ័ស Spread ទាប និងការផ្តល់សិទ្ធិចូល VIP Signals ឥតគិតថ្លៃ។
-      </p>
-      <a href="https://one.exness-track.com" target="_blank" class="btn-exness">
-        👉 ចុចទីនេះដើម្បីបង្កើតគណនី Exness ឥឡូវនេះ
-      </a>
-      <div style="text-align:center; margin-top:6px;">
-        <a href="https://t.me/signalhoun21?text=សួស្តី_LHoneboy_ខ្ញុំបានបង្កើតគណនី_Exness_រួចរាល់ហើយ" target="_blank" style="color:#38bdf8; font-size:10px; text-decoration:none; font-weight:bold;">
-          📩 បង្កើតរួចចុចទីនេះ ដើម្បីផ្ញើលេខគណនីចូល VIP
-        </a>
-      </div>
+    <!-- Active Signal Area (តែ ១ គត់) -->
+    <div class="section-title">
+      <span>📡 LHvara Active Signal (10M Interval)</span>
+      <span id="marketStatus" style="font-size: 11px; color: var(--green);">● Market Open</span>
     </div>
 
-    <div style="font-size:10px; color:#64748b; margin-top:14px;">© 2026 LHvara Desk. Managed by LHoneboy.</div>
+    <div id="signalContainer"></div>
+
+    <!-- Forex Factory News Calendar -->
+    <div class="section-title">
+      <span>📰 Forex Factory News & Signal Impact</span>
+      <span id="newsDateRange" style="font-size: 10px; color: var(--text-muted);">Live Calendar Feed</span>
+    </div>
+
+    <div class="news-card">
+      <table class="news-table">
+        <thead>
+          <tr>
+            <th>កាលបរិច្ឆេទ & ម៉ោង</th>
+            <th>រូបិយប័ណ្ណ / ព័ត៌មាន</th>
+            <th style="text-align:right;">Signal Forecast</th>
+          </tr>
+        </thead>
+        <tbody id="newsTableBody">
+          <tr><td colspan="3" style="text-align:center; color:var(--text-muted); padding:14px;">កំពុងទាញយកព័ត៌មានពី Factory...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Auth Modal (Sign In & Login) -->
+  <div id="authModal" class="auth-overlay">
+    <div class="auth-box">
+      <button onclick="closeAuthModal()" style="position: absolute; top: 12px; right: 12px; background: transparent; border: none; color: var(--text-muted); font-size: 16px; cursor: pointer;">✕</button>
+
+      <div class="auth-tabs">
+        <button id="tabLogin" class="auth-tab-btn" onclick="switchAuthTab('login')" style="border-bottom: 2px solid var(--gold); color: var(--gold);">ចូលប្រើ (Login)</button>
+        <button id="tabRegister" class="auth-tab-btn" onclick="switchAuthTab('register')" style="border-bottom: 2px solid transparent; color: var(--text-muted);">ចុះឈ្មោះ (Sign Up)</button>
+      </div>
+
+      <!-- Quick Owner One-Click Log in Badge -->
+      <div style="background: rgba(245, 158, 11, 0.1); border: 1px dashed var(--gold); border-radius: 8px; padding: 8px; margin-bottom: 12px; text-align: center;">
+        <span style="font-size: 10px; color: var(--gold); display: block; margin-bottom: 4px;">👑 គណនីម្ចាស់ប្រព័ន្ធ (Master Owner)</span>
+        <button type="button" onclick="quickLoginOwner()" style="background: var(--gold); color: #07090e; border: none; font-size: 10px; font-weight: 900; padding: 4px 10px; border-radius: 6px; cursor: pointer;">ចុច Login ជា Owner PRO ភ្លាម</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="auth-input-group" onsubmit="handleLogin(event)">
+        <div>
+          <label>Email ឬ ឈ្មោះអ្នកប្រើ (Username)</label>
+          <input type="text" id="loginUser" required placeholder="admin ឬ lhvara">
+        </div>
+        <div>
+          <label>លេខសម្ងាត់ (Password)</label>
+          <input type="password" id="loginPass" required placeholder="lhvara8888">
+        </div>
+        <button type="submit" class="auth-submit-btn" style="background: linear-gradient(135deg, #f59e0b, #d97706);">ចូលប្រើប្រាស់</button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="registerForm" class="auth-input-group" onsubmit="handleRegister(event)" style="display: none;">
+        <div>
+          <label>ឈ្មោះអ្នកប្រើ (Username)</label>
+          <input type="text" id="regUser" required placeholder="ឈ្មោះអ្នកប្រើ">
+        </div>
+        <div>
+          <label>Email</label>
+          <input type="email" id="regEmail" required placeholder="name@example.com">
+        </div>
+        <div>
+          <label>បង្កើតលេខសម្ងាត់ (Password)</label>
+          <input type="password" id="regPass" required placeholder="យ៉ាងតិច ៦ ខ្ទង់">
+        </div>
+        <button type="submit" class="auth-submit-btn" style="background: linear-gradient(135deg, #10b981, #059669);">បង្កើតគណនី</button>
+      </form>
+
+      <p id="authMsg" style="font-size: 11px; text-align: center; margin-top: 10px; display: none;"></p>
+    </div>
   </div>
 
   <script>
-    var BLOCK_DURATION = 600; // 10 នាទី = 600 វិនាទី
-    var lastBlockIndex = -1;
+    let currentAsset = 'XAUUSD';
+    let currentTV = 'OANDA:XAUUSD';
+    const INTERVAL_MINUTES = 10;
+    let manualOverrideSignal = null; // រក្សាទុក Signal ដែល Owner កែដោយដៃ
 
-    function fmt(d) {
-      var h = d.getHours(), m = d.getMinutes(), ap = h >= 12 ? 'PM' : 'AM';
-      h = h % 12 || 12;
-      return (h < 10 ? '0' + h : h) + ':' + (m < 10 ? '0' + m : m) + ' ' + ap;
+    const marketPrices = {
+      'XAUUSD': 2742.50,
+      'EURUSD': 1.0835,
+      'GBPUSD': 1.2980,
+      'USDJPY': 152.40,
+      'BTCUSDT': 67500.00
+    };
+
+    function isMarketOpen(symbol) {
+      if (symbol === 'BTCUSDT') return true;
+      const now = new Date();
+      const utcDay = now.getUTCDay();
+      const utcHour = now.getUTCHours();
+      if (utcDay === 6) return false;
+      if (utcDay === 5 && utcHour >= 21) return false;
+      if (utcDay === 0 && utcHour < 21) return false;
+      return true;
     }
 
-    // មុខងារគណនា Signal ផ្អែកលើ Block ម៉ោងសកល (ដើររហូតទោះបិទ Web)
-    function syncGlobal10MinSignal() {
-      var now = new Date();
-      var currentTimestamp = Math.floor(now.getTime() / 1000);
-      
-      // រក Block នៃជុំ ១០ នាទី (ឧទាហរណ៍៖ 08:00, 08:10, 08:20, 08:30...)
-      var currentBlockIndex = Math.floor(currentTimestamp / BLOCK_DURATION);
-      var secondsRemaining = BLOCK_DURATION - (currentTimestamp % BLOCK_DURATION);
+    function switchAsset(symbol, tvSymbol, btn) {
+      currentAsset = symbol;
+      currentTV = tvSymbol;
+      manualOverrideSignal = null;
+      document.querySelectorAll('.btn-sym').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
 
-      // បង្ហាញ Timer រាប់ថយក្រោយតាមវិនាទីពិតលើពិភពលោក
-      var m = Math.floor(secondsRemaining / 60);
-      var s = secondsRemaining % 60;
-      document.getElementById("sig-timer").innerText = "⏱️ " + (m < 10 ? '0' + m : m) + ":" + (s < 10 ? '0' + s : s);
+      loadChart(tvSymbol);
+      updateSignalForCurrentInterval(true);
+    }
 
-      // បើឆ្លងចូល Block ១០ នាទីថ្មី -> គណនា និងប្តូរ Signal ភ្លាមៗ
-      if (currentBlockIndex !== lastBlockIndex) {
-        lastBlockIndex = currentBlockIndex;
-        updateSignalData(currentBlockIndex);
+    function loadChart(tvSymbol) {
+      const box = document.getElementById('chart-viewport');
+      box.innerHTML = `
+        <iframe 
+          src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_widget&symbol=${tvSymbol}&interval=10&hidesidetoolbar=0&symboledit=1&saveimage=0&toolbarbg=07090e&studies=[]&theme=dark&style=1&timezone=Asia%2FBangkok" 
+          allowfullscreen>
+        </iframe>
+      `;
+    }
+
+    function updateChartOverlay(sig) {
+      const overlay = document.getElementById('chartIndicatorOverlay');
+      if (!sig) {
+        overlay.style.display = 'none';
+        return;
       }
+      overlay.style.display = 'flex';
+
+      const badge = document.getElementById('indSignalBadge');
+      const isBuy = sig.type === 'BUY';
+      badge.innerText = sig.type;
+      badge.style.background = isBuy ? '#10b981' : '#ef4444';
+      badge.style.color = isBuy ? '#07090e' : '#ffffff';
+
+      document.getElementById('indEntry').innerText = `Entry: ${sig.entry}`;
+      document.getElementById('indSL').
+              document.getElementById('indSL').innerText = `SL: ${sig.sl}`;
+      document.getElementById('indTP1').innerText = `TP1: ${sig.tp1}`;
+      document.getElementById('indTP2').innerText = `TP2: ${sig.tp2}`;
+
+      const delta = Math.abs(sig.tp1 - sig.entry);
+      const tp3Val = isBuy ? (sig.entry + delta * 2.2).toFixed(sig.symbol === 'XAUUSD' ? 2 : 4) : (sig.entry - delta * 2.2).toFixed(sig.symbol === 'XAUUSD' ? 2 : 4);
+      document.getElementById('indTP3').innerText = `TP3: ${tp3Val}`;
     }
 
-    function updateSignalData(blockIndex) {
-      var blockStartTime = new Date(blockIndex * BLOCK_DURATION * 1000);
-      var blockEndTime = new Date((blockIndex + 1) * BLOCK_DURATION * 1000);
+    function calculateSignalForPeriod(symbol, periodTimestamp) {
+      if (manualOverrideSignal && manualOverrideSignal.symbol === symbol) {
+        updateChartOverlay(manualOverrideSignal);
+        return manualOverrideSignal;
+      }
 
-      document.getElementById("sig-entry-time").innerText = fmt(blockStartTime);
-      document.getElementById("sig-valid-time").innerText = fmt(blockEndTime);
+      const seed = Math.sin(periodTimestamp + symbol.charCodeAt(0)) * 10000;
+      const rand = seed - Math.floor(seed);
+      const type = rand > 0.5 ? 'BUY' : 'SELL';
+      const base = marketPrices[symbol];
+      const delta = (rand * 0.002 * base);
+      const currentPrice = type === 'BUY' ? base + delta : base - delta;
 
-      // ក្បួនគណនា Pseudo-Random ផ្អែកលើ Block Index (ធានាថាក្នុង ១០ នាទីនោះទោះបិទ/បើក Web ក៏នៅតែរក្សា Signal ដដែល ដល់ចប់ជុំទើបដូរ)
-      var seed = (blockIndex * 9301 + 49297) % 233280;
-      var rnd = seed / 233280.0;
+      let entry, sl, tp1, tp2;
 
-      // តម្លៃ Candle មាសបច្ចុប្បន្ន (~4056.xx)
-      var base = 4056.00 + (rnd * 2.0);
-      var isBuy = rnd > 0.45;
-
-      var card = document.getElementById("main-sig-card");
-      var badge = document.getElementById("sig-action-badge");
-      var entryEl = document.getElementById("sig-val-entry");
-      var tpEl = document.getElementById("sig-val-tp");
-      var slEl = document.getElementById("sig-val-sl");
-      var profitEl = document.getElementById("sig-val-profit");
-      var lossEl = document.getElementById("sig-val-loss");
-      var tgBtn = document.getElementById("btn-tg-link");
-
-      if (isBuy) {
-        card.className = "single-signal-card";
-        badge.className = "action-tag tag-buy";
-        badge.innerText = "BUY NOW";
-
-        var entry = (base + 0.49).toFixed(2);
-        var tp = (parseFloat(entry) + 8.50).toFixed(2);
-        var sl = (parseFloat(entry) - 4.50).toFixed(2);
-
-        entryEl.innerText = entry;
-        tpEl.innerText = tp;
-        slEl.innerText = sl;
-        profitEl.innerText = "+$85.00 (+85.0 pips)";
-        lossEl.innerText = "-$45.00";
-
-        var msg = encodeURIComponent("👑 LHvara AI 10-Min Signal 👑\n\n🎯 Action: 🟢 BUY NOW (10M Candle Breakout)\n⚡ Entry: " + entry + "\n🎯 Target (TP): " + tp + "\n🛑 Stop (SL): " + sl + "\n🕒 ម៉ោងចាប់ផ្តើម: " + fmt(blockStartTime) + "\n⌛ បញ្ចប់ជុំ: " + fmt(blockEndTime) + "\n\nVerified by: @signalhoun21 (LHoneboy)");
-        tgBtn.href = "https://t.me/signalhoun21?text=" + msg;
+      if (symbol === 'XAUUSD') {
+        entry = parseFloat(currentPrice.toFixed(2));
+        sl = type === 'BUY' ? parseFloat((entry - 5.5).toFixed(2)) : parseFloat((entry + 5.5).toFixed(2));
+        tp1 = type === 'BUY' ? parseFloat((entry + 6.0).toFixed(2)) : parseFloat((entry - 6.0).toFixed(2));
+        tp2 = type === 'BUY' ? parseFloat((entry + 12.0).toFixed(2)) : parseFloat((entry - 12.0).toFixed(2));
+      } else if (symbol === 'BTCUSDT') {
+        entry = parseFloat(currentPrice.toFixed(1));
+        sl = type === 'BUY' ? entry - 400 : entry + 400;
+        tp1 = type === 'BUY' ? entry + 550 : entry - 550;
+        tp2 = type === 'BUY' ? entry + 1100 : entry - 1100;
       } else {
-        card.className = "single-signal-card sell-mode";
-        badge.className = "action-tag tag-sell";
-        badge.innerText = "SELL NOW";
-
-        var entry = (base + 0.20).toFixed(2);
-        var tp = (parseFloat(entry) - 8.50).toFixed(2);
-        var sl = (parseFloat(entry) + 4.50).toFixed(2);
-
-        entryEl.innerText = entry;
-        tpEl.innerText = tp;
-        slEl.innerText = sl;
-        profitEl.innerText = "+$85.00 (+85.0 pips)";
-        lossEl.innerText = "-$45.00";
-
-        var msg = encodeURIComponent("👑 LHvara AI 10-Min Signal 👑\n\n🎯 Action: 🔴 SELL NOW (10M Candle Rejection)\n⚡ Entry: " + entry + "\n🎯 Target (TP): " + tp + "\n🛑 Stop (SL): " + sl + "\n🕒 ម៉ោងចាប់ផ្តើម: " + fmt(blockStartTime) + "\n⌛ បញ្ចប់ជុំ: " + fmt(blockEndTime) + "\n\nVerified by: @signalhoun21 (LHoneboy)");
-        tgBtn.href = "https://t.me/signalhoun21?text=" + msg;
+        entry = parseFloat(currentPrice.toFixed(4));
+        sl = type === 'BUY' ? parseFloat((entry - 0.0022).toFixed(4)) : parseFloat((entry + 0.0022).toFixed(4));
+        tp1 = type === 'BUY' ? parseFloat((entry + 0.0030).toFixed(4)) : parseFloat((entry - 0.0030).toFixed(4));
+        tp2 = type === 'BUY' ? parseFloat((entry + 0.0065).toFixed(4)) : parseFloat((entry - 0.0065).toFixed(4));
       }
 
-      document.getElementById("ticker-bid").innerText = base.toFixed(2);
-      document.getElementById("ticker-ask").innerText = (base + 0.49).toFixed(2);
+      const notes = [
+        'M10 Liquidity Sweep & Fair Value Gap (FVG)',
+        'M10 Orderblock Reaction + Trend Continuation',
+        'Indicator Balanced Trend Confirmation',
+        'EMA Dynamic Support/Resistance Breakout'
+      ];
+      const note = notes[Math.floor(rand * notes.length)];
+      const dateObj = new Date(periodTimestamp);
+      const timeStr = dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      updateChartOverlay({ symbol, type, entry, sl, tp1, tp2 });
+
+      return { symbol, type, timeframe: 'M10', entry, sl, tp1, tp2, note, time: timeStr, status: 'ACTIVE' };
     }
 
-    // ដំណើរការ Sync ម៉ោងពិតលើពិភពលោករៀងរាល់ ១ វិនាទីម្តង
-    setInterval(syncGlobal10MinSignal, 1000);
-    syncGlobal10MinSignal();
+    function renderSingleSignal(sig, isOpen) {
+      const container = document.getElementById('signalContainer');
+      const statusIndicator = document.getElementById('marketStatus');
+
+      if (!isOpen) {
+        statusIndicator.innerHTML = '● Market Closed (Weekend)';
+        statusIndicator.style.color = 'var(--red)';
+        updateChartOverlay(null);
+        container.innerHTML = `
+          <div class="sig-card closed">
+            <div class="sig-top">
+              <div>
+                <span class="sig-badge badge-closed">CLOSED</span>
+                <span class="sig-symbol">${currentAsset}</span>
+              </div>
+              <span class="sig-time">ទីផ្សារបិទសម្រាក</span>
+            </div>
+            <div style="padding: 16px; text-align: center; color: var(--text-muted); font-size: 12px;">
+              ⚠️ ទីផ្សារ Forex & Gold ត្រូវបានបិទសម្រាប់ចុងសប្តាហ៍។<br>
+              ប្រព័ន្ធនឹងចាប់ផ្តើមបញ្ចេញ Signal ស្វ័យប្រវត្តិនូវពេលទីផ្សារបើកដំណើរការវិញ។
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      statusIndicator.innerHTML = '● Market Open (Live)';
+      statusIndicator.style.color = 'var(--green)';
+
+      const isBuy = sig.type === 'BUY';
+      const isOwner = currentUser && currentUser.role === 'OWNER';
+
+      container.innerHTML = `
+        <div class="sig-card ${isBuy ? 'buy' : 'sell'}">
+          <div class="sig-top">
+            <div>
+              <span class="sig-badge ${isBuy ? 'badge-buy' : 'badge-sell'}">${sig.type}</span>
+              <span class="sig-symbol">${sig.symbol}</span>
+              <span class="sig-tf">${sig.timeframe}</span>
+            </div>
+            <span class="sig-time">Valid from: ${sig.time}</span>
+          </div>
+
+          <div class="sig-grid">
+            <div class="sig-item"><label>ENTRY</label><span>${sig.entry}</span></div>
+            <div class="sig-item"><label style="color:var(--red);">SL</label><span style="color:var(--red);">${sig.sl}</span></div>
+            <div class="sig-item"><label style="color:var(--green);">TP 1</label><span style="color:var(--green);">${sig.tp1}</span></div>
+            <div class="sig-item"><label style="color:var(--green);">TP 2</label><span style="color:var(--green);">${sig.tp2}</span></div>
+          </div>
+
+          <div class="sig-note">💡 ${sig.note}</div>
+
+          <div class="sig-actions">
+            <span class="status-tag" id="currentSigStatus">${sig.status}</span>
+            
+            <div class="owner-controls" id="ownerControlPanel" style="${isOwner ? 'display:flex;' : 'display:none;'}">
+              <button class="btn-owner" onclick="setSignalStatus('TP1 HIT')">Hit TP1</button>
+              <button class="btn-owner" onclick="setSignalStatus('SL HIT')">Hit SL</button>
+              <button class="btn-owner" onclick="setSignalStatus('CLOSED')">Close</button>
+            </div>
+
+            <span style="font-size:10px; color:var(--text-muted);">${isOwner ? '👑 PRO Control Active' : 'LHvara Engine'}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function setSignalStatus(newStatus) {
+      const tag = document.getElementById('currentSigStatus');
+      if (tag) tag.innerText = newStatus;
+    }
+
+    function promptManualSignal() {
+      const type = prompt('ជ្រើសរើស Action (វាយ BUY ឬ SELL):', 'BUY');
+      if (!type) return;
+      const entry = parseFloat(prompt('បញ្ចូល Entry Price:', marketPrices[currentAsset]));
+      const sl = parseFloat(prompt('បញ្ចូល Stop Loss (SL):', type.toUpperCase() === 'BUY' ? entry - 5 : entry + 5));
+      const tp1 = parseFloat(prompt('បញ្ចូល TP1:', type.toUpperCase() === 'BUY' ? entry + 6 : entry - 6));
+      const tp2 = parseFloat(prompt('បញ្ចូល TP2:', type.toUpperCase() === 'BUY' ? entry + 12 : entry - 12));
+
+      manualOverrideSignal = {
+        symbol: currentAsset,
+        type: type.toUpperCase(),
+        timeframe: 'M10 (PRO)',
+        entry, sl, tp1, tp2,
+        note: '👑 Master Owner Direct Signal (High Accuracy)',
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        status: 'ACTIVE'
+      };
+
+      renderSingleSignal(manualOverrideSignal, true);
+    }
+
+    let lastPeriodId = null;
+
+    function updateSignalForCurrentInterval(force = false) {
+      const now = new Date();
+      const currentMinutes = now.getMinutes();
+      const periodMinutes = Math.floor(currentMinutes / INTERVAL_MINUTES) * INTERVAL_MINUTES;
+      const periodDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), periodMinutes, 0);
+      const periodId = periodDate.getTime() + '_' + currentAsset;
+
+      const open = isMarketOpen(currentAsset);
+
+      if (force || periodId !== lastPeriodId) {
+        lastPeriodId = periodId;
+        manualOverrideSignal = null;
+        if (open) {
+          const sig = calculateSignalForPeriod(currentAsset, periodDate.getTime());
+          renderSingleSignal(sig, true);
+        } else {
+          renderSingleSignal(null, false);
+        }
+      }
+
+      const nextPeriodTimestamp = periodDate.getTime() + (INTERVAL_MINUTES * 60 * 1000);
+      const diffMs = nextPeriodTimestamp - now.getTime();
+      const diffSecs = Math.max(0, Math.floor(diffMs / 1000));
+      const m = Math.floor(diffSecs / 60);
+      const s = diffSecs % 60;
+      document.getElementById('countdownTimer').innerText = `Next: ${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    // Forex Factory Live News Fetcher
+    async function loadForexFactoryData() {
+      const tbody = document.getElementById('newsTableBody');
+      const dateRangeEl = document.getElementById('newsDateRange');
+      
+      const targetUrl = 'https://nfs.faireconomy.media/ff_calendar_thisweek.json';
+      const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl);
+
+      try {
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:var(--gold); padding:14px;">⏳ កំពុងភ្ជាប់ទៅ Forex Factory Live Server...</td></tr>';
+        
+        let res = await fetch(proxyUrl);
+        if (!res.ok) {
+          res = await fetch('https://corsproxy.io/?' + encodeURIComponent(targetUrl));
+        }
+        
+        const data = await res.json();
+
+        const importantNews = data.filter(item => {
+          return (item.impact === 'High' || item.impact === 'Medium') && 
+                 ['USD', 'EUR', 'GBP', 'JPY'].includes(item.currency);
+        });
+
+        if (!importantNews || importantNews.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:var(--text-muted); padding:14px;">គ្មានព័ត៌មាន High Impact ក្នុងសប្តាហ៍នេះទេ</td></tr>';
+          return;
+        }
+
+        if (dateRangeEl) {
+          dateRangeEl.innerText = `Forex Factory Live (${importantNews.length} ព្រឹត្តិការណ៍)`;
+        }
+
+        tbody.innerHTML = '';
+
+        importantNews.slice(0, 10).forEach(item => {
+          const dateObj = new Date(item.date);
+          const dateStr = dateObj.toLocaleDateString('km-KH', { 
+            weekday: 'short', 
+            month: 'numeric', 
+            day: 'numeric' 
+          });
+          
+          const timeStr = isNaN(dateObj.getTime()) ? 'All Day' : dateObj.toLocaleTimeString([], { 
+            hour: '2-digit', 
+            minute: '2-digit' 
+          });
+
+          const isHigh = item.impact === 'High';
+
+          let signalBadge = '';
+          if (item.currency === 'USD') {
+            signalBadge = isHigh 
+              ? '<span class="sig-forecast-buy">GOLD HIGH VOL ⚠️</span>' 
+              : '<span class="sig-forecast-vol">USD VOLATILITY</span>';
+          } else if (item.currency === 'EUR' || item.currency === 'GBP') {
+            signalBadge = isHigh 
+              ? `<span class="sig-forecast-sell">${item.currency} VOLATILE</span>` 
+              : `<span class="sig-forecast-vol">NORMAL IMPACT</span>`;
+          } else {
+            signalBadge = `<span class="sig-forecast-vol">${item.currency} IMPACT</span>`;
+          }
+
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>
+              <div style="font-weight:bold; color:var(--text);">${dateStr}</div>
+              <div style="color:var(--gold); font-family:monospace; font-size:10px;">${timeStr}</div>
+            </td>
+            <td>
+              <div>
+                <span class="news-impact-dot ${isHigh ? 'dot-high' : 'dot-med'}"></span>
+                <span class="news-curr" style="color:${item.currency === 'USD' ? 'var(--gold)' : 'var(--blue)'};">${item.currency}</span>
+                <span style="font-weight:600; color:#cbd5e1;">${item.title}</span>
+              </div>
+            </td>
+            <td style="text-align:right;">${signalBadge}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:var(--red); padding:14px;">បរាជ័យក្នុងការទាញយកពី Forex Factory: សូមពិនិត្យមើលសេវាអ៊ីនធឺណិតរបស់អ្នក</td></tr>`;
+      }
+    }
+
+    // Authentication Logic & Master Owner Pro Account
+    let currentUser = JSON.parse(localStorage.getItem('lhvara_auth_user')) || null;
+
+    function openAuthModal() {
+      if (currentUser) {
+        if (confirm(`អ្នកកំពុង Log in ដោយគណនី: ${currentUser.name} (${currentUser.role || 'MEMBER'})\nតើអ្នកចង់ Log out ដែរឬទេ?`)) {
+          currentUser = null;
+          localStorage.removeItem('lhvara_auth_user');
+          updateAuthUI();
+          updateSignalForCurrentInterval(true);
+        }
+        return;
+      }
+      document.getElementById('authModal').style.display = 'flex';
+    }
+
+    function closeAuthModal() {
+      document.getElementById('authModal').style.display = 'none';
+      document.getElementById('authMsg').style.display = 'none';
+    }
+
+    function switchAuthTab(tab) {
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+      const tabLogin = document.getElementById('tabLogin');
+      const tabRegister = document.getElementById('tabRegister');
+      const msg = document.getElementById('authMsg');
+      msg.style.display = 'none';
+
+      if (tab === 'login') {
+        loginForm.style.display = 'flex';
+        registerForm.style.display = 'none';
+        tabLogin.style.borderBottomColor = 'var(--gold)';
+        tabLogin.style.color = 'var(--gold)';
+        tabRegister.style.borderBottomColor = 'transparent';
+        tabRegister.style.color = 'var(--text-muted)';
+      } else {
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'flex';
+        tabRegister.style.borderBottomColor = 'var(--green)';
+        tabRegister.style.color = 'var(--green)';
+        tabLogin.style.borderBottomColor = 'transparent';
+        tabLogin.style.color = 'var(--text-muted)';
+      }
+    }
+
+    function quickLoginOwner() {
+      currentUser = { name: 'LHvara Owner', role: 'OWNER', email: 'owner@lhvara.com' };
+      localStorage.setItem('lhvara_auth_user', JSON.stringify(currentUser));
+      const msg = document.getElementById('authMsg');
+      msg.innerText = '👑 ស្វាគមន៍ការវិលត្រឡប់របស់ Master Owner!';
+      msg.style.color = 'var(--gold)';
+      msg.style.display = 'block';
+
+      setTimeout(() => {
+        closeAuthModal();
+        updateAuthUI();
+        updateSignalForCurrentInterval(true);
+      }, 600);
+    }
+
+    function handleRegister(e) {
+      e.preventDefault();
+      const user = document.getElementById('regUser').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const pass = document.getElementById('regPass').value;
+      const msg = document.getElementById('authMsg');
+
+      let users = JSON.parse(localStorage.getItem('lhvara_registered_users')) || [];
+      if (users.some(u => u.user === user || u.email === email)) {
+        msg.innerText = '⚠️ Username ឬ Email នេះមានគេប្រើរួចហើយ!';
+        msg.style.color = 'var(--red)';
+        msg.style.display = 'block';
+        return;
+      }
+
+      users.push({ user, email, pass, role: 'PRO_USER' });
+      localStorage.setItem('lhvara_registered_users', JSON.stringify(users));
+
+      currentUser = { name: user, email: email, role: 'PRO_USER' };
+      localStorage.setItem('lhvara_auth_user', JSON.stringify(currentUser));
+
+      msg.innerText = '✅ ចុះឈ្មោះ និងចូលប្រើបានជោគជ័យ!';
+      msg.style.color = 'var(--green)';
+      msg.style.display = 'block';
+
+      setTimeout(() => {
+        closeAuthModal();
+        updateAuthUI();
+        updateSignalForCurrentInterval(true);
+      }, 700);
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const identifier = document.getElementById('loginUser').value.trim();
+      const pass = document.getElementById('loginPass').value;
+      const msg = document.getElementById('authMsg');
+
+      if ((identifier === 'admin' || identifier === 'lhvara' || identifier === 'owner') && (pass === 'lhvara8888' || pass === '8888')) {
+        quickLoginOwner();
+        return;
+      }
+
+      let users = JSON.parse(localStorage.getItem('lhvara_registered_users')) || [];
+      const found = users.find(u => (u.user === identifier || u.email === identifier) && u.pass === pass);
+
+      if (found) {
+        currentUser = { name: found.user, email: found.email, role: found.role || 'PRO_USER' };
+        localStorage.setItem('lhvara_auth_user', JSON.stringify(currentUser));
+        msg.innerText = '✅ ចូលប្រើជោគជ័យ!';
+        msg.style.color = 'var(--green)';
+        msg.style.display = 'block';
+        setTimeout(() => {
+          closeAuthModal();
+          updateAuthUI();
+          updateSignalForCurrentInterval(true);
+        }, 700);
+      } else {
+        msg.innerText = '⚠️ ព័ត៌មានមិនត្រឹមត្រូវ ឬគណនីមិនទាន់មាន!';
+        msg.style.color = 'var(--red)';
+        msg.style.display = 'block';
+      }
+    }
+
+    function updateAuthUI() {
+      const btn = document.getElementById('authBtn');
+      const overrideBtn = document.getElementById('adminOverrideBtn');
+
+      if (currentUser) {
+        if (currentUser.role === 'OWNER') {
+          btn.innerHTML = `👑 ${currentUser.name} (PRO)`;
+          btn.style.color = 'var(--gold)';
+          btn.style.borderColor = 'var(--gold)';
+          btn.style.background = 'rgba(245, 158, 11, 0.15)';
+          if (overrideBtn) overrideBtn.style.display = 'block';
+        } else {
+          btn.innerHTML = `⭐ ${currentUser.name} (PRO)`;
+          btn.style.color = 'var(--green)';
+          btn.style.borderColor = 'var(--green)';
+          btn.style.background = 'var(--card-inner)';
+          if (overrideBtn) overrideBtn.style.display = 'none';
+        }
+      } else {
+        btn.innerHTML = '🔑 Login';
+        btn.style.color = 'var(--gold)';
+        btn.style.borderColor = 'var(--border)';
+        btn.style.background = 'var(--card-inner)';
+        if (overrideBtn) overrideBtn.style.display = 'none';
+      }
+    }
+
+    setInterval(() => {
+      updateSignalForCurrentInterval(false);
+    }, 1000);
+
+    window.onload = () => {
+      loadChart('OANDA:XAUUSD');
+      updateSignalForCurrentInterval(true);
+      loadForexFactoryData();
+      updateAuthUI();
+    };
   </script>
 </body>
 </html>
