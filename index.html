@@ -386,6 +386,7 @@
       font-size: 10px;
     }
 
+    /* Auth Modal Styling */
     .auth-overlay {
       display: none;
       position: fixed;
@@ -543,7 +544,7 @@
     </div>
   </main>
 
-  <!-- Auth Modal -->
+  <!-- Auth Modal (គ្មានប៊ូតុង Quick Login ឬបង្ហាញ Password ឱ្យអ្នកដទៃឃើញឡើយ) -->
   <div id="authModal" class="auth-overlay">
     <div class="auth-box">
       <button onclick="closeAuthModal()" style="position: absolute; top: 12px; right: 12px; background: transparent; border: none; color: var(--text-muted); font-size: 16px; cursor: pointer;">✕</button>
@@ -553,34 +554,31 @@
         <button id="tabRegister" class="auth-tab-btn" onclick="switchAuthTab('register')" style="border-bottom: 2px solid transparent; color: var(--text-muted);">ចុះឈ្មោះ (Sign Up)</button>
       </div>
 
-      <div style="background: rgba(245, 158, 11, 0.1); border: 1px dashed var(--gold); border-radius: 8px; padding: 8px; margin-bottom: 12px; text-align: center;">
-        <span style="font-size: 10px; color: var(--gold); display: block; margin-bottom: 4px;">👑 គណនីម្ចាស់ប្រព័ន្ធ (Master Owner)</span>
-        <button type="button" onclick="quickLoginOwner()" style="background: var(--gold); color: #07090e; border: none; font-size: 10px; font-weight: 900; padding: 4px 10px; border-radius: 6px; cursor: pointer;">ចុច Login ជា Owner PRO ភ្លាម</button>
-      </div>
-
+      <!-- Login Form -->
       <form id="loginForm" class="auth-input-group" onsubmit="handleLogin(event)">
         <div>
-          <label>Email ឬ ឈ្មោះអ្នកប្រើ (Username)</label>
-          <input type="text" id="loginUser" required placeholder="admin ឬ lhvara">
+          <label>ឈ្មោះអ្នកប្រើ ឬ Email</label>
+          <input type="text" id="loginUser" required placeholder="បញ្ចូល username">
         </div>
         <div>
           <label>លេខសម្ងាត់ (Password)</label>
-          <input type="password" id="loginPass" required placeholder="lhvara8888">
+          <input type="password" id="loginPass" required placeholder="••••••••">
         </div>
         <button type="submit" class="auth-submit-btn" style="background: linear-gradient(135deg, #f59e0b, #d97706);">ចូលប្រើប្រាស់</button>
       </form>
 
+      <!-- Register Form (អ្នកចុះឈ្មោះបានត្រឹមជា Member) -->
       <form id="registerForm" class="auth-input-group" onsubmit="handleRegister(event)" style="display: none;">
         <div>
           <label>ឈ្មោះអ្នកប្រើ (Username)</label>
-          <input type="text" id="regUser" required placeholder="ឈ្មោះអ្នកប្រើ">
+          <input type="text" id="regUser" required placeholder="ឈ្មោះរបស់អ្នក">
         </div>
         <div>
           <label>Email</label>
           <input type="email" id="regEmail" required placeholder="name@example.com">
         </div>
         <div>
-          <label>បង្កើតលេខសម្ងាត់ (Password)</label>
+          <label>បង្កើតលេខសម្ងាត់</label>
           <input type="password" id="regPass" required placeholder="យ៉ាងតិច ៦ ខ្ទង់">
         </div>
         <button type="submit" class="auth-submit-btn" style="background: linear-gradient(135deg, #10b981, #059669);">បង្កើតគណនី</button>
@@ -677,11 +675,11 @@
 
       if (symbol === 'XAUUSD') {
         entry = parseFloat(currentPrice.toFixed(2));
-                sl = type === 'BUY' ? parseFloat((entry - 5.5).toFixed(2)) : parseFloat((entry + 5.5).toFixed(2));
+        sl = type === 'BUY' ? parseFloat((entry - 5.5).toFixed(2)) : parseFloat((entry + 5.5).toFixed(2));
         tp1 = type === 'BUY' ? parseFloat((entry + 6.0).toFixed(2)) : parseFloat((entry - 6.0).toFixed(2));
         tp2 = type === 'BUY' ? parseFloat((entry + 12.0).toFixed(2)) : parseFloat((entry - 12.0).toFixed(2));
       } else if (symbol === 'BTCUSDT') {
-        entry = parseFloat(currentPrice.toFixed(1));
+                entry = parseFloat(currentPrice.toFixed(1));
         sl = type === 'BUY' ? entry - 400 : entry + 400;
         tp1 = type === 'BUY' ? entry + 550 : entry - 550;
         tp2 = type === 'BUY' ? entry + 1100 : entry - 1100;
@@ -830,7 +828,7 @@
       document.getElementById('countdownTimer').innerText = `Next: ${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
     }
 
-    // Forex Factory Live News Fetcher (ដំណើរការលើ Vercel 100%)
+    // Forex Factory Live News Fetcher
     async function loadForexFactoryData() {
       const tbody = document.getElementById('newsTableBody');
       const dateRangeEl = document.getElementById('newsDateRange');
@@ -938,7 +936,7 @@
 
     function openAuthModal() {
       if (currentUser) {
-        if (confirm(`អ្នកកំពុង Log in ដោយគណនី: ${currentUser.name} (${currentUser.role || 'MEMBER'})\nតើអ្នកចង់ Log out ដែរឬទេ?`)) {
+        if (confirm(`អ្នកកំពុង Log in ដោយគណនី: ${currentUser.name} (${currentUser.role})\nតើអ្នកចង់ Log out ដែរឬទេ?`)) {
           currentUser = null;
           localStorage.removeItem('lhvara_auth_user');
           updateAuthUI();
@@ -979,21 +977,6 @@
       }
     }
 
-    function quickLoginOwner() {
-      currentUser = { name: 'LHvara Owner', role: 'OWNER', email: 'owner@lhvara.com' };
-      localStorage.setItem('lhvara_auth_user', JSON.stringify(currentUser));
-      const msg = document.getElementById('authMsg');
-      msg.innerText = '👑 ស្វាគមន៍ការវិលត្រឡប់របស់ Master Owner!';
-      msg.style.color = 'var(--gold)';
-      msg.style.display = 'block';
-
-      setTimeout(() => {
-        closeAuthModal();
-        updateAuthUI();
-        updateSignalForCurrentInterval(true);
-      }, 600);
-    }
-
     function handleRegister(e) {
       e.preventDefault();
       const user = document.getElementById('regUser').value.trim();
@@ -1009,13 +992,13 @@
         return;
       }
 
-      users.push({ user, email, pass, role: 'PRO_USER' });
+      users.push({ user, email, pass, role: 'MEMBER' });
       localStorage.setItem('lhvara_registered_users', JSON.stringify(users));
 
-      currentUser = { name: user, email: email, role: 'PRO_USER' };
+      currentUser = { name: user, email: email, role: 'MEMBER' };
       localStorage.setItem('lhvara_auth_user', JSON.stringify(currentUser));
 
-      msg.innerText = '✅ ចុះឈ្មោះ និងចូលប្រើបានជោគជ័យ!';
+      msg.innerText = '✅ ចុះឈ្មោះបានជោគជ័យ!';
       msg.style.color = 'var(--green)';
       msg.style.display = 'block';
 
@@ -1032,8 +1015,18 @@
       const pass = document.getElementById('loginPass').value;
       const msg = document.getElementById('authMsg');
 
-      if ((identifier === 'admin' || identifier === 'lhvara' || identifier === 'owner') && (pass === 'lhvara8888' || pass === '8888')) {
-        quickLoginOwner();
+      if (identifier === 'lhvara' && pass === 'Lhvara@Owner9999') {
+        currentUser = { name: 'LHvara Owner', role: 'OWNER', email: 'owner@lhvara.com' };
+        localStorage.setItem('lhvara_auth_user', JSON.stringify(currentUser));
+        msg.innerText = '👑 ស្វាគមន៍ការវិលត្រឡប់របស់ Master Owner!';
+        msg.style.color = 'var(--gold)';
+        msg.style.display = 'block';
+
+        setTimeout(() => {
+          closeAuthModal();
+          updateAuthUI();
+          updateSignalForCurrentInterval(true);
+        }, 600);
         return;
       }
 
@@ -1041,7 +1034,7 @@
       const found = users.find(u => (u.user === identifier || u.email === identifier) && u.pass === pass);
 
       if (found) {
-        currentUser = { name: found.user, email: found.email, role: found.role || 'PRO_USER' };
+        currentUser = { name: found.user, email: found.email, role: 'MEMBER' };
         localStorage.setItem('lhvara_auth_user', JSON.stringify(currentUser));
         msg.innerText = '✅ ចូលប្រើជោគជ័យ!';
         msg.style.color = 'var(--green)';
@@ -1052,7 +1045,7 @@
           updateSignalForCurrentInterval(true);
         }, 700);
       } else {
-        msg.innerText = '⚠️ ព័ត៌មានមិនត្រឹមត្រូវ ឬគណនីមិនទាន់មាន!';
+        msg.innerText = '⚠️ ព័ត៌មានមិនត្រឹមត្រូវ!';
         msg.style.color = 'var(--red)';
         msg.style.display = 'block';
       }
@@ -1070,9 +1063,9 @@
           btn.style.background = 'rgba(245, 158, 11, 0.15)';
           if (overrideBtn) overrideBtn.style.display = 'block';
         } else {
-          btn.innerHTML = `⭐ ${currentUser.name} (PRO)`;
-          btn.style.color = 'var(--green)';
-          btn.style.borderColor = 'var(--green)';
+          btn.innerHTML = `👤 ${currentUser.name}`;
+          btn.style.color = 'var(--blue)';
+          btn.style.borderColor = 'var(--border)';
           btn.style.background = 'var(--card-inner)';
           if (overrideBtn) overrideBtn.style.display = 'none';
         }
