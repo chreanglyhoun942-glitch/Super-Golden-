@@ -386,7 +386,6 @@
       font-size: 10px;
     }
 
-    /* Auth Modal Styling */
     .auth-overlay {
       display: none;
       position: fixed;
@@ -544,7 +543,7 @@
     </div>
   </main>
 
-  <!-- Auth Modal (គ្មានប៊ូតុង Quick Login ឬបង្ហាញ Password ឱ្យអ្នកដទៃឃើញឡើយ) -->
+  <!-- Auth Modal -->
   <div id="authModal" class="auth-overlay">
     <div class="auth-box">
       <button onclick="closeAuthModal()" style="position: absolute; top: 12px; right: 12px; background: transparent; border: none; color: var(--text-muted); font-size: 16px; cursor: pointer;">✕</button>
@@ -554,7 +553,6 @@
         <button id="tabRegister" class="auth-tab-btn" onclick="switchAuthTab('register')" style="border-bottom: 2px solid transparent; color: var(--text-muted);">ចុះឈ្មោះ (Sign Up)</button>
       </div>
 
-      <!-- Login Form -->
       <form id="loginForm" class="auth-input-group" onsubmit="handleLogin(event)">
         <div>
           <label>ឈ្មោះអ្នកប្រើ ឬ Email</label>
@@ -567,7 +565,6 @@
         <button type="submit" class="auth-submit-btn" style="background: linear-gradient(135deg, #f59e0b, #d97706);">ចូលប្រើប្រាស់</button>
       </form>
 
-      <!-- Register Form (អ្នកចុះឈ្មោះបានត្រឹមជា Member) -->
       <form id="registerForm" class="auth-input-group" onsubmit="handleRegister(event)" style="display: none;">
         <div>
           <label>ឈ្មោះអ្នកប្រើ (Username)</label>
@@ -594,8 +591,9 @@
     const INTERVAL_MINUTES = 10;
     let manualOverrideSignal = null;
 
+    // កែសម្រួលតម្លៃគោលមាសឱ្យត្រូវនឹងកម្រិត Candle ជាក់ស្តែង (3905+)
     const marketPrices = {
-      'XAUUSD': 2742.50,
+      'XAUUSD': 3905.00,
       'EURUSD': 1.0835,
       'GBPUSD': 1.2980,
       'USDJPY': 152.40,
@@ -668,20 +666,20 @@
       const rand = seed - Math.floor(seed);
       const type = rand > 0.5 ? 'BUY' : 'SELL';
       const base = marketPrices[symbol];
-      const delta = (rand * 0.002 * base);
+      const delta = (rand * 0.0015 * base);
       const currentPrice = type === 'BUY' ? base + delta : base - delta;
 
       let entry, sl, tp1, tp2;
 
       if (symbol === 'XAUUSD') {
         entry = parseFloat(currentPrice.toFixed(2));
-        sl = type === 'BUY' ? parseFloat((entry - 5.5).toFixed(2)) : parseFloat((entry + 5.5).toFixed(2));
-        tp1 = type === 'BUY' ? parseFloat((entry + 6.0).toFixed(2)) : parseFloat((entry - 6.0).toFixed(2));
-        tp2 = type === 'BUY' ? parseFloat((entry + 12.0).toFixed(2)) : parseFloat((entry - 12.0).toFixed(2));
+        sl = type === 'BUY' ? parseFloat((entry - 7.5).toFixed(2)) : parseFloat((entry + 7.5).toFixed(2));
+        tp1 = type === 'BUY' ? parseFloat((entry + 8.0).toFixed(2)) : parseFloat((entry - 8.0).toFixed(2));
+        tp2 = type === 'BUY' ? parseFloat((entry + 16.0).toFixed(2)) : parseFloat((entry - 16.0).toFixed(2));
       } else if (symbol === 'BTCUSDT') {
-                entry = parseFloat(currentPrice.toFixed(1));
+        entry = parseFloat(currentPrice.toFixed(1));
         sl = type === 'BUY' ? entry - 400 : entry + 400;
-        tp1 = type === 'BUY' ? entry + 550 : entry - 550;
+                tp1 = type === 'BUY' ? entry + 550 : entry - 550;
         tp2 = type === 'BUY' ? entry + 1100 : entry - 1100;
       } else {
         entry = parseFloat(currentPrice.toFixed(4));
@@ -781,9 +779,9 @@
       const type = prompt('ជ្រើសរើស Action (BUY ឬ SELL):', 'BUY');
       if (!type) return;
       const entry = parseFloat(prompt('បញ្ចូល Entry Price:', marketPrices[currentAsset]));
-      const sl = parseFloat(prompt('បញ្ចូល Stop Loss (SL):', type.toUpperCase() === 'BUY' ? entry - 5 : entry + 5));
-      const tp1 = parseFloat(prompt('បញ្ចូល TP1:', type.toUpperCase() === 'BUY' ? entry + 6 : entry - 6));
-      const tp2 = parseFloat(prompt('បញ្ចូល TP2:', type.toUpperCase() === 'BUY' ? entry + 12 : entry - 12));
+      const sl = parseFloat(prompt('បញ្ចូល Stop Loss (SL):', type.toUpperCase() === 'BUY' ? entry - 7 : entry + 7));
+      const tp1 = parseFloat(prompt('បញ្ចូល TP1:', type.toUpperCase() === 'BUY' ? entry + 8 : entry - 8));
+      const tp2 = parseFloat(prompt('បញ្ចូល TP2:', type.toUpperCase() === 'BUY' ? entry + 16 : entry - 16));
 
       manualOverrideSignal = {
         symbol: currentAsset,
@@ -828,7 +826,6 @@
       document.getElementById('countdownTimer').innerText = `Next: ${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
     }
 
-    // Forex Factory Live News Fetcher
     async function loadForexFactoryData() {
       const tbody = document.getElementById('newsTableBody');
       const dateRangeEl = document.getElementById('newsDateRange');
