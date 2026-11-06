@@ -18,11 +18,11 @@
     .card { background: #0d131f; border: 1px solid #1e293b; border-radius: 12px; padding: 12px; margin-bottom: 14px; text-align: left; }
     
     /* SIGNAL CARD */
-    .signal-card { background: #0d131f; border-radius: 14px; padding: 14px; border: 2px solid #10b981; border-left: 6px solid #10b981; margin-bottom: 14px; text-align: left; box-shadow: 0 0 15px rgba(16,185,129,0.15); }
-    .signal-card.sell-mode { border-color: #ef4444; border-left-color: #ef4444; box-shadow: 0 0 15px rgba(239,68,68,0.15); }
+    .signal-card { background: #0d131f; border-radius: 14px; padding: 14px; border: 2px solid #ef4444; border-left: 6px solid #ef4444; margin-bottom: 14px; text-align: left; box-shadow: 0 0 15px rgba(239,68,68,0.2); }
+    .signal-card.buy-mode { border-color: #10b981; border-left-color: #10b981; box-shadow: 0 0 15px rgba(16,185,129,0.2); }
     .sig-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-    .dir-badge { font-size: 12px; font-weight: 900; padding: 3px 8px; border-radius: 4px; background: #10b981; color: #000; }
-    .dir-badge.b-sell { background: #f43f5e; color: #fff; }
+    .dir-badge { font-size: 11px; font-weight: 900; padding: 3px 8px; border-radius: 4px; background: #f43f5e; color: #fff; }
+    .dir-badge.buy { background: #10b981; color: #000; }
     .timer-tag { background: #1e293b; color: #f59e0b; font-family: monospace; font-size: 11px; padding: 3px 6px; border-radius: 4px; font-weight: bold; }
     .price-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; background: #06080c; padding: 8px 6px; border-radius: 8px; text-align: center; margin-bottom: 8px; border: 1px solid #1e293b; }
     .p-lbl { font-size: 8.5px; color: #64748b; font-weight: bold; margin-bottom: 2px; }
@@ -32,7 +32,7 @@
     .sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     .btn-sub { text-align: center; padding: 6px; border-radius: 6px; font-size: 10px; font-weight: bold; text-decoration: none; color: #fff; background: #1e293b; border: 1px solid #334155; }
 
-    /* FOREX FACTORY NEWS */
+    /* FOREX FACTORY EXACT STYLES */
     .news-title-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
     .news-table-header { display: grid; grid-template-columns: 2fr 3.5fr 2.5fr; background: #06080c; padding: 6px 8px; border-radius: 6px; font-size: 9.5px; color: #64748b; font-weight: bold; margin-bottom: 6px; }
     .news-item-row { display: grid; grid-template-columns: 2fr 3.5fr 2.5fr; background: #090e17; border: 1px solid #1e293b; padding: 8px; border-radius: 6px; font-size: 10px; align-items: center; margin-bottom: 6px; }
@@ -43,6 +43,7 @@
     .fc-sell { background: rgba(244, 63, 94, 0.2); color: #f43f5e; border: 1px solid #f43f5e; }
     .fc-buy { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid #10b981; }
 
+    /* LOCK SCREEN */
     .pro-lock-box { background: rgba(13, 19, 31, 0.95); border: 2px dashed #f59e0b; border-radius: 12px; padding: 20px 14px; text-align: center; }
     .btn-buy-instant { display: inline-block; background: linear-gradient(135deg, #f59e0b, #d97706); color: #000; font-weight: 900; font-size: 12px; padding: 10px 18px; border-radius: 8px; border: none; cursor: pointer; margin-top: 8px; }
 
@@ -53,6 +54,7 @@
     .btn-submit-action { width: 100%; background: #14b8a6; color: #000; border: none; padding: 10px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; margin-top: 6px; }
     .btn-close-modal { background: #1e293b; color: #94a3b8; border: none; padding: 8px; width: 100%; border-radius: 6px; margin-top: 8px; cursor: pointer; font-size: 11px; }
 
+    /* PLAN CARDS */
     .plan-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
     .plan-card { border: 1.5px solid #334155; background: #06080c; padding: 8px; border-radius: 8px; text-align: center; cursor: pointer; }
     .plan-card.active { border-color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
@@ -70,9 +72,9 @@
 </head>
 <body>
 
-  <!-- TICKER REAL-TIME (~4,070.90) -->
+  <!-- TICKER -->
   <div class="top-bar">
-    <span>XAUUSD: SELL: <b id="ticker-bid" style="color:#f43f5e">4,070.94</b> BUY: <b id="ticker-ask" style="color:#10b981">4,071.07</b></span>
+    <span>XAUUSD: SELL: <b id="ticker-bid" style="color:#f43f5e">4,073.00</b> BUY: <b id="ticker-ask" style="color:#10b981">4,073.45</b></span>
     <span id="user-badge" style="color:#94a3b8; font-size:10px;">● Free Member</span>
   </div>
 
@@ -106,30 +108,30 @@
       <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA%3AXAUUSD&interval=1&theme=dark&style=1&timezone=Asia%2FBangkok&locale=en" style="width:100%; height:320px; border:none;"></iframe>
     </div>
 
-    <!-- BIG MOVE SIGNAL (CANDLE ស្មើតម្លៃជាក់ស្តែង ~4,070.xx) -->
+    <!-- BIG MOVE SIGNAL (CANDLE SYNCED) -->
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
       <b style="font-size:12px; color:#f59e0b;">🔥 BIG MOVE SETUP (LIVE CANDLE)</b>
-      <span style="color:#38bdf8; font-size:10px;">● Target: 150 - 300 Pips</span>
+      <span style="color:#38bdf8; font-size:10px;">● Auto-Sync 10M</span>
     </div>
 
     <div class="signal-card" id="main-signal-card">
       <div class="sig-header">
         <div style="display:flex; align-items:center; gap:6px;">
-          <span class="dir-badge" id="sig-badge">BUY (BIG MOVE)</span>
+          <span class="dir-badge" id="sig-badge">SELL (BIG MOVE)</span>
           <b style="font-size:13px; color:#fff;">XAUUSD</b>
-          <span style="color:#10b981; font-size:9.5px; font-weight:bold; background:rgba(16,185,129,0.15); padding:2px 5px; border-radius:4px;">BULLISH RALLY</span>
+          <span id="trend-tag" style="color:#f43f5e; font-size:9.5px; font-weight:bold; background:rgba(244,63,94,0.15); padding:2px 5px; border-radius:4px;">BEARISH DUMP</span>
         </div>
         <div style="display:flex; align-items:center; gap:6px;">
           <span class="timer-tag" id="sig-timer">⏱️ 10:00</span>
-          <span style="font-size:10px; color:#94a3b8;">Valid from: <b id="sig-valid-from" style="color:#38bdf8;">03:40 PM</b></span>
+          <span style="font-size:10px; color:#94a3b8;">Valid from: <b id="sig-valid-from" style="color:#38bdf8;">--:--</b></span>
         </div>
       </div>
 
       <div class="price-grid-4">
-        <div><div class="p-lbl">ENTRY</div><div class="p-val" id="val-entry" style="color:#fff;">4070.94</div></div>
-        <div><div class="p-lbl">STOP (SL)</div><div class="p-val" id="val-sl" style="color:#f43f5e;">4064.50</div></div>
-        <div><div class="p-lbl">TP 1 (150p)</div><div class="p-val" id="val-tp1" style="color:#10b981;">4085.94</div></div>
-        <div><div class="p-lbl">TP 2 (300p)</div><div class="p-val" id="val-tp2" style="color:#10b981;">4100.94</div></div>
+        <div><div class="p-lbl">ENTRY</div><div class="p-val" id="val-entry" style="color:#fff;">4073.20</div></div>
+        <div><div class="p-lbl">STOP (SL)</div><div class="p-val" id="val-sl" style="color:#f43f5e;">4079.20</div></div>
+        <div><div class="p-lbl">TP 1 (150p)</div><div class="p-val" id="val-tp1" style="color:#10b981;">4058.20</div></div>
+        <div><div class="p-lbl">TP 2 (300p)</div><div class="p-val" id="val-tp2" style="color:#10b981;">4043.20</div></div>
       </div>
 
       <div class="profit-target-box">
@@ -143,10 +145,9 @@
       </a>
     </div>
 
-    <!-- FOREX FACTORY (EXACT CALENDAR FROM NOV 6 SCREENSHOT) -->
+    <!-- FOREX FACTORY (EXACT NOV 6 CALENDAR) -->
     <div class="card" id="forex-factory-wrapper" style="border-color: rgba(245, 158, 11, 0.4);">
       
-      <!-- ផ្ទាំងចាក់សោរសម្រាប់ FREE USER -->
       <div id="factory-locked-view" class="pro-lock-box">
         <div style="font-size:30px; margin-bottom:6px;">🔒</div>
         <b style="color:#f59e0b; font-size:13px;">FOREX FACTORY PRO INSIGHTS (LOCKED)</b>
@@ -159,7 +160,6 @@
         </button>
       </div>
 
-      <!-- ផ្ទាំងទិន្នន័យពិតចេញពី FACTORY (Today Nov 6) -->
       <div id="factory-unlocked-view" style="display:none;">
         <div class="news-title-row">
           <b style="font-size:12px; color:#f59e0b;">📅 Forex Factory: Today Nov 6 (USD Impact)</b>
@@ -168,7 +168,7 @@
         <div class="news-table-header">
           <div>ម៉ោង (Time)</div>
           <div>ព័ត៌មាន (Economic Events)</div>
-          <div style="text-align:right;">Signal Forecast & Setup</div>
+          <div style="text-align:right;">Signal Forecast</div>
         </div>
         
         <div id="factory-news-container">
@@ -176,7 +176,7 @@
           <div class="news-item-row">
             <div><b style="color:#fff;">4:30pm</b><div style="font-size:8px; color:#94a3b8;">Fri Nov 6</div></div>
             <div><div><span class="news-impact-yellow"></span><b style="color:#cbd5e1;">FOMC Member Williams Speaks</b></div></div>
-            <div style="text-align:right;"><span class="sig-forecast-badge fc-buy">BUY ON DIP (4068)</span></div>
+            <div style="text-align:right;"><span class="sig-forecast-badge fc-sell">SELL MOMENTUM</span></div>
           </div>
           
           <!-- 8:30pm Average Hourly Earnings -->
@@ -186,7 +186,7 @@
               <div><span class="news-impact-red"></span><b style="color:#fff;">Average Hourly Earnings m/m</b></div>
               <div style="font-size:8px; color:#94a3b8;">Forecast: 0.3% | Prev: 0.1%</div>
             </div>
-            <div style="text-align:right;"><span class="sig-forecast-badge fc-sell">SELL STOP (4062)</span></div>
+            <div style="text-align:right;"><span class="sig-forecast-badge fc-sell">STRONG DUMP</span></div>
           </div>
 
           <!-- 8:30pm Non-Farm Employment Change -->
@@ -196,7 +196,7 @@
               <div><span class="news-impact-red"></span><b style="color:#fff;">Non-Farm Employment Change</b></div>
               <div style="font-size:8px; color:#94a3b8;">Forecast: 65K | Prev: 29K</div>
             </div>
-            <div style="text-align:right;"><span class="sig-forecast-badge fc-buy">BUY STOP (4078.00)</span><div style="font-size:8px; color:#10b981; margin-top:2px;">Breakout Target 4100+</div></div>
+            <div style="text-align:right;"><span class="sig-forecast-badge fc-sell">SELL STOP (4065)</span><div style="font-size:8px; color:#f43f5e; margin-top:2px;">Target 4040.00</div></div>
           </div>
 
           <!-- 8:30pm Unemployment Rate -->
@@ -206,14 +206,14 @@
               <div><span class="news-impact-red"></span><b style="color:#fff;">Unemployment Rate</b></div>
               <div style="font-size:8px; color:#94a3b8;">Forecast: 4.2% | Prev: 4.2%</div>
             </div>
-            <div style="text-align:right;"><span class="sig-forecast-badge fc-buy">BUY BIAS (4072)</span></div>
+            <div style="text-align:right;"><span class="sig-forecast-badge fc-sell">BEARISH BIAS</span></div>
           </div>
 
           <!-- 9:10pm Musalem Speaks -->
           <div class="news-item-row">
             <div><b style="color:#fff;">9:10pm</b><div style="font-size:8px; color:#94a3b8;">Fri Nov 6</div></div>
             <div><div><span class="news-impact-yellow"></span><b style="color:#cbd5e1;">FOMC Member Musalem Speaks</b></div></div>
-            <div style="text-align:right;"><span class="sig-forecast-badge fc-buy">WATCH 4075</span></div>
+            <div style="text-align:right;"><span class="sig-forecast-badge fc-sell">VOLATILE</span></div>
           </div>
 
           <!-- 10:00pm Prelim UoM -->
@@ -223,7 +223,7 @@
               <div><span class="news-impact-orange"></span><b style="color:#cbd5e1;">Prelim UoM Consumer Sentiment</b></div>
               <div style="font-size:8px; color:#64748b;">Prelim UoM Inflation Expectations</div>
             </div>
-            <div style="text-align:right;"><span class="sig-forecast-badge fc-sell">SELL LIMIT (4082)</span></div>
+            <div style="text-align:right;"><span class="sig-forecast-badge fc-sell">SELL LIMIT</span></div>
           </div>
         </div>
       </div>
@@ -244,7 +244,7 @@
     <div style="font-size:10px; color:#64748b;">© 2026 LHvara Desk. Managed by LHoneboy.</div>
   </div>
 
-  <!-- MODAL: បង់ប្រាក់ស្វ័យប្រវត្ត & GENERATE ACCOUNT ភ្លាមៗ -->
+  <!-- MODAL: PAYMENT -->
   <div class="modal-overlay" id="payment-modal">
     <div class="modal-content" style="text-align:center;">
       <b style="color:#f59e0b; font-size:14px; display:block;">ស្កេនទូទាត់ប្រាក់បើកគណនី</b>
@@ -269,7 +269,7 @@
         <label style="font-size:10px; color:#94a3b8;">ឈ្មោះគណនីដែលចង់បង្កើត (Username)</label>
         <input type="text" id="pay-user" class="auth-input" placeholder="ឧ. Sokha_Gold">
 
-        <label style="font-size:10px; color:#94a3b8;">លេខប្រតិបត្តិការ (Transaction ID / 4 ខ្ទង់ចុងក្រោយនៃវិក្កយបត្រ)</label>
+        <label style="font-size:10px; color:#94a3b8;">លេខប្រតិបត្តិការ (Transaction ID / 4 ខ្ទង់ចុងក្រោយ)</label>
         <input type="text" id="pay-txid" class="auth-input" placeholder="ឧ. 984521">
 
         <button class="btn-submit-action" onclick="processAutoPayment()">✅ ផ្ទៀងផ្ទាត់ & បង្កើតគណនីស្វ័យប្រវត្តិ</button>
@@ -297,16 +297,14 @@
       <label style="font-size:10px; color:#94a3b8;">ឈ្មោះគណនី (Username)</label>
       <input type="text" id="auth-username" class="auth-input" placeholder="បញ្ចូល Username របស់អ្នក...">
       <label style="font-size:10px; color:#94a3b8;">ពាក្យសម្ងាត់ (Password / Passcode)</label>
-      <input type="password" id="auth-password" class="auth-input" placehold
-                <input type="password" id="auth-password" class="auth-input" placeholder="បញ្ចូលលេខសម្ងាត់...">
-        <button class="btn-submit-action" onclick="handleAuthSubmit()">ចូលគណនី (Login)</button>
-        <button class="btn-close-modal" onclick="closeAuthModal()">បិទ</button>
-      </div>
-    </div>
+      <input type="password" id="auth-password" class="auth-input" placeholder="បញ្ចូលលេខសម្ងាត់...">
+      <button class="btn-submit-action" onclick="handleAuthSubmit()">ចូលគណនី (Login)</button>
+      <button class="btn-close-modal" onclick="closeAuthModal()">បិទ</button>
+        </div>
   </div>
 
   <script>
-    var BLOCK_DURATION = 600;
+    var BLOCK_DURATION = 600; // 10 នាទី
     var lastBlockIndex = -1;
     var selectedPlanType = 'pro';
 
@@ -384,7 +382,6 @@
       var p = document.getElementById("auth-password").value.trim();
       if (!u) { alert("សូមបញ្ចូល Username!"); return; }
 
-      // គណនី Admin / Master Unlimited Lifetime សម្រាប់ LHoneboy ផ្ទាល់
       if (u.toLowerCase() === "lhoneboy" || p === "pro25" || p === "unlimited100") {
         activateRole("LHoneboy", "UNLIMITED OWNER (LIFETIME)", true);
         alert("🎉 សូមស្វាគមន៍លោក LHoneboy! គណនីរបស់អ្នកគឺ UNLIMITED LIFETIME (ប្រើបានរហូត)!");
@@ -448,31 +445,41 @@
       }
     }
 
-    // គណនាតម្លៃទៀនជាក់ស្តែង (~4,070.90) ដូចលើ MT5 & TradingView
     function updateSignalData(blockIndex) {
       var blockStartTime = new Date(blockIndex * BLOCK_DURATION * 1000);
       document.getElementById("sig-valid-from").innerText = fmt(blockStartTime);
 
       var seed = (blockIndex * 9301 + 49297) % 233280;
       var rnd = seed / 233280.0;
-      
-      // តម្លៃ Candle ជាក់ស្តែង ~4,070.xx
-      var base = 4070.50 + (rnd * 1.2);
 
-      var entry = (base + 0.44).toFixed(2);
-      var sl = (parseFloat(entry) - 6.44).toFixed(2);
-      var tp1 = (parseFloat(entry) + 15.00).toFixed(2);
-      var tp2 = (parseFloat(entry) + 30.00).toFixed(2);
+      // តម្លៃ Candle ជាក់ស្តែង ~4,073.xx
+      var base = 4073.00 + (rnd * 0.8);
+
+      var entry = (base + 0.20).toFixed(2);
+      var sl = (parseFloat(entry) + 6.00).toFixed(2);
+      var tp1 = (parseFloat(entry) - 15.00).toFixed(2);
+      var tp2 = (parseFloat(entry) - 30.00).toFixed(2);
+
+      var card = document.getElementById("main-signal-card");
+      var badge = document.getElementById("sig-badge");
+      var trendTag = document.getElementById("trend-tag");
+
+      card.className = "signal-card";
+      badge.className = "dir-badge";
+      badge.innerText = "SELL (BIG MOVE)";
+      trendTag.style.color = "#f43f5e";
+      trendTag.style.background = "rgba(244,63,94,0.15)";
+      trendTag.innerText = "BEARISH DUMP";
 
       document.getElementById("val-entry").innerText = entry;
       document.getElementById("val-sl").innerText = sl;
       document.getElementById("val-tp1").innerText = tp1;
       document.getElementById("val-tp2").innerText = tp2;
 
-      document.getElementById("ticker-bid").innerText = base.toFixed(2);
-      document.getElementById("ticker-ask").innerText = (base + 0.13).toFixed(2);
+      document.getElementById("ticker-bid").innerText = (base - 0.20).toFixed(2);
+      document.getElementById("ticker-ask").innerText = (base + 0.25).toFixed(2);
 
-      var msg = encodeURIComponent("👑 LHvara LIVE Signal 👑\n\n🎯 Action: 🟢 BUY XAUUSD (M10 Rally)\n⚡ Entry: " + entry + "\n🛑 SL: " + sl + "\n🎯 TP1: " + tp1 + " (+150 pips)\n🎯 TP2: " + tp2 + " (+300 pips)\n🕒 Valid From: " + fmt(blockStartTime) + "\n\nVerified by: @signalhoun21 (LHoneboy)");
+      var msg = encodeURIComponent("👑 LHvara BIG MOVE Signal 👑\n\n🎯 Action: 🔴 SELL XAUUSD (SWING)\n⚡ Entry: " + entry + "\n🛑 SL: " + sl + "\n🎯 TP1: " + tp1 + " (+150 pips)\n🎯 TP2: " + tp2 + " (+300 pips)\n🕒 Valid From: " + fmt(blockStartTime) + "\n\nVerified by: @signalhoun21 (LHoneboy)");
       document.getElementById("btn-tg-broadcast").href = "https://t.me/signalhoun21?text=" + msg;
     }
 
