@@ -19,10 +19,8 @@
     
     /* SIGNAL CARD */
     .signal-card { background: #0d131f; border-radius: 14px; padding: 14px; border: 2px solid #ef4444; border-left: 6px solid #ef4444; margin-bottom: 14px; text-align: left; box-shadow: 0 0 15px rgba(239,68,68,0.2); }
-    .signal-card.buy-mode { border-color: #10b981; border-left-color: #10b981; box-shadow: 0 0 15px rgba(16,185,129,0.2); }
     .sig-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
     .dir-badge { font-size: 11px; font-weight: 900; padding: 3px 8px; border-radius: 4px; background: #f43f5e; color: #fff; }
-    .dir-badge.buy { background: #10b981; color: #000; }
     .timer-tag { background: #1e293b; color: #f59e0b; font-family: monospace; font-size: 11px; padding: 3px 6px; border-radius: 4px; font-weight: bold; }
     .price-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; background: #06080c; padding: 8px 6px; border-radius: 8px; text-align: center; margin-bottom: 8px; border: 1px solid #1e293b; }
     .p-lbl { font-size: 8.5px; color: #64748b; font-weight: bold; margin-bottom: 2px; }
@@ -32,13 +30,14 @@
     .sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     .btn-sub { text-align: center; padding: 6px; border-radius: 6px; font-size: 10px; font-weight: bold; text-decoration: none; color: #fff; background: #1e293b; border: 1px solid #334155; }
 
-    /* FOREX FACTORY DYNAMIC STYLES */
-    .news-title-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    /* FOREX FACTORY TABS & STYLES */
+    .tab-bar { display: flex; gap: 6px; margin-bottom: 8px; }
+    .tab-btn { background: #06080c; border: 1px solid #334155; color: #94a3b8; font-size: 10.5px; font-weight: bold; padding: 5px 10px; border-radius: 6px; cursor: pointer; }
+    .tab-btn.active { background: #1e293b; color: #f59e0b; border-color: #f59e0b; }
     .news-table-header { display: grid; grid-template-columns: 2fr 3.5fr 2.5fr; background: #06080c; padding: 6px 8px; border-radius: 6px; font-size: 9.5px; color: #64748b; font-weight: bold; margin-bottom: 6px; }
     .news-item-row { display: grid; grid-template-columns: 2fr 3.5fr 2.5fr; background: #090e17; border: 1px solid #1e293b; padding: 8px; border-radius: 6px; font-size: 10px; align-items: center; margin-bottom: 6px; }
     .news-impact-red { width: 8px; height: 8px; background: #ef4444; border-radius: 2px; display: inline-block; margin-right: 4px; }
     .news-impact-yellow { width: 8px; height: 8px; background: #eab308; border-radius: 2px; display: inline-block; margin-right: 4px; }
-    .news-impact-orange { width: 8px; height: 8px; background: #f97316; border-radius: 2px; display: inline-block; margin-right: 4px; }
     .sig-forecast-badge { display: inline-block; font-size: 8.5px; font-weight: bold; padding: 2px 5px; border-radius: 4px; text-align: center; }
     .fc-sell { background: rgba(244, 63, 94, 0.2); color: #f43f5e; border: 1px solid #f43f5e; }
     .fc-buy { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid #10b981; }
@@ -145,7 +144,7 @@
       </a>
     </div>
 
-    <!-- FOREX FACTORY (AUTO DYNAMIC DATE & EVENTS) -->
+    <!-- FOREX FACTORY (EXACT NOV 9 & NOV 10) -->
     <div class="card" id="forex-factory-wrapper" style="border-color: rgba(245, 158, 11, 0.4);">
       
       <div id="factory-locked-view" class="pro-lock-box">
@@ -162,16 +161,22 @@
 
       <div id="factory-unlocked-view" style="display:none;">
         <div class="news-title-row">
-          <b id="factory-date-header" style="font-size:12px; color:#f59e0b;">📅 Forex Factory Live Feed</b>
+          <b style="font-size:12px; color:#f59e0b;">📅 Forex Factory: Nov 9 - Nov 10 Feed</b>
           <span style="color:#10b981; font-size:9.5px; font-weight:bold;">👑 UNLOCKED</span>
         </div>
+
+        <!-- TABS សម្រាប់ជ្រើសរើសមើល ថ្ងៃទី ៩ ឬ ថ្ងៃទី ១០ -->
+        <div class="tab-bar">
+          <button class="tab-btn active" id="tab-nov9" onclick="switchNewsTab('nov9')">Mon Nov 9</button>
+          <button class="tab-btn" id="tab-nov10" onclick="switchNewsTab('nov10')">Tue Nov 10 (CPI 🔥)</button>
+        </div>
+
         <div class="news-table-header">
           <div>ម៉ោង (Time)</div>
           <div>ព័ត៌មាន (Economic Events)</div>
           <div style="text-align:right;">Signal Forecast</div>
         </div>
         
-        <!-- ប្រអប់នេះនឹងផ្លាស់ប្តូរទិន្នន័យស្វ័យប្រវត្តិតាម JS -->
         <div id="factory-news-container"></div>
       </div>
     </div>
@@ -254,6 +259,7 @@
     var BLOCK_DURATION = 600; // 10 នាទី
     var lastBlockIndex = -1;
     var selectedPlanType = 'pro';
+    var activeNewsTab = 'nov9';
 
     var savedUser = localStorage.getItem("lh_user");
     var savedRole = localStorage.getItem("lh_role");
@@ -325,9 +331,9 @@
     }
 
     function handleAuthSubmit() {
-      var u = document.getElementById("auth-username").value.trim();
+           var u = document.getElementById("auth-username").value.trim();
       var p = document.getElementById("auth-password").value.trim();
-            if (!u) { alert("សូមបញ្ចូល Username!"); return; }
+      if (!u) { alert("សូមបញ្ចូល Username!"); return; }
 
       if (u.toLowerCase() === "lhoneboy" || p === "pro25" || p === "unlimited100") {
         activateRole("LHoneboy", "UNLIMITED OWNER (LIFETIME)", true);
@@ -376,62 +382,38 @@
       return (h < 10 ? '0' + h : h) + ':' + (m < 10 ? '0' + m : m) + ' ' + ap;
     }
 
-    function updateDynamicForexFactory() {
-      var now = new Date();
-      var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-      var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-      var dayName = days[now.getDay()];
-      var monthName = months[now.getMonth()];
-      var dateNum = now.getDate();
+    // ទិន្នន័យពិតប្រាកដតាម FOREX FACTORY ថ្ងៃទី ៩ និងទី ១០
+    var newsNov9 = [
+      { time: "9:50pm", title: "USD FOMC Member Bowman Speaks", impact: "yellow", fc: "RANGE BIAS", bias: "fc-sell" },
+      { time: "10:00pm", title: "USD Final Wholesale Inventories m/m", impact: "yellow", fc: "Forecast: 0.6% | Prev: 0.6%", bias: "fc-buy" },
+      { time: "Tentative", title: "USD FOMC Member Goolsbee Speaks", impact: "yellow", fc: "VOLATILE", bias: "fc-sell" }
+    ];
 
-      document.getElementById("factory-date-header").innerText = "📅 Forex Factory: Today " + monthName + " " + dateNum + " (" + dayName + ")";
+    var newsNov10 = [
+      { time: "12:15am", title: "USD FOMC Member Barkin Speaks", impact: "yellow", fc: "SPEECH BIAS", bias: "fc-sell" },
+      { time: "4:00pm", title: "USD FOMC Member Waller Speaks", impact: "yellow", fc: "MONITOR", bias: "fc-buy" },
+      { time: "8:15pm", title: "USD ADP Weekly Employment Change", impact: "yellow", fc: "PRE-CPI DATA", bias: "fc-buy" },
+      { time: "8:30pm", title: "USD Core CPI m/m (High Impact 🔥)", impact: "red", fc: "Forecast: 0.3% | Prev: 0.3%", bias: "fc-sell" },
+      { time: "8:30pm", title: "USD CPI m/m (High Impact 🔥)", impact: "red", fc: "SELL STOP (4060)", bias: "fc-sell" },
+      { time: "10:15pm", title: "USD FOMC Member Logan Speaks", impact: "yellow", fc: "POST-CPI IMPACT", bias: "fc-sell" }
+    ];
 
-      var schedule = [
-        [
-          { time: "08:30 PM", title: "USD Loan Officer Survey", impact: "yellow", fc: "RANGE BIAS", bias: "fc-buy" },
-          { time: "09:00 PM", title: "USD Consumer Inflation Expectations", impact: "orange", fc: "HOLD WAIT", bias: "fc-sell" },
-          { time: "10:30 PM", title: "USD Treasury Bond Auction", impact: "yellow", fc: "VOLATILE", bias: "fc-sell" }
-        ],
-        [
-          { time: "07:30 PM", title: "USD Trade Balance", impact: "orange", fc: "SELL MOMENTUM", bias: "fc-sell" },
-          { time: "09:00 PM", title: "USD IBD/TIPP Economic Optimism", impact: "yellow", fc: "RANGE BIAS", bias: "fc-buy" },
-          { time: "10:00 PM", title: "USD FOMC Member Speech", impact: "red", fc: "SELL STOP (4065)", bias: "fc-sell" }
-        ],
-        [
-          { time: "07:30 PM", title: "USD Building Permits m/m", impact: "orange", fc: "BEARISH BIAS", bias: "fc-sell" },
-          { time: "09:30 PM", title: "USD Crude Oil Inventories", impact: "red", fc: "BUY STOP (4085)", bias: "fc-buy" },
-          { time: "01:00 AM", title: "USD 10-y Bond Auction", impact: "yellow", fc: "HIGH SPREAD", bias: "fc-sell" }
-        ],
-        [
-          { time: "07:30 PM", title: "USD Unemployment Claims (ធំ)", impact: "red", fc: "STRONG DUMP", bias: "fc-sell" },
-          { time: "07:30 PM", title: "USD Core PPI m/m", impact: "red", fc: "SELL STOP (4060)", bias: "fc-sell" },
-          { time: "09:30 PM", title: "USD Natural Gas Storage", impact: "yellow", fc: "WATCH LEVEL", bias: "fc-buy" }
-        ],
-        [
-          { time: "04:30 PM", title: "FOMC Member Williams Speaks", impact: "yellow", fc: "SELL MOMENTUM", bias: "fc-sell" },
-          { time: "08:30 PM", title: "Average Hourly Earnings m/m", impact: "red", fc: "STRONG DUMP", bias: "fc-sell" },
-          { time: "08:30 PM", title: "Non-Farm Employment Change (NFP)", impact: "red", fc: "SELL STOP (4065)", bias: "fc-sell" },
-          { time: "08:30 PM", title: "Unemployment Rate", impact: "red", fc: "BEARISH BIAS", bias: "fc-sell" },
-          { time: "10:00 PM", title: "Prelim UoM Consumer Sentiment", impact: "orange", fc: "SELL LIMIT", bias: "fc-sell" }
-        ],
-        [
-          { time: "04:00 AM", title: "Forex Market Weekly Close", impact: "yellow", fc: "MARKET CLOSED", bias: "fc-sell" },
-          { time: "All Day", title: "CFTC Gold Speculative Net Positions", impact: "orange", fc: "WEEKLY REPORT", bias: "fc-buy" }
-        ],
-        [
-          { time: "05:00 PM", title: "Market Open Preparation", impact: "yellow", fc: "MONITOR GAP", bias: "fc-buy" },
-          { time: "All Day", title: "Weekly Economic Calendar Setup", impact: "orange", fc: "SETUP BIAS", bias: "fc-sell" }
-        ]
-      ];
+    function switchNewsTab(tab) {
+      activeNewsTab = tab;
+      document.getElementById("tab-nov9").className = tab === 'nov9' ? 'tab-btn active' : 'tab-btn';
+      document.getElementById("tab-nov10").className = tab === 'nov10' ? 'tab-btn active' : 'tab-btn';
+      renderFactoryNews();
+    }
 
-      var dayIndex = now.getDay();
-      var dayEvents = schedule[dayIndex === 0 ? 6 : dayIndex - 1] || schedule[4];
-
+    function renderFactoryNews() {
+      var list = activeNewsTab === 'nov9' ? newsNov9 : newsNov10;
+      var dayLabel = activeNewsTab === 'nov9' ? 'Mon Nov 9' : 'Tue Nov 10';
       var html = "";
-      dayEvents.forEach(function(item) {
-        var impactClass = item.impact === "red" ? "news-impact-red" : (item.impact === "orange" ? "news-impact-orange" : "news-impact-yellow");
+
+      list.forEach(function(item) {
+        var impactClass = item.impact === "red" ? "news-impact-red" : "news-impact-yellow";
         html += '<div class="news-item-row">' +
-          '<div><b style="color:#fff;">' + item.time + '</b><div style="font-size:8px; color:#94a3b8;">' + dayName + '</div></div>' +
+          '<div><b style="color:#fff;">' + item.time + '</b><div style="font-size:8px; color:#94a3b8;">' + dayLabel + '</div></div>' +
           '<div><div><span class="' + impactClass + '"></span><b style="color:#cbd5e1;">' + item.title + '</b></div></div>' +
           '<div style="text-align:right;"><span class="sig-forecast-badge ' + item.bias + '">' + item.fc + '</span></div>' +
         '</div>';
@@ -453,7 +435,6 @@
       if (currentBlockIndex !== lastBlockIndex) {
         lastBlockIndex = currentBlockIndex;
         updateSignalData(currentBlockIndex);
-        updateDynamicForexFactory();
       }
     }
 
@@ -493,7 +474,7 @@
       document.getElementById("btn-tg-broadcast").href = "https://t.me/signalhoun21?text=" + msg;
     }
 
-    updateDynamicForexFactory();
+    renderFactoryNews();
     setInterval(sync10MinSignal, 1000);
     sync10MinSignal();
   </script>
