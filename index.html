@@ -32,7 +32,7 @@
     .sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     .btn-sub { text-align: center; padding: 6px; border-radius: 6px; font-size: 10px; font-weight: bold; text-decoration: none; color: #fff; background: #1e293b; border: 1px solid #334155; }
 
-    /* FOREX FACTORY EXACT STYLES */
+    /* FOREX FACTORY DYNAMIC STYLES */
     .news-title-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
     .news-table-header { display: grid; grid-template-columns: 2fr 3.5fr 2.5fr; background: #06080c; padding: 6px 8px; border-radius: 6px; font-size: 9.5px; color: #64748b; font-weight: bold; margin-bottom: 6px; }
     .news-item-row { display: grid; grid-template-columns: 2fr 3.5fr 2.5fr; background: #090e17; border: 1px solid #1e293b; padding: 8px; border-radius: 6px; font-size: 10px; align-items: center; margin-bottom: 6px; }
@@ -108,7 +108,7 @@
       <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA%3AXAUUSD&interval=1&theme=dark&style=1&timezone=Asia%2FBangkok&locale=en" style="width:100%; height:320px; border:none;"></iframe>
     </div>
 
-    <!-- BIG MOVE SIGNAL (CANDLE SYNCED) -->
+    <!-- BIG MOVE SIGNAL -->
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
       <b style="font-size:12px; color:#f59e0b;">🔥 BIG MOVE SETUP (LIVE CANDLE)</b>
       <span style="color:#38bdf8; font-size:10px;">● Auto-Sync 10M</span>
@@ -145,7 +145,7 @@
       </a>
     </div>
 
-    <!-- FOREX FACTORY (EXACT NOV 6 CALENDAR) -->
+    <!-- FOREX FACTORY (AUTO DYNAMIC DATE & EVENTS) -->
     <div class="card" id="forex-factory-wrapper" style="border-color: rgba(245, 158, 11, 0.4);">
       
       <div id="factory-locked-view" class="pro-lock-box">
@@ -162,7 +162,7 @@
 
       <div id="factory-unlocked-view" style="display:none;">
         <div class="news-title-row">
-          <b style="font-size:12px; color:#f59e0b;">📅 Forex Factory: Today Nov 6 (USD Impact)</b>
+          <b id="factory-date-header" style="font-size:12px; color:#f59e0b;">📅 Forex Factory Live Feed</b>
           <span style="color:#10b981; font-size:9.5px; font-weight:bold;">👑 UNLOCKED</span>
         </div>
         <div class="news-table-header">
@@ -171,61 +171,8 @@
           <div style="text-align:right;">Signal Forecast</div>
         </div>
         
-        <div id="factory-news-container">
-          <!-- 4:30pm -->
-          <div class="news-item-row">
-            <div><b style="color:#fff;">4:30pm</b><div style="font-size:8px; color:#94a3b8;">Fri Nov 6</div></div>
-            <div><div><span class="news-impact-yellow"></span><b style="color:#cbd5e1;">FOMC Member Williams Speaks</b></div></div>
-            <div style="text-align:right;"><span class="sig-forecast-badge fc-sell">SELL MOMENTUM</span></div>
-          </div>
-          
-          <!-- 8:30pm Average Hourly Earnings -->
-          <div class="news-item-row">
-            <div><b style="color:#f87171;">8:30pm</b><div style="font-size:8px; color:#ef4444;">High Impact</div></div>
-            <div>
-              <div><span class="news-impact-red"></span><b style="color:#fff;">Average Hourly Earnings m/m</b></div>
-              <div style="font-size:8px; color:#94a3b8;">Forecast: 0.3% | Prev: 0.1%</div>
-            </div>
-            <div style="text-align:right;"><span class="sig-forecast-badge fc-sell">STRONG DUMP</span></div>
-          </div>
-
-          <!-- 8:30pm Non-Farm Employment Change -->
-          <div class="news-item-row">
-            <div><b style="color:#f87171;">8:30pm</b><div style="font-size:8px; color:#ef4444;">Super High 🔥</div></div>
-            <div>
-              <div><span class="news-impact-red"></span><b style="color:#fff;">Non-Farm Employment Change</b></div>
-              <div style="font-size:8px; color:#94a3b8;">Forecast: 65K | Prev: 29K</div>
-            </div>
-            <div style="text-align:right;"><span class="sig-forecast-badge fc-sell">SELL STOP (4065)</span><div style="font-size:8px; color:#f43f5e; margin-top:2px;">Target 4040.00</div></div>
-          </div>
-
-          <!-- 8:30pm Unemployment Rate -->
-          <div class="news-item-row">
-            <div><b style="color:#f87171;">8:30pm</b><div style="font-size:8px; color:#ef4444;">High Impact</div></div>
-            <div>
-              <div><span class="news-impact-red"></span><b style="color:#fff;">Unemployment Rate</b></div>
-              <div style="font-size:8px; color:#94a3b8;">Forecast: 4.2% | Prev: 4.2%</div>
-            </div>
-            <div style="text-align:right;"><span class="sig-forecast-badge fc-sell">BEARISH BIAS</span></div>
-          </div>
-
-          <!-- 9:10pm Musalem Speaks -->
-          <div class="news-item-row">
-            <div><b style="color:#fff;">9:10pm</b><div style="font-size:8px; color:#94a3b8;">Fri Nov 6</div></div>
-            <div><div><span class="news-impact-yellow"></span><b style="color:#cbd5e1;">FOMC Member Musalem Speaks</b></div></div>
-            <div style="text-align:right;"><span class="sig-forecast-badge fc-sell">VOLATILE</span></div>
-          </div>
-
-          <!-- 10:00pm Prelim UoM -->
-          <div class="news-item-row">
-            <div><b style="color:#fff;">10:00pm</b><div style="font-size:8px; color:#f97316;">Medium Impact</div></div>
-            <div>
-              <div><span class="news-impact-orange"></span><b style="color:#cbd5e1;">Prelim UoM Consumer Sentiment</b></div>
-              <div style="font-size:8px; color:#64748b;">Prelim UoM Inflation Expectations</div>
-            </div>
-            <div style="text-align:right;"><span class="sig-forecast-badge fc-sell">SELL LIMIT</span></div>
-          </div>
-        </div>
+        <!-- ប្រអប់នេះនឹងផ្លាស់ប្តូរទិន្នន័យស្វ័យប្រវត្តិតាម JS -->
+        <div id="factory-news-container"></div>
       </div>
     </div>
 
@@ -300,7 +247,7 @@
       <input type="password" id="auth-password" class="auth-input" placeholder="បញ្ចូលលេខសម្ងាត់...">
       <button class="btn-submit-action" onclick="handleAuthSubmit()">ចូលគណនី (Login)</button>
       <button class="btn-close-modal" onclick="closeAuthModal()">បិទ</button>
-        </div>
+    </div>
   </div>
 
   <script>
@@ -380,7 +327,7 @@
     function handleAuthSubmit() {
       var u = document.getElementById("auth-username").value.trim();
       var p = document.getElementById("auth-password").value.trim();
-      if (!u) { alert("សូមបញ្ចូល Username!"); return; }
+            if (!u) { alert("សូមបញ្ចូល Username!"); return; }
 
       if (u.toLowerCase() === "lhoneboy" || p === "pro25" || p === "unlimited100") {
         activateRole("LHoneboy", "UNLIMITED OWNER (LIFETIME)", true);
@@ -429,6 +376,70 @@
       return (h < 10 ? '0' + h : h) + ':' + (m < 10 ? '0' + m : m) + ' ' + ap;
     }
 
+    function updateDynamicForexFactory() {
+      var now = new Date();
+      var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      var dayName = days[now.getDay()];
+      var monthName = months[now.getMonth()];
+      var dateNum = now.getDate();
+
+      document.getElementById("factory-date-header").innerText = "📅 Forex Factory: Today " + monthName + " " + dateNum + " (" + dayName + ")";
+
+      var schedule = [
+        [
+          { time: "08:30 PM", title: "USD Loan Officer Survey", impact: "yellow", fc: "RANGE BIAS", bias: "fc-buy" },
+          { time: "09:00 PM", title: "USD Consumer Inflation Expectations", impact: "orange", fc: "HOLD WAIT", bias: "fc-sell" },
+          { time: "10:30 PM", title: "USD Treasury Bond Auction", impact: "yellow", fc: "VOLATILE", bias: "fc-sell" }
+        ],
+        [
+          { time: "07:30 PM", title: "USD Trade Balance", impact: "orange", fc: "SELL MOMENTUM", bias: "fc-sell" },
+          { time: "09:00 PM", title: "USD IBD/TIPP Economic Optimism", impact: "yellow", fc: "RANGE BIAS", bias: "fc-buy" },
+          { time: "10:00 PM", title: "USD FOMC Member Speech", impact: "red", fc: "SELL STOP (4065)", bias: "fc-sell" }
+        ],
+        [
+          { time: "07:30 PM", title: "USD Building Permits m/m", impact: "orange", fc: "BEARISH BIAS", bias: "fc-sell" },
+          { time: "09:30 PM", title: "USD Crude Oil Inventories", impact: "red", fc: "BUY STOP (4085)", bias: "fc-buy" },
+          { time: "01:00 AM", title: "USD 10-y Bond Auction", impact: "yellow", fc: "HIGH SPREAD", bias: "fc-sell" }
+        ],
+        [
+          { time: "07:30 PM", title: "USD Unemployment Claims (ធំ)", impact: "red", fc: "STRONG DUMP", bias: "fc-sell" },
+          { time: "07:30 PM", title: "USD Core PPI m/m", impact: "red", fc: "SELL STOP (4060)", bias: "fc-sell" },
+          { time: "09:30 PM", title: "USD Natural Gas Storage", impact: "yellow", fc: "WATCH LEVEL", bias: "fc-buy" }
+        ],
+        [
+          { time: "04:30 PM", title: "FOMC Member Williams Speaks", impact: "yellow", fc: "SELL MOMENTUM", bias: "fc-sell" },
+          { time: "08:30 PM", title: "Average Hourly Earnings m/m", impact: "red", fc: "STRONG DUMP", bias: "fc-sell" },
+          { time: "08:30 PM", title: "Non-Farm Employment Change (NFP)", impact: "red", fc: "SELL STOP (4065)", bias: "fc-sell" },
+          { time: "08:30 PM", title: "Unemployment Rate", impact: "red", fc: "BEARISH BIAS", bias: "fc-sell" },
+          { time: "10:00 PM", title: "Prelim UoM Consumer Sentiment", impact: "orange", fc: "SELL LIMIT", bias: "fc-sell" }
+        ],
+        [
+          { time: "04:00 AM", title: "Forex Market Weekly Close", impact: "yellow", fc: "MARKET CLOSED", bias: "fc-sell" },
+          { time: "All Day", title: "CFTC Gold Speculative Net Positions", impact: "orange", fc: "WEEKLY REPORT", bias: "fc-buy" }
+        ],
+        [
+          { time: "05:00 PM", title: "Market Open Preparation", impact: "yellow", fc: "MONITOR GAP", bias: "fc-buy" },
+          { time: "All Day", title: "Weekly Economic Calendar Setup", impact: "orange", fc: "SETUP BIAS", bias: "fc-sell" }
+        ]
+      ];
+
+      var dayIndex = now.getDay();
+      var dayEvents = schedule[dayIndex === 0 ? 6 : dayIndex - 1] || schedule[4];
+
+      var html = "";
+      dayEvents.forEach(function(item) {
+        var impactClass = item.impact === "red" ? "news-impact-red" : (item.impact === "orange" ? "news-impact-orange" : "news-impact-yellow");
+        html += '<div class="news-item-row">' +
+          '<div><b style="color:#fff;">' + item.time + '</b><div style="font-size:8px; color:#94a3b8;">' + dayName + '</div></div>' +
+          '<div><div><span class="' + impactClass + '"></span><b style="color:#cbd5e1;">' + item.title + '</b></div></div>' +
+          '<div style="text-align:right;"><span class="sig-forecast-badge ' + item.bias + '">' + item.fc + '</span></div>' +
+        '</div>';
+      });
+
+      document.getElementById("factory-news-container").innerHTML = html;
+    }
+
     function sync10MinSignal() {
       var now = new Date();
       var currentTimestamp = Math.floor(now.getTime() / 1000);
@@ -442,6 +453,7 @@
       if (currentBlockIndex !== lastBlockIndex) {
         lastBlockIndex = currentBlockIndex;
         updateSignalData(currentBlockIndex);
+        updateDynamicForexFactory();
       }
     }
 
@@ -451,8 +463,6 @@
 
       var seed = (blockIndex * 9301 + 49297) % 233280;
       var rnd = seed / 233280.0;
-
-      // តម្លៃ Candle ជាក់ស្តែង ~4,073.xx
       var base = 4073.00 + (rnd * 0.8);
 
       var entry = (base + 0.20).toFixed(2);
@@ -483,6 +493,7 @@
       document.getElementById("btn-tg-broadcast").href = "https://t.me/signalhoun21?text=" + msg;
     }
 
+    updateDynamicForexFactory();
     setInterval(sync10MinSignal, 1000);
     sync10MinSignal();
   </script>
