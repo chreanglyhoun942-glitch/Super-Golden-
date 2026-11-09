@@ -73,7 +73,7 @@
 
   <!-- TICKER -->
   <div class="top-bar">
-    <span>XAUUSD: SELL: <b id="ticker-bid" style="color:#f43f5e">4,073.00</b> BUY: <b id="ticker-ask" style="color:#10b981">4,073.45</b></span>
+    <span>XAUUSD &bull; LIVE (TradingView)</span>
     <span id="user-badge" style="color:#94a3b8; font-size:10px;">● Free Member</span>
   </div>
 
@@ -107,10 +107,21 @@
       <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA%3AXAUUSD&interval=1&theme=dark&style=1&timezone=Asia%2FBangkok&locale=en" style="width:100%; height:320px; border:none;"></iframe>
     </div>
 
-    <!-- BIG MOVE SIGNAL -->
+    <!-- LIVE PRICE + REAL TECHNICAL SIGNAL (TradingView) -->
+    <div class="card" style="padding:4px;">
+      <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>{"symbol":"OANDA:XAUUSD","width":"100%","colorTheme":"dark","isTransparent":true,"locale":"en"}</script></div>
+    </div>
+    <div class="card" style="padding:4px;">
+      <b style="font-size:11px;color:#f59e0b;display:block;padding:6px 8px 0;">Technical Signal (live indicators)</b>
+      <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>{"interval":"15m","width":"100%","isTransparent":true,"height":380,"symbol":"OANDA:XAUUSD","showIntervalTabs":true,"displayMode":"single","locale":"en","colorTheme":"dark"}</script></div>
+    </div>
+
+    <!-- OWNER SIGNAL -->
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-      <b style="font-size:12px; color:#f59e0b;">🔥 BIG MOVE SETUP (LIVE CANDLE)</b>
-      <span style="color:#38bdf8; font-size:10px;">● Auto-Sync 10M</span>
+      <b style="font-size:12px; color:#f59e0b;">🔥 LATEST SETUP</b>
+      <span style="color:#38bdf8; font-size:10px;">● Owner setup</span>
     </div>
 
     <div class="signal-card" id="main-signal-card">
@@ -129,8 +140,8 @@
       <div class="price-grid-4">
         <div><div class="p-lbl">ENTRY</div><div class="p-val" id="val-entry" style="color:#fff;">4073.20</div></div>
         <div><div class="p-lbl">STOP (SL)</div><div class="p-val" id="val-sl" style="color:#f43f5e;">4079.20</div></div>
-        <div><div class="p-lbl">TP 1 (150p)</div><div class="p-val" id="val-tp1" style="color:#10b981;">4058.20</div></div>
-        <div><div class="p-lbl">TP 2 (300p)</div><div class="p-val" id="val-tp2" style="color:#10b981;">4043.20</div></div>
+        <div><div class="p-lbl">TP 1</div><div class="p-val" id="val-tp1" style="color:#10b981;">4058.20</div></div>
+        <div><div class="p-lbl">TP 2</div><div class="p-val" id="val-tp2" style="color:#10b981;">4043.20</div></div>
       </div>
 
       <div class="profit-target-box">
@@ -213,29 +224,15 @@
       </div>
 
       <div class="qr-container">
-        <img id="qr-img" src="21739.jpg" alt="Bakong QR">
+        <img id="qr-img" src="payment-qr.jpg" alt="Bakong QR">
         <div id="qr-price-lbl" style="color:#000; font-size:11px; font-weight:900; margin-top:4px;">LHoneboy • $25.00 (១ខែ)</div>
       </div>
 
       <div id="pay-input-section" style="text-align:left; margin-top:8px;">
-        <label style="font-size:10px; color:#94a3b8;">ឈ្មោះគណនីដែលចង់បង្កើត (Username)</label>
-        <input type="text" id="pay-user" class="auth-input" placeholder="ឧ. Sokha_Gold">
-
-        <label style="font-size:10px; color:#94a3b8;">លេខប្រតិបត្តិការ (Transaction ID / 4 ខ្ទង់ចុងក្រោយ)</label>
-        <input type="text" id="pay-txid" class="auth-input" placeholder="ឧ. 984521">
-
-        <button class="btn-submit-action" onclick="processAutoPayment()">✅ ផ្ទៀងផ្ទាត់ & បង្កើតគណនីស្វ័យប្រវត្តិ</button>
-      </div>
-
-      <div id="pay-success-section" class="success-box" style="display:none;">
-        <b style="color:#10b981; font-size:12px;">🎉 ការទូទាត់ប្រាក់ជោគជ័យ!</b>
-        <p style="font-size:10px; color:#cbd5e1; margin-top:2px;">នេះជាព័ត៌មានគណនីរបស់អ្នក សូមចំណាំទុក៖</p>
-        
-        <div class="cred-item">Username: <b id="out-user" style="color:#fff;"></b></div>
-        <div class="cred-item">Password: <b id="out-pass" style="color:#f59e0b;"></b></div>
-        <div class="cred-item">កាលកំណត់: <b id="out-expiry" style="color:#10b981;"></b></div>
-
-        <button class="btn-submit-action" style="background:#10b981; margin-top:8px;" onclick="instantLoginAfterPay()">ចូលប្រើប្រាស់ឥឡូវនេះ</button>
+        <p style="font-size:10px; color:#cbd5e1; margin-bottom:6px;">១) ស្កេនបង់ប្រាក់ &nbsp;២) ផ្ញើរូបថតការទូទាត់ទៅ <a href="https://t.me/signalhoun21" target="_blank" style="color:#38bdf8;">Telegram @signalhoun21</a> &nbsp;៣) ទទួលបាន Activation Code ក្រោយផ្ទៀងផ្ទាត់ ហើយបញ្ចូលខាងក្រោម</p>
+        <label style="font-size:10px; color:#94a3b8;">Activation Code</label>
+        <input type="text" id="pay-code" class="auth-input" placeholder="ឧ. P-1A2B3C4D" autocomplete="off">
+        <button class="btn-submit-action" onclick="processActivation()">✅ Activate Plan</button>
       </div>
 
       <button class="btn-close-modal" onclick="closePaymentModal()">បិទផ្ទាំងនេះ</button>
@@ -250,136 +247,86 @@
       <input type="text" id="auth-username" class="auth-input" placeholder="បញ្ចូល Username របស់អ្នក...">
       <label style="font-size:10px; color:#94a3b8;">ពាក្យសម្ងាត់ (Password / Passcode)</label>
       <input type="password" id="auth-password" class="auth-input" placeholder="បញ្ចូលលេខសម្ងាត់...">
-      <button class="btn-submit-action" onclick="handleAuthSubmit()">ចូលគណនី (Login)</button>
+      <button class="btn-submit-action" onclick="handleLogin()">ចូលគណនី (Login)</button>
+      <button class="btn-submit-action" style="background:#334155;margin-top:6px;" onclick="handleRegister()">បង្កើតគណនីថ្មី (Free)</button>
       <button class="btn-close-modal" onclick="closeAuthModal()">បិទ</button>
     </div>
   </div>
 
   <script>
-    var BLOCK_DURATION = 600; // 10 នាទី
-    var lastBlockIndex = -1;
+    // ===== OWNER: edit this to post a setup (set to null to hide) =====
+    var SIGNAL = null;
+    // Example: SIGNAL = { dir:"SELL", entry:4073.20, sl:4079.20, tp1:4058.20, tp2:4043.20, validFrom:"10 Nov 20:30", note:"After CPI" };
+
+    var PLANS = { pro:{label:"PRO (1-MONTH)",days:30}, unlimited:{label:"UNLIMITED (1-YEAR)",days:365}, owner:{label:"OWNER (LIFETIME)",days:null} };
+    var CH = {"12t1gwu7vt3": "pro", "urhiji385g": "pro", "ii4v6i5vz9": "pro", "xyn10reb0": "pro", "1d5bkw3li37": "pro", "pw6g2v16lp": "pro", "hk8gcxmkui": "pro", "lvdb094t1f": "pro", "22ts69nvsi6": "pro", "fppv2lw02e": "pro", "1pej5pogrlc": "unlimited", "1vpw9hdhj1u": "unlimited", "1sdm2b4asnu": "unlimited", "1uqthqpd34p": "unlimited", "1izcewkz2ds": "unlimited", "sdfij9uexj": "unlimited", "5o9xqj6hqn": "unlimited", "1v6nxgvlcql": "unlimited", "1zl0dwv4elc": "unlimited", "17me53yvhbc": "unlimited", "mmxywumwep": "owner"};
     var selectedPlanType = 'pro';
     var activeNewsTab = 'nov9';
 
-    var savedUser = localStorage.getItem("lh_user");
-    var savedRole = localStorage.getItem("lh_role");
+    function c53(s,seed){seed=seed||0;var h1=0xdeadbeef^seed,h2=0x41c6ce57^seed;for(var i=0,ch;i<s.length;i++){ch=s.charCodeAt(i);h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677)}h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);return(4294967296*(2097151&h2)+(h1>>>0)).toString(36)}
+    function getUsers(){try{return JSON.parse(localStorage.getItem("lh_users")||"{}")}catch(e){return {}}}
+    function putUsers(u){localStorage.setItem("lh_users",JSON.stringify(u))}
+    var me = localStorage.getItem("lh_me");
 
-    if (savedUser) {
-      if (savedRole === "unlimited_owner") {
-        activateRole(savedUser, "UNLIMITED OWNER (LIFETIME)", true);
-      } else if (savedRole === "unlimited_year") {
-        activateRole(savedUser, "UNLIMITED 1-YEAR", true);
-      } else if (savedRole === "pro_month") {
-        activateRole(savedUser, "PRO MEMBER (1-MONTH)", true);
-      } else {
-        setFreeMember(savedUser);
-      }
+    function roleOf(name){
+      var u=getUsers()[name]; if(!u||!u.code) return "free";
+      var p=CH[u.code]; if(!p||p!==u.plan) return "free";
+      var d=PLANS[p].days; if(d && Date.now()>u.at+d*864e5) return "free";
+      return p;
+    }
+    function applyUI(){
+      var role = me ? roleOf(me) : "guest";
+      var badge=document.getElementById("user-badge"), btn=document.getElementById("btn-auth-modal");
+      var paid = role==="pro"||role==="unlimited"||role==="owner";
+      badge.textContent = me ? ((paid?"👑 ":"👤 ")+me+" ("+(paid?PLANS[role].label:"Free Member")+")") : "● Free Member";
+      btn.textContent = me ? ((paid?"👑 ":"👤 ")+me) : "🔑 Login / គណនី";
+      document.getElementById("factory-locked-view").style.display = paid ? "none" : "block";
+      document.getElementById("factory-unlocked-view").style.display = paid ? "block" : "none";
     }
 
-    function openAuthModal() { document.getElementById("auth-modal").style.display = "flex"; }
-    function closeAuthModal() { document.getElementById("auth-modal").style.display = "none"; }
-    function openPaymentModal() { document.getElementById("payment-modal").style.display = "flex"; }
-    function closePaymentModal() { document.getElementById("payment-modal").style.display = "none"; }
+    function openAuthModal(){
+      if(me){ if(confirm("Logout "+me+"?")){ me=null; localStorage.removeItem("lh_me"); applyUI(); } return; }
+      document.getElementById("auth-modal").style.display="flex";
+    }
+    function closeAuthModal(){document.getElementById("auth-modal").style.display="none";}
+    function openPaymentModal(){
+      if(!me){ alert("សូមបង្កើតគណនី ឬ Login ជាមុនសិន។"); document.getElementById("auth-modal").style.display="flex"; return; }
+      document.getElementById("payment-modal").style.display="flex";
+    }
+    function closePaymentModal(){document.getElementById("payment-modal").style.display="none";}
+
+    function readCreds(){
+      var u=document.getElementById("auth-username").value.trim().toLowerCase(), p=document.getElementById("auth-password").value;
+      if(!/^[a-z0-9_.-]{3,24}$/.test(u)){alert("Username: 3-24 តួ (a-z, 0-9, _ . -)");return null}
+      if(p.length<6){alert("Password យ៉ាងតិច 6 តួ");return null}
+      return {u:u,p:p};
+    }
+    function finishLogin(u){me=u;localStorage.setItem("lh_me",u);document.getElementById("auth-password").value="";closeAuthModal();applyUI();}
+    function handleRegister(){
+      var c=readCreds(); if(!c)return; var users=getUsers();
+      if(users[c.u]){alert("Username នេះមានរួចហើយ។ សូម Login។");return}
+      users[c.u]={pw:c53(c.p),plan:"free"}; putUsers(users); finishLogin(c.u);
+    }
+    function handleLogin(){
+      var c=readCreds(); if(!c)return; var u=getUsers()[c.u];
+      if(!u||u.pw!==c53(c.p)){alert("Username ឬ Password មិនត្រឹមត្រូវ។");return}
+      finishLogin(c.u);
+    }
 
     function selectPlan(type) {
       selectedPlanType = type;
-      if (type === 'pro') {
-        document.getElementById("p-pro").className = "plan-card active";
-        document.getElementById("p-unlimited").className = "plan-card";
-        document.getElementById("qr-price-lbl").innerText = "LHoneboy • $25.00 (១ខែ)";
-      } else {
-        document.getElementById("p-unlimited").className = "plan-card active";
-        document.getElementById("p-pro").className = "plan-card";
-        document.getElementById("qr-price-lbl").innerText = "LHoneboy • $100.00 (១ឆ្នាំ)";
-      }
+      document.getElementById("p-pro").className = type==='pro' ? "plan-card active" : "plan-card";
+      document.getElementById("p-unlimited").className = type==='unlimited' ? "plan-card active" : "plan-card";
+      document.getElementById("qr-price-lbl").innerText = type==='pro' ? "LHoneboy • $25.00 (១ខែ)" : "LHoneboy • $100.00 (១ឆ្នាំ)";
     }
-
-    var tempGeneratedUser = "";
-    var tempGeneratedPass = "";
-    var tempGeneratedRole = "";
-
-    function processAutoPayment() {
-      var u = document.getElementById("pay-user").value.trim();
-      var tx = document.getElementById("pay-txid").value.trim();
-
-      if (!u || !tx) {
-        alert("សូមបំពេញ Username និង លេខប្រតិបត្តិការវិក្កយបត្រ!");
-        return;
-      }
-
-      var autoPass = "lh" + Math.floor(1000 + Math.random() * 9000);
-      var expiryText = selectedPlanType === 'pro' ? "១ ខែ (30 ថ្ងៃ)" : "១ ឆ្នាំ (365 ថ្ងៃ)";
-
-      tempGeneratedUser = u;
-      tempGeneratedPass = autoPass;
-      tempGeneratedRole = selectedPlanType === 'pro' ? "pro_month" : "unlimited_year";
-
-      localStorage.setItem("user_" + u.toLowerCase(), autoPass);
-      localStorage.setItem("role_" + u.toLowerCase(), tempGeneratedRole);
-
-      document.getElementById("out-user").innerText = u;
-      document.getElementById("out-pass").innerText = autoPass;
-      document.getElementById("out-expiry").innerText = expiryText;
-
-      document.getElementById("pay-input-section").style.display = "none";
-      document.getElementById("pay-success-section").style.display = "block";
-    }
-
-    function instantLoginAfterPay() {
-      activateRole(tempGeneratedUser, tempGeneratedRole === 'pro_month' ? "PRO (១ខែ)" : "UNLIMITED (១ឆ្នាំ)", true);
-      closePaymentModal();
-    }
-
-    function handleAuthSubmit() {
-           var u = document.getElementById("auth-username").value.trim();
-      var p = document.getElementById("auth-password").value.trim();
-      if (!u) { alert("សូមបញ្ចូល Username!"); return; }
-
-      if (u.toLowerCase() === "lhoneboy" || p === "pro25" || p === "unlimited100") {
-        activateRole("LHoneboy", "UNLIMITED OWNER (LIFETIME)", true);
-        alert("🎉 សូមស្វាគមន៍លោក LHoneboy! គណនីរបស់អ្នកគឺ UNLIMITED LIFETIME (ប្រើបានរហូត)!");
-        closeAuthModal();
-        return;
-      }
-
-      var registeredPass = localStorage.getItem("user_" + u.toLowerCase());
-      var registeredRole = localStorage.getItem("role_" + u.toLowerCase());
-
-      if (registeredPass && registeredPass === p) {
-        var roleLabel = registeredRole === "pro_month" ? "PRO MEMBER (1-MONTH)" : "UNLIMITED (1-YEAR)";
-        activateRole(u, roleLabel, true);
-        alert("🎉 សូមស្វាគមន៍ " + u + "! បាន Login ជោគជ័យជា " + roleLabel + "!");
-      } else {
-        setFreeMember(u);
-        alert("✅ បាន Login ជា Free Member! អ្នកត្រូវជាវគណនី PRO/UNLIMITED ទើបមើល Factory បាន។");
-      }
-      closeAuthModal();
-    }
-
-    function activateRole(username, roleName, isPro) {
-      var roleKey = roleName.includes("LIFETIME") ? "unlimited_owner" : (roleName.includes("1-YEAR") ? "unlimited_year" : "pro_month");
-      localStorage.setItem("lh_user", username);
-      localStorage.setItem("lh_role", roleKey);
-
-      document.getElementById("user-badge").innerHTML = "👑 <b style='color:#f59e0b'>" + username + " (" + roleName + ")</b>";
-      document.getElementById("btn-auth-modal").innerText = "👑 " + username;
-      document.getElementById("factory-locked-view").style.display = "none";
-      document.getElementById("factory-unlocked-view").style.display = "block";
-    }
-
-    function setFreeMember(username) {
-      localStorage.setItem("lh_user", username);
-      localStorage.setItem("lh_role", "free");
-      document.getElementById("user-badge").innerHTML = "👤 " + username + " (Free Member)";
-      document.getElementById("btn-auth-modal").innerText = "👤 " + username;
-      document.getElementById("factory-locked-view").style.display = "block";
-      document.getElementById("factory-unlocked-view").style.display = "none";
-    }
-
-    function fmt(d) {
-      var h = d.getHours(), m = d.getMinutes(), ap = h >= 12 ? 'PM' : 'AM';
-      h = h % 12 || 12;
-      return (h < 10 ? '0' + h : h) + ':' + (m < 10 ? '0' + m : m) + ' ' + ap;
+    function processActivation(){
+      var code=document.getElementById("pay-code").value.trim().toUpperCase(), h=c53(code), p=CH[h];
+      if(!me){alert("សូម Login ជាមុន។");return}
+      if(!p){alert("Activation Code មិនត្រឹមត្រូវ។");return}
+      var users=getUsers(); users[me].plan=p; users[me].code=h; users[me].at=Date.now(); putUsers(users);
+      document.getElementById("pay-code").value="";
+      closePaymentModal(); applyUI();
+      alert("🎉 Activated: "+PLANS[p].label);
     }
 
     // ទិន្នន័យពិតប្រាកដតាម FOREX FACTORY ថ្ងៃទី ៩ និងទី ១០
@@ -422,61 +369,29 @@
       document.getElementById("factory-news-container").innerHTML = html;
     }
 
-    function sync10MinSignal() {
-      var now = new Date();
-      var currentTimestamp = Math.floor(now.getTime() / 1000);
-      var currentBlockIndex = Math.floor(currentTimestamp / BLOCK_DURATION);
-      var secondsRemaining = BLOCK_DURATION - (currentTimestamp % BLOCK_DURATION);
-
-      var m = Math.floor(secondsRemaining / 60);
-      var s = secondsRemaining % 60;
-      document.getElementById("sig-timer").innerText = "⏱️ " + (m < 10 ? '0' + m : m) + ":" + (s < 10 ? '0' + s : s);
-
-      if (currentBlockIndex !== lastBlockIndex) {
-        lastBlockIndex = currentBlockIndex;
-        updateSignalData(currentBlockIndex);
+    
+    function renderSignal(){
+      var card=document.getElementById("main-signal-card"), badge=document.getElementById("sig-badge"), tag=document.getElementById("trend-tag");
+      var set=function(id,v){document.getElementById(id).innerText=v};
+      if(!SIGNAL){
+        ["val-entry","val-sl","val-tp1","val-tp2"].forEach(function(i){set(i,"—")});
+        set("pips-tp1","—");set("pips-tp2","—");set("val-rr","—");set("sig-valid-from","—");set("sig-timer","No setup");
+        badge.innerText="NO ACTIVE SETUP"; badge.style.background="#334155"; tag.style.display="none";
+        card.style.borderColor="#334155"; card.style.boxShadow="none";
+        document.getElementById("btn-tg-broadcast").style.display="none"; return;
       }
+      var buy=SIGNAL.dir==="BUY", col=buy?"#10b981":"#f43f5e";
+      card.style.borderColor=col; card.style.boxShadow="0 0 15px "+(buy?"rgba(16,185,129,0.2)":"rgba(239,68,68,0.2)");
+      badge.innerText=SIGNAL.dir; badge.style.background=col; tag.style.display="inline"; tag.innerText=SIGNAL.note||""; tag.style.color=col;
+      set("val-entry",SIGNAL.entry.toFixed(2)); set("val-sl",SIGNAL.sl.toFixed(2)); set("val-tp1",SIGNAL.tp1.toFixed(2)); set("val-tp2",SIGNAL.tp2.toFixed(2));
+      var p1=Math.abs(SIGNAL.entry-SIGNAL.tp1)*10, p2=Math.abs(SIGNAL.entry-SIGNAL.tp2)*10, r=Math.abs(SIGNAL.entry-SIGNAL.sl)*10;
+      set("pips-tp1","+"+p1.toFixed(0)+" Pips"); set("pips-tp2","+"+p2.toFixed(0)+" Pips"); set("val-rr","1 : "+(p2/r).toFixed(2));
+      set("sig-valid-from",SIGNAL.validFrom||""); set("sig-timer","Active");
+      var msg=encodeURIComponent("LHvara Signal\n"+SIGNAL.dir+" XAUUSD\nEntry: "+SIGNAL.entry+"\nSL: "+SIGNAL.sl+"\nTP1: "+SIGNAL.tp1+"\nTP2: "+SIGNAL.tp2+"\nNot financial advice.");
+      document.getElementById("btn-tg-broadcast").href="https://t.me/signalhoun21?text="+msg;
     }
 
-    function updateSignalData(blockIndex) {
-      var blockStartTime = new Date(blockIndex * BLOCK_DURATION * 1000);
-      document.getElementById("sig-valid-from").innerText = fmt(blockStartTime);
-
-      var seed = (blockIndex * 9301 + 49297) % 233280;
-      var rnd = seed / 233280.0;
-      var base = 4073.00 + (rnd * 0.8);
-
-      var entry = (base + 0.20).toFixed(2);
-      var sl = (parseFloat(entry) + 6.00).toFixed(2);
-      var tp1 = (parseFloat(entry) - 15.00).toFixed(2);
-      var tp2 = (parseFloat(entry) - 30.00).toFixed(2);
-
-      var card = document.getElementById("main-signal-card");
-      var badge = document.getElementById("sig-badge");
-      var trendTag = document.getElementById("trend-tag");
-
-      card.className = "signal-card";
-      badge.className = "dir-badge";
-      badge.innerText = "SELL (BIG MOVE)";
-      trendTag.style.color = "#f43f5e";
-      trendTag.style.background = "rgba(244,63,94,0.15)";
-      trendTag.innerText = "BEARISH DUMP";
-
-      document.getElementById("val-entry").innerText = entry;
-      document.getElementById("val-sl").innerText = sl;
-      document.getElementById("val-tp1").innerText = tp1;
-      document.getElementById("val-tp2").innerText = tp2;
-
-      document.getElementById("ticker-bid").innerText = (base - 0.20).toFixed(2);
-      document.getElementById("ticker-ask").innerText = (base + 0.25).toFixed(2);
-
-      var msg = encodeURIComponent("👑 LHvara BIG MOVE Signal 👑\n\n🎯 Action: 🔴 SELL XAUUSD (SWING)\n⚡ Entry: " + entry + "\n🛑 SL: " + sl + "\n🎯 TP1: " + tp1 + " (+150 pips)\n🎯 TP2: " + tp2 + " (+300 pips)\n🕒 Valid From: " + fmt(blockStartTime) + "\n\nVerified by: @signalhoun21 (LHoneboy)");
-      document.getElementById("btn-tg-broadcast").href = "https://t.me/signalhoun21?text=" + msg;
-    }
-
-    renderFactoryNews();
-    setInterval(sync10MinSignal, 1000);
-    sync10MinSignal();
+    renderFactoryNews(); renderSignal(); applyUI();
   </script>
 </body>
 </html>
