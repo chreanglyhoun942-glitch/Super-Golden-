@@ -320,7 +320,7 @@
       var u = getUsers()[name];
       if(!u || !u.code) return "free";
       var p = CH[u.code];
-      if(!p || p !== u.plan || p === "owner") return "free;
+            if(!p || p !== u.plan || p === "owner") return "free";
       var d = PLANS[p].days;
       if(d && Date.now() > u.at + d * 864e5) return "free";
       return p;
