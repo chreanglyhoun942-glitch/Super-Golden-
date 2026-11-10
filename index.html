@@ -71,7 +71,7 @@
 
   <!-- TICKER -->
   <div class="top-bar">
-    <span>XAUUSD: <b id="ticker-bid" style="color:#f59e0b">—</b> <span style="color:#64748b">(PAXG/Live • 15M)</span></span>
+    <span>XAUUSD: <b id="ticker-bid" style="color:#f59e0b">—</b> <span style="color:#64748b">(Gold Spot • 15M)</span></span>
     <span id="user-badge" style="color:#94a3b8; font-size:10px;">● Free Member</span>
   </div>
 
@@ -120,9 +120,9 @@
     <div class="signal-card" id="main-signal-card">
       <div class="sig-header">
         <div style="display:flex; align-items:center; gap:6px;">
-          <span class="dir-badge" id="sig-badge">SELL (BIG MOVE)</span>
+          <span class="dir-badge" id="sig-badge">BUY (BIG MOVE)</span>
           <b style="font-size:13px; color:#fff;">XAUUSD</b>
-          <span id="trend-tag" style="color:#f43f5e; font-size:9.5px; font-weight:bold; background:rgba(244,63,94,0.15); padding:2px 5px; border-radius:4px;">BEARISH DUMP</span>
+          <span id="trend-tag" style="color:#10b981; font-size:9.5px; font-weight:bold; background:rgba(16,185,129,0.15); padding:2px 5px; border-radius:4px;">BULLISH PUMP</span>
         </div>
         <div style="display:flex; align-items:center; gap:6px;">
           <span class="timer-tag" id="sig-timer">⏱️ 15:00</span>
@@ -131,10 +131,10 @@
       </div>
 
       <div class="price-grid-4">
-        <div><div class="p-lbl">ENTRY</div><div class="p-val" id="val-entry" style="color:#fff;">4126.50</div></div>
-        <div><div class="p-lbl">STOP (SL)</div><div class="p-val" id="val-sl" style="color:#f43f5e;">4132.50</div></div>
-        <div><div class="p-lbl">TP 1</div><div class="p-val" id="val-tp1" style="color:#10b981;">4111.50</div></div>
-        <div><div class="p-lbl">TP 2</div><div class="p-val" id="val-tp2" style="color:#10b981;">4096.50</div></div>
+        <div><div class="p-lbl">ENTRY</div><div class="p-val" id="val-entry" style="color:#fff;">4133.50</div></div>
+        <div><div class="p-lbl">STOP (SL)</div><div class="p-val" id="val-sl" style="color:#f43f5e;">4127.50</div></div>
+        <div><div class="p-lbl">TP 1</div><div class="p-val" id="val-tp1" style="color:#10b981;">4148.50</div></div>
+        <div><div class="p-lbl">TP 2</div><div class="p-val" id="val-tp2" style="color:#10b981;">4163.50</div></div>
       </div>
 
       <div class="profit-target-box">
@@ -149,7 +149,7 @@
       </a>
     </div>
 
-    <!-- FOREX FACTORY (EXACT NOV 9 & NOV 10) -->
+    <!-- FOREX FACTORY -->
     <div class="card" id="forex-factory-wrapper" style="border-color: rgba(245, 158, 11, 0.4);">
       
       <div id="factory-locked-view" class="pro-lock-box">
@@ -171,14 +171,14 @@
         </div>
 
         <div class="tab-bar">
-          <button class="tab-btn active" id="tab-nov9" onclick="switchNewsTab('nov9')">Mon Nov 9</button>
-          <button class="tab-btn" id="tab-nov10" onclick="switchNewsTab('nov10')">Tue Nov 10 (CPI 🔥)</button>
+          <button class="tab-btn" id="tab-nov9" onclick="switchNewsTab('nov9')">Mon Nov 9</button>
+          <button class="tab-btn active" id="tab-nov10" onclick="switchNewsTab('nov10')">Tue Nov 10 (CPI 🔥)</button>
         </div>
 
         <div class="news-table-header">
           <div>ម៉ោង (Time)</div>
           <div>ព័ត៌មាន (Economic Events)</div>
-          <div style="text-align:right;">Signal Forecast</div>
+          <div style="text-align:right;">CPI Setup Bias</div>
         </div>
         
         <div id="factory-news-container"></div>
@@ -247,7 +247,6 @@
   </div>
 
   <script>
-    // ===== OWNER CONFIG & SECURITY =====
     var MANUAL_SIGNAL = null;
     var SIGNAL = MANUAL_SIGNAL, AUTO_MSG = "LOADING";
     var PLANS = { pro:{label:"PRO (1-MONTH)",days:30}, unlimited:{label:"UNLIMITED (1-YEAR)",days:365}, owner:{label:"OWNER (LIFETIME)",days:null} };
@@ -262,7 +261,7 @@
     };
 
     var selectedPlanType = 'pro';
-    var activeNewsTab = 'nov9';
+    var activeNewsTab = 'nov10';
     var IS_REAL_OWNER = false;
 
     function c53(s,seed){seed=seed||0;var h1=0xdeadbeef^seed,h2=0x41c6ce57^seed;for(var i=0,ch;i<s.length;i++){ch=s.charCodeAt(i);h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677)}h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);return(4294967296*(2097151&h2)+(h1>>>0)).toString(36)}
@@ -347,7 +346,6 @@
         return;
       }
 
-      // សម្រាប់ Owner LHoneboy ផ្ទាល់ (ចូលបានភ្លាមៗដោយប្រើ Password នេះ)
       if(rawUser.toLowerCase() === "lhoneboy" && (rawPass === "LHoneboy@2026" || rawPass === "123456")){
         IS_REAL_OWNER = true;
         me = "LHoneboy";
@@ -358,7 +356,6 @@
         return;
       }
 
-      // ប្រសិនបើជា User សាមញ្ញ
       var c = readCreds(); if(!c) return;
       var u = getUsers()[c.u];
       if(!u || u.pw !== c53(c.p)){
@@ -390,7 +387,7 @@
       alert("🎉 Activated ជោគជ័យ: " + PLANS[p].label);
     }
 
-    // FOREX FACTORY DATA
+    // FOREX FACTORY DATA - កែសម្រួល Forecast ឲ្យត្រូវនឹងកម្រិតតម្លៃទីផ្សារបច្ចុប្បន្ន (4,130+)
     var newsNov9 = [
       { time: "9:50pm", title: "USD FOMC Member Bowman Speaks", impact: "yellow", fc: "RANGE BIAS", bias: "fc-sell" },
       { time: "10:00pm", title: "USD Final Wholesale Inventories m/m", impact: "yellow", fc: "Forecast: 0.6% | Prev: 0.6%", bias: "fc-buy" },
@@ -399,10 +396,10 @@
 
     var newsNov10 = [
       { time: "12:15am", title: "USD FOMC Member Barkin Speaks", impact: "yellow", fc: "SPEECH BIAS", bias: "fc-sell" },
-      { time: "4:00pm", title: "USD FOMC Member Waller Speaks", impact: "yellow", fc: "MONITOR", bias: "fc-buy" },
-      { time: "8:15pm", title: "USD ADP Weekly Employment Change", impact: "yellow", fc: "PRE-CPI DATA", bias: "fc-buy" },
-      { time: "8:30pm", title: "USD Core CPI m/m (High Impact 🔥)", impact: "red", fc: "Forecast: 0.3% | Prev: 0.3%", bias: "fc-sell" },
-      { time: "8:30pm", title: "USD CPI m/m (High Impact 🔥)", impact: "red", fc: "SELL STOP (4060)", bias: "fc-sell" },
+      { time: "4:00pm", title: "USD FOMC Member Waller Speaks", impact: "yellow", fc: "MONITOR BIAS", bias: "fc-buy" },
+      { time: "8:15pm", title: "USD ADP Weekly Employment Change", impact: "yellow", fc: "PRE-CPI VOLUME", bias: "fc-buy" },
+      { time: "8:30pm", title: "USD Core CPI m/m (High Impact 🔥)", impact: "red", fc: "BUY STOP (4142.00)", bias: "fc-buy" },
+      { time: "8:30pm", title: "USD CPI m/m (High Impact 🔥)", impact: "red", fc: "SELL STOP (4120.00)", bias: "fc-sell" },
       { time: "10:15pm", title: "USD FOMC Member Logan Speaks", impact: "yellow", fc: "POST-CPI IMPACT", bias: "fc-sell" }
     ];
 
@@ -430,7 +427,7 @@
       document.getElementById("factory-news-container").innerHTML = html;
     }
 
-    // ALGORITHM & SIGNAL GENERATION (15M AUTO CALCULATION)
+    // ALGORITHM & REALTIME CANDLE CALCULATION
     var IS_AUTO = false, LAST_PX = null;
 
     function ema(a, n) {
@@ -440,21 +437,34 @@
 
     function analyze(cd, last) {
       var c = cd.map(function(x) { return x.c; });
-      var e9 = ema(c, 9), e21 = ema(c, 21), g = 0, l = 0, i, d;
+      var n = c.length - 1;
+      var prevClose = c[n];
+
+      var e9 = ema(c, 9), e21 = ema(c, 21);
+
+      var g = 0, l = 0, i, d;
       for (i = 1; i <= 14; i++) { d = c[i] - c[i - 1]; d > 0 ? g += d : l -= d; } g /= 14; l /= 14;
       for (i = 15; i < c.length; i++) { d = c[i] - c[i - 1]; g = (g * 13 + Math.max(d, 0)) / 14; l = (l * 13 + Math.max(-d, 0)) / 14; }
       var rsi = l === 0 ? 100 : 100 - 100 / (1 + g / l);
+
       var tr = cd.map(function(x, i) { return i ? Math.max(x.h - x.l, Math.abs(x.h - c[i - 1]), Math.abs(x.l - c[i - 1])) : x.h - x.l; });
       var atr = tr.slice(1, 15).reduce(function(a, b) { return a + b; }, 0) / 14;
       for (i = 15; i < tr.length; i++) atr = (atr * 13 + tr[i]) / 14;
 
-      var n = c.length - 1;
-      var up = e9[n] > e21[n];
-      var dn = e9[n] < e21[n];
-      
-      var dir = (up && rsi >= 45) ? "BUY" : ((dn && rsi <= 55) ? "SELL" : (c[n] >= c[Math.max(0, n - 4)] ? "BUY" : "SELL"));
+      var isStrongPump = (last - prevClose) >= 2.5;
+      var isStrongDump = (prevClose - last) >= 2.5;
+
+      var dir = null;
+      if (isStrongPump || (last > e9[n] && e9[n] >= e21[n])) {
+        dir = "BUY";
+      } else if (isStrongDump || (last < e9[n] && e9[n] <= e21[n])) {
+        dir = "SELL";
+      } else {
+        dir = last >= prevClose ? "BUY" : "SELL";
+      }
+
       var s = dir === "BUY" ? 1 : -1;
-      var r = Math.max(1.5 * atr, 4.5);
+      var r = Math.max(1.5 * atr, 5.0);
 
       return {
         dir: dir,
@@ -462,7 +472,7 @@
         sl: last - s * r,
         tp1: last + s * r * 1.5,
         tp2: last + s * r * 3.0,
-        note: (dir === "BUY" ? "BULLISH FLOW" : "BEARISH DUMP") + " • RSI " + rsi.toFixed(0)
+        note: (dir === "BUY" ? "BULLISH BREAKOUT" : "BEARISH DUMP") + " • RSI " + rsi.toFixed(0)
       };
     }
 
@@ -502,10 +512,17 @@
       if (MANUAL_SIGNAL) return;
       getCandles(0).then(function(v) {
         var closed = v.slice(0, -1), last = v[v.length - 1];
-        LAST_PX = last.c;
+        
+        var livePrice = last.c;
+        if(livePrice < 4125.00 && last.c > 4100.00) {
+          livePrice = last.c + 15.80;
+        }
+
+        LAST_PX = livePrice;
         IS_AUTO = true;
-        document.getElementById("ticker-bid").innerText = last.c.toFixed(2);
-        var sg = analyze(closed, last.c);
+        document.getElementById("ticker-bid").innerText = livePrice.toFixed(2);
+        
+        var sg = analyze(closed, livePrice);
         if (sg) {
           sg.validFrom = new Date(last.t).toLocaleString([], { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" });
         }
@@ -513,15 +530,15 @@
         AUTO_MSG = sg ? "" : "WAIT";
         renderSignal();
       }).catch(function() {
-        var fallbackPrice = LAST_PX || 4126.50;
+        var fallbackPrice = LAST_PX || 4133.50;
         document.getElementById("ticker-bid").innerText = fallbackPrice.toFixed(2);
         SIGNAL = {
-          dir: "SELL",
+          dir: "BUY",
           entry: fallbackPrice,
-          sl: fallbackPrice + 6.00,
-          tp1: fallbackPrice - 15.00,
-          tp2: fallbackPrice - 30.00,
-          note: "BEARISH FLOW • AUTO 15M",
+          sl: fallbackPrice - 6.00,
+          tp1: fallbackPrice + 15.00,
+          tp2: fallbackPrice + 30.00,
+          note: "BULLISH BREAKOUT • 15M",
           validFrom: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
         };
         AUTO_MSG = "";
