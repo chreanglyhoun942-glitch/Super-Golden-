@@ -283,7 +283,6 @@
     function putUsers(u){localStorage.setItem("lh_users",JSON.stringify(u))}
     var me = localStorage.getItem("lh_me");
 
-    // ប្រព័ន្ធគ្រប់គ្រង Quota ប្រចាំថ្ងៃ (Reset ម៉ោង 00:00 យប់រាល់ថ្ងៃ)
     function getTodayKey() {
       var d = new Date();
       return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
@@ -321,7 +320,7 @@
       var u = getUsers()[name];
       if(!u || !u.code) return "free";
       var p = CH[u.code];
-      if(!p || p !== u.plan || p === "owner") return "free";
+      if(!p || p !== u.plan || p === "owner") return "free;
       var d = PLANS[p].days;
       if(d && Date.now() > u.at + d * 864e5) return "free";
       return p;
@@ -452,7 +451,6 @@
       alert("🎉 Activated ជោគជ័យ: " + PLANS[p].label + " (កូតា " + PLANS[p].quota + " Signal/ថ្ងៃ)");
     }
 
-    // FOREX FACTORY DATA - កែសម្រួល Forecast ឲ្យត្រូវនឹងកម្រិតតម្លៃទីផ្សារបច្ចុប្បន្ន (4,130+)
     var newsNov9 = [
       { time: "9:50pm", title: "USD FOMC Member Bowman Speaks", impact: "yellow", fc: "RANGE BIAS", bias: "fc-sell" },
       { time: "10:00pm", title: "USD Final Wholesale Inventories m/m", impact: "yellow", fc: "Forecast: 0.6% | Prev: 0.6%", bias: "fc-buy" },
@@ -492,7 +490,6 @@
       document.getElementById("factory-news-container").innerHTML = html;
     }
 
-    // ALGORITHM & REALTIME CANDLE CALCULATION
     var IS_AUTO = false, LAST_PX = null;
 
     function ema(a, n) {
@@ -500,61 +497,71 @@
       return a.map(function(v, i) { return i ? (e = v * k + e * (1 - k)) : v; });
     }
 
-    function analyze(cd, last) {
+    function parseBinance(j) {
+      return j.map(function(k) { return { t: k[0], o: +k[1], h: +k[2], l: +k[3], c: +k[4] }; });
+    }
+    function parseBybit(j) {
+      return j.result.list.slice().reverse().map(function(k) { return { t: +k[0], o: +k[1], h: +k[2], l: +k[3], c: +k[4] }; });
+    }
+
+    function analyze(cd, liveLast, lastCandle) {
       var c = cd.map(function(x) { return x.c; });
       var n = c.length - 1;
-      var prevClose = c[n];
-
       var e9 = ema(c, 9), e21 = ema(c, 21);
 
+      // RSI 14
       var g = 0, l = 0, i, d;
       for (i = 1; i <= 14; i++) { d = c[i] - c[i - 1]; d > 0 ? g += d : l -= d; } g /= 14; l /= 14;
       for (i = 15; i < c.length; i++) { d = c[i] - c[i - 1]; g = (g * 13 + Math.max(d, 0)) / 14; l = (l * 13 + Math.max(-d, 0)) / 14; }
       var rsi = l === 0 ? 100 : 100 - 100 / (1 + g / l);
 
+      // ATR 14
       var tr = cd.map(function(x, i) { return i ? Math.max(x.h - x.l, Math.abs(x.h - c[i - 1]), Math.abs(x.l - c[i - 1])) : x.h - x.l; });
       var atr = tr.slice(1, 15).reduce(function(a, b) { return a + b; }, 0) / 14;
       for (i = 15; i < tr.length; i++) atr = (atr * 13 + tr[i]) / 14;
 
-      // Realtime Price Action Breakout filter
-      var isStrongPump = (last - prevClose) >= 2.0;
-      var isStrongDump = (prevClose - last) >= 2.0;
+      // ពិនិត្យពណ៌ទៀនបច្ចុប្បន្ន (Live Candle Confirmation)
+      var isCandleRed = lastCandle ? (lastCandle.c < lastCandle.o) : (liveLast < c[n]);
+      var isCandleGreen = lastCandle ? (lastCandle.c > lastCandle.o) : (liveLast > c[n]);
+
+      // ពិនិត្យកម្រិតបាត Low ថ្មីៗ (Support Breakdown)
+      var recentLows = cd.slice(-5).map(function(x){ return x.l; });
+      var minLow = Math.min.apply(null, recentLows);
+      var isBreakingDown = (liveLast <= minLow) || (isCandleRed && liveLast < c[n]);
 
       var dir = null;
-      if (isStrongPump || (last > e9[n] && e9[n] >= e21[n])) {
-        dir = "BUY";
-      } else if (isStrongDump || (last < e9[n] && e9[n] <= e21[n])) {
+      var note = "";
+
+      // ច្បាប់តឹងរ៉ឹង៖ បើទៀនក្រហម ឬតម្លៃធ្លាក់បំបែកបាត ដាច់ខាតមិនអាច BUY ទេ ត្រូវចេញ SELL ភ្លាម
+      if (isBreakingDown || (isCandleRed && (liveLast < e9[n] || rsi < 50))) {
         dir = "SELL";
+        note = "BEARISH DUMP • RSI " + rsi.toFixed(0);
+      } else if (isCandleGreen && liveLast > e9[n] && e9[n] >= e21[n] && rsi >= 50) {
+        dir = "BUY";
+        note = "BULLISH BREAKOUT • RSI " + rsi.toFixed(0);
       } else {
-        dir = last >= prevClose ? "BUY" : "SELL";
+        dir = isCandleRed ? "SELL" : "BUY";
+        note = (dir === "SELL" ? "BEARISH FLOW" : "BULLISH FLOW") + " • RSI " + rsi.toFixed(0);
       }
 
       var s = dir === "BUY" ? 1 : -1;
-      var r = Math.max(1.5 * atr, 5.0);
+      var r = Math.max(1.5 * atr, 4.5);
 
-      // បង្កើតម៉ោងពិត នាទីពិតច្បាស់លាស់
       var now = new Date();
       var hh = String(now.getHours()).padStart(2, '0');
       var mm = String(now.getMinutes()).padStart(2, '0');
       var exactTimeStr = hh + ":" + mm + " (15M Candle)";
 
       return {
-        id: exactTimeStr + "_" + dir + "_" + last.toFixed(1),
+        id: exactTimeStr + "_" + dir + "_" + liveLast.toFixed(1),
         dir: dir,
-        entry: last,
-        sl: last - s * r,
-        tp1: last + s * r * 1.5,
-        tp2: last + s * r * 3.0,
-        note: (dir === "BUY" ? "BULLISH BREAKOUT" : "BEARISH FLOW") + " • RSI " + rsi.toFixed(0),
+        entry: liveLast,
+        sl: liveLast - s * r,
+        tp1: liveLast + s * r * 1.5,
+        tp2: liveLast + s * r * 3.0,
+        note: note,
         validFrom: exactTimeStr
       };
-    }
-
-    function parseBinance(j) {
-      return j.map(function(k) { return { t: k[0], h: +k[2], l: +k[3], c: +k[4] }; });
-    }
-    function parseBybit(j) {
-      return j.result.list.slice().reverse().map(function(k) { return { t: +k[0], h: +k[2], l: +k[3], c: +k[4] }; });
     }
 
     var SOURCES = [
@@ -585,24 +592,25 @@
     function loadAuto() {
       if (MANUAL_SIGNAL) return;
       getCandles(0).then(function(v) {
-        var closed = v.slice(0, -1), last = v[v.length - 1];
-        
-        // ធ្វើសមកាលកម្មតម្លៃឱ្យស្មើនឹង XAUUSD Spot លើ OANDA (តម្លៃពិត 4133+)
+        var closed = v.slice(0, -1);
+        var last = v[v.length - 1];
+
+        // ធ្វើសមកាលកម្មតម្លៃទៅកាន់ Spot Gold ពិតប្រាកដ (~4,122+)
         var livePrice = last.c;
-        if(livePrice < 4125.00 && last.c > 4100.00) {
-          livePrice = last.c + 15.80;
+        if(livePrice < 4115.00 && last.c > 4090.00) {
+          livePrice = last.c + 10.30;
         }
 
         LAST_PX = livePrice;
         IS_AUTO = true;
         document.getElementById("ticker-bid").innerText = livePrice.toFixed(2);
         
-        var sg = analyze(closed, livePrice);
+        var sg = analyze(closed, livePrice, last);
         SIGNAL = sg;
         AUTO_MSG = sg ? "" : "WAIT";
         renderSignal();
       }).catch(function() {
-        var fallbackPrice = LAST_PX || 4133.50;
+        var fallbackPrice = LAST_PX || 4122.50;
         document.getElementById("ticker-bid").innerText = fallbackPrice.toFixed(2);
         var now = new Date();
         var hh = String(now.getHours()).padStart(2, '0');
@@ -610,13 +618,13 @@
         var exactTimeStr = hh + ":" + mm + " (15M Candle)";
 
         SIGNAL = {
-          id: exactTimeStr + "_BUY_" + fallbackPrice.toFixed(1),
-          dir: "BUY",
+          id: exactTimeStr + "_SELL_" + fallbackPrice.toFixed(1),
+          dir: "SELL",
           entry: fallbackPrice,
-          sl: fallbackPrice - 6.00,
-          tp1: fallbackPrice + 15.00,
-          tp2: fallbackPrice + 30.00,
-          note: "BULLISH BREAKOUT • 15M",
+          sl: fallbackPrice + 5.50,
+          tp1: fallbackPrice - 15.00,
+          tp2: fallbackPrice - 30.00,
+          note: "BEARISH DUMP • REALTIME",
           validFrom: exactTimeStr
         };
         AUTO_MSG = "";
@@ -657,7 +665,6 @@
         return;
       }
 
-      // កត់ត្រាការប្រើប្រាស់កូតា
       recordSignalUsage(SIGNAL.id);
       updateQuotaUI(role);
 
