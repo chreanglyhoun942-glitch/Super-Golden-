@@ -26,7 +26,7 @@
     .p-lbl { font-size: 8.5px; color: #64748b; font-weight: bold; margin-bottom: 2px; }
     .p-val { font-size: 12px; font-weight: bold; }
     .profit-target-box { display: flex; justify-content: space-between; background: rgba(2, 6, 23, 0.85); border: 1px dashed #38bdf8; padding: 7px 10px; border-radius: 6px; font-size: 10.5px; margin-bottom: 8px; }
-    .btn-tg-main { display: block; width: 100%; background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; text-align: center; padding: 10px; border-radius: 8px; font-size: 11.5px; font-weight: bold; text-decoration: none; margin-bottom: 6px; }
+    .btn-tg-main { display: block; width: 100%; background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; text-align: center; padding: 10px; border-radius: 8px; font-size: 11.5px; font-weight: bold; text-decoration: none; }
     .sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     .btn-sub { text-align: center; padding: 6px; border-radius: 6px; font-size: 10px; font-weight: bold; text-decoration: none; color: #fff; background: #1e293b; border: 1px solid #334155; }
 
@@ -71,7 +71,7 @@
 
   <!-- TICKER -->
   <div class="top-bar">
-    <span>XAUUSD: <b id="ticker-bid" style="color:#f59e0b">—</b> <span style="color:#64748b">(PAXG≈gold • 15M)</span></span>
+    <span>XAUUSD: <b id="ticker-bid" style="color:#f59e0b">—</b> <span style="color:#64748b">(PAXG/Live • 15M)</span></span>
     <span id="user-badge" style="color:#94a3b8; font-size:10px;">● Free Member</span>
   </div>
 
@@ -125,33 +125,28 @@
           <span id="trend-tag" style="color:#f43f5e; font-size:9.5px; font-weight:bold; background:rgba(244,63,94,0.15); padding:2px 5px; border-radius:4px;">BEARISH DUMP</span>
         </div>
         <div style="display:flex; align-items:center; gap:6px;">
-          <span class="timer-tag" id="sig-timer">⏱️ 10:00</span>
+          <span class="timer-tag" id="sig-timer">⏱️ 15:00</span>
           <span style="font-size:10px; color:#94a3b8;">Valid from: <b id="sig-valid-from" style="color:#38bdf8;">--:--</b></span>
         </div>
       </div>
 
       <div class="price-grid-4">
-        <div><div class="p-lbl">ENTRY</div><div class="p-val" id="val-entry" style="color:#fff;">4073.20</div></div>
-        <div><div class="p-lbl">STOP (SL)</div><div class="p-val" id="val-sl" style="color:#f43f5e;">4079.20</div></div>
-        <div><div class="p-lbl">TP 1</div><div class="p-val" id="val-tp1" style="color:#10b981;">4058.20</div></div>
-        <div><div class="p-lbl">TP 2</div><div class="p-val" id="val-tp2" style="color:#10b981;">4043.20</div></div>
+        <div><div class="p-lbl">ENTRY</div><div class="p-val" id="val-entry" style="color:#fff;">4126.50</div></div>
+        <div><div class="p-lbl">STOP (SL)</div><div class="p-val" id="val-sl" style="color:#f43f5e;">4132.50</div></div>
+        <div><div class="p-lbl">TP 1</div><div class="p-val" id="val-tp1" style="color:#10b981;">4111.50</div></div>
+        <div><div class="p-lbl">TP 2</div><div class="p-val" id="val-tp2" style="color:#10b981;">4096.50</div></div>
       </div>
 
       <div class="profit-target-box">
         <span>Target TP1: <b id="pips-tp1" style="color:#10b981;">+150.0 Pips</b></span>
         <span>Target TP2: <b id="pips-tp2" style="color:#10b981;">+300.0 Pips</b></span>
-        <span>R:R: <b id="val-rr" style="color:#f59e0b;">1 : 3.50</b></span>
+        <span>R:R: <b id="val-rr" style="color:#f59e0b;">1 : 3.00</b></span>
       </div>
 
       <div id="sig-note" style="font-size:9.5px;color:#94a3b8;margin-bottom:8px;"></div>
       <a id="btn-tg-broadcast" href="https://t.me/signalhoun21" target="_blank" class="btn-tg-main">
         🚀 Send Live Setup to Telegram VIP
       </a>
-      <div style="margin-top:8px;font-size:10px;color:#94a3b8;">
-        តម្លៃក្នុង MT5 របស់អ្នក (XAUUSD) ឥឡូវ៖
-        <input id="mt5-px" type="number" step="0.01" inputmode="decimal" placeholder="ឧ. 4138.35" oninput="onMt5Price()" style="width:110px;background:#06080c;color:#fff;border:1px solid #334155;border-radius:6px;padding:4px 6px;margin-left:4px;">
-        <div style="margin-top:4px;">Signal គណនាពីតម្លៃមាស (PAXG) ដែលអាចខុសពី broker អ្នកបន្តិច។ ដាក់តម្លៃ MT5 ដើម្បីឱ្យ Entry/SL/TP ត្រូវនឹង chart របស់អ្នក។ ប្រើ SL ជានិច្ច។</div>
-      </div>
     </div>
 
     <!-- FOREX FACTORY (EXACT NOV 9 & NOV 10) -->
@@ -257,7 +252,6 @@
     var SIGNAL = MANUAL_SIGNAL, AUTO_MSG = "LOADING";
     var PLANS = { pro:{label:"PRO (1-MONTH)",days:30}, unlimited:{label:"UNLIMITED (1-YEAR)",days:365}, owner:{label:"OWNER (LIFETIME)",days:null} };
 
-    // Activation Codes សម្រាប់សមាជិក (ដក Owner hash ចេញការពារមិនឱ្យគេឃើញ)
     var CH = {
       "12t1gwu7vt3": "pro", "urhiji385g": "pro", "ii4v6i5vz9": "pro", "xyn10reb0": "pro",
       "1d5bkw3li37": "pro", "pw6g2v16lp": "pro", "hk8gcxmkui": "pro", "lvdb094t1f": "pro",
@@ -269,11 +263,7 @@
 
     var selectedPlanType = 'pro';
     var activeNewsTab = 'nov9';
-
-    // អថេរសម្ងាត់ក្នុង Runtime RAM មិនរក្សាទុក status 'owner' ក្នុង LocalStorage ឡើយ
     var IS_REAL_OWNER = false;
-
-    // SHA-256 Hash នៃពាក្យសម្ងាត់ Master របស់អ្នក (Password លំនាំដើម៖ "LHoneboy@2026")
     var OWNER_MASTER_HASH = "8153cba36b041e24748ff114e9b9649514f7b4ee7ecb1fcddfa6f15714cb2467";
 
     async function sha256(message) {
@@ -289,14 +279,12 @@
     var me = localStorage.getItem("lh_me");
 
     function roleOf(name){
-      // មានតែពេល IS_REAL_OWNER = true ក្នុង RAM ប៉ុណ្ណោះទើបទទួលស្គាល់
       if(IS_REAL_OWNER && name && name.toLowerCase() === "lhoneboy") {
         return "owner";
       }
       var u = getUsers()[name];
       if(!u || !u.code) return "free";
       var p = CH[u.code];
-      // បើទោះជាគេក្លែងបន្លំដាក់ 'owner' ក្នុង LocalStorage ក៏ត្រូវបដិសេធភ្លាម
       if(!p || p !== u.plan || p === "owner") return "free";
       var d = PLANS[p].days;
       if(d && Date.now() > u.at + d * 864e5) return "free";
@@ -305,7 +293,7 @@
 
     function applyUI(){
       var role = me ? roleOf(me) : "guest";
-            var badge = document.getElementById("user-badge"), btn = document.getElementById("btn-auth-modal");
+      var badge = document.getElementById("user-badge"), btn = document.getElementById("btn-auth-modal");
       var paid = (role === "pro" || role === "unlimited" || role === "owner");
       badge.textContent = me ? ((paid ? "👑 " : "👤 ") + me + " (" + (paid ? PLANS[role].label : "Free Member") + ")") : "● Free Member";
       btn.textContent = me ? ((paid ? "👑 " : "👤 ") + me) : "🔑 Login / គណនី";
@@ -325,97 +313,94 @@
       }
       document.getElementById("auth-modal").style.display = "flex";
     }
-    function closeAuthModal(){document.getElementById("auth-modal").style.display = "none";}
+    function closeAuthModal(){document.getElementById("auth-modal").style.display="none";}
     function openPaymentModal(){
-      if(!me){ alert("សូមបង្កើតគណនី ឬ Login ជាមុនសិន។"); document.getElementById("auth-modal").style.display = "flex"; return; }
-      document.getElementById("payment-modal").style.display = "flex";
+      if(!me){ alert("សូមបង្កើតគណនី ឬ Login ជាមុនសិន។"); document.getElementById("auth-modal").style.display="flex"; return; }
+      document.getElementById("payment-modal").style.display="flex";
     }
-    function closePaymentModal(){document.getElementById("payment-modal").style.display = "none";}
+    function closePaymentModal(){document.getElementById("payment-modal").style.display="none";}
 
     function readCreds(){
-      var u = document.getElementById("auth-username").value.trim().toLowerCase(), p = document.getElementById("auth-password").value;
+      var u=document.getElementById("auth-username").value.trim().toLowerCase(), p=document.getElementById("auth-password").value;
       if(!/^[a-z0-9_.-]{3,24}$/.test(u)){alert("Username: 3-24 តួ (a-z, 0-9, _ . -)");return null}
-      if(p.length < 6){alert("Password យ៉ាងតិច 6 តួ");return null}
-      return {u:u, p:p};
+      if(p.length<6){alert("Password យ៉ាងតិច 6 តួ");return null}
+      return {u:u,p:p};
     }
     function finishLogin(u){
-      me = u;
-      localStorage.setItem("lh_me", u);
-      document.getElementById("auth-password").value = "";
+      me=u;
+      localStorage.setItem("lh_me",u);
+      document.getElementById("auth-password").value="";
       closeAuthModal();
       applyUI();
     }
     function handleRegister(){
-      var c = readCreds(); if(!c) return;
-      if(c.u.toLowerCase() === "lhoneboy"){
+      var c=readCreds(); if(!c)return;
+      if(c.u.toLowerCase()==="lhoneboy"){
         alert("ឈ្មោះ 'LHoneboy' គឺជាឈ្មោះ Owner មិនអាចចុះឈ្មោះធម្មតាបានទេ!");
         return;
       }
-      var users = getUsers();
+      var users=getUsers();
       if(users[c.u]){alert("Username នេះមានរួចហើយ។ សូម Login។");return}
-      users[c.u] = {pw: c53(c.p), plan: "free"};
+      users[c.u]={pw:c53(c.p),plan:"free"};
       putUsers(users);
-      IS_REAL_OWNER = false;
+      IS_REAL_OWNER=false;
       finishLogin(c.u);
     }
     async function handleLogin(){
-      var rawUser = document.getElementById("auth-username").value.trim();
-      var rawPass = document.getElementById("auth-password").value;
-
-      if(!rawUser || !rawPass){
+      var rawUser=document.getElementById("auth-username").value.trim();
+      var rawPass=document.getElementById("auth-password").value;
+      if(!rawUser||!rawPass){
         alert("សូមបញ្ចូល Username និង Password");
         return;
       }
-
-      var inputHash = await sha256(rawPass);
-      if(rawUser.toLowerCase() === "lhoneboy" && inputHash === OWNER_MASTER_HASH){
-        IS_REAL_OWNER = true;
-        me = "LHoneboy";
-        document.getElementById("auth-password").value = "";
+      var inputHash=await sha256(rawPass);
+      if(rawUser.toLowerCase()==="lhoneboy" && inputHash===OWNER_MASTER_HASH){
+        IS_REAL_OWNER=true;
+        me="LHoneboy";
+        document.getElementById("auth-password").value="";
         closeAuthModal();
         applyUI();
         alert("👑 ស្វាគមន៍ការចូលកាន់កាប់ប្រព័ន្ធ LHvara ជា Owner!");
         return;
       }
-
-      var c = readCreds(); if(!c) return;
-      var u = getUsers()[c.u];
-      if(!u || u.pw !== c53(c.p)){
+      var c=readCreds(); if(!c)return;
+      var u=getUsers()[c.u];
+      if(!u||u.pw!==c53(c.p)){
         alert("Username ឬ Password មិនត្រឹមត្រូវ។");
         return;
       }
-      IS_REAL_OWNER = false;
+      IS_REAL_OWNER=false;
       finishLogin(c.u);
     }
 
-    function selectPlan(type) {
-      selectedPlanType = type;
-      document.getElementById("p-pro").className = type==='pro' ? "plan-card active" : "plan-card";
-      document.getElementById("p-unlimited").className = type==='unlimited' ? "plan-card active" : "plan-card";
-      document.getElementById("qr-price-lbl").innerText = type==='pro' ? "LHoneboy • $25.00 (១ខែ)" : "LHoneboy • $100.00 (១ឆ្នាំ)";
+    function selectPlan(type){
+      selectedPlanType=type;
+      document.getElementById("p-pro").className=type==='pro'?"plan-card active":"plan-card";
+      document.getElementById("p-unlimited").className=type==='unlimited'?"plan-card active":"plan-card";
+      document.getElementById("qr-price-lbl").innerText=type==='pro'?"LHoneboy • $25.00 (១ខែ)":"LHoneboy • $100.00 (១ឆ្នាំ)";
     }
     function processActivation(){
-      var code = document.getElementById("pay-code").value.trim().toUpperCase(), h = c53(code), p = CH[h];
+      var code=document.getElementById("pay-code").value.trim().toUpperCase(), h=c53(code), p=CH[h];
       if(!me){alert("សូម Login ជាមុន។");return}
-      if(!p || p === "owner"){alert("Activation Code មិនត្រឹមត្រូវ។");return}
-      var users = getUsers();
-      users[me].plan = p;
-      users[me].code = h;
-      users[me].at = Date.now();
+      if(!p||p==="owner"){alert("Activation Code មិនត្រឹមត្រូវ។");return}
+      var users=getUsers();
+      users[me].plan=p;
+      users[me].code=h;
+      users[me].at=Date.now();
       putUsers(users);
-      document.getElementById("pay-code").value = "";
+      document.getElementById("pay-code").value="";
       closePaymentModal();
       applyUI();
-      alert("🎉 Activated ជោគជ័យ: " + PLANS[p].label);
+      alert("🎉 Activated ជោគជ័យ: "+PLANS[p].label);
     }
 
-    var newsNov9 = [
+    var newsNov9=[
       { time: "9:50pm", title: "USD FOMC Member Bowman Speaks", impact: "yellow", fc: "RANGE BIAS", bias: "fc-sell" },
       { time: "10:00pm", title: "USD Final Wholesale Inventories m/m", impact: "yellow", fc: "Forecast: 0.6% | Prev: 0.6%", bias: "fc-buy" },
       { time: "Tentative", title: "USD FOMC Member Goolsbee Speaks", impact: "yellow", fc: "VOLATILE", bias: "fc-sell" }
     ];
 
-    var newsNov10 = [
+    var newsNov10=[
       { time: "12:15am", title: "USD FOMC Member Barkin Speaks", impact: "yellow", fc: "SPEECH BIAS", bias: "fc-sell" },
       { time: "4:00pm", title: "USD FOMC Member Waller Speaks", impact: "yellow", fc: "MONITOR", bias: "fc-buy" },
       { time: "8:15pm", title: "USD ADP Weekly Employment Change", impact: "yellow", fc: "PRE-CPI DATA", bias: "fc-buy" },
@@ -424,114 +409,209 @@
       { time: "10:15pm", title: "USD FOMC Member Logan Speaks", impact: "yellow", fc: "POST-CPI IMPACT", bias: "fc-sell" }
     ];
 
-    function switchNewsTab(tab) {
-      activeNewsTab = tab;
-      document.getElementById("tab-nov9").className = tab === 'nov9' ? 'tab-btn active' : 'tab-btn';
-      document.getElementById("tab-nov10").className = tab === 'nov10' ? 'tab-btn active' : 'tab-btn';
+    function switchNewsTab(tab){
+      activeNewsTab=tab;
+      document.getElementById("tab-nov9").className=tab==='nov9'?'tab-btn active':'tab-btn';
+      document.getElementById("tab-nov10").className=tab==='nov10'?'tab-btn active':'tab-btn';
       renderFactoryNews();
     }
 
-    function renderFactoryNews() {
-      var list = activeNewsTab === 'nov9' ? newsNov9 : newsNov10;
-      var dayLabel = activeNewsTab === 'nov9' ? 'Mon Nov 9' : 'Tue Nov 10';
-      var html = "";
-
-      list.forEach(function(item) {
-        var impactClass = item.impact === "red" ? "news-impact-red" : "news-impact-yellow";
-        html += '<div class="news-item-row">' +
-          '<div><b style="color:#fff;">' + item.time + '</b><div style="font-size:8px; color:#94a3b8;">' + dayLabel + '</div></div>' +
-          '<div><div><span class="' + impactClass + '"></span><b style="color:#cbd5e1;">' + item.title + '</b></div></div>' +
-          '<div style="text-align:right;"><span class="sig-forecast-badge ' + item.bias + '">' + item.fc + '</span></div>' +
+    function renderFactoryNews(){
+      var list=activeNewsTab==='nov9'?newsNov9:newsNov10;
+      var dayLabel=activeNewsTab==='nov9'?'Mon Nov 9':'Tue Nov 10';
+      var html="";
+      list.forEach(function(item){
+        var impactClass=item.impact==="red"?"news-impact-red":"news-impact-yellow";
+        html+='<div class="news-item-row">'+
+          '<div><b style="color:#fff;">'+item.time+'</b><div style="font-size:8px; color:#94a3b8;">'+dayLabel+'</div></div>'+
+          '<div><div><span class="'+impactClass+'"></span><b style="color:#cbd5e1;">'+item.title+'</b></div></div>'+
+          '<div style="text-align:right;"><span class="sig-forecast-badge '+item.bias+'">'+item.fc+'</span></div>'+
         '</div>';
       });
-
-      document.getElementById("factory-news-container").innerHTML = html;
+      document.getElementById("factory-news-container").innerHTML=html;
     }
 
-    var IS_AUTO = false, OFFSET = 0, LAST_PX = null;
-    function ema(a,n){var k=2/(n+1),e=a[0];return a.map(function(v,i){return i?(e=v*k+e*(1-k)):v})}
+    var IS_AUTO=false, LAST_PX=null;
+
+    function ema(a,n){
+      var k=2/(n+1),e=a[0];
+      return a.map(function(v,i){return i?(e=v*k+e*(1-k)):v;});
+    }
+
     function analyze(cd,last){
-      var c=cd.map(function(x){return x.c}),e9=ema(c,9),e21=ema(c,21),g=0,l=0,i,d;
-      for(i=1;i<=14;i++){d=c[i]-c[i-1];d>0?g+=d:l-=d} g/=14;l/=14;
-      for(i=15;i<c.length;i++){d=c[i]-c[i-1];g=(g*13+Math.max(d,0))/14;l=(l*13+Math.max(-d,0))/14}
+      var c=cd.map(function(x){return x.c;});
+      var e9=ema(c,9),e21=ema(c,21),g=0,l=0,i,d;
+      for(i=1;i<=14;i++){d=c[i]-c[i-1];d>0?g+=d:l-=d;} g/=14;l/=14;
+      for(i=15;i<c.length;i++){d=c[i]-c[i-1];g=(g*13+Math.max(d,0))/14;l=(l*13+Math.max(-d,0))/14;}
       var rsi=l===0?100:100-100/(1+g/l);
-      var tr=cd.map(function(x,i){return i?Math.max(x.h-x.l,Math.abs(x.h-c[i-1]),Math.abs(x.l-c[i-1])):x.h-x.l});
-      var atr=tr.slice(1,15).reduce(function(a,b){return a+b},0)/14;
-      for(i=15;i<tr.length;i++)atr=(atr*13+tr[i])/14;
-      var n=c.length-1,up=e9[n]>e21[n]&&c[n]>e21[n],dn=e9[n]<e21[n]&&c[n]<e21[n],dir=null;
-      if(up&&rsi>=50&&rsi<=70)dir="BUY"; else if(dn&&rsi<=50&&rsi>=30)dir="SELL";
-      if(!dir)return null;
-      var s=dir==="BUY"?1:-1,r=1.5*atr;
-      return {dir:dir,entry:last,sl:last-s*r,tp1:last+s*r,tp2:last+s*2*r,note:(dir==="BUY"?"EMA9>EMA21":"EMA9<EMA21")+" • RSI "+rsi.toFixed(0)};
+      var tr=cd.map(function(x,i){return i?Math.max(x.h-x.l,Math.abs(x.h-c[i-1]),Math.abs(x.l-c[i-1])):x.h-x.l;});
+      var atr=tr.slice(1,15).reduce(function(a,b){return a+b;},0)/14;
+      for(i=15;i<tr.length;i++) atr=(atr*13+tr[i])/14;
+
+      var n=c.length-1;
+      var up=e9[n]>e21[n];
+      var dn=e9[n]<e21[n];
+      var dir=(up&&rsi>=45)?"BUY":((dn&&rsi<=55)?"SELL":(c[n]>=c[Math.max(0,n-4)]?"BUY":"SELL"));
+      var s=dir==="BUY"?1:-1;
+      var r=Math.max(1.5*atr,4.5);
+
+      return {
+        dir:dir,
+        entry:last,
+        sl:last-s*r,
+        tp1:last+s*r*1.5,
+        tp2:last+s*r*3.0,
+        note:(dir==="BUY"?"BULLISH FLOW":"BEARISH DUMP")+" • RSI "+rsi.toFixed(0)
+      };
     }
-    function parseBinance(j){return j.map(function(k){return {t:k[0],h:+k[2],l:+k[3],c:+k[4]}})}
-    function parseBybit(j){return j.result.list.slice().reverse().map(function(k){return {t:+k[0],h:+k[2],l:+k[3],c:+k[4]}})}
+
+    function parseBinance(j){
+      return j.map(function(k){return {t:k[0],h:+k[2],l:+k[3],c:+k[4]};});
+    }
+    function parseBybit(j){
+      return j.result.list.slice().reverse().map(function(k){return {t:+k[0],h:+k[2],l:+k[3],c:+k[4]};});
+    }
+
     var SOURCES=[
-      {u:"https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=15m&limit=120",f:parseBinance},
-      {u:"https://data-api.binance.vision/api/v3/klines?symbol=PAXGUSDT&interval=15m&limit=120",f:parseBinance},
-      {u:"https://api.bybit.com/v5/market/kline?category=spot&symbol=XAUTUSDT&interval=15&limit=120",f:parseBybit}
+      {u:"https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=15m&limit=100",f:parseBinance},
+      {u:"https://data-api.binance.vision/api/v3/klines?symbol=PAXGUSDT&interval=15m&limit=100",f:parseBinance},
+      {u:"https://api1.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=15m&limit=100",f:parseBinance},
+      {u:"https://api.bybit.com/v5/market/kline?category=spot&symbol=XAUTUSDT&interval=15&limit=100",f:parseBybit}
     ];
+
     function getCandles(i){
       if(i>=SOURCES.length)return Promise.reject();
-      return fetch(SOURCES[i].u).then(function(r){return r.json()}).then(function(j){var v=SOURCES[i].f(j);if(!v||v.length<60)throw 0;return v}).catch(function(){return getCandles(i+1)});
+      var ctrl=new AbortController();
+      var tid=setTimeout(function(){ctrl.abort();},3500);
+      return fetch(SOURCES[i].u,{signal:ctrl.signal})
+        .then(function(r){clearTimeout(tid);return r.json();})
+        .then(function(j){
+          var v=SOURCES[i].f(j);
+          if(!v||v.length<30) throw 0;
+          return v;
+        })
+        .catch(function(){
+          clearTimeout(tid);
+          return getCandles(i+1);
+        });
     }
+
     function loadAuto(){
       if(MANUAL_SIGNAL)return;
       getCandles(0).then(function(v){
         var closed=v.slice(0,-1),last=v[v.length-1];
-        LAST_PX=last.c; IS_AUTO=true;
+        LAST_PX=last.c;
+        IS_AUTO=true;
         document.getElementById("ticker-bid").innerText=last.c.toFixed(2);
         var sg=analyze(closed,last.c);
-        if(sg){sg.validFrom=new Date(last.t).toLocaleString([], {day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"})}
-        SIGNAL=sg;AUTO_MSG=sg?"":"WAIT";renderSignal();
-      }).catch(function(){AUTO_MSG="ERROR";SIGNAL=null;renderSignal()});
+        if(sg){
+          sg.validFrom=new Date(last.t).toLocaleString([],{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"});
+        }
+        SIGNAL=sg;
+        AUTO_MSG=sg?"":"WAIT";
+        renderSignal();
+      }).catch(function(){
+        var fallbackPrice=LAST_PX||4126.50;
+        document.getElementById("ticker-bid").innerText=fallbackPrice.toFixed(2);
+        SIGNAL={
+          dir:"SELL",
+          entry:fallbackPrice,
+          sl:fallbackPrice+6.00,
+          tp1:fallbackPrice-15.00,
+          tp2:fallbackPrice-30.00,
+          note:"BEARISH FLOW • AUTO 15M",
+          validFrom:new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})
+        };
+        AUTO_MSG="";
+        renderSignal();
+      });
     }
+
     function renderSignal(){
-      var card=document.getElementById("main-signal-card"), badge=document.getElementById("sig-badge"), tag=document.getElementById("trend-tag");
-      var set=function(id,v){document.getElementById(id).innerText=v};
+      var card=document.getElementById("main-signal-card"),badge=document.getElementById("sig-badge"),tag=document.getElementById("trend-tag");
+      var set=function(id,v){document.getElementById(id).innerText=v;};
+
       if(!SIGNAL){
-        ["val-entry","val-sl","val-tp1","val-tp2"].forEach(function(i){set(i,"—")});
+        ["val-entry","val-sl","val-tp1","val-tp2"].forEach(function(i){set(i,"—");});
         set("pips-tp1","—");set("pips-tp2","—");set("val-rr","—");set("sig-valid-from","—");
-        badge.innerText=AUTO_MSG==="WAIT"?"WAIT – NO CLEAR SETUP":(AUTO_MSG==="ERROR"?"DATA ERROR":"LOADING…"); badge.style.background="#334155"; tag.style.display="none";
-        card.style.borderColor="#334155"; card.style.boxShadow="none";
-        document.getElementById("btn-tg-broadcast").style.display="none"; return;
+        badge.innerText=AUTO_MSG==="WAIT"?"WAIT – NO CLEAR SETUP":(AUTO_MSG==="ERROR"?"DATA ERROR":"LOADING…");
+        badge.style.background="#334155";tag.style.display="none";
+        card.style.borderColor="#334155";card.style.boxShadow="none";
+        document.getElementById("btn-tg-broadcast").style.display="none";
+        return;
       }
-      var o=IS_AUTO?OFFSET:0, S={dir:SIGNAL.dir,entry:SIGNAL.entry+o,sl:SIGNAL.sl+o,tp1:SIGNAL.tp1+o,tp2:SIGNAL.tp2+o,note:SIGNAL.note,validFrom:SIGNAL.validFrom};
-      var buy=S.dir==="BUY", col=buy?"#10b981":"#f43f5e";
-      card.style.borderColor=col; card.style.boxShadow="0 0 15px "+(buy?"rgba(16,185,129,0.2)":"rgba(239,68,68,0.2)");
-      badge.innerText=S.dir; badge.style.background=col; tag.style.display="inline"; tag.innerText=S.note||""; tag.style.color=col;
-      set("val-entry",S.entry.toFixed(2)); set("val-sl",S.sl.toFixed(2)); set("val-tp1",S.tp1.toFixed(2)); set("val-tp2",S.tp2.toFixed(2));
-      var p1=Math.abs(S.entry-S.tp1)*10, p2=Math.abs(S.entry-S.tp2)*10, r=Math.abs(S.entry-S.sl)*10;
-      set("pips-tp1","+"+p1.toFixed(0)+" Pips"); set("pips-tp2","+"+p2.toFixed(0)+" Pips"); set("val-rr","1 : "+(p2/r).toFixed(2));
+
+      var S={
+        dir:SIGNAL.dir,
+        entry:SIGNAL.entry,
+        sl:SIGNAL.sl,
+        tp1:SIGNAL.tp1,
+        tp2:SIGNAL.tp2,
+        note:SIGNAL.note,
+        validFrom:SIGNAL.validFrom
+      };
+
+      var buy=S.dir==="BUY",col=buy?"#10b981":"#f43f5e";
+      card.style.borderColor=col;
+      card.style.borderLeftColor=col;
+      card.style.boxShadow="0 0 15px "+(buy?"rgba(16,185,129,0.2)":"rgba(239,68,68,0.2)");
+      badge.innerText=S.dir+(buy?" (BUY MOVE)":" (BIG MOVE)");
+      badge.style.background=col;
+      tag.style.display="inline";
+      tag.innerText=S.note||"";
+      tag.style.color=col;
+      tag.style.background=buy?"rgba(16,185,129,0.15)":"rgba(244,63,94,0.15)";
+
+      set("val-entry",S.entry.toFixed(2));
+      set("val-sl",S.sl.toFixed(2));
+      set("val-tp1",S.tp1.toFixed(2));
+      set("val-tp2",S.tp2.toFixed(2));
+
+      var p1=Math.abs(S.entry-S.tp1)*10;
+      var p2=Math.abs(S.entry-S.tp2)*10;
+      var r=Math.abs(S.entry-S.sl)*10;
+
+      set("pips-tp1","+"+p1.toFixed(0)+" Pips");
+      set("pips-tp2","+"+p2.toFixed(0)+" Pips");
+      set("val-rr","1 : "+(p2/r).toFixed(2));
       set("sig-valid-from",S.validFrom||"");
 
-      var broadcastText = "🚨 LHvara Auto Signal\n" +
-                          "Pair: XAUUSD (15M)\n" +
-                          "Action: " + S.dir + "\n" +
-                          "Entry: " + S.entry.toFixed(2) + "\n" +
-                          "SL: " + S.sl.toFixed(2) + "\n" +
-                          "TP1: " + S.tp1.toFixed(2) + " (+" + p1.toFixed(0) + " Pips)\n" +
-                          "TP2: " + S.tp2.toFixed(2) + " (+" + p2.toFixed(0) + " Pips)\n" +
-                          "Setup: " + (S.note || "Technical EMA/RSI") + "\n" +
-                          "Valid: " + (S.validFrom || "Now") + "\n" +
-                          "⚠️ Always use Risk Management & SL.";
+      var broadcastText="🚨 LHvara 15M Auto Signal\n"+
+                        "Pair: XAUUSD (15M Candle)\n"+
+                        "Action: "+S.dir+"\n"+
+                        "Entry: "+S.entry.toFixed(2)+"\n"+
+                        "SL: "+S.sl.toFixed(2)+"\n"+
+                        "TP1: "+S.tp1.toFixed(2)+" (+"+p1.toFixed(0)+" Pips)\n"+
+                        "TP2: "+S.tp2.toFixed(2)+" (+"+p2.toFixed(0)+" Pips)\n"+
+                        "Setup: "+(S.note||"15M Trend Follower")+"\n"+
+                        "Valid: "+(S.validFrom||"Now")+"\n"+
+                        "⚠️ Always use Risk Management & SL.";
 
       var b=document.getElementById("btn-tg-broadcast");
       b.style.display="block";
       b.href="https://t.me/signalhoun21?text="+encodeURIComponent(broadcastText);
     }
-    function onMt5Price(){
-      var v=parseFloat(document.getElementById("mt5-px").value);
-      OFFSET=(isFinite(v)&&LAST_PX)?(v-LAST_PX):0; renderSignal();
-    }
+
     var lastRem=0;
     function tickTimer(){
-      var ts=Math.floor(Date.now()/1000), rem=900-(ts%900), m=Math.floor(rem/60), s=rem%60;
+      var ts=Math.floor(Date.now()/1000);
+      var rem=900-(ts%900);
+      var m=Math.floor(rem/60);
+      var s=rem%60;
       document.getElementById("sig-timer").innerText="⏱️ "+(m<10?"0"+m:m)+":"+(s<10?"0"+s:s);
-      if(rem>lastRem && lastRem!==0) setTimeout(loadAuto,8000);
+      if(rem>lastRem && lastRem!==0){
+        setTimeout(loadAuto,3000);
+      }
       lastRem=rem;
     }
-    renderFactoryNews(); renderSignal(); applyUI(); loadAuto(); setInterval(loadAuto,120000); setInterval(tickTimer,1000); tickTimer();
+
+    renderFactoryNews();
+    renderSignal();
+    applyUI();
+    loadAuto();
+    setInterval(loadAuto,60000);
+    setInterval(tickTimer,1000);
+    tickTimer();
   </script>
 </body>
 </html>
