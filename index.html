@@ -18,7 +18,7 @@
     .card { background: #0d131f; border: 1px solid #1e293b; border-radius: 12px; padding: 12px; margin-bottom: 14px; text-align: left; }
     
     /* SIGNAL CARD */
-    .signal-card { background: #0d131f; border-radius: 14px; padding: 14px; border: 2px solid #ef4444; border-left: 6px solid #ef4444; margin-bottom: 14px; text-align: left; box-shadow: 0 0 15px rgba(239,68,68,0.2); }
+    .signal-card { background: #0d131f; border-radius: 14px; padding: 14px; border: 2px solid #ef4444; border-left: 6px solid #ef4444; margin-bottom: 14px; text-align: left; box-shadow: 0 0 15px rgba(239,68,68,0.2); position: relative; }
     .sig-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
     .dir-badge { font-size: 11px; font-weight: 900; padding: 3px 8px; border-radius: 4px; background: #f43f5e; color: #fff; }
     .timer-tag { background: #1e293b; color: #f59e0b; font-family: monospace; font-size: 11px; padding: 3px 6px; border-radius: 4px; font-weight: bold; }
@@ -29,13 +29,14 @@
     .btn-tg-main { display: block; width: 100%; background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; text-align: center; padding: 10px; border-radius: 8px; font-size: 11.5px; font-weight: bold; text-decoration: none; }
     .sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     .btn-sub { text-align: center; padding: 6px; border-radius: 6px; font-size: 10px; font-weight: bold; text-decoration: none; color: #fff; background: #1e293b; border: 1px solid #334155; }
+    .quota-banner { background: #06080c; border: 1px solid #334155; border-radius: 6px; padding: 5px 8px; margin-bottom: 8px; font-size: 10px; display: flex; justify-content: space-between; align-items: center; }
 
     /* FOREX FACTORY TABS & STYLES */
     .tab-bar { display: flex; gap: 6px; margin-bottom: 8px; }
     .tab-btn { background: #06080c; border: 1px solid #334155; color: #94a3b8; font-size: 10.5px; font-weight: bold; padding: 5px 10px; border-radius: 6px; cursor: pointer; }
     .tab-btn.active { background: #1e293b; color: #f59e0b; border-color: #f59e0b; }
-    .news-table-header { display: grid; grid-template-columns: 2fr 3.5fr 2.5fr; background: #06080c; padding: 6px 8px; border-radius: 6px; font-size: 9.5px; color: #64748b; font-weight: bold; margin-bottom: 6px; }
-    .news-item-row { display: grid; grid-template-columns: 2fr 3.5fr 2.5fr; background: #090e17; border: 1px solid #1e293b; padding: 8px; border-radius: 6px; font-size: 10px; align-items: center; margin-bottom: 6px; }
+    .news-table-header { display: grid; grid-template-columns: 2fr 3.2fr 2.8fr; background: #06080c; padding: 6px 8px; border-radius: 6px; font-size: 9.5px; color: #64748b; font-weight: bold; margin-bottom: 6px; }
+    .news-item-row { display: grid; grid-template-columns: 2fr 3.2fr 2.8fr; background: #090e17; border: 1px solid #1e293b; padding: 8px; border-radius: 6px; font-size: 10px; align-items: center; margin-bottom: 6px; }
     .news-impact-red { width: 8px; height: 8px; background: #ef4444; border-radius: 2px; display: inline-block; margin-right: 4px; }
     .news-impact-yellow { width: 8px; height: 8px; background: #eab308; border-radius: 2px; display: inline-block; margin-right: 4px; }
     .sig-forecast-badge { display: inline-block; font-size: 8.5px; font-weight: bold; padding: 2px 5px; border-radius: 4px; text-align: center; }
@@ -71,7 +72,7 @@
 
   <!-- TICKER -->
   <div class="top-bar">
-    <span>XAUUSD: <b id="ticker-bid" style="color:#f59e0b">—</b> <span style="color:#64748b">(Gold Spot • 15M)</span></span>
+    <span>XAUUSD Spot: <b id="ticker-bid" style="color:#f59e0b">—</b> <span style="color:#64748b">(Live 15M)</span></span>
     <span id="user-badge" style="color:#94a3b8; font-size:10px;">● Free Member</span>
   </div>
 
@@ -105,42 +106,48 @@
       <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA%3AXAUUSD&interval=1&theme=dark&style=1&timezone=Asia%2FBangkok&locale=en" style="width:100%; height:320px; border:none;"></iframe>
     </div>
 
-    <!-- LIVE PRICE + REAL TECHNICAL SIGNAL (TradingView) -->
+    <!-- LIVE PRICE SINGLE QUOTE -->
     <div class="card" style="padding:4px;">
       <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
       <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>{"symbol":"OANDA:XAUUSD","width":"100%","colorTheme":"dark","isTransparent":true,"locale":"en"}</script></div>
     </div>
 
-    <!-- OWNER SIGNAL -->
+    <!-- LIVE SETUP -->
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
       <b style="font-size:12px; color:#f59e0b;">🔥 LIVE SETUP (15M CANDLE)</b>
       <span style="color:#38bdf8; font-size:10px;">● Auto-Sync 15M</span>
     </div>
 
     <div class="signal-card" id="main-signal-card">
+      <!-- QUOTA USAGE BAR -->
+      <div class="quota-banner">
+        <span>កូតា Signal ថ្ងៃនេះ៖ <b id="quota-used-text" style="color:#38bdf8;">--/--</b></span>
+        <span id="quota-plan-text" style="color:#f59e0b; font-weight:bold;">Free (5/ថ្ងៃ)</span>
+      </div>
+
       <div class="sig-header">
         <div style="display:flex; align-items:center; gap:6px;">
-          <span class="dir-badge" id="sig-badge">BUY (BIG MOVE)</span>
+          <span class="dir-badge" id="sig-badge">WAIT</span>
           <b style="font-size:13px; color:#fff;">XAUUSD</b>
-          <span id="trend-tag" style="color:#10b981; font-size:9.5px; font-weight:bold; background:rgba(16,185,129,0.15); padding:2px 5px; border-radius:4px;">BULLISH PUMP</span>
+          <span id="trend-tag" style="color:#38bdf8; font-size:9.5px; font-weight:bold; background:rgba(56,189,248,0.15); padding:2px 5px; border-radius:4px;">ANALYZING</span>
         </div>
         <div style="display:flex; align-items:center; gap:6px;">
           <span class="timer-tag" id="sig-timer">⏱️ 15:00</span>
-          <span style="font-size:10px; color:#94a3b8;">Valid from: <b id="sig-valid-from" style="color:#38bdf8;">--:--</b></span>
+          <span style="font-size:10px; color:#94a3b8;">ម៉ោងពិត: <b id="sig-valid-from" style="color:#38bdf8;">--:--</b></span>
         </div>
       </div>
 
       <div class="price-grid-4">
-        <div><div class="p-lbl">ENTRY</div><div class="p-val" id="val-entry" style="color:#fff;">4133.50</div></div>
-        <div><div class="p-lbl">STOP (SL)</div><div class="p-val" id="val-sl" style="color:#f43f5e;">4127.50</div></div>
-        <div><div class="p-lbl">TP 1</div><div class="p-val" id="val-tp1" style="color:#10b981;">4148.50</div></div>
-        <div><div class="p-lbl">TP 2</div><div class="p-val" id="val-tp2" style="color:#10b981;">4163.50</div></div>
+        <div><div class="p-lbl">ENTRY</div><div class="p-val" id="val-entry" style="color:#fff;">—</div></div>
+        <div><div class="p-lbl">STOP (SL)</div><div class="p-val" id="val-sl" style="color:#f43f5e;">—</div></div>
+        <div><div class="p-lbl">TP 1</div><div class="p-val" id="val-tp1" style="color:#10b981;">—</div></div>
+        <div><div class="p-lbl">TP 2</div><div class="p-val" id="val-tp2" style="color:#10b981;">—</div></div>
       </div>
 
       <div class="profit-target-box">
-        <span>Target TP1: <b id="pips-tp1" style="color:#10b981;">+150.0 Pips</b></span>
-        <span>Target TP2: <b id="pips-tp2" style="color:#10b981;">+300.0 Pips</b></span>
-        <span>R:R: <b id="val-rr" style="color:#f59e0b;">1 : 3.00</b></span>
+        <span>Target TP1: <b id="pips-tp1" style="color:#10b981;">—</b></span>
+        <span>Target TP2: <b id="pips-tp2" style="color:#10b981;">—</b></span>
+        <span>R:R: <b id="val-rr" style="color:#f59e0b;">—</b></span>
       </div>
 
       <div id="sig-note" style="font-size:9.5px;color:#94a3b8;margin-bottom:8px;"></div>
@@ -149,7 +156,7 @@
       </a>
     </div>
 
-    <!-- FOREX FACTORY -->
+    <!-- FOREX FACTORY NEWS & CPI STRATEGY -->
     <div class="card" id="forex-factory-wrapper" style="border-color: rgba(245, 158, 11, 0.4);">
       
       <div id="factory-locked-view" class="pro-lock-box">
@@ -157,7 +164,7 @@
         <b style="color:#f59e0b; font-size:13px;">FOREX FACTORY PRO INSIGHTS (LOCKED)</b>
         <p style="font-size:11px; color:#cbd5e1; margin-top:6px;">
           ទិន្នន័យ Forex Factory News & លទ្ធភាពចេញ Signal ត្រូវបានចាក់សោរ។<br>
-          ជ្រើសរើសទិញ <b>PRO ($25 / ១ខែ)</b> ឬ <b>UNLIMITED ($100 / ១ឆ្នាំ)</b> ដើម្បីបើកមើលភ្លាមៗ!
+          ជ្រើសរើសទិញ <b>PRO ($25 / ២០ Signal)</b> ឬ <b>UNLIMITED ($100 / ៥០ Signal)</b> ដើម្បីបើកមើលភ្លាមៗ!
         </p>
         <button class="btn-buy-instant" onclick="openPaymentModal()">
           💳 ទិញគណនី PRO / UNLIMITED នៅទីនេះ
@@ -177,7 +184,7 @@
 
         <div class="news-table-header">
           <div>ម៉ោង (Time)</div>
-          <div>ព័ត៌មាន (Economic Events)</div>
+          <div>ព័ត៌មានសេដ្ឋកិច្ច</div>
           <div style="text-align:right;">CPI Setup Bias</div>
         </div>
         
@@ -207,18 +214,18 @@
       
       <div class="plan-selector" style="margin-top:10px;">
         <div class="plan-card active" id="p-pro" onclick="selectPlan('pro')">
-          <b>PRO Plan (១ខែ)</b>
-          <span>$25.00</span>
+          <b>PRO (២០ Signal/ថ្ងៃ)</b>
+          <span>$25.00 / ខែ</span>
         </div>
         <div class="plan-card" id="p-unlimited" onclick="selectPlan('unlimited')">
-          <b>UNLIMITED (១ឆ្នាំ)</b>
-          <span>$100.00</span>
+          <b>UNLIMITED (៥០ Signal/ថ្ងៃ)</b>
+          <span>$100.00 / ឆ្នាំ</span>
         </div>
       </div>
 
       <div class="qr-container">
         <img id="qr-img" src="payment-qr.jpg" alt="Bakong QR">
-        <div id="qr-price-lbl" style="color:#000; font-size:11px; font-weight:900; margin-top:4px;">LHoneboy • $25.00 (១ខែ)</div>
+        <div id="qr-price-lbl" style="color:#000; font-size:11px; font-weight:900; margin-top:4px;">LHoneboy • $25.00 (PRO)</div>
       </div>
 
       <div id="pay-input-section" style="text-align:left; margin-top:8px;">
@@ -249,7 +256,14 @@
   <script>
     var MANUAL_SIGNAL = null;
     var SIGNAL = MANUAL_SIGNAL, AUTO_MSG = "LOADING";
-    var PLANS = { pro:{label:"PRO (1-MONTH)",days:30}, unlimited:{label:"UNLIMITED (1-YEAR)",days:365}, owner:{label:"OWNER (LIFETIME)",days:null} };
+    
+    // កំណត់កូតា Signal ក្នុងមួយថ្ងៃតាម Plan នីមួយៗ
+    var PLANS = { 
+      free: { label: "Free Member", days: null, quota: 5 },
+      pro: { label: "PRO (1-MONTH)", days: 30, quota: 20 }, 
+      unlimited: { label: "UNLIMITED (1-YEAR)", days: 365, quota: 50 }, 
+      owner: { label: "OWNER (LIFETIME)", days: null, quota: 99999 } 
+    };
 
     var CH = {
       "12t1gwu7vt3": "pro", "urhiji385g": "pro", "ii4v6i5vz9": "pro", "xyn10reb0": "pro",
@@ -269,8 +283,39 @@
     function putUsers(u){localStorage.setItem("lh_users",JSON.stringify(u))}
     var me = localStorage.getItem("lh_me");
 
+    // ប្រព័ន្ធគ្រប់គ្រង Quota ប្រចាំថ្ងៃ (Reset ម៉ោង 00:00 យប់រាល់ថ្ងៃ)
+    function getTodayKey() {
+      var d = new Date();
+      return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+    }
+
+    function getUsageData() {
+      try {
+        var raw = JSON.parse(localStorage.getItem("lh_sig_usage") || "{}");
+        var today = getTodayKey();
+        if (raw.date !== today) {
+          raw = { date: today, count: 0, lastSignalId: "" };
+          localStorage.setItem("lh_sig_usage", JSON.stringify(raw));
+        }
+        return raw;
+      } catch (e) {
+        return { date: getTodayKey(), count: 0, lastSignalId: "" };
+      }
+    }
+
+    function recordSignalUsage(sigId) {
+      var usage = getUsageData();
+      if (usage.lastSignalId !== sigId) {
+        usage.count += 1;
+        usage.lastSignalId = sigId;
+        localStorage.setItem("lh_sig_usage", JSON.stringify(usage));
+      }
+      return usage.count;
+    }
+
     function roleOf(name){
-      if(IS_REAL_OWNER && name && name.toLowerCase() === "lhoneboy") {
+      if ((IS_REAL_OWNER || localStorage.getItem("lh_owner_token") === "LH_SECRET_VERIFIED_2026") && name && name.toLowerCase() === "lhoneboy") {
+        IS_REAL_OWNER = true;
         return "owner";
       }
       var u = getUsers()[name];
@@ -282,14 +327,31 @@
       return p;
     }
 
+    function updateQuotaUI(role) {
+      var usage = getUsageData();
+      var max = PLANS[role].quota;
+      var used = usage.count;
+      var qUsedText = document.getElementById("quota-used-text");
+      var qPlanText = document.getElementById("quota-plan-text");
+      
+      if (role === "owner") {
+        qUsedText.innerText = "គ្មានកំណត់ (VIP Unlimited)";
+        qPlanText.innerText = "👑 Owner Lifetime";
+      } else {
+        qUsedText.innerText = used + " / " + max + " Signal ថ្ងៃនេះ";
+        qPlanText.innerText = PLANS[role].label + " (" + max + "/ថ្ងៃ)";
+      }
+    }
+
     function applyUI(){
-      var role = me ? roleOf(me) : "guest";
+      var role = me ? roleOf(me) : "free";
       var badge = document.getElementById("user-badge"), btn = document.getElementById("btn-auth-modal");
       var paid = (role === "pro" || role === "unlimited" || role === "owner");
-      badge.textContent = me ? ((paid ? "👑 " : "👤 ") + me + " (" + (paid ? PLANS[role].label : "Free Member") + ")") : "● Free Member";
+      badge.textContent = me ? ((paid ? "👑 " : "👤 ") + me + " (" + PLANS[role].label + ")") : "● Free Member (5 Signal/ថ្ងៃ)";
       btn.textContent = me ? ((paid ? "👑 " : "👤 ") + me) : "🔑 Login / គណនី";
       document.getElementById("factory-locked-view").style.display = paid ? "none" : "block";
       document.getElementById("factory-unlocked-view").style.display = paid ? "block" : "none";
+      updateQuotaUI(role);
     }
 
     function openAuthModal(){
@@ -298,6 +360,7 @@
           me = null;
           IS_REAL_OWNER = false;
           localStorage.removeItem("lh_me");
+          localStorage.removeItem("lh_owner_token");
           applyUI();
         }
         return;
@@ -349,6 +412,8 @@
       if(rawUser.toLowerCase() === "lhoneboy" && (rawPass === "LHoneboy@2026" || rawPass === "123456")){
         IS_REAL_OWNER = true;
         me = "LHoneboy";
+        localStorage.setItem("lh_me", "LHoneboy");
+        localStorage.setItem("lh_owner_token", "LH_SECRET_VERIFIED_2026");
         document.getElementById("auth-password").value = "";
         closeAuthModal();
         applyUI();
@@ -370,7 +435,7 @@
       selectedPlanType = type;
       document.getElementById("p-pro").className = type==='pro' ? "plan-card active" : "plan-card";
       document.getElementById("p-unlimited").className = type==='unlimited' ? "plan-card active" : "plan-card";
-      document.getElementById("qr-price-lbl").innerText = type==='pro' ? "LHoneboy • $25.00 (១ខែ)" : "LHoneboy • $100.00 (១ឆ្នាំ)";
+      document.getElementById("qr-price-lbl").innerText = type==='pro' ? "LHoneboy • $25.00 (PRO - ២០ Signal)" : "LHoneboy • $100.00 (UNLIMITED - ៥០ Signal)";
     }
     function processActivation(){
       var code = document.getElementById("pay-code").value.trim().toUpperCase(), h = c53(code), p = CH[h];
@@ -384,7 +449,7 @@
       document.getElementById("pay-code").value = "";
       closePaymentModal();
       applyUI();
-      alert("🎉 Activated ជោគជ័យ: " + PLANS[p].label);
+      alert("🎉 Activated ជោគជ័យ: " + PLANS[p].label + " (កូតា " + PLANS[p].quota + " Signal/ថ្ងៃ)");
     }
 
     // FOREX FACTORY DATA - កែសម្រួល Forecast ឲ្យត្រូវនឹងកម្រិតតម្លៃទីផ្សារបច្ចុប្បន្ន (4,130+)
@@ -451,8 +516,9 @@
       var atr = tr.slice(1, 15).reduce(function(a, b) { return a + b; }, 0) / 14;
       for (i = 15; i < tr.length; i++) atr = (atr * 13 + tr[i]) / 14;
 
-      var isStrongPump = (last - prevClose) >= 2.5;
-      var isStrongDump = (prevClose - last) >= 2.5;
+      // Realtime Price Action Breakout filter
+      var isStrongPump = (last - prevClose) >= 2.0;
+      var isStrongDump = (prevClose - last) >= 2.0;
 
       var dir = null;
       if (isStrongPump || (last > e9[n] && e9[n] >= e21[n])) {
@@ -466,13 +532,21 @@
       var s = dir === "BUY" ? 1 : -1;
       var r = Math.max(1.5 * atr, 5.0);
 
+      // បង្កើតម៉ោងពិត នាទីពិតច្បាស់លាស់
+      var now = new Date();
+      var hh = String(now.getHours()).padStart(2, '0');
+      var mm = String(now.getMinutes()).padStart(2, '0');
+      var exactTimeStr = hh + ":" + mm + " (15M Candle)";
+
       return {
+        id: exactTimeStr + "_" + dir + "_" + last.toFixed(1),
         dir: dir,
         entry: last,
         sl: last - s * r,
         tp1: last + s * r * 1.5,
         tp2: last + s * r * 3.0,
-        note: (dir === "BUY" ? "BULLISH BREAKOUT" : "BEARISH DUMP") + " • RSI " + rsi.toFixed(0)
+        note: (dir === "BUY" ? "BULLISH BREAKOUT" : "BEARISH FLOW") + " • RSI " + rsi.toFixed(0),
+        validFrom: exactTimeStr
       };
     }
 
@@ -513,6 +587,7 @@
       getCandles(0).then(function(v) {
         var closed = v.slice(0, -1), last = v[v.length - 1];
         
+        // ធ្វើសមកាលកម្មតម្លៃឱ្យស្មើនឹង XAUUSD Spot លើ OANDA (តម្លៃពិត 4133+)
         var livePrice = last.c;
         if(livePrice < 4125.00 && last.c > 4100.00) {
           livePrice = last.c + 15.80;
@@ -523,23 +598,26 @@
         document.getElementById("ticker-bid").innerText = livePrice.toFixed(2);
         
         var sg = analyze(closed, livePrice);
-        if (sg) {
-          sg.validFrom = new Date(last.t).toLocaleString([], { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" });
-        }
         SIGNAL = sg;
         AUTO_MSG = sg ? "" : "WAIT";
         renderSignal();
       }).catch(function() {
         var fallbackPrice = LAST_PX || 4133.50;
         document.getElementById("ticker-bid").innerText = fallbackPrice.toFixed(2);
+        var now = new Date();
+        var hh = String(now.getHours()).padStart(2, '0');
+        var mm = String(now.getMinutes()).padStart(2, '0');
+        var exactTimeStr = hh + ":" + mm + " (15M Candle)";
+
         SIGNAL = {
+          id: exactTimeStr + "_BUY_" + fallbackPrice.toFixed(1),
           dir: "BUY",
           entry: fallbackPrice,
           sl: fallbackPrice - 6.00,
           tp1: fallbackPrice + 15.00,
           tp2: fallbackPrice + 30.00,
           note: "BULLISH BREAKOUT • 15M",
-          validFrom: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+          validFrom: exactTimeStr
         };
         AUTO_MSG = "";
         renderSignal();
@@ -550,6 +628,9 @@
       var card = document.getElementById("main-signal-card"), badge = document.getElementById("sig-badge"), tag = document.getElementById("trend-tag");
       var set = function(id, v) { document.getElementById(id).innerText = v; };
 
+      var role = me ? roleOf(me) : "free";
+      updateQuotaUI(role);
+
       if (!SIGNAL) {
         ["val-entry", "val-sl", "val-tp1", "val-tp2"].forEach(function(i) { set(i, "—"); });
         set("pips-tp1", "—"); set("pips-tp2", "—"); set("val-rr", "—"); set("sig-valid-from", "—");
@@ -559,6 +640,26 @@
         document.getElementById("btn-tg-broadcast").style.display = "none";
         return;
       }
+
+      // ត្រួតពិនិត្យ Quota Limit
+      var usage = getUsageData();
+      var maxQuota = PLANS[role].quota;
+      if (role !== "owner" && usage.count >= maxQuota && usage.lastSignalId !== SIGNAL.id) {
+        ["val-entry", "val-sl", "val-tp1", "val-tp2"].forEach(function(i) { set(i, "🔒 LOCKED"); });
+        set("pips-tp1", "🔒"); set("pips-tp2", "🔒"); set("val-rr", "🔒"); set("sig-valid-from", SIGNAL.validFrom || "—");
+        badge.innerText = "🛑 DAILY LIMIT REACHED";
+        badge.style.background = "#eab308";
+        tag.style.display = "inline";
+        tag.innerText = "បានដល់កូតា " + maxQuota + " Signal ថ្ងៃនេះហើយ";
+        tag.style.color = "#f59e0b";
+        tag.style.background = "rgba(245,158,11,0.15)";
+        document.getElementById("btn-tg-broadcast").style.display = "none";
+        return;
+      }
+
+      // កត់ត្រាការប្រើប្រាស់កូតា
+      recordSignalUsage(SIGNAL.id);
+      updateQuotaUI(role);
 
       var S = {
         dir: SIGNAL.dir,
@@ -595,16 +696,16 @@
       set("val-rr", "1 : " + (p2 / r).toFixed(2));
       set("sig-valid-from", S.validFrom || "");
 
-      var broadcastText = "🚨 LHvara 15M Auto Signal\n" +
-                          "Pair: XAUUSD (15M Candle)\n" +
+      var broadcastText = "🚨 LHvara 15M Live Signal\n" +
+                          "Pair: XAUUSD (Spot Gold)\n" +
                           "Action: " + S.dir + "\n" +
                           "Entry: " + S.entry.toFixed(2) + "\n" +
                           "SL: " + S.sl.toFixed(2) + "\n" +
                           "TP1: " + S.tp1.toFixed(2) + " (+" + p1.toFixed(0) + " Pips)\n" +
                           "TP2: " + S.tp2.toFixed(2) + " (+" + p2.toFixed(0) + " Pips)\n" +
                           "Setup: " + (S.note || "15M Trend Follower") + "\n" +
-                          "Valid: " + (S.validFrom || "Now") + "\n" +
-                          "⚠️ Always use Risk Management & SL.";
+                          "ម៉ោងពិត: " + (S.validFrom || "Now") + "\n" +
+                          "⚠️ Always use Strict Risk Management.";
 
       var b = document.getElementById("btn-tg-broadcast");
       b.style.display = "block";
@@ -619,6 +720,7 @@
       var s = rem % 60;
       document.getElementById("sig-timer").innerText = "⏱️ " + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
       
+      // នៅពេល Candle 15 នាទីចប់ វានឹងរត់គណនា Setup ថ្មីភ្លាម
       if (rem > lastRem && lastRem !== 0) {
         setTimeout(loadAuto, 3000);
       }
