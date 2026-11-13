@@ -110,7 +110,7 @@
       </div>
     </div>
 
-    <!-- LIVE AI SIGNAL CARD -->
+    <!-- LIVE AI SIGNAL CARD (5-Minute Interval Refresh) -->
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
       <b style="font-size:11.5px; color:#f59e0b;">⚡ AI FAST 5.5 LIVE SMC SETUP (5M Refresh)</b>
       <span style="color:#38bdf8; font-size:9.5px;">● Real-time MT5 Sync</span>
@@ -161,7 +161,7 @@
         <div style="font-size:26px; margin-bottom:4px;">🔒</div>
         <b style="color:#f59e0b; font-size:12px;">FOREX FACTORY & FACTORY SIGNALS (LOCKED)</b>
         <p style="font-size:10px; color:#cbd5e1; margin-top:5px;">
-          ទិន្នន័យប្រតិទិនសេដ្ឋកិច្ច Factory និង Signal ពិសេសត្រូវបានចាក់សោរ។<br>
+          ទិន្នន័យប្រតិទិនសេដ្ឋកិច្ច Factory (ថ្ងៃនេះ និងសប្តាហ៍ក្រោយ) ត្រូវបានចាក់សោរ។<br>
           តម្រូវឱ្យដំឡើងកម្រិតជា <b>PRO ($25)</b> ឬ <b>UNLIMITED ($100)</b> / Owner ទើបអាចមើលឃើញ!
         </p>
         <button class="btn-buy-instant" onclick="openPaymentModal()">
@@ -172,16 +172,15 @@
       <!-- UNLOCKED VIEW FOR PAID MEMBERS -->
       <div id="factory-unlocked-view" style="display:none;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <b style="font-size:11.5px; color:#f59e0b;">📅 Forex Factory Live Calendar & Signals</b>
+          <b style="font-size:11.5px; color:#f59e0b;">📅 Forex Factory Live Calendar (This Week & Next Week)</b>
           <span style="color:#10b981; font-size:9px; font-weight:bold;">👑 UNLOCKED VIP</span>
         </div>
 
         <div class="tab-bar" id="ff-tabs-container">
-          <button class="tab-btn active" onclick="selectDayTab('Mon')">Mon</button>
-          <button class="tab-btn" onclick="selectDayTab('Tue')">Tue</button>
-          <button class="tab-btn" onclick="selectDayTab('Wed')">Wed</button>
-          <button class="tab-btn" onclick="selectDayTab('Thu')">Thu</button>
-          <button class="tab-btn" onclick="selectDayTab('Fri')">Fri</button>
+          <button class="tab-btn active" onclick="selectDayTab('Fri')">Fri Nov 13</button>
+          <button class="tab-btn" onclick="selectDayTab('Sat')">Sat Nov 14</button>
+          <button class="tab-btn" onclick="selectDayTab('NextMon')">Next Mon</button>
+          <button class="tab-btn" onclick="selectDayTab('NextTue')">Next Tue (CPI 🔥)</button>
         </div>
 
         <div class="news-table-header">
@@ -275,7 +274,7 @@
     };
 
     var selectedPlanType = 'pro';
-    var activeNewsDay = 'Mon';
+    var activeNewsDay = 'Fri';
     var IS_REAL_OWNER = false;
 
     function c53(s,seed){seed=seed||0;var h1=0xdeadbeef^seed,h2=0x41c6ce57^seed;for(var i=0,ch;i<s.length;i++){ch=s.charCodeAt(i);h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677)}h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);return(4294967296*(2097151&h2)+(h1>>>0)).toString(36)}
@@ -441,7 +440,7 @@
     }
     function processActivation(){
       var code = document.getElementById("pay-code").value.trim().toUpperCase(), h = c53(code), p = CH[h];
-      if(!me){alert("សូម Login ជាមុន។");return}
+      if(!me){alert("សូម Login ជាមុនសិន។");return}
       if(!p || p === "owner"){alert("Activation Code មិនត្រឹមត្រូវ។");return}
       var users = getUsers();
       users[me].plan = p;
@@ -454,23 +453,23 @@
       alert("🎉 Activated ជោគជ័យ: " + PLANS[p].label);
     }
 
-    // ===== FOREX FACTORY CALENDAR ENGINE =====
+    // ===== FOREX FACTORY ENGINE =====
     var FF_ALL_EVENTS = [];
     var FF_BACKUP_EVENTS = [
-      { day: "Mon", time: "9:50pm", title: "USD FOMC Member Bowman Speaks", impact: "yellow", fc: "RANGE BIAS", bias: "fc-sell" },
-      { day: "Mon", time: "10:00pm", title: "USD Final Wholesale Inventories m/m", impact: "yellow", fc: "Fc: 0.6% | Prev: 0.6%", bias: "fc-buy" },
-      { day: "Tue", time: "8:30pm", title: "USD Core CPI m/m (High Impact 🔥)", impact: "red", fc: "BUY STOP (3920.00)", bias: "fc-buy" },
-      { day: "Tue", time: "8:30pm", title: "USD CPI m/m (High Impact 🔥)", impact: "red", fc: "SELL STOP (3900.00)", bias: "fc-sell" },
-      { day: "Wed", time: "8:30pm", title: "USD PPI m/m (Wholesale Inflation)", impact: "red", fc: "BUY BIAS (3910.00)", bias: "fc-buy" },
-      { day: "Thu", time: "8:30pm", title: "USD Unemployment Claims", impact: "red", fc: "VOLATILITY BURST", bias: "fc-buy" },
-      { day: "Fri", time: "10:00pm", title: "USD Prelim UoM Consumer Sentiment", impact: "red", fc: "TREND EXTENSION", bias: "fc-sell" }
+      { day: "Fri", time: "12:00am", title: "USD Crude Oil Inventories", impact: "yellow", fc: "ENERGY FLOW", bias: "fc-sell" },
+      { day: "Fri", time: "8:30pm", title: "USD Core PPI m/m (High Impact 🔥)", impact: "red", fc: "BUY STOP (3895.00)", bias: "fc-buy" },
+      { day: "Fri", time: "8:30pm", title: "USD PPI m/m (High Impact 🔥)", impact: "red", fc: "SELL STOP (3885.00)", bias: "fc-sell" },
+      { day: "Fri", time: "9:10pm", title: "USD FOMC Member Collins Speaks", impact: "yellow", fc: "SPEECH BIAS", bias: "fc-buy" },
+      { day: "Sat", time: "12:00am", title: "USD FOMC Member Daly Speaks", impact: "yellow", fc: "WEEKEND CLOSE", bias: "fc-sell" },
+      { day: "NextMon", time: "8:30pm", title: "USD Retail Sales m/m", impact: "red", fc: "BUY STOP (3910.00)", bias: "fc-buy" },
+      { day: "NextTue", time: "8:30pm", title: "USD CPI m/m (Next Week CPI 🔥)", impact: "red", fc: "BUY 3925 / SELL 3890", bias: "fc-sell" }
     ];
 
     function selectDayTab(day) {
       activeNewsDay = day;
       var buttons = document.querySelectorAll("#ff-tabs-container .tab-btn");
       buttons.forEach(function(b) {
-        b.className = (b.innerText.indexOf(day) !== -1) ? "tab-btn active" : "tab-btn";
+        b.className = (b.innerText.indexOf(day !== 'NextMon' && day !== 'NextTue' ? day : (day==='NextMon'?'Next Mon':'Next Tue')) !== -1) ? "tab-btn active" : "tab-btn";
       });
       renderFactoryNews();
     }
@@ -482,7 +481,7 @@
       });
 
       if (filtered.length === 0) {
-        filtered = sourceList.filter(function(item) { return item.day === "Mon"; });
+        filtered = sourceList.filter(function(item) { return item.day === "Fri"; });
       }
 
       var html = "";
@@ -510,7 +509,7 @@
           data.forEach(function(ev) {
             if (ev.country !== "USD") return;
             var evDate = new Date(ev.date);
-            var dayName = daysMap[evDate.getDay()] || "Mon";
+            var dayName = daysMap[evDate.getDay()] || "Fri";
             var timeStr = evDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true });
             var impact = (ev.impact || "yellow").toLowerCase();
             if (impact === "medium") impact = "orange";
@@ -520,7 +519,7 @@
             var bias = "fc-buy";
             if (impact === "red") {
               if (ev.title.indexOf("CPI") !== -1) {
-                fcText = "BUY 3920 / SELL 3900";
+                fcText = "BUY 3925 / SELL 3890";
                 bias = "fc-sell";
               } else {
                 fcText = "BREAKOUT " + (ev.forecast || "HIGH");
@@ -542,6 +541,9 @@
             });
           });
 
+          FF_ALL_EVENTS.push({ day: "NextMon", dateStr: "Nov 16", time: "8:30pm", title: "USD Retail Sales m/m", impact: "red", fc: "BUY STOP (3910.00)", bias: "fc-buy" });
+          FF_ALL_EVENTS.push({ day: "NextTue", dateStr: "Nov 17", time: "8:30pm", title: "USD CPI m/m (Next Week CPI 🔥)", impact: "red", fc: "BUY 3925 / SELL 3890", bias: "fc-sell" });
+
           if (FF_ALL_EVENTS.length > 0) renderFactoryNews();
         })
         .catch(function() {
@@ -550,6 +552,8 @@
     }
 
     // ===== AI FAST 5.5 SMC ENGINE (5-MINUTE REFRESH) =====
+    var LAST_SIGNAL_BLOCK = "";
+
     function ema(a, n) {
       var k = 2 / (n + 1), e = a[0];
       return a.map(function(v, i) { return i ? (e = v * k + e * (1 - k)) : v; });
@@ -587,7 +591,7 @@
       var note = dir === "SELL" ? "BEARISH SMC FVG • AI FAST 5.5" : "BULLISH SMC FVG • AI FAST 5.5";
       
       var s = dir === "BUY" ? 1 : -1;
-      var r = Math.max(1.5 * atr, 4.0);
+      var r = Math.max(1.5 * atr, 3.5);
 
       var now = new Date();
       var mBlock = Math.floor(now.getMinutes() / 5) * 5;
@@ -634,19 +638,27 @@
     }
 
     function loadAuto() {
-      var livePrice = 3915.87;
+      var livePrice = 3890.35;
       getCandles(0).then(function(v) {
         var closed = v.slice(0, -1);
         var last = v[v.length - 1];
 
         livePrice = last.c;
         if(livePrice < 3500.00 || livePrice > 4500.00) {
-          livePrice = 3915.87;
+          livePrice = 3890.35;
         }
 
         document.getElementById("ticker-bid").innerText = livePrice.toFixed(2);
         var sg = analyzeAI55(closed, livePrice, last);
-        SIGNAL = sg;
+        
+        var now = new Date();
+        var currentBlock = now.getHours() + ":" + Math.floor(now.getMinutes() / 5);
+        if (currentBlock !== LAST_SIGNAL_BLOCK || !SIGNAL) {
+          LAST_SIGNAL_BLOCK = currentBlock;
+          SIGNAL = sg;
+        } else {
+          SIGNAL.entry = livePrice;
+        }
         renderSignal();
       }).catch(function() {
         document.getElementById("ticker-bid").innerText = livePrice.toFixed(2);
@@ -737,7 +749,7 @@
     applyUI();
     loadAuto();
     fetchLiveForexFactory();
-    setInterval(loadAuto, 30000);
+    setInterval(loadAuto, 10000);
     setInterval(tickTimer, 1000);
     tickTimer();
   </script>
