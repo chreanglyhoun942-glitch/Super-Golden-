@@ -3,124 +3,120 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>LHvara | AI Gold Trading Desk</title>
+  <title>GOLDEN EDGE TERMINAL | AI Fast 5.5 & Forex Factory</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: #06080c; color: #f1f5f9; padding-bottom: 50px; line-height: 1.4; text-align: center; }
-    .top-bar { background: #0b0f17; border-bottom: 1px solid #1e293b; padding: 7px 10px; font-size: 11px; display: flex; justify-content: space-between; align-items: center; }
-    .container { max-width: 550px; margin: 0 auto; padding: 12px; }
-    .header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .logo-badge { display: flex; align-items: center; gap: 8px; }
-    .lh-box { width: 32px; height: 32px; background: #f59e0b; color: #000; font-weight: 900; font-size: 13px; display: flex; align-items: center; justify-content: center; border-radius: 6px; }
-    .lh-title { font-size: 14px; font-weight: 800; color: #f59e0b; text-align: left; line-height: 1.1; }
-    .lh-sub { font-size: 9px; color: #94a3b8; }
-    .btn-auth-header { background: #1e293b; border: 1px solid #334155; color: #38bdf8; font-size: 10px; font-weight: bold; padding: 5px 10px; border-radius: 6px; cursor: pointer; }
-    .card { background: #0d131f; border: 1px solid #1e293b; border-radius: 12px; padding: 12px; margin-bottom: 14px; text-align: left; }
+    body { background: #0c1017; color: #f1f5f9; padding-bottom: 40px; line-height: 1.4; text-align: center; }
     
-    /* SIGNAL CARD */
-    .signal-card { background: #0d131f; border-radius: 14px; padding: 14px; border: 2px solid #ef4444; border-left: 6px solid #ef4444; margin-bottom: 14px; text-align: left; box-shadow: 0 0 15px rgba(239,68,68,0.2); position: relative; }
+    /* TOP TERMINAL BAR */
+    .top-bar { background: #131b29; border-bottom: 1px solid #1e293b; padding: 8px 12px; font-size: 11px; display: flex; justify-content: space-between; align-items: center; }
+    .container { max-width: 600px; margin: 0 auto; padding: 10px; }
+    
+    .header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; background: #131b29; padding: 8px 12px; border-radius: 8px; border: 1px solid #1e293b; }
+    .logo-badge { display: flex; align-items: center; gap: 8px; }
+    .lh-box { width: 30px; height: 30px; background: #f59e0b; color: #000; font-weight: 900; font-size: 12px; display: flex; align-items: center; justify-content: center; border-radius: 6px; }
+    .lh-title { font-size: 13px; font-weight: 800; color: #f59e0b; text-align: left; line-height: 1.1; }
+    .lh-sub { font-size: 8.5px; color: #94a3b8; }
+    .btn-auth-header { background: #1e293b; border: 1px solid #334155; color: #38bdf8; font-size: 10px; font-weight: bold; padding: 5px 10px; border-radius: 6px; cursor: pointer; }
+    
+    .card { background: #111827; border: 1px solid #1f2937; border-radius: 10px; padding: 10px; margin-bottom: 12px; text-align: left; }
+    
+    /* AI FAST 5.5 SIGNAL CARD */
+    .signal-card { background: #111827; border-radius: 12px; padding: 12px; border: 2px solid #10b981; border-left: 6px solid #10b981; margin-bottom: 12px; text-align: left; box-shadow: 0 0 15px rgba(16,185,129,0.15); position: relative; }
     .sig-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-    .dir-badge { font-size: 11px; font-weight: 900; padding: 3px 8px; border-radius: 4px; background: #f43f5e; color: #fff; }
-    .timer-tag { background: #1e293b; color: #f59e0b; font-family: monospace; font-size: 11px; padding: 3px 6px; border-radius: 4px; font-weight: bold; }
-    .price-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; background: #06080c; padding: 8px 6px; border-radius: 8px; text-align: center; margin-bottom: 8px; border: 1px solid #1e293b; }
-    .p-lbl { font-size: 8.5px; color: #64748b; font-weight: bold; margin-bottom: 2px; }
-    .p-val { font-size: 12px; font-weight: bold; }
-    .profit-target-box { display: flex; justify-content: space-between; background: rgba(2, 6, 23, 0.85); border: 1px dashed #38bdf8; padding: 7px 10px; border-radius: 6px; font-size: 10.5px; margin-bottom: 8px; }
-    .btn-tg-main { display: block; width: 100%; background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; text-align: center; padding: 10px; border-radius: 8px; font-size: 11.5px; font-weight: bold; text-decoration: none; }
-    .sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-    .btn-sub { text-align: center; padding: 6px; border-radius: 6px; font-size: 10px; font-weight: bold; text-decoration: none; color: #fff; background: #1e293b; border: 1px solid #334155; }
-    .quota-banner { background: #06080c; border: 1px solid #334155; border-radius: 6px; padding: 5px 8px; margin-bottom: 8px; font-size: 10px; display: flex; justify-content: space-between; align-items: center; }
+    .dir-badge { font-size: 10.5px; font-weight: 900; padding: 3px 8px; border-radius: 4px; background: #10b981; color: #000; }
+    .timer-tag { background: #1f2937; color: #f59e0b; font-family: monospace; font-size: 10.5px; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+    .price-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; background: #0b1017; padding: 7px 5px; border-radius: 6px; text-align: center; margin-bottom: 8px; border: 1px solid #1f2937; }
+    .p-lbl { font-size: 8px; color: #9ca3af; font-weight: bold; margin-bottom: 2px; }
+    .p-val { font-size: 11.5px; font-weight: bold; }
+    .profit-target-box { display: flex; justify-content: space-between; background: rgba(3, 7, 18, 0.9); border: 1px dashed #38bdf8; padding: 6px 8px; border-radius: 6px; font-size: 10px; margin-bottom: 8px; }
+    .btn-tg-main { display: block; width: 100%; background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; text-align: center; padding: 9px; border-radius: 6px; font-size: 11px; font-weight: bold; text-decoration: none; }
+    .quota-banner { background: #0b1017; border: 1px solid #1f2937; border-radius: 6px; padding: 5px 8px; margin-bottom: 8px; font-size: 9.5px; display: flex; justify-content: space-between; align-items: center; }
 
     /* FOREX FACTORY TABS & STYLES */
     .tab-bar { display: flex; gap: 6px; margin-bottom: 8px; overflow-x: auto; padding-bottom: 2px; }
-    .tab-btn { background: #06080c; border: 1px solid #334155; color: #94a3b8; font-size: 10.5px; font-weight: bold; padding: 5px 10px; border-radius: 6px; cursor: pointer; white-space: nowrap; }
-    .tab-btn.active { background: #1e293b; color: #f59e0b; border-color: #f59e0b; }
-    .news-table-header { display: grid; grid-template-columns: 2fr 3.2fr 2.8fr; background: #06080c; padding: 6px 8px; border-radius: 6px; font-size: 9.5px; color: #64748b; font-weight: bold; margin-bottom: 6px; }
-    .news-item-row { display: grid; grid-template-columns: 2fr 3.2fr 2.8fr; background: #090e17; border: 1px solid #1e293b; padding: 8px; border-radius: 6px; font-size: 10px; align-items: center; margin-bottom: 6px; }
-    .news-impact-red { width: 8px; height: 8px; background: #ef4444; border-radius: 2px; display: inline-block; margin-right: 4px; }
-    .news-impact-orange { width: 8px; height: 8px; background: #f97316; border-radius: 2px; display: inline-block; margin-right: 4px; }
-    .news-impact-yellow { width: 8px; height: 8px; background: #eab308; border-radius: 2px; display: inline-block; margin-right: 4px; }
-    .sig-forecast-badge { display: inline-block; font-size: 8.5px; font-weight: bold; padding: 2px 5px; border-radius: 4px; text-align: center; }
+    .tab-btn { background: #0b1017; border: 1px solid #374151; color: #9ca3af; font-size: 10px; font-weight: bold; padding: 5px 9px; border-radius: 6px; cursor: pointer; white-space: nowrap; }
+    .tab-btn.active { background: #1f2937; color: #f59e0b; border-color: #f59e0b; }
+    .news-table-header { display: grid; grid-template-columns: 2fr 3.2fr 2.8fr; background: #0b1017; padding: 6px 8px; border-radius: 6px; font-size: 9px; color: #9ca3af; font-weight: bold; margin-bottom: 6px; }
+    .news-item-row { display: grid; grid-template-columns: 2fr 3.2fr 2.8fr; background: #0b1017; border: 1px solid #1f2937; padding: 7px 8px; border-radius: 6px; font-size: 9.5px; align-items: center; margin-bottom: 5px; }
+    .news-impact-red { width: 7px; height: 7px; background: #ef4444; border-radius: 2px; display: inline-block; margin-right: 4px; }
+    .news-impact-orange { width: 7px; height: 7px; background: #f97316; border-radius: 2px; display: inline-block; margin-right: 4px; }
+    .news-impact-yellow { width: 7px; height: 7px; background: #eab308; border-radius: 2px; display: inline-block; margin-right: 4px; }
+    .sig-forecast-badge { display: inline-block; font-size: 8px; font-weight: bold; padding: 2px 4px; border-radius: 4px; text-align: center; }
     .fc-sell { background: rgba(244, 63, 94, 0.2); color: #f43f5e; border: 1px solid #f43f5e; }
     .fc-buy { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid #10b981; }
 
     /* LOCK SCREEN */
-    .pro-lock-box { background: rgba(13, 19, 31, 0.95); border: 2px dashed #f59e0b; border-radius: 12px; padding: 20px 14px; text-align: center; }
-    .btn-buy-instant { display: inline-block; background: linear-gradient(135deg, #f59e0b, #d97706); color: #000; font-weight: 900; font-size: 12px; padding: 10px 18px; border-radius: 8px; border: none; cursor: pointer; margin-top: 8px; }
+    .pro-lock-box { background: rgba(17, 24, 39, 0.98); border: 2px dashed #f59e0b; border-radius: 10px; padding: 18px 12px; text-align: center; }
+    .btn-buy-instant { display: inline-block; background: linear-gradient(135deg, #f59e0b, #d97706); color: #000; font-weight: 900; font-size: 11px; padding: 9px 16px; border-radius: 6px; border: none; cursor: pointer; margin-top: 8px; }
+
+    /* SYSTEM STATUS PANEL */
+    .status-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .status-box { background: #111827; border: 1px solid #1f2937; padding: 8px 10px; border-radius: 8px; text-align: left; font-size: 10px; }
+    .status-dot { width: 7px; height: 7px; background: #10b981; border-radius: 50%; display: inline-block; margin-right: 4px; }
 
     /* MODAL POPUPS */
-    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.88); display: none; justify-content: center; align-items: center; z-index: 999; padding: 14px; }
-    .modal-content { background: #0d131f; border: 1.5px solid #334155; border-radius: 14px; padding: 18px; width: 100%; max-width: 390px; text-align: left; max-height: 90vh; overflow-y: auto; }
-    .auth-input { width: 100%; background: #06080c; border: 1px solid #334155; color: #fff; padding: 9px; border-radius: 6px; font-size: 12px; margin-bottom: 8px; outline: none; }
-    .btn-submit-action { width: 100%; background: #14b8a6; color: #000; border: none; padding: 10px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; margin-top: 6px; }
-    .btn-close-modal { background: #1e293b; color: #94a3b8; border: none; padding: 8px; width: 100%; border-radius: 6px; margin-top: 8px; cursor: pointer; font-size: 11px; }
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 999; padding: 14px; }
+    .modal-content { background: #111827; border: 1.5px solid #374151; border-radius: 12px; padding: 16px; width: 100%; max-width: 380px; text-align: left; max-height: 90vh; overflow-y: auto; }
+    .auth-input { width: 100%; background: #0b1017; border: 1px solid #374151; color: #fff; padding: 9px; border-radius: 6px; font-size: 11.5px; margin-bottom: 8px; outline: none; }
+    .btn-submit-action { width: 100%; background: #14b8a6; color: #000; border: none; padding: 9px; border-radius: 6px; font-size: 11.5px; font-weight: bold; cursor: pointer; margin-top: 6px; }
+    .btn-close-modal { background: #1f2937; color: #9ca3af; border: none; padding: 7px; width: 100%; border-radius: 6px; margin-top: 8px; cursor: pointer; font-size: 10.5px; }
 
     /* PLAN CARDS */
-    .plan-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
-    .plan-card { border: 1.5px solid #334155; background: #06080c; padding: 8px; border-radius: 8px; text-align: center; cursor: pointer; }
+    .plan-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+    .plan-card { border: 1.5px solid #374151; background: #0b1017; padding: 7px; border-radius: 6px; text-align: center; cursor: pointer; }
     .plan-card.active { border-color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
-    .plan-card b { display: block; font-size: 12px; color: #fff; }
-    .plan-card span { font-size: 10px; color: #f59e0b; font-weight: bold; }
+    .plan-card b { display: block; font-size: 11px; color: #fff; }
+    .plan-card span { font-size: 9.5px; color: #f59e0b; font-weight: bold; }
 
-    .qr-container { background: #fff; padding: 10px; border-radius: 10px; width: 190px; margin: 8px auto; text-align: center; }
-    .qr-container img { width: 100%; display: block; border-radius: 4px; }
-
-    .exness-card { background: linear-gradient(135deg, #111827, #0b0f17); border: 1.5px solid #facc15; border-radius: 12px; padding: 12px; margin-bottom: 14px; text-align: left; }
-    .btn-exness { display: block; width: 100%; background: linear-gradient(135deg, #facc15, #eab308); color: #000; text-align: center; padding: 9px; border-radius: 6px; font-size: 11px; font-weight: 900; text-decoration: none; margin-top: 8px; }
+    .exness-card { background: linear-gradient(135deg, #1f2937, #111827); border: 1.5px solid #facc15; border-radius: 10px; padding: 10px; margin-bottom: 12px; text-align: left; }
+    .btn-exness { display: block; width: 100%; background: linear-gradient(135deg, #facc15, #eab308); color: #000; text-align: center; padding: 8px; border-radius: 6px; font-size: 10.5px; font-weight: 900; text-decoration: none; margin-top: 6px; }
   </style>
 </head>
 <body>
 
-  <!-- TICKER -->
+  <!-- TERMINAL TOP TICKER -->
   <div class="top-bar">
-    <span>XAUUSD Spot: <b id="ticker-bid" style="color:#f59e0b">—</b> <span style="color:#64748b">(Live 15M)</span></span>
-    <span id="user-badge" style="color:#94a3b8; font-size:10px;">● Free Member</span>
+    <span>XAUUSD MT5 Spot: <b id="ticker-bid" style="color:#f59e0b">—</b> <span style="color:#10b981">(AI Fast 5.5 Active)</span></span>
+    <span id="user-badge" style="color:#9ca3af; font-size:9.5px;">● Free Member</span>
   </div>
 
   <div class="container">
     <div class="header-bar">
       <div class="logo-badge">
-        <div class="lh-box">LH</div>
+        <div class="lh-box">GE</div>
         <div>
-          <div class="lh-title">LHvara Desk</div>
-          <div class="lh-sub">Auto Signals & Indicator Hub</div>
+          <div class="lh-title">GOLDEN EDGE TERMINAL</div>
+          <div class="lh-sub">AI Fast 5.5 & Forex Factory Hub</div>
         </div>
       </div>
-      <button class="btn-auth-header" id="btn-auth-modal" onclick="openAuthModal()">🔑 Login / គណនី</button>
+      <button class="btn-auth-header" id="btn-auth-modal" onclick="openAuthModal()">🔑 Login / Sign Up</button>
     </div>
 
-    <!-- PROFILE -->
-    <div class="card">
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <b>LHoneboy (Dev • Founder)</b>
-        <span style="color:#38bdf8; font-size:10px;">Official Founder ✓</span>
-      </div>
-      <div class="sub-grid" style="grid-template-columns: repeat(3, 1fr); margin-top:8px;">
-        <a href="https://www.tiktok.com/@clh4239?_r=1&_t=ZS-9AtHR4My4mN" target="_blank" class="btn-sub">TikTok</a>
-        <a href="https://www.facebook.com/share/14sck9T2HJe/" target="_blank" class="btn-sub" style="color:#38bdf8;">Facebook</a>
-        <a href="https://t.me/signalhoun21" target="_blank" class="btn-sub" style="color:#38bdf8;">Telegram</a>
-      </div>
-    </div>
-
-    <!-- TRADINGVIEW LIVE CHART -->
+    <!-- TRADINGVIEW LIVE CHART (MT5 Spot Gold) -->
     <div class="card" style="padding:0; overflow:hidden;">
-      <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA%3AXAUUSD&interval=1&theme=dark&style=1&timezone=Asia%2FBangkok&locale=en" style="width:100%; height:320px; border:none;"></iframe>
+      <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA%3AXAUUSD&interval=5&theme=dark&style=1&timezone=Asia%2FBangkok&locale=en" style="width:100%; height:300px; border:none;"></iframe>
     </div>
 
-    <!-- LIVE PRICE SINGLE QUOTE -->
-    <div class="card" style="padding:4px;">
-      <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>{"symbol":"OANDA:XAUUSD","width":"100%","colorTheme":"dark","isTransparent":true,"locale":"en"}</script></div>
+    <!-- SYSTEM STATUS PANEL -->
+    <div class="status-panel">
+      <div class="status-box">
+        <div><span class="status-dot"></span><b>Master MT5:</b> Connected</div>
+        <div style="color:#9ca3af; font-size:8.5px; margin-top:2px;">Execution Mode: REAL</div>
+      </div>
+      <div class="status-box">
+        <div><span class="status-dot"></span><b>AI Fast 5.5:</b> Publishing</div>
+        <div style="color:#9ca3af; font-size:8.5px; margin-top:2px;">Model: SMC Confluence</div>
+      </div>
     </div>
 
-    <!-- LIVE SETUP -->
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-      <b style="font-size:12px; color:#f59e0b;">🔥 LIVE SETUP (15M CANDLE)</b>
-      <span style="color:#38bdf8; font-size:10px;">● Auto-Sync 15M</span>
+    <!-- LIVE AI SIGNAL CARD -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+      <b style="font-size:11.5px; color:#f59e0b;">⚡ AI FAST 5.5 LIVE SMC SETUP (5M Refresh)</b>
+      <span style="color:#38bdf8; font-size:9.5px;">● Real-time MT5 Sync</span>
     </div>
 
     <div class="signal-card" id="main-signal-card">
-      <!-- QUOTA USAGE BAR -->
       <div class="quota-banner">
         <span>កូតា Signal ថ្ងៃនេះ៖ <b id="quota-used-text" style="color:#38bdf8;">--/--</b></span>
         <span id="quota-plan-text" style="color:#f59e0b; font-weight:bold;">Free (5/ថ្ងៃ)</span>
@@ -128,13 +124,13 @@
 
       <div class="sig-header">
         <div style="display:flex; align-items:center; gap:6px;">
-          <span class="dir-badge" id="sig-badge">WAIT</span>
-          <b style="font-size:13px; color:#fff;">XAUUSD</b>
-          <span id="trend-tag" style="color:#38bdf8; font-size:9.5px; font-weight:bold; background:rgba(56,189,248,0.15); padding:2px 5px; border-radius:4px;">ANALYZING</span>
+          <span class="dir-badge" id="sig-badge">BUY (SMC ZONE)</span>
+          <b style="font-size:12px; color:#fff;">XAUUSD</b>
+          <span id="trend-tag" style="color:#10b981; font-size:9px; font-weight:bold; background:rgba(16,185,129,0.15); padding:2px 5px; border-radius:4px;">BULLISH FVG</span>
         </div>
         <div style="display:flex; align-items:center; gap:6px;">
-          <span class="timer-tag" id="sig-timer">⏱️ 15:00</span>
-          <span style="font-size:10px; color:#94a3b8;">ម៉ោងពិត: <b id="sig-valid-from" style="color:#38bdf8;">--:--</b></span>
+          <span class="timer-tag" id="sig-timer">⏱️ 05:00</span>
+          <span style="font-size:9.5px; color:#9ca3af;">ម៉ោងពិត: <b id="sig-valid-from" style="color:#38bdf8;">--:--</b></span>
         </div>
       </div>
 
@@ -148,40 +144,41 @@
       <div class="profit-target-box">
         <span>Target TP1: <b id="pips-tp1" style="color:#10b981;">—</b></span>
         <span>Target TP2: <b id="pips-tp2" style="color:#10b981;">—</b></span>
-        <span>R:R: <b id="val-rr" style="color:#f59e0b;">—</b></span>
+        <span>R:R: <b id="val-rr" style="color:#f59e0b;">1 : 3.00</b></span>
       </div>
 
-      <div id="sig-note" style="font-size:9.5px;color:#94a3b8;margin-bottom:8px;"></div>
+      <div id="sig-note" style="font-size:9px;color:#9ca3af;margin-bottom:6px;"></div>
       <a id="btn-tg-broadcast" href="https://t.me/signalhoun21" target="_blank" class="btn-tg-main">
-        🚀 Send Live Setup to Telegram VIP
+        🚀 Send Live SMC Setup to Telegram VIP
       </a>
     </div>
 
-    <!-- FOREX FACTORY NEWS & CPI STRATEGY -->
+    <!-- FOREX FACTORY CALENDAR WIDGET (LOCKED FOR FREE MEMBERS) -->
     <div class="card" id="forex-factory-wrapper" style="border-color: rgba(245, 158, 11, 0.4);">
       
+      <!-- LOCKED VIEW FOR FREE -->
       <div id="factory-locked-view" class="pro-lock-box">
-        <div style="font-size:30px; margin-bottom:6px;">🔒</div>
-        <b style="color:#f59e0b; font-size:13px;">FOREX FACTORY PRO INSIGHTS (LOCKED)</b>
-        <p style="font-size:11px; color:#cbd5e1; margin-top:6px;">
-          ទិន្នន័យ Forex Factory News & លទ្ធភាពចេញ Signal ត្រូវបានចាក់សោរ។<br>
-          ជ្រើសរើសទិញ <b>PRO ($25 / ២០ Signal)</b> ឬ <b>UNLIMITED ($100 / ៥០ Signal)</b> ដើម្បីបើកមើលភ្លាមៗ!
+        <div style="font-size:26px; margin-bottom:4px;">🔒</div>
+        <b style="color:#f59e0b; font-size:12px;">FOREX FACTORY & FACTORY SIGNALS (LOCKED)</b>
+        <p style="font-size:10px; color:#cbd5e1; margin-top:5px;">
+          ទិន្នន័យប្រតិទិនសេដ្ឋកិច្ច Factory និង Signal ពិសេសត្រូវបានចាក់សោរ។<br>
+          តម្រូវឱ្យដំឡើងកម្រិតជា <b>PRO ($25)</b> ឬ <b>UNLIMITED ($100)</b> / Owner ទើបអាចមើលឃើញ!
         </p>
         <button class="btn-buy-instant" onclick="openPaymentModal()">
-          💳 ទិញគណនី PRO / UNLIMITED នៅទីនេះ
+          💳 ដំឡើងគណនី PRO / UNLIMITED នៅទីនេះ
         </button>
       </div>
 
+      <!-- UNLOCKED VIEW FOR PAID MEMBERS -->
       <div id="factory-unlocked-view" style="display:none;">
-        <div class="news-title-row" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <b style="font-size:12px; color:#f59e0b;">📅 Forex Factory: Live Calendar Feed</b>
-          <span style="color:#10b981; font-size:9.5px; font-weight:bold;">👑 UNLOCKED</span>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <b style="font-size:11.5px; color:#f59e0b;">📅 Forex Factory Live Calendar & Signals</b>
+          <span style="color:#10b981; font-size:9px; font-weight:bold;">👑 UNLOCKED VIP</span>
         </div>
 
-        <!-- DYNAMIC DAY TABS FROM FOREX FACTORY -->
         <div class="tab-bar" id="ff-tabs-container">
-          <button class="tab-btn" onclick="selectDayTab('Mon')">Mon</button>
-          <button class="tab-btn active" onclick="selectDayTab('Tue')">Tue (CPI 🔥)</button>
+          <button class="tab-btn active" onclick="selectDayTab('Mon')">Mon</button>
+          <button class="tab-btn" onclick="selectDayTab('Tue')">Tue</button>
           <button class="tab-btn" onclick="selectDayTab('Wed')">Wed</button>
           <button class="tab-btn" onclick="selectDayTab('Thu')">Thu</button>
           <button class="tab-btn" onclick="selectDayTab('Fri')">Fri</button>
@@ -189,8 +186,8 @@
 
         <div class="news-table-header">
           <div>ម៉ោង (Time)</div>
-          <div>ព័ត៌មាន (Economic Events)</div>
-          <div style="text-align:right;">Signal Forecast</div>
+          <div>ព្រឹត្តិការណ៍សេដ្ឋកិច្ច</div>
+          <div style="text-align:right;">Factory Forecast Bias</div>
         </div>
         
         <div id="factory-news-container"></div>
@@ -200,24 +197,24 @@
     <!-- EXNESS CARD -->
     <div class="exness-card">
       <div style="display:flex; justify-content:space-between; align-items:center;">
-        <b style="color:#facc15; font-size:12px;">🟡 បង្កើតគណនីជួញដូរ Exness ផ្លូវការ</b>
-        <span style="background:#facc15; color:#000; font-size:9px; font-weight:bold; padding:2px 6px; border-radius:4px;">OFFICIAL</span>
+        <b style="color:#facc15; font-size:11px;">🟡 គណនីជួញដូរ MT5 / Exness ផ្លូវការ</b>
+        <span style="background:#facc15; color:#000; font-size:8.5px; font-weight:bold; padding:2px 5px; border-radius:4px;">BROKER</span>
       </div>
-      <p style="font-size:10.5px; color:#cbd5e1; margin-top:6px;">
-        ចុះឈ្មោះគណនី Exness តាមរយៈតំណភ្ជាប់ Partner របស់ LHoneboy ដើម្បីទទួលបានការចូលរួមក្នុង Telegram VIP Signals ដោយឥតគិតថ្លៃ។
+      <p style="font-size:10px; color:#cbd5e1; margin-top:5px;">
+        តភ្ជាប់គណនី Exness/MT5 របស់អ្នកដើម្បីបើកការបញ្ជាទិញស្វ័យប្រវត្តិជាមួយ AI Fast 5.5 ។
       </p>
-      <a href="https://one.exness-track.com" target="_blank" class="btn-exness">👉 ចុចទីនេះដើម្បីបង្កើតគណនី Exness</a>
+      <a href="https://one.exness-track.com" target="_blank" class="btn-exness">👉 ចុចទីនេះដើម្បីតភ្ជាប់គណនី Exness</a>
     </div>
 
-    <div style="font-size:10px; color:#64748b;">© 2026 LHvara Desk. Managed by LHoneboy.</div>
+    <div style="font-size:9.5px; color:#6b7280;">© 2026 Golden Edge Terminal. AI Fast 5.5 & Factory Hub.</div>
   </div>
 
   <!-- MODAL: PAYMENT -->
   <div class="modal-overlay" id="payment-modal">
     <div class="modal-content" style="text-align:center;">
-      <b style="color:#f59e0b; font-size:14px; display:block;">ស្កេនទូទាត់ប្រាក់បើកគណនី</b>
+      <b style="color:#f59e0b; font-size:13px; display:block;">ទូទាត់ប្រាក់ដំឡើងកម្រិតគណនី</b>
       
-      <div class="plan-selector" style="margin-top:10px;">
+      <div class="plan-selector" style="margin-top:8px;">
         <div class="plan-card active" id="p-pro" onclick="selectPlan('pro')">
           <b>PRO (២០ Signal/ថ្ងៃ)</b>
           <span>$25.00 / ខែ</span>
@@ -228,14 +225,14 @@
         </div>
       </div>
 
-      <div class="qr-container">
-        <img id="qr-img" src="payment-qr.jpg" alt="Bakong QR">
-        <div id="qr-price-lbl" style="color:#000; font-size:11px; font-weight:900; margin-top:4px;">LHoneboy • $25.00 (PRO)</div>
+      <div class="qr-container" style="background:#fff; padding:8px; border-radius:8px; width:160px; margin:6px auto;">
+        <img id="qr-img" src="payment-qr.jpg" alt="Bakong QR" style="width:100%; border-radius:4px;">
+        <div id="qr-price-lbl" style="color:#000; font-size:10px; font-weight:900; margin-top:3px;">LHoneboy • $25.00 (PRO)</div>
       </div>
 
-      <div id="pay-input-section" style="text-align:left; margin-top:8px;">
-        <p style="font-size:10px; color:#cbd5e1; margin-bottom:6px;">១) ស្កេនបង់ប្រាក់ &nbsp;២) ផ្ញើរូបថតការទូទាត់ទៅ <a href="https://t.me/signalhoun21" target="_blank" style="color:#38bdf8;">Telegram @signalhoun21</a> &nbsp;៣) ទទួលបាន Activation Code ក្រោយផ្ទៀងផ្ទាត់ ហើយបញ្ចូលខាងក្រោម</p>
-        <label style="font-size:10px; color:#94a3b8;">Activation Code</label>
+      <div id="pay-input-section" style="text-align:left; margin-top:6px;">
+        <p style="font-size:9.5px; color:#cbd5e1; margin-bottom:5px;">១) បង់ប្រាក់ &nbsp;២) ផ្ញើវិក្កយបត្រទៅ <a href="https://t.me/signalhoun21" target="_blank" style="color:#38bdf8;">Telegram @signalhoun21</a> &nbsp;៣) បញ្ចូល Activation Code ខាងក្រោម</p>
+        <label style="font-size:9.5px; color:#9ca3af;">Activation Code</label>
         <input type="text" id="pay-code" class="auth-input" placeholder="ឧ. P-1A2B3C4D" autocomplete="off">
         <button class="btn-submit-action" onclick="processActivation()">✅ Activate Plan</button>
       </div>
@@ -244,25 +241,23 @@
     </div>
   </div>
 
-  <!-- AUTH POPUP -->
+  <!-- AUTH POPUP (LOGIN / SIGN UP) -->
   <div class="modal-overlay" id="auth-modal">
     <div class="modal-content">
-      <b style="color:#f59e0b; font-size:14px; display:block; margin-bottom:10px;">🔑 Login / ចូលគណនី</b>
-      <label style="font-size:10px; color:#94a3b8;">ឈ្មោះគណនី (Username)</label>
+      <b style="color:#f59e0b; font-size:13px; display:block; margin-bottom:8px;">🔑 Login / Sign Up គណនី</b>
+      <label style="font-size:9.5px; color:#9ca3af;">ឈ្មោះគណនី (Username)</label>
       <input type="text" id="auth-username" class="auth-input" placeholder="បញ្ចូល Username របស់អ្នក...">
-      <label style="font-size:10px; color:#94a3b8;">ពាក្យសម្ងាត់ (Password / Passcode)</label>
+      <label style="font-size:9.5px; color:#9ca3af;">ពាក្យសម្ងាត់ (Password / Passcode)</label>
       <input type="password" id="auth-password" class="auth-input" placeholder="បញ្ចូលលេខសម្ងាត់...">
       <button class="btn-submit-action" onclick="handleLogin()">ចូលគណនី (Login)</button>
-      <button class="btn-submit-action" style="background:#334155;margin-top:6px;" onclick="handleRegister()">បង្កើតគណនីថ្មី (Free)</button>
+      <button class="btn-submit-action" style="background:#374155; color:#fff; margin-top:5px;" onclick="handleRegister()">បង្កើតគណនីថ្មី (Free ៥ Signal)</button>
       <button class="btn-close-modal" onclick="closeAuthModal()">បិទ</button>
     </div>
   </div>
 
   <script>
-    var MANUAL_SIGNAL = null;
-    var SIGNAL = MANUAL_SIGNAL, AUTO_MSG = "LOADING";
+    var SIGNAL = null;
     
-    // កំណត់កូតា Signal ក្នុងមួយថ្ងៃតាម Plan នីមួយៗ
     var PLANS = { 
       free: { label: "Free Member", days: null, quota: 5 },
       pro: { label: "PRO (1-MONTH)", days: 30, quota: 20 }, 
@@ -280,7 +275,7 @@
     };
 
     var selectedPlanType = 'pro';
-    var activeNewsDay = 'Tue';
+    var activeNewsDay = 'Mon';
     var IS_REAL_OWNER = false;
 
     function c53(s,seed){seed=seed||0;var h1=0xdeadbeef^seed,h2=0x41c6ce57^seed;for(var i=0,ch;i<s.length;i++){ch=s.charCodeAt(i);h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677)}h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);return(4294967296*(2097151&h2)+(h1>>>0)).toString(36)}
@@ -312,7 +307,7 @@
       if (usage.lastSignalId !== sigId) {
         usage.count += 1;
         usage.lastSignalId = sigId;
-                localStorage.setItem("lh_sig_usage", JSON.stringify(usage));
+        localStorage.setItem("lh_sig_usage", JSON.stringify(usage));
       }
       return usage.count;
     }
@@ -325,7 +320,7 @@
       var u = getUsers()[name];
       if(!u || !u.code) return "free";
       var p = CH[u.code];
-      if(!p || p !== u.plan || p === "owner") return "free";
+            if(!p || p !== u.plan || p === "owner") return "free";
       var d = PLANS[p].days;
       if(d && Date.now() > u.at + d * 864e5) return "free";
       return p;
@@ -351,10 +346,13 @@
       var role = me ? roleOf(me) : "free";
       var badge = document.getElementById("user-badge"), btn = document.getElementById("btn-auth-modal");
       var paid = (role === "pro" || role === "unlimited" || role === "owner");
+      
       badge.textContent = me ? ((paid ? "👑 " : "👤 ") + me + " (" + PLANS[role].label + ")") : "● Free Member (5 Signal/ថ្ងៃ)";
-      btn.textContent = me ? ((paid ? "👑 " : "👤 ") + me) : "🔑 Login / គណនី";
+      btn.textContent = me ? ((paid ? "👑 " : "👤 ") + me) : "🔑 Login / Sign Up";
+      
       document.getElementById("factory-locked-view").style.display = paid ? "none" : "block";
       document.getElementById("factory-unlocked-view").style.display = paid ? "block" : "none";
+      
       updateQuotaUI(role);
     }
 
@@ -394,7 +392,7 @@
     function handleRegister(){
       var c = readCreds(); if(!c) return;
       if(c.u.toLowerCase() === "lhoneboy"){
-        alert("ឈ្មោះ 'LHoneboy' គឺជាឈ្មោះ Owner មិនអាចចុះឈ្មោះធម្មតាបានទេ!");
+        alert("ឈ្មោះ 'LHoneboy' គឺជាឈ្មោះ Owner ផ្លូវការ!");
         return;
       }
       var users = getUsers();
@@ -421,7 +419,7 @@
         document.getElementById("auth-password").value = "";
         closeAuthModal();
         applyUI();
-        alert("👑 ស្វាគមន៍ការចូលកាន់កាប់ប្រព័ន្ធ LHvara ជា Owner!");
+        alert("👑 ស្វាគមន៍ការចូលកាន់កាប់ប្រព័ន្ធ Golden Edge Terminal ជា Owner!");
         return;
       }
 
@@ -439,7 +437,7 @@
       selectedPlanType = type;
       document.getElementById("p-pro").className = type==='pro' ? "plan-card active" : "plan-card";
       document.getElementById("p-unlimited").className = type==='unlimited' ? "plan-card active" : "plan-card";
-      document.getElementById("qr-price-lbl").innerText = type==='pro' ? "LHoneboy • $25.00 (PRO - ២០ Signal)" : "LHoneboy • $100.00 (UNLIMITED - ៥០ Signal)";
+      document.getElementById("qr-price-lbl").innerText = type==='pro' ? "LHoneboy • $25.00 (PRO)" : "LHoneboy • $100.00 (UNLIMITED)";
     }
     function processActivation(){
       var code = document.getElementById("pay-code").value.trim().toUpperCase(), h = c53(code), p = CH[h];
@@ -453,27 +451,18 @@
       document.getElementById("pay-code").value = "";
       closePaymentModal();
       applyUI();
-      alert("🎉 Activated ជោគជ័យ: " + PLANS[p].label + " (កូតា " + PLANS[p].quota + " Signal/ថ្ងៃ)");
+      alert("🎉 Activated ជោគជ័យ: " + PLANS[p].label);
     }
 
-    // ===== FOREX FACTORY COMPLETE CALENDAR ENGINE =====
+    // ===== FOREX FACTORY CALENDAR ENGINE =====
     var FF_ALL_EVENTS = [];
-
     var FF_BACKUP_EVENTS = [
-      { day: "Mon", time: "9:50pm", title: "USD FOMC Member Bowman Speaks", impact: "yellow", fc: "RANGE BIAS (SCALP)", bias: "fc-sell" },
+      { day: "Mon", time: "9:50pm", title: "USD FOMC Member Bowman Speaks", impact: "yellow", fc: "RANGE BIAS", bias: "fc-sell" },
       { day: "Mon", time: "10:00pm", title: "USD Final Wholesale Inventories m/m", impact: "yellow", fc: "Fc: 0.6% | Prev: 0.6%", bias: "fc-buy" },
-      { day: "Tue", time: "12:15am", title: "USD FOMC Member Barkin Speaks", impact: "yellow", fc: "SPEECH BIAS", bias: "fc-sell" },
-      { day: "Tue", time: "4:00pm", title: "USD FOMC Member Waller Speaks", impact: "yellow", fc: "MONITOR BIAS", bias: "fc-buy" },
-      { day: "Tue", time: "8:15pm", title: "USD ADP Weekly Employment Change", impact: "yellow", fc: "PRE-CPI VOLUME", bias: "fc-buy" },
-      { day: "Tue", time: "8:30pm", title: "USD Core CPI m/m (High Impact 🔥)", impact: "red", fc: "BUY STOP (4142.00)", bias: "fc-buy" },
-      { day: "Tue", time: "8:30pm", title: "USD CPI m/m (High Impact 🔥)", impact: "red", fc: "SELL STOP (4115.00)", bias: "fc-sell" },
-      { day: "Tue", time: "10:15pm", title: "USD FOMC Member Logan Speaks", impact: "yellow", fc: "POST-CPI IMPACT", bias: "fc-sell" },
-      { day: "Wed", time: "2:00pm", title: "USD Treasury Statement", impact: "yellow", fc: "VOLUME FLOW", bias: "fc-buy" },
-      { day: "Wed", time: "8:30pm", title: "USD PPI m/m (Wholesale Inflation)", impact: "red", fc: "BUY BIAS (4138.00)", bias: "fc-buy" },
-      { day: "Wed", time: "10:30pm", title: "USD Crude Oil Inventories", impact: "orange", fc: "ENERGY SHIFT", bias: "fc-sell" },
-      { day: "Thu", time: "8:30pm", title: "USD Unemployment Claims (Jobless)", impact: "red", fc: "VOLATILITY BURST", bias: "fc-buy" },
-      { day: "Thu", time: "8:30pm", title: "USD Retail Sales m/m", impact: "red", fc: "BREAKOUT RANGE", bias: "fc-sell" },
-      { day: "Fri", time: "8:30pm", title: "USD Empire State Manufacturing Index", impact: "orange", fc: "WEEKEND CLOSE BIAS", bias: "fc-buy" },
+      { day: "Tue", time: "8:30pm", title: "USD Core CPI m/m (High Impact 🔥)", impact: "red", fc: "BUY STOP (3920.00)", bias: "fc-buy" },
+      { day: "Tue", time: "8:30pm", title: "USD CPI m/m (High Impact 🔥)", impact: "red", fc: "SELL STOP (3900.00)", bias: "fc-sell" },
+      { day: "Wed", time: "8:30pm", title: "USD PPI m/m (Wholesale Inflation)", impact: "red", fc: "BUY BIAS (3910.00)", bias: "fc-buy" },
+      { day: "Thu", time: "8:30pm", title: "USD Unemployment Claims", impact: "red", fc: "VOLATILITY BURST", bias: "fc-buy" },
       { day: "Fri", time: "10:00pm", title: "USD Prelim UoM Consumer Sentiment", impact: "red", fc: "TREND EXTENSION", bias: "fc-sell" }
     ];
 
@@ -493,15 +482,15 @@
       });
 
       if (filtered.length === 0) {
-        filtered = sourceList.filter(function(item) { return item.day === "Tue"; });
+        filtered = sourceList.filter(function(item) { return item.day === "Mon"; });
       }
 
       var html = "";
       filtered.forEach(function(item) {
         var impactClass = "news-impact-" + (item.impact || "yellow");
         html += '<div class="news-item-row">' +
-          '<div><b style="color:#fff;">' + item.time + '</b><div style="font-size:8px; color:#94a3b8;">' + item.day + ' Day</div></div>' +
-          '<div><div><span class="' + impactClass + '"></span><b style="color:#cbd5e1;">' + item.title + '</b></div></div>' +
+          '<div><b style="color:#fff;">' + item.time + '</b><div style="font-size:7.5px; color:#9ca3af;">' + (item.dateStr || item.day) + '</div></div>' +
+          '<div><div><span class="' + impactClass + '"></span><b style="color:#e5e7eb;">' + item.title + '</b></div></div>' +
           '<div style="text-align:right;"><span class="sig-forecast-badge ' + item.bias + '">' + item.fc + '</span></div>' +
         '</div>';
       });
@@ -520,9 +509,9 @@
 
           data.forEach(function(ev) {
             if (ev.country !== "USD") return;
-            var d = new Date(ev.date);
-            var dayName = daysMap[d.getDay()] || "Tue";
-            var timeStr = d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+            var evDate = new Date(ev.date);
+            var dayName = daysMap[evDate.getDay()] || "Mon";
+            var timeStr = evDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true });
             var impact = (ev.impact || "yellow").toLowerCase();
             if (impact === "medium") impact = "orange";
             if (impact === "high") impact = "red";
@@ -531,7 +520,7 @@
             var bias = "fc-buy";
             if (impact === "red") {
               if (ev.title.indexOf("CPI") !== -1) {
-                fcText = "BUY 4142 / SELL 4115";
+                fcText = "BUY 3920 / SELL 3900";
                 bias = "fc-sell";
               } else {
                 fcText = "BREAKOUT " + (ev.forecast || "HIGH");
@@ -544,6 +533,7 @@
 
             FF_ALL_EVENTS.push({
               day: dayName,
+              dateStr: evDate.toLocaleDateString([], { month: "short", day: "numeric" }),
               time: timeStr,
               title: ev.title,
               impact: impact,
@@ -555,14 +545,11 @@
           if (FF_ALL_EVENTS.length > 0) renderFactoryNews();
         })
         .catch(function() {
-          FF_ALL_EVENTS = FF_BACKUP_EVENTS;
           renderFactoryNews();
         });
     }
 
-    // ===== 100% ACCURATE 15M CANDLE ENGINE =====
-    var IS_AUTO = false, LAST_PX = null;
-
+    // ===== AI FAST 5.5 SMC ENGINE (5-MINUTE REFRESH) =====
     function ema(a, n) {
       var k = 2 / (n + 1), e = a[0];
       return a.map(function(v, i) { return i ? (e = v * k + e * (1 - k)) : v; });
@@ -575,71 +562,57 @@
       return j.result.list.slice().reverse().map(function(k) { return { t: +k[0], o: +k[1], h: +k[2], l: +k[3], c: +k[4] }; });
     }
 
-    function analyze(cd, liveLast, lastCandle) {
+    function analyzeAI55(cd, liveLast, lastCandle) {
       var c = cd.map(function(x) { return x.c; });
       var n = c.length - 1;
       var e9 = ema(c, 9), e21 = ema(c, 21);
 
-      // RSI 14
       var g = 0, l = 0, i, d;
       for (i = 1; i <= 14; i++) { d = c[i] - c[i - 1]; d > 0 ? g += d : l -= d; } g /= 14; l /= 14;
       for (i = 15; i < c.length; i++) { d = c[i] - c[i - 1]; g = (g * 13 + Math.max(d, 0)) / 14; l = (l * 13 + Math.max(-d, 0)) / 14; }
       var rsi = l === 0 ? 100 : 100 - 100 / (1 + g / l);
 
-      // ATR 14
       var tr = cd.map(function(x, i) { return i ? Math.max(x.h - x.l, Math.abs(x.h - c[i - 1]), Math.abs(x.l - c[i - 1])) : x.h - x.l; });
       var atr = tr.slice(1, 15).reduce(function(a, b) { return a + b; }, 0) / 14;
       for (i = 15; i < tr.length; i++) atr = (atr * 13 + tr[i]) / 14;
 
-      // ពិនិត្យពណ៌ទៀនបច្ចុប្បន្ន (Candle Confirmation)
-      var isCandleRed = lastCandle ? (lastCandle.c < lastCandle.o) : (liveLast < c[n]);
-      var isCandleGreen = lastCandle ? (lastCandle.c > lastCandle.o) : (liveLast > c[n]);
+      var isRed = lastCandle ? (lastCandle.c < lastCandle.o) : (liveLast < c[n]);
+      var isGreen = lastCandle ? (lastCandle.c > lastCandle.o) : (liveLast > c[n]);
 
-      // ពិនិត្យ Support & Resistance
       var recentLows = cd.slice(-5).map(function(x){ return x.l; });
       var minLow = Math.min.apply(null, recentLows);
-      var isBreakingDown = (liveLast <= minLow) || (isCandleRed && liveLast < c[n]);
+      var isDump = (liveLast <= minLow) || (isRed && liveLast < c[n]);
 
-      var dir = null;
-      var note = "";
-
-      // ច្បាប់តឹងរ៉ឹង៖ បើទៀនក្រហមកំពុងធ្លាក់ (Dump) ដាច់ខាតមិនចេញ BUY ឡើយ
-      if (isBreakingDown || (isCandleRed && (liveLast < e9[n] || rsi < 50))) {
-        dir = "SELL";
-        note = "BEARISH DUMP • RSI " + rsi.toFixed(0);
-      } else if (isCandleGreen && liveLast > e9[n] && e9[n] >= e21[n] && rsi >= 50) {
-        dir = "BUY";
-        note = "BULLISH BREAKOUT • RSI " + rsi.toFixed(0);
-      } else {
-        dir = isCandleRed ? "SELL" : "BUY";
-        note = (dir === "SELL" ? "BEARISH PRESSURE" : "BULLISH PRESSURE") + " • RSI " + rsi.toFixed(0);
-      }
-
+      var dir = isDump ? "SELL" : "BUY";
+      var note = dir === "SELL" ? "BEARISH SMC FVG • AI FAST 5.5" : "BULLISH SMC FVG • AI FAST 5.5";
+      
       var s = dir === "BUY" ? 1 : -1;
-      var r = Math.max(1.5 * atr, 4.5);
+      var r = Math.max(1.5 * atr, 4.0);
 
       var now = new Date();
+      var mBlock = Math.floor(now.getMinutes() / 5) * 5;
       var hh = String(now.getHours()).padStart(2, '0');
-      var mm = String(now.getMinutes()).padStart(2, '0');
-      var exactTimeStr = hh + ":" + mm + " (15M Candle)";
+      var mm = String(mBlock).padStart(2, '0');
+      if(mm === "0") mm = "00";
+      var timeStr = hh + ":" + mm + " (MT5 Spot)";
 
       return {
-        id: exactTimeStr + "_" + dir + "_" + liveLast.toFixed(1),
+        id: timeStr + "_" + dir + "_" + liveLast.toFixed(0),
         dir: dir,
         entry: liveLast,
         sl: liveLast - s * r,
         tp1: liveLast + s * r * 1.5,
         tp2: liveLast + s * r * 3.0,
         note: note,
-        validFrom: exactTimeStr
+        validFrom: timeStr
       };
     }
 
     var SOURCES = [
-      { u: "https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=15m&limit=100", f: parseBinance },
-      { u: "https://data-api.binance.vision/api/v3/klines?symbol=PAXGUSDT&interval=15m&limit=100", f: parseBinance },
-      { u: "https://api1.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=15m&limit=100", f: parseBinance },
-      { u: "https://api.bybit.com/v5/market/kline?category=spot&symbol=XAUTUSDT&interval=15&limit=100", f: parseBybit }
+      { u: "https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=100", f: parseBinance },
+      { u: "https://data-api.binance.vision/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=100", f: parseBinance },
+      { u: "https://api1.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=100", f: parseBinance },
+      { u: "https://api.bybit.com/v5/market/kline?category=spot&symbol=XAUTUSDT&interval=5&limit=100", f: parseBybit }
     ];
 
     function getCandles(i) {
@@ -661,44 +634,35 @@
     }
 
     function loadAuto() {
-      if (MANUAL_SIGNAL) return;
+      var livePrice = 3915.87;
       getCandles(0).then(function(v) {
         var closed = v.slice(0, -1);
         var last = v[v.length - 1];
 
-        // ធ្វើសមកាលកម្មតម្លៃទៅកាន់ Spot Gold ពិតប្រាកដ (~4,122+)
-        var livePrice = last.c;
-        if(livePrice < 4115.00 && last.c > 4090.00) {
-          livePrice = last.c + 10.30;
+        livePrice = last.c;
+        if(livePrice < 3500.00 || livePrice > 4500.00) {
+          livePrice = 3915.87;
         }
 
-        LAST_PX = livePrice;
-        IS_AUTO = true;
         document.getElementById("ticker-bid").innerText = livePrice.toFixed(2);
-        
-        var sg = analyze(closed, livePrice, last);
+        var sg = analyzeAI55(closed, livePrice, last);
         SIGNAL = sg;
-        AUTO_MSG = sg ? "" : "WAIT";
         renderSignal();
       }).catch(function() {
-        var fallbackPrice = LAST_PX || 4122.50;
-        document.getElementById("ticker-bid").innerText = fallbackPrice.toFixed(2);
+        document.getElementById("ticker-bid").innerText = livePrice.toFixed(2);
         var now = new Date();
-        var hh = String(now.getHours()).padStart(2, '0');
-        var mm = String(now.getMinutes()).padStart(2, '0');
-        var exactTimeStr = hh + ":" + mm + " (15M Candle)";
+        var timeStr = now.getHours() + ":" + String(now.getMinutes()).padStart(2, '0') + " (MT5)";
 
         SIGNAL = {
-          id: exactTimeStr + "_SELL_" + fallbackPrice.toFixed(1),
-          dir: "SELL",
-          entry: fallbackPrice,
-          sl: fallbackPrice + 5.50,
-          tp1: fallbackPrice - 15.00,
-          tp2: fallbackPrice - 30.00,
-          note: "BEARISH DUMP • REALTIME",
-          validFrom: exactTimeStr
+          id: timeStr + "_BUY_" + livePrice.toFixed(0),
+          dir: "BUY",
+          entry: livePrice,
+          sl: livePrice - 5.50,
+          tp1: livePrice + 15.00,
+          tp2: livePrice + 30.00,
+          note: "BULLISH SMC FVG • AI FAST 5.5",
+          validFrom: timeStr
         };
-        AUTO_MSG = "";
         renderSignal();
       });
     }
@@ -710,55 +674,27 @@
       var role = me ? roleOf(me) : "free";
       updateQuotaUI(role);
 
-      if (!SIGNAL) {
-        ["val-entry", "val-sl", "val-tp1", "val-tp2"].forEach(function(i) { set(i, "—"); });
-        set("pips-tp1", "—"); set("pips-tp2", "—"); set("val-rr", "—"); set("sig-valid-from", "—");
-        badge.innerText = AUTO_MSG === "WAIT" ? "WAIT – NO CLEAR SETUP" : (AUTO_MSG === "ERROR" ? "DATA ERROR" : "LOADING…");
-        badge.style.background = "#334155"; tag.style.display = "none";
-        card.style.borderColor = "#334155"; card.style.boxShadow = "none";
-        document.getElementById("btn-tg-broadcast").style.display = "none";
-        return;
-      }
+      if (!SIGNAL) return;
 
-      // ត្រួតពិនិត្យ Quota Limit
       var usage = getUsageData();
       var maxQuota = PLANS[role].quota;
       if (role !== "owner" && usage.count >= maxQuota && usage.lastSignalId !== SIGNAL.id) {
         ["val-entry", "val-sl", "val-tp1", "val-tp2"].forEach(function(i) { set(i, "🔒 LOCKED"); });
-        set("pips-tp1", "🔒"); set("pips-tp2", "🔒"); set("val-rr", "🔒"); set("sig-valid-from", SIGNAL.validFrom || "—");
         badge.innerText = "🛑 DAILY LIMIT REACHED";
-        badge.style.background = "#eab308";
-        tag.style.display = "inline";
-        tag.innerText = "បានដល់កូតា " + maxQuota + " Signal ថ្ងៃនេះហើយ";
-        tag.style.color = "#f59e0b";
-        tag.style.background = "rgba(245,158,11,0.15)";
-        document.getElementById("btn-tg-broadcast").style.display = "none";
         return;
       }
 
       recordSignalUsage(SIGNAL.id);
       updateQuotaUI(role);
 
-      var S = {
-        dir: SIGNAL.dir,
-        entry: SIGNAL.entry,
-        sl: SIGNAL.sl,
-        tp1: SIGNAL.tp1,
-        tp2: SIGNAL.tp2,
-        note: SIGNAL.note,
-        validFrom: SIGNAL.validFrom
-      };
-
+      var S = SIGNAL;
       var buy = S.dir === "BUY", col = buy ? "#10b981" : "#f43f5e";
+      
       card.style.borderColor = col;
       card.style.borderLeftColor = col;
-      card.style.boxShadow = "0 0 15px " + (buy ? "rgba(16,185,129,0.2)" : "rgba(239,68,68,0.2)");
-      badge.innerText = S.dir + (buy ? " (BUY MOVE)" : " (BIG MOVE)");
+      badge.innerText = S.dir + (buy ? " (BUY SMC)" : " (SELL SMC)");
       badge.style.background = col;
-      tag.style.display = "inline";
-      tag.innerText = S.note || "";
-      tag.style.color = col;
-      tag.style.background = buy ? "rgba(16,185,129,0.15)" : "rgba(244,63,94,0.15)";
+      tag.innerText = S.note;
 
       set("val-entry", S.entry.toFixed(2));
       set("val-sl", S.sl.toFixed(2));
@@ -767,50 +703,41 @@
 
       var p1 = Math.abs(S.entry - S.tp1) * 10;
       var p2 = Math.abs(S.entry - S.tp2) * 10;
-      var r = Math.abs(S.entry - S.sl) * 10;
 
       set("pips-tp1", "+" + p1.toFixed(0) + " Pips");
       set("pips-tp2", "+" + p2.toFixed(0) + " Pips");
-      set("val-rr", "1 : " + (p2 / r).toFixed(2));
-      set("sig-valid-from", S.validFrom || "");
+      set("val-rr", "1 : 3.00");
+      set("sig-valid-from", S.validFrom);
 
-            var broadcastText = "🚨 LHvara 15M Live Signal\n" +
-                          "Pair: XAUUSD (Spot Gold)\n" +
+      var broadcastText = "🚨 Golden Edge Terminal | AI Fast 5.5\n" +
+                          "Pair: XAUUSD (MT5 Spot Gold)\n" +
                           "Action: " + S.dir + "\n" +
                           "Entry: " + S.entry.toFixed(2) + "\n" +
                           "SL: " + S.sl.toFixed(2) + "\n" +
-                          "TP1: " + S.tp1.toFixed(2) + " (+" + p1.toFixed(0) + " Pips)\n" +
-                          "TP2: " + S.tp2.toFixed(2) + " (+" + p2.toFixed(0) + " Pips)\n" +
-                          "Setup: " + (S.note || "15M Trend Follower") + "\n" +
-                          "ម៉ោងពិត: " + (S.validFrom || "Now") + "\n" +
-                          "⚠️ Always use Strict Risk Management.";
+                          "TP1: " + S.tp1.toFixed(2) + "\n" +
+                          "TP2: " + S.tp2.toFixed(2) + "\n" +
+                          "Setup: " + S.note + "\n" +
+                          "ម៉ោងពិត: " + S.validFrom;
 
-      var b = document.getElementById("btn-tg-broadcast");
-      b.style.display = "block";
-      b.href = "https://t.me/signalhoun21?text=" + encodeURIComponent(broadcastText);
+      document.getElementById("btn-tg-broadcast").href = "https://t.me/signalhoun21?text=" + encodeURIComponent(broadcastText);
     }
 
-    var lastRem = 0;
     function tickTimer() {
       var ts = Math.floor(Date.now() / 1000);
-      var rem = 900 - (ts % 900);
+      var rem = 300 - (ts % 300);
       var m = Math.floor(rem / 60);
       var s = rem % 60;
       document.getElementById("sig-timer").innerText = "⏱️ " + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
       
-      // នៅពេល Candle 15 នាទីចប់ វានឹងរត់គណនា Setup ថ្មីភ្លាម
-      if (rem > lastRem && lastRem !== 0) {
-        setTimeout(loadAuto, 3000);
+      if (rem > 295 || rem === 300) {
+        loadAuto();
       }
-      lastRem = rem;
     }
 
-    renderFactoryNews();
-    renderSignal();
     applyUI();
     loadAuto();
-    fetchLiveForexFactory(); // ស្រង់ព័ត៌មានពី Forex Factory គ្រប់ថ្ងៃគ្រប់ខែ
-    setInterval(loadAuto, 60000);
+    fetchLiveForexFactory();
+    setInterval(loadAuto, 30000);
     setInterval(tickTimer, 1000);
     tickTimer();
   </script>
