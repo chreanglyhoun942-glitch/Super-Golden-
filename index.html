@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>GOLDEN EDGE TERMINAL | AI Fast 5.5 & Forex Factory</title>
+  <title>GOLDEN EDGE TERMINAL | AI Fast 5.5 Cloud & Forex Factory</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background: #0c1017; color: #f1f5f9; padding-bottom: 40px; line-height: 1.4; text-align: center; }
@@ -77,7 +77,7 @@
 
   <!-- TERMINAL TOP TICKER -->
   <div class="top-bar">
-    <span>XAUUSD MT5 Spot: <b id="ticker-bid" style="color:#f59e0b">—</b> <span style="color:#10b981">(AI Fast 5.5 Active)</span></span>
+    <span>XAUUSD MT5 Spot: <b id="ticker-bid" style="color:#f59e0b">—</b> <span style="color:#10b981">(AI Fast 5.5 Cloud Active)</span></span>
     <span id="user-badge" style="color:#9ca3af; font-size:9.5px;">● Free Member</span>
   </div>
 
@@ -87,7 +87,7 @@
         <div class="lh-box">GE</div>
         <div>
           <div class="lh-title">GOLDEN EDGE TERMINAL</div>
-          <div class="lh-sub">AI Fast 5.5 & Forex Factory Hub</div>
+          <div class="lh-sub">AI Fast 5.5 Cloud & Forex Factory Hub</div>
         </div>
       </div>
       <button class="btn-auth-header" id="btn-auth-modal" onclick="openAuthModal()">🔑 Login / Sign Up</button>
@@ -105,14 +105,14 @@
         <div style="color:#9ca3af; font-size:8.5px; margin-top:2px;">Execution Mode: REAL</div>
       </div>
       <div class="status-box">
-        <div><span class="status-dot"></span><b>AI Fast 5.5:</b> Publishing</div>
-        <div style="color:#9ca3af; font-size:8.5px; margin-top:2px;">Model: SMC Confluence</div>
+        <div><span class="status-dot"></span><b>AI Fast 5.5 Cloud:</b> Synchronized</div>
+        <div style="color:#9ca3af; font-size:8.5px; margin-top:2px;">Model: Advanced Cloud SMC</div>
       </div>
     </div>
 
     <!-- LIVE AI SIGNAL CARD (5-Minute Interval Refresh) -->
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
-      <b style="font-size:11.5px; color:#f59e0b;">⚡ AI FAST 5.5 LIVE SMC SETUP (5M Refresh)</b>
+      <b style="font-size:11.5px; color:#f59e0b;">⚡ AI FAST 5.5 CLOUD LIVE SETUP (5M Refresh)</b>
       <span style="color:#38bdf8; font-size:9.5px;">● Real-time MT5 Sync</span>
     </div>
 
@@ -172,15 +172,13 @@
       <!-- UNLOCKED VIEW FOR PAID MEMBERS -->
       <div id="factory-unlocked-view" style="display:none;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <b style="font-size:11.5px; color:#f59e0b;">📅 Forex Factory Live Calendar (This Week & Next Week)</b>
+          <b style="font-size:11.5px; color:#f59e0b;">📅 Forex Factory Live Calendar (Tue Nov 17 & Wed Nov 18)</b>
           <span style="color:#10b981; font-size:9px; font-weight:bold;">👑 UNLOCKED VIP</span>
         </div>
 
         <div class="tab-bar" id="ff-tabs-container">
-          <button class="tab-btn active" onclick="selectDayTab('Fri')">Fri Nov 13</button>
-          <button class="tab-btn" onclick="selectDayTab('Sat')">Sat Nov 14</button>
-          <button class="tab-btn" onclick="selectDayTab('NextMon')">Next Mon</button>
-          <button class="tab-btn" onclick="selectDayTab('NextTue')">Next Tue (CPI 🔥)</button>
+          <button class="tab-btn active" onclick="selectDayTab('Tue')">Tue Nov 17 (CPI 🔥)</button>
+          <button class="tab-btn" onclick="selectDayTab('Wed')">Wed Nov 18</button>
         </div>
 
         <div class="news-table-header">
@@ -200,12 +198,12 @@
         <span style="background:#facc15; color:#000; font-size:8.5px; font-weight:bold; padding:2px 5px; border-radius:4px;">BROKER</span>
       </div>
       <p style="font-size:10px; color:#cbd5e1; margin-top:5px;">
-        តភ្ជាប់គណនី Exness/MT5 របស់អ្នកដើម្បីបើកការបញ្ជាទិញស្វ័យប្រវត្តិជាមួយ AI Fast 5.5 ។
+        តភ្ជាប់គណនី Exness/MT5 របស់អ្នកដើម្បីបើកការបញ្ជាទិញស្វ័យប្រវត្តិជាមួយ AI Fast 5.5 Cloud ។
       </p>
       <a href="https://one.exness-track.com" target="_blank" class="btn-exness">👉 ចុចទីនេះដើម្បីតភ្ជាប់គណនី Exness</a>
     </div>
 
-    <div style="font-size:9.5px; color:#6b7280;">© 2026 Golden Edge Terminal. AI Fast 5.5 & Factory Hub.</div>
+    <div style="font-size:9.5px; color:#6b7280;">© 2026 Golden Edge Terminal. AI Fast 5.5 Cloud & Factory Hub.</div>
   </div>
 
   <!-- MODAL: PAYMENT -->
@@ -274,7 +272,7 @@
     };
 
     var selectedPlanType = 'pro';
-    var activeNewsDay = 'Fri';
+    var activeNewsDay = 'Tue';
     var IS_REAL_OWNER = false;
 
     function c53(s,seed){seed=seed||0;var h1=0xdeadbeef^seed,h2=0x41c6ce57^seed;for(var i=0,ch;i<s.length;i++){ch=s.charCodeAt(i);h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677)}h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);return(4294967296*(2097151&h2)+(h1>>>0)).toString(36)}
@@ -319,9 +317,9 @@
       var u = getUsers()[name];
       if(!u || !u.code) return "free";
       var p = CH[u.code];
-            if(!p || p !== u.plan || p === "owner") return "free";
+      if(!p || p !== u.plan || p === "owner") return "free";
       var d = PLANS[p].days;
-      if(d && Date.now() > u.at + d * 864e5) return "free";
+            if(d && Date.now() > u.at + d * 864e5) return "free";
       return p;
     }
 
@@ -456,20 +454,25 @@
     // ===== FOREX FACTORY ENGINE =====
     var FF_ALL_EVENTS = [];
     var FF_BACKUP_EVENTS = [
-      { day: "Fri", time: "12:00am", title: "USD Crude Oil Inventories", impact: "yellow", fc: "ENERGY FLOW", bias: "fc-sell" },
-      { day: "Fri", time: "8:30pm", title: "USD Core PPI m/m (High Impact 🔥)", impact: "red", fc: "BUY STOP (3895.00)", bias: "fc-buy" },
-      { day: "Fri", time: "8:30pm", title: "USD PPI m/m (High Impact 🔥)", impact: "red", fc: "SELL STOP (3885.00)", bias: "fc-sell" },
-      { day: "Fri", time: "9:10pm", title: "USD FOMC Member Collins Speaks", impact: "yellow", fc: "SPEECH BIAS", bias: "fc-buy" },
-      { day: "Sat", time: "12:00am", title: "USD FOMC Member Daly Speaks", impact: "yellow", fc: "WEEKEND CLOSE", bias: "fc-sell" },
-      { day: "NextMon", time: "8:30pm", title: "USD Retail Sales m/m", impact: "red", fc: "BUY STOP (3910.00)", bias: "fc-buy" },
-      { day: "NextTue", time: "8:30pm", title: "USD CPI m/m (Next Week CPI 🔥)", impact: "red", fc: "BUY 3925 / SELL 3890", bias: "fc-sell" }
+      { day: "Tue", time: "12:00am", title: "USD Fed Chairman Powell Speaks", impact: "yellow", fc: "SPEECH BIAS", bias: "fc-sell" },
+      { day: "Tue", time: "2:15am", title: "USD FOMC Member Hammack Speaks", impact: "yellow", fc: "MONITOR", bias: "fc-buy" },
+      { day: "Tue", time: "6:15am", title: "USD FOMC Member Barkin Speaks", impact: "yellow", fc: "RANGE BIAS", bias: "fc-buy" },
+      { day: "Tue", time: "6:30am", title: "USD FOMC Member Goolsbee Speaks", impact: "yellow", fc: "VOLATILITY", bias: "fc-sell" },
+      { day: "Tue", time: "7:30pm", title: "USD FOMC Member Musalem Speaks", impact: "yellow", fc: "SPEECH IMPACT", bias: "fc-buy" },
+      { day: "Tue", time: "8:15pm", title: "USD ADP Weekly Employment Change", impact: "yellow", fc: "PRE-CPI VOLUME", bias: "fc-buy" },
+      { day: "Tue", time: "8:30pm", title: "USD Core Retail Sales m/m (High Impact 🔥)", impact: "red", fc: "BUY STOP (3875.00)", bias: "fc-buy" },
+      { day: "Tue", time: "8:30pm", title: "USD Retail Sales m/m (High Impact 🔥)", impact: "red", fc: "SELL STOP (3855.00)", bias: "fc-sell" },
+      { day: "Tue", time: "9:10pm", title: "USD FOMC Member Waller Speaks", impact: "yellow", fc: "POST-RETAIL BIAS", bias: "fc-sell" },
+      { day: "Tue", time: "9:30pm", title: "USD FOMC Member Hammack Speaks", impact: "yellow", fc: "LATE SESSION", bias: "fc-buy" },
+      { day: "Tue", time: "10:00pm", title: "USD Business Inventories m/m", impact: "yellow", fc: "INVENTORY SHIFT", bias: "fc-buy" },
+      { day: "Wed", time: "2:25am", title: "USD FOMC Member Williams Speaks", impact: "yellow", fc: "ASIAN SESSION", bias: "fc-buy" }
     ];
 
     function selectDayTab(day) {
       activeNewsDay = day;
       var buttons = document.querySelectorAll("#ff-tabs-container .tab-btn");
       buttons.forEach(function(b) {
-        b.className = (b.innerText.indexOf(day !== 'NextMon' && day !== 'NextTue' ? day : (day==='NextMon'?'Next Mon':'Next Tue')) !== -1) ? "tab-btn active" : "tab-btn";
+        b.className = (b.innerText.indexOf(day) !== -1) ? "tab-btn active" : "tab-btn";
       });
       renderFactoryNews();
     }
@@ -481,7 +484,7 @@
       });
 
       if (filtered.length === 0) {
-        filtered = sourceList.filter(function(item) { return item.day === "Fri"; });
+        filtered = sourceList.filter(function(item) { return item.day === "Tue"; });
       }
 
       var html = "";
@@ -509,7 +512,7 @@
           data.forEach(function(ev) {
             if (ev.country !== "USD") return;
             var evDate = new Date(ev.date);
-            var dayName = daysMap[evDate.getDay()] || "Fri";
+            var dayName = daysMap[evDate.getDay()] || "Tue";
             var timeStr = evDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true });
             var impact = (ev.impact || "yellow").toLowerCase();
             if (impact === "medium") impact = "orange";
@@ -518,8 +521,8 @@
             var fcText = "MONITOR";
             var bias = "fc-buy";
             if (impact === "red") {
-              if (ev.title.indexOf("CPI") !== -1) {
-                fcText = "BUY 3925 / SELL 3890";
+              if (ev.title.indexOf("Retail Sales") !== -1) {
+                fcText = "BUY 3875 / SELL 3855";
                 bias = "fc-sell";
               } else {
                 fcText = "BREAKOUT " + (ev.forecast || "HIGH");
@@ -541,9 +544,6 @@
             });
           });
 
-          FF_ALL_EVENTS.push({ day: "NextMon", dateStr: "Nov 16", time: "8:30pm", title: "USD Retail Sales m/m", impact: "red", fc: "BUY STOP (3910.00)", bias: "fc-buy" });
-          FF_ALL_EVENTS.push({ day: "NextTue", dateStr: "Nov 17", time: "8:30pm", title: "USD CPI m/m (Next Week CPI 🔥)", impact: "red", fc: "BUY 3925 / SELL 3890", bias: "fc-sell" });
-
           if (FF_ALL_EVENTS.length > 0) renderFactoryNews();
         })
         .catch(function() {
@@ -551,7 +551,7 @@
         });
     }
 
-    // ===== AI FAST 5.5 SMC ENGINE (5-MINUTE REFRESH) =====
+    // ===== AI FAST 5.5 CLOUD ENGINE (5-MINUTE REFRESH) =====
     var LAST_SIGNAL_BLOCK = "";
 
     function ema(a, n) {
@@ -566,7 +566,7 @@
       return j.result.list.slice().reverse().map(function(k) { return { t: +k[0], o: +k[1], h: +k[2], l: +k[3], c: +k[4] }; });
     }
 
-    function analyzeAI55(cd, liveLast, lastCandle) {
+    function analyzeAI55Cloud(cd, liveLast, lastCandle) {
       var c = cd.map(function(x) { return x.c; });
       var n = c.length - 1;
       var e9 = ema(c, 9), e21 = ema(c, 21);
@@ -588,10 +588,10 @@
       var isDump = (liveLast <= minLow) || (isRed && liveLast < c[n]);
 
       var dir = isDump ? "SELL" : "BUY";
-      var note = dir === "SELL" ? "BEARISH SMC FVG • AI FAST 5.5" : "BULLISH SMC FVG • AI FAST 5.5";
+      var note = dir === "SELL" ? "CLOUD SMC FVG • AI FAST 5.5" : "CLOUD FVG REVERSAL • AI FAST 5.5";
       
       var s = dir === "BUY" ? 1 : -1;
-      var r = Math.max(1.5 * atr, 3.5);
+      var r = Math.max(1.2 * atr, 3.0);
 
       var now = new Date();
       var mBlock = Math.floor(now.getMinutes() / 5) * 5;
@@ -638,18 +638,18 @@
     }
 
     function loadAuto() {
-      var livePrice = 3890.35;
+      var livePrice = 3864.88;
       getCandles(0).then(function(v) {
         var closed = v.slice(0, -1);
         var last = v[v.length - 1];
 
         livePrice = last.c;
         if(livePrice < 3500.00 || livePrice > 4500.00) {
-          livePrice = 3890.35;
+          livePrice = 3864.88;
         }
 
         document.getElementById("ticker-bid").innerText = livePrice.toFixed(2);
-        var sg = analyzeAI55(closed, livePrice, last);
+        var sg = analyzeAI55Cloud(closed, livePrice, last);
         
         var now = new Date();
         var currentBlock = now.getHours() + ":" + Math.floor(now.getMinutes() / 5);
@@ -672,7 +672,7 @@
           sl: livePrice - 5.50,
           tp1: livePrice + 15.00,
           tp2: livePrice + 30.00,
-          note: "BULLISH SMC FVG • AI FAST 5.5",
+          note: "CLOUD SMC FVG • AI FAST 5.5",
           validFrom: timeStr
         };
         renderSignal();
@@ -721,7 +721,7 @@
       set("val-rr", "1 : 3.00");
       set("sig-valid-from", S.validFrom);
 
-      var broadcastText = "🚨 Golden Edge Terminal | AI Fast 5.5\n" +
+      var broadcastText = "🚨 Golden Edge Terminal | AI Fast 5.5 Cloud\n" +
                           "Pair: XAUUSD (MT5 Spot Gold)\n" +
                           "Action: " + S.dir + "\n" +
                           "Entry: " + S.entry.toFixed(2) + "\n" +
